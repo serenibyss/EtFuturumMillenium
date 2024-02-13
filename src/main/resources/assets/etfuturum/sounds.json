@@ -1,0 +1,22 @@
+{
+  "block.barrel.open": {
+    "sounds": [
+      {
+        "name": "etfuturum:block/barrel/open1",
+        "pitch": 1.0
+      },
+      {
+        "name": "etfuturum:block/barrel/open2",
+        "pitch": 1.0
+      }
+    ]
+  },
+  "block.barrel.close": {
+    "sounds": [
+      {
+        "name": "etfuturum:block/barrel/close",
+        "pitch": 1.0
+      }
+    ]
+  }
+}

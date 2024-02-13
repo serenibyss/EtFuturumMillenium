@@ -1,0 +1,8 @@
+{
+  "parent": "etfuturum:block/cube_bottom_top",
+  "textures": {
+    "top": "etfuturum:block/barrel_top_open",
+    "bottom": "etfuturum:block/barrel_bottom",
+    "side": "etfuturum:block/barrel_side"
+  }
+}

@@ -9,7 +9,8 @@ public class Features14 extends FeatureManager {
     public Features14() {
         // initialize your features here
         barrel = Feature.builder(this, () -> ConfigBlocksItems.enableBarrels)
-                .addTextures("block/barrel_bottom.png", "block/barrel_side.png", "block/barrel_top.png", "block/barrel_top_open.png")
+                .addTextures("block/barrel_bottom.png", "block/barrel_side.png", "block/barrel_top.png",
+                        "block/barrel_top_open.png", "gui/container/shulker_box.png")
                 .addSounds("block/barrel/open1.ogg", "block/barrel/open2.ogg", "block/barrel/close.ogg")
                 .build();
     }
