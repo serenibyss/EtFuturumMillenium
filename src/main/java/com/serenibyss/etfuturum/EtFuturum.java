@@ -1,5 +1,6 @@
 package com.serenibyss.etfuturum;
 
+import com.serenibyss.etfuturum.load.AssetLoader;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -7,10 +8,7 @@ import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
-import net.minecraftforge.fml.common.event.FMLInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
-import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.event.*;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -19,6 +17,11 @@ import org.apache.logging.log4j.Logger;
 public class EtFuturum {
 
     public static final Logger LOGGER = LogManager.getLogger(EFMTags.MODID);
+
+    @EventHandler
+    public void onConstruction(FMLConstructionEvent event) {
+        AssetLoader.init();
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {

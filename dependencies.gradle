@@ -38,5 +38,7 @@
  * For more details, see https://docs.gradle.org/8.4/userguide/java_library_plugin.html#sec:java_library_configurations_graph
  */
 dependencies {
-
+    // todo consider shading
+    api('com.cleanroommc:assetmover:2.5')
+    api('com.cleanroommc:configanytime:2.0')
 }
