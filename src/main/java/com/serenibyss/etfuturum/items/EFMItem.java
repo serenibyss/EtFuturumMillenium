@@ -35,12 +35,10 @@ public class EFMItem extends Item {
         int maxCount = 64;
         int maxDamage;
         CreativeTabs tab;
-        EnumRarity rarity;
+        EnumRarity rarity = EnumRarity.COMMON;
         String translationKey;
 
-        public Settings() {
-            rarity = EnumRarity.COMMON;
-        }
+        public Settings() {}
 
         public Settings maxCount(int count) {
             maxCount = count;
@@ -54,6 +52,11 @@ public class EFMItem extends Item {
 
         public Settings creativeTab(CreativeTabs tab) {
             this.tab = tab;
+            return this;
+        }
+
+        public Settings setRarity(EnumRarity rarity) {
+            this.rarity = rarity;
             return this;
         }
 
