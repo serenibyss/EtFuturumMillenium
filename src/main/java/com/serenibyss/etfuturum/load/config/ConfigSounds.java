@@ -1,12 +1,11 @@
-package com.serenibyss.etfuturum.config;
+package com.serenibyss.etfuturum.load.config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
 import net.minecraftforge.common.config.Config;
 
-// todo collapse into others?
-@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Mixins")
-public class ConfigMixins {
+@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Sounds")
+public class ConfigSounds {
 
     // 1.13: Update Aquatic
 
@@ -27,6 +26,6 @@ public class ConfigMixins {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigBlocksItems.class);
+        ConfigAnytime.register(ConfigSounds.class);
     }
 }

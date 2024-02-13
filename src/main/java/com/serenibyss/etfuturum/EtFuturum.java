@@ -1,6 +1,6 @@
 package com.serenibyss.etfuturum;
 
-import com.serenibyss.etfuturum.load.AssetLoader;
+import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.crafting.IRecipe;
@@ -20,7 +20,8 @@ public class EtFuturum {
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
-        AssetLoader.init();
+        Features.init(event);
+        LOGGER.info("Barrel enabled: {}", Features.MC14.barrel.isEnabled());
     }
 
     @EventHandler

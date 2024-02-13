@@ -1,11 +1,11 @@
-package com.serenibyss.etfuturum.config;
+package com.serenibyss.etfuturum.load.config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Tweaks")
-public class ConfigTweaks {
+@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/EnchantsAndPotions")
+public class ConfigEnchantsPotions {
 
     // 1.13: Update Aquatic
 
@@ -26,6 +26,6 @@ public class ConfigTweaks {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigBlocksItems.class);
+        ConfigAnytime.register(ConfigEnchantsPotions.class);
     }
 }

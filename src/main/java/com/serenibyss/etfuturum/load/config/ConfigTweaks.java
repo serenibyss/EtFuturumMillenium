@@ -1,12 +1,11 @@
-package com.serenibyss.etfuturum.config;
+package com.serenibyss.etfuturum.load.config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
 import net.minecraftforge.common.config.Config;
 
-// todo rename?
-@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Functions")
-public class ConfigFunctions {
+@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Tweaks")
+public class ConfigTweaks {
 
     // 1.13: Update Aquatic
 
@@ -27,6 +26,6 @@ public class ConfigFunctions {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigBlocksItems.class);
+        ConfigAnytime.register(ConfigTweaks.class);
     }
 }

@@ -1,4 +1,4 @@
-package com.serenibyss.etfuturum.config;
+package com.serenibyss.etfuturum.load.config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
@@ -26,6 +26,6 @@ public class ConfigWorld {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigBlocksItems.class);
+        ConfigAnytime.register(ConfigWorld.class);
     }
 }

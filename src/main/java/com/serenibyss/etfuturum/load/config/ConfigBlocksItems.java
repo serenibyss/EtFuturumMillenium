@@ -1,15 +1,17 @@
-package com.serenibyss.etfuturum.config;
+package com.serenibyss.etfuturum.load.config;
 
 import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
 import net.minecraftforge.common.config.Config;
 
-@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Entities")
-public class ConfigEntities {
+@Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/BlocksAndItems")
+public class ConfigBlocksItems {
 
     // 1.13: Update Aquatic
 
     // 1.14: Village & Pillage
+
+    public static boolean enableBarrels = true;
 
     // 1.15: Buzzy Bees
 
