@@ -8,6 +8,7 @@ import com.serenibyss.etfuturum.tiles.TileEntityBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -40,8 +41,39 @@ public enum EFMBlocks {
         this.myTile = myTile;
     }
 
+    public boolean isEnabled() {
+        return feature.isEnabled();
+    }
+
+    @Nullable
     public EFMBlock getBlock() {
-        return myBlock;
+        if (isEnabled()) {
+            return myBlock;
+        }
+        return null;
+    }
+
+    @Nullable
+    public Item getItem() {
+        if (isEnabled()) {
+            return ItemBlock.getItemFromBlock(myBlock);
+        }
+        return null;
+    }
+
+    public ItemStack getItemStack() {
+        return getItemStack(1, 0);
+    }
+
+    public ItemStack getItemStack(int count) {
+        return getItemStack(count, 0);
+    }
+
+    public ItemStack getItemStack(int count, int meta) {
+        if (isEnabled()) {
+            return new ItemStack(myBlock, count, meta);
+        }
+        return ItemStack.EMPTY;
     }
 
     @SubscribeEvent
@@ -49,10 +81,8 @@ public enum EFMBlocks {
         IForgeRegistry<Block> r = event.getRegistry();
         for (EFMBlocks value : values()) {
             if (value.isEnabled()) {
-                if (value.myBlock != null) {
-                    value.myBlock.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
-                    r.register(value.myBlock);
-                }
+                value.myBlock.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
+                r.register(value.myBlock);
                 if (value.myTile != null) {
                     GameRegistry.registerTileEntity(value.myTile, new ResourceLocation(EFMTags.MODID, value.myName));
                 }
@@ -65,11 +95,9 @@ public enum EFMBlocks {
         IForgeRegistry<Item> r = event.getRegistry();
         for (EFMBlocks value : values()) {
             if (value.isEnabled()) {
-                if (value.myBlock != null) {
-                    ItemBlock ib = new ItemBlock(value.myBlock);
-                    ib.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
-                    r.register(ib);
-                }
+                ItemBlock ib = new ItemBlock(value.myBlock);
+                ib.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
+                r.register(ib);
             }
         }
     }
@@ -78,14 +106,8 @@ public enum EFMBlocks {
     public static void onModelRegister(ModelRegistryEvent event) {
         for (EFMBlocks value : values()) {
             if (value.isEnabled()) {
-                if (value.myBlock != null) {
-                    value.myBlock.registerModel();
-                }
+                value.myBlock.registerModel();
             }
         }
-    }
-
-    public boolean isEnabled() {
-        return feature.isEnabled();
     }
 }
