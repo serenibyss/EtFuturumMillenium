@@ -35,7 +35,6 @@ public abstract class FeatureManager {
 
     @SideOnly(Side.CLIENT)
     public static void gatherAssets() {
-        Set<AssetRequest> requests = new HashSet<>();
         for (FeatureManager manager : FEATURE_MANAGERS) {
             AssetRequest request = new AssetRequest(manager.getMinecraftVersion());
             for (Feature feature : manager.featureSet) {
@@ -44,6 +43,9 @@ public abstract class FeatureManager {
 
                 request.addSounds(feature.sounds);
                 feature.sounds.clear();
+
+                request.addStructures(feature.structures);
+                feature.structures.clear();
             }
             request.send();
         }

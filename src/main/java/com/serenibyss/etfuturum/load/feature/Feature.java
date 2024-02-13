@@ -14,6 +14,7 @@ public class Feature {
 
     protected final Set<String> textures = new HashSet<>();
     protected final Set<String> sounds = new HashSet<>();
+    protected final Set<String> structures = new HashSet<>();
 
     private Feature(FeatureManager myManager, Supplier<Boolean> enabledTest) {
         this.myManager = myManager;
@@ -47,6 +48,11 @@ public class Feature {
 
         public Builder addSounds(String... sounds) {
             feature.sounds.addAll(Arrays.asList(sounds));
+            return this;
+        }
+
+        public Builder addStructures(String... structures) {
+            feature.structures.addAll(Arrays.asList(structures));
             return this;
         }
 

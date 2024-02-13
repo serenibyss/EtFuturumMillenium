@@ -25,6 +25,10 @@ public class AssetRequest {
         assetFiles.computeIfAbsent(AssetType.SOUNDS, $ -> new HashSet<>()).addAll(sounds);
     }
 
+    public void addStructures(Set<String> structures) {
+        assetFiles.computeIfAbsent(AssetType.STRUCTURES, $ -> new HashSet<>()).addAll(structures);
+    }
+
     public void send() {
         for (AssetType type : AssetType.VALUES) {
             String typeName = type.name().toLowerCase();
