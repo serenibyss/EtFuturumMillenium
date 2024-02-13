@@ -14,9 +14,17 @@ public class EtFuturumSounds {
     public static SoundEvent BARREL_CLOSE;
     public static SoundEvent UI_STONECUTTER_TAKE_RESULT;
 
+    public static SoundEvent ENTITY_PHANTOM_ATTACK;
+    public static SoundEvent ENTITY_PHANTOM_FLAP;
+
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
         IForgeRegistry<SoundEvent> r = event.getRegistry();
+
+        if(Features.MC13.phantom.isEnabled()) {
+            ENTITY_PHANTOM_ATTACK = register(r, "entity.phantom.attack");
+            ENTITY_PHANTOM_FLAP = register(r, "entity.phantom.hurt");
+        }
 
         if (Features.MC14.barrel.isEnabled()) {
             BARREL_OPEN = register(r, "block.barrel.open");

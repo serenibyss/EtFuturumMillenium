@@ -40,5 +40,21 @@
         "pitch": 0.92
       }
     ]
+  },
+  "entity.phantom.attack": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/phantom/attack",
+        "pitch": 1.0
+      }
+    ]
+  },
+  "entity.phantom.hurt": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/phantom/hurt",
+        "pitch": 1.0
+      }
+    ]
   }
 }

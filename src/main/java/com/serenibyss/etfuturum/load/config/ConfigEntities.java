@@ -9,6 +9,8 @@ public class ConfigEntities {
 
     // 1.13: Update Aquatic
 
+    public static boolean enablePhantoms = true;
+
     // 1.14: Village & Pillage
 
     // 1.15: Buzzy Bees
