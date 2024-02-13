@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.load;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import com.serenibyss.etfuturum.client.GuiHandler;
+import com.serenibyss.etfuturum.entities.EFMEntities;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.recipes.EFMRecipes;
 import com.serenibyss.etfuturum.sounds.EtFuturumSounds;
@@ -21,6 +22,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(EFMBlocks.class);
         MinecraftForge.EVENT_BUS.register(EFMItems.class);
         MinecraftForge.EVENT_BUS.register(EFMRecipes.class);
+        MinecraftForge.EVENT_BUS.register(EFMEntities.class);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(EFMTags.MODID, new GuiHandler());
     }
