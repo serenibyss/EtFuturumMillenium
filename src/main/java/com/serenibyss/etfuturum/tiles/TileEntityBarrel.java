@@ -3,7 +3,7 @@ package com.serenibyss.etfuturum.tiles;
 import com.serenibyss.etfuturum.blocks.BlockBarrel;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import com.serenibyss.etfuturum.containers.ContainerBarrel;
-import com.serenibyss.etfuturum.sounds.EtFuturumSounds;
+import com.serenibyss.etfuturum.sounds.EFMSounds;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -48,11 +48,11 @@ public class TileEntityBarrel extends TileEntityLockableLoot {
         if (type > 0 && !state.getValue(BlockBarrel.OPEN)) {
             world.setBlockState(pos, state.withProperty(BlockBarrel.OPEN, true), 3);
             world.markBlockRangeForRenderUpdate(pos, pos);
-            world.playSound(null, pos, EtFuturumSounds.BARREL_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos, EFMSounds.BARREL_OPEN, SoundCategory.BLOCKS, 1.0F, 1.0F);
         } else {
             world.setBlockState(pos, state.withProperty(BlockBarrel.OPEN, false), 3);
             world.markBlockRangeForRenderUpdate(pos, pos);
-            world.playSound(null, pos, EtFuturumSounds.BARREL_CLOSE, SoundCategory.BLOCKS, 1.0F, 1.0F);
+            world.playSound(null, pos, EFMSounds.BARREL_CLOSE, SoundCategory.BLOCKS, 1.0F, 1.0F);
         }
         return true;
     }

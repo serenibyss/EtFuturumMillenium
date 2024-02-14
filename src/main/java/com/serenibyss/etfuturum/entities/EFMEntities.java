@@ -22,6 +22,7 @@ public class EFMEntities {
         if(Features.MC13.phantom.isEnabled()) {
             event.getRegistry().register(EntityEntryBuilder.create().entity(EntityPhantom.class)
                     .id(new ResourceLocation(EFMTags.MODID, "phantom"), 0)
+                            .tracker(80, 3, true)
                     .name("phantom")
                     .egg(0x0000ff, 0x00ff00).build());
         }

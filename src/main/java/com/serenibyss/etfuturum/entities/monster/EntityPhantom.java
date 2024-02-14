@@ -1,23 +1,27 @@
 package com.serenibyss.etfuturum.entities.monster;
 
-import com.serenibyss.etfuturum.sounds.EtFuturumSounds;
-import net.minecraft.entity.EntityBodyHelper;
-import net.minecraft.entity.EntityFlying;
-import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
+import com.serenibyss.etfuturum.sounds.EFMSounds;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITarget;
 import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.ai.EntityMoveHelper;
+import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
@@ -58,13 +62,95 @@ public class EntityPhantom extends EntityFlying implements IMob {
             float r1 = MathHelper.cos((float)(this.getEntityId() * 3 + this.ticksExisted) * 0.13f + (float)Math.PI);
             float r2 = MathHelper.cos((float)(this.getEntityId() * 3 + this.ticksExisted + 1) * 0.13f + (float)Math.PI);
             if(r1 > 0.0f && r2 <= 0.0f) {
-                this.world.playSound(this.posX, this.posY, this.posZ, EtFuturumSounds.ENTITY_PHANTOM_FLAP, this.getSoundCategory(), 0.95F + this.rand.nextFloat() * 0.05f, 0.95F + this.rand.nextFloat() * 0.05f, false);
+                this.world.playSound(this.posX, this.posY, this.posZ, EFMSounds.ENTITY_PHANTOM_FLAP, this.getSoundCategory(), 0.95F + this.rand.nextFloat() * 0.05f, 0.95F + this.rand.nextFloat() * 0.05f, false);
             }
         }
 
         if(!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             world.removeEntity(this);
         }
+    }
+
+    @Override
+    public void onLivingUpdate() {
+        if(this.isInDaylight()) {
+            this.setFire(8);
+        }
+        super.onLivingUpdate();
+    }
+
+    @Override
+    protected void updateAITasks() {
+        super.updateAITasks();
+    }
+
+    @Nullable
+    @Override
+    public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
+        this.altitudePos = (new BlockPos(this)).up(5);
+        return super.onInitialSpawn(difficulty, livingdata);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public boolean isInRangeToRenderDist(double distance) {
+        return true;
+    }
+
+    @Override
+    public SoundCategory getSoundCategory() {
+        return SoundCategory.HOSTILE;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getAmbientSound() {
+        return EFMSounds.ENTITY_PHANTOM_AMBIENT;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
+        return EFMSounds.ENTITY_PHANTOM_HURT;
+    }
+
+    @Nullable
+    @Override
+    protected SoundEvent getDeathSound() {
+        return EFMSounds.ENTITY_PHANTOM_DEATH;
+    }
+
+    //    @Nullable
+//    @Override
+//    protected ResourceLocation getLootTable() {
+//
+//    }
+
+    @Override
+    public EnumCreatureAttribute getCreatureAttribute() {
+        return EnumCreatureAttribute.UNDEAD;
+    }
+
+    @Override
+    protected float getSoundVolume() {
+        return 1.0f;
+    }
+
+    @Override
+    public boolean canAttackClass(Class<? extends EntityLivingBase> cls) {
+        return true;
+    }
+
+    protected boolean isInDaylight() {
+        if (this.world.isDaytime() && !this.world.isRemote) {
+            float f = this.getBrightness();
+            BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ);
+            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     class AIAttackPlayer extends EntityAIBase {
@@ -78,8 +164,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
         @Override
         public boolean shouldExecute() {
             if(this.cooldownTimer > 0) {
-                -- this.cooldownTimer;
-                return false;
+                --this.cooldownTimer;
             } else {
                 this.cooldownTimer = 60;
                 AxisAlignedBB aabb = EntityPhantom.this.getEntityBoundingBox().grow(16.0, 64.0, 16.0);
@@ -98,6 +183,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
                 }
                 return false;
             }
+            return false;
         }
 
         @Override
@@ -189,7 +275,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
             if(EntityPhantom.this.getEntityBoundingBox().grow(0.2).intersects(target.getEntityBoundingBox())) {
                 EntityPhantom.this.attackEntityAsMob(target);
                 EntityPhantom.this.attackPhase = AttackPhase.CIRCLE;
-                EntityPhantom.this.world.playSound(null, new BlockPos(EntityPhantom.this), EtFuturumSounds.ENTITY_PHANTOM_ATTACK, SoundCategory.HOSTILE, 1.0f, 1.0f);
+                EntityPhantom.this.world.playSound(null, new BlockPos(EntityPhantom.this), EFMSounds.ENTITY_PHANTOM_ATTACK, SoundCategory.HOSTILE, 1.0f, 1.0f);
             } else if(EntityPhantom.this.collidedHorizontally || EntityPhantom.this.hurtTime > 0) {
                 EntityPhantom.this.attackPhase = AttackPhase.CIRCLE;
             }

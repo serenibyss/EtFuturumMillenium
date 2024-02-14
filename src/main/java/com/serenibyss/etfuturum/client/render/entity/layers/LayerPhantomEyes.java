@@ -1,5 +1,6 @@
 package com.serenibyss.etfuturum.client.render.entity.layers;
 
+import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.client.render.entity.RenderPhantom;
 import com.serenibyss.etfuturum.entities.monster.EntityPhantom;
 import net.minecraft.client.Minecraft;
@@ -9,7 +10,7 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.util.ResourceLocation;
 
 public class LayerPhantomEyes implements LayerRenderer<EntityPhantom> {
-private static final ResourceLocation eyeTexture = new ResourceLocation("textures/entity/phantom_eyes.png");
+private static final ResourceLocation eyeTexture = new ResourceLocation(EFMTags.MODID, "textures/entity/phantom_eyes.png");
     private final RenderPhantom phantomRenderer;
 
     public LayerPhantomEyes(RenderPhantom renderPhantom) {

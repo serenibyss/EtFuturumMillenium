@@ -44,23 +44,23 @@
   "entity.phantom.ambient": {
     "sounds": [
       {
-        "name": "mob/phantom/idle1",
+        "name": "etfuturum:mob/phantom/idle1",
         "volume": 0.8
       },
       {
-        "name": "mob/phantom/idle2",
+        "name": "etfuturum:mob/phantom/idle2",
         "volume": 0.8
       },
       {
-        "name": "mob/phantom/idle3",
+        "name": "etfuturum:mob/phantom/idle3",
         "volume": 0.8
       },
       {
-        "name": "mob/phantom/idle4",
+        "name": "etfuturum:mob/phantom/idle4",
         "volume": 0.8
       },
       {
-        "name": "mob/phantom/idle5",
+        "name": "etfuturum:mob/phantom/idle5",
         "volume": 0.8
       }
     ],
@@ -68,43 +68,43 @@
   },
   "entity.phantom.bite": {
     "sounds": [
-      "mob/phantom/bite1",
-      "mob/phantom/bite2"
+      "etfuturum:mob/phantom/bite1",
+      "etfuturum:mob/phantom/bite2"
     ],
     "subtitle": "subtitles.entity.phantom.bite"
   },
   "entity.phantom.death": {
     "sounds": [
-      "mob/phantom/death1",
-      "mob/phantom/death2",
-      "mob/phantom/death3"
+      "etfuturum:mob/phantom/death1",
+      "etfuturum:mob/phantom/death2",
+      "etfuturum:mob/phantom/death3"
     ],
     "subtitle": "subtitles.entity.phantom.death"
   },
   "entity.phantom.flap": {
     "sounds": [
       {
-        "name": "mob/phantom/flap1",
+        "name": "etfuturum:mob/phantom/flap1",
         "volume": 0.9
       },
       {
-        "name": "mob/phantom/flap2",
+        "name": "etfuturum:mob/phantom/flap2",
         "volume": 0.9
       },
       {
-        "name": "mob/phantom/flap3",
+        "name": "etfuturum:mob/phantom/flap3",
         "volume": 0.9
       },
       {
-        "name": "mob/phantom/flap4",
+        "name": "etfuturum:mob/phantom/flap4",
         "volume": 0.9
       },
       {
-        "name": "mob/phantom/flap5",
+        "name": "etfuturum:mob/phantom/flap5",
         "volume": 0.9
       },
       {
-        "name": "mob/phantom/flap6",
+        "name": "etfuturum:mob/phantom/flap6",
         "volume": 0.9
       }
     ],
@@ -113,15 +113,15 @@
   "entity.phantom.hurt": {
     "sounds": [
       {
-        "name": "mob/phantom/hurt1",
+        "name": "etfuturum:mob/phantom/hurt1",
         "volume": 0.75
       },
       {
-        "name": "mob/phantom/hurt2",
+        "name": "etfuturum:mob/phantom/hurt2",
         "volume": 0.75
       },
       {
-        "name": "mob/phantom/hurt3",
+        "name": "etfuturum:mob/phantom/hurt3",
         "volume": 0.75
       }
     ],
@@ -130,19 +130,19 @@
   "entity.phantom.swoop": {
     "sounds": [
       {
-        "name": "mob/phantom/swoop1",
+        "name": "etfuturum:mob/phantom/swoop1",
         "volume": 0.7
       },
       {
-        "name": "mob/phantom/swoop2",
+        "name": "etfuturum:mob/phantom/swoop2",
         "volume": 0.7
       },
       {
-        "name": "mob/phantom/swoop3",
+        "name": "etfuturum:mob/phantom/swoop3",
         "volume": 0.7
       },
       {
-        "name": "mob/phantom/swoop4",
+        "name": "etfuturum:mob/phantom/swoop4",
         "volume": 0.7
       }
     ],
