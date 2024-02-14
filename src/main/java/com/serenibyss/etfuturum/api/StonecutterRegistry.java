@@ -1,10 +1,8 @@
 package com.serenibyss.etfuturum.api;
 
 import com.serenibyss.etfuturum.util.ItemStackHashStrategy;
-import com.serenibyss.etfuturum.util.ItemStackUtils;
 import it.unimi.dsi.fastutil.objects.*;
 import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
@@ -33,21 +31,6 @@ public final class StonecutterRegistry {
             return ObjectLists.emptyList();
         }
         return ObjectLists.unmodifiable(recipes.get(input));
-    }
-
-    @ApiStatus.Internal
-    public int getIndexForOutput(ItemStack input, ItemStack targetOutput) {
-        List<ItemStack> outputs = recipes.get(input);
-        if (outputs == null) {
-            return -1;
-        }
-        for (int i = 0; i < outputs.size(); i++) {
-            ItemStack output = outputs.get(i);
-            if (ItemStackUtils.areItemStacksEqualIgnoreCount(output, targetOutput)) {
-                return i;
-            }
-        }
-        return -1;
     }
 
     @NotNull

@@ -37,7 +37,12 @@ public class EFMBlock extends Block {
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return settings != null && settings.opaque;
+        return settings.opaque;
+    }
+
+    @Override
+    public boolean isFullCube(IBlockState state) {
+        return settings.fullCube;
     }
 
     @Override
@@ -85,6 +90,7 @@ public class EFMBlock extends Block {
         CreativeTabs tab;
         boolean collidable = true;
         boolean opaque = true;
+        boolean fullCube = true;
         float resistance;
         float hardness;
         SoundType soundType = SoundType.STONE;
@@ -112,6 +118,11 @@ public class EFMBlock extends Block {
 
         public Settings nonOpaque() {
             opaque = false;
+            return this;
+        }
+
+        public Settings nonFullCube() {
+            fullCube = false;
             return this;
         }
 

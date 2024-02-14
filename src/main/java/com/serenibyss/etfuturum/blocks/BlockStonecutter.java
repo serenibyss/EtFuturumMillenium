@@ -4,7 +4,6 @@ import com.serenibyss.etfuturum.EtFuturum;
 import com.serenibyss.etfuturum.blocks.base.EFMBlockHorizontal;
 import com.serenibyss.etfuturum.client.EFMGuiIDs;
 import com.serenibyss.etfuturum.util.VoxelShape;
-import net.minecraft.block.BlockHorizontal;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
@@ -27,6 +26,7 @@ public class BlockStonecutter extends EFMBlockHorizontal {
         super(new Settings(Material.ROCK)
                 .hardness(3.5F)
                 .resistance(3.5F)
+                .nonFullCube().nonOpaque()
                 .creativeTab(CreativeTabs.DECORATIONS)
                 .translationKey("stonecutter"));
     }
@@ -46,11 +46,6 @@ public class BlockStonecutter extends EFMBlockHorizontal {
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
         return SHAPE;
     }
-
-    // todo func_220074_n
-
-    // todo isSolid
-
 
     @Override
     public EnumBlockRenderType getRenderType(IBlockState state) {
