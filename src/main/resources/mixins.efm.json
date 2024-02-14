@@ -1,0 +1,10 @@
+{
+  "package": "com.serenibyss.etfuturum.mixin",
+  "refmap": "mixins.etfuturum.refmap.json",
+  "target": "@env(DEFAULT)",
+  "minVersion": "0.8",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "WorldServerMixin"
+  ]
+}
