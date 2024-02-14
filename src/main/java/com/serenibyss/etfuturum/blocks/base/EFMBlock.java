@@ -33,11 +33,15 @@ public class EFMBlock extends Block {
         setSoundType(settings.soundType);
         setTranslationKey(settings.translationKey);
         setCreativeTab(settings.tab);
+
+        // Fix some potential issues with these fields being set prematurely by the super ctor
+        this.fullBlock = getDefaultState().isOpaqueCube();
+        this.lightOpacity = this.fullBlock ? 255 : 0;
     }
 
     @Override
     public boolean isOpaqueCube(IBlockState state) {
-        return settings.opaque;
+        return settings != null && settings.opaque;
     }
 
     @Override
