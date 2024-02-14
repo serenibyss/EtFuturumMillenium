@@ -9,6 +9,7 @@ import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.IMob;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
@@ -92,6 +93,22 @@ public class EntityPhantom extends EntityFlying implements IMob {
     }
 
     @Override
+    public void readEntityFromNBT(NBTTagCompound compound) {
+        super.readEntityFromNBT(compound);
+        if(compound.hasKey("AX")) {
+            this.altitudePos = new BlockPos(compound.getInteger("AX"), compound.getInteger("AY"), compound.getInteger("AZ"));
+        }
+    }
+
+    @Override
+    public void writeEntityToNBT(NBTTagCompound compound) {
+        super.writeEntityToNBT(compound);
+        compound.setInteger("AX", this.altitudePos.getX());
+        compound.setInteger("AY", this.altitudePos.getY());
+        compound.setInteger("AZ", this.altitudePos.getZ());
+    }
+
+    @Override
     @SideOnly(Side.CLIENT)
     public boolean isInRangeToRenderDist(double distance) {
         return true;
@@ -103,7 +120,6 @@ public class EntityPhantom extends EntityFlying implements IMob {
     }
 
     @Nullable
-    @Override
     protected SoundEvent getAmbientSound() {
         return EFMSounds.ENTITY_PHANTOM_AMBIENT;
     }
@@ -391,14 +407,69 @@ public class EntityPhantom extends EntityFlying implements IMob {
             super(entitylivingIn);
         }
 
-        public void tick() {
+        @Override
+        public void onUpdateMoveHelper() {
             EntityPhantom phantom;
             if(EntityPhantom.this.collidedHorizontally) {
                 phantom = EntityPhantom.this;
                 phantom.rotationYaw += 180.0f;
                 this.motionVec = 0.1F;
             }
+
+            float deltaX = (float)(EntityPhantom.this.targetVec.x - EntityPhantom.this.posX);
+            float deltaY = (float)(EntityPhantom.this.targetVec.y - EntityPhantom.this.posY);
+            float deltaZ = (float)(EntityPhantom.this.targetVec.z - EntityPhantom.this.posZ);
+            double mag = (double)MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+
+            double normalized = 1.0 - (double)Math.abs(deltaY * 0.7F) / mag;
+            deltaX *= normalized;
+            deltaZ *= normalized;
+
+            mag = (double)MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+
+            double trueMag = (double)MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ + deltaY * deltaY);
+            float currentYaw = EntityPhantom.this.rotationYaw;
+            float angle = (float)MathHelper.atan2(deltaZ, deltaX);
+            float yaw = MathHelper.wrapDegrees(EntityPhantom.this.rotationYaw + 90.0F);
+            float angleDeg = MathHelper.wrapDegrees((float)Math.toDegrees(angle));
+            EntityPhantom.this.rotationYaw = approachDegrees(yaw, angleDeg, 4.0F) - 90.0F;
+            EntityPhantom.this.renderYawOffset = EntityPhantom.this.rotationYaw;
+            if(degreesDifferenceAbs(currentYaw, EntityPhantom.this.rotationYaw) < 3.0f) {
+                this.motionVec = approach(this.motionVec, 1.8F, 0.005F * (1.8F / this.motionVec));
+            } else {
+                this.motionVec = approach(this.motionVec, 0.2F, 0.025F);
+            }
+
+            float newPitch = (float)(-Math.toDegrees(MathHelper.atan2((double)(-deltaY), mag)));
+            EntityPhantom.this.rotationPitch = newPitch;
+            float yawOffset = EntityPhantom.this.rotationYaw + 90.0F;
+            double velX = (double)(this.motionVec * MathHelper.cos((float)Math.toRadians(yawOffset))) * Math.abs((double)deltaX / trueMag);
+            double velZ = (double)(this.motionVec * MathHelper.sin((float)Math.toRadians(yawOffset))) * Math.abs((double)deltaZ / trueMag);
+            double velY = (double)(this.motionVec * MathHelper.sin((float)Math.toRadians(newPitch))) * Math.abs((double)deltaY / trueMag);
+            EntityPhantom.this.motionX += (velX - EntityPhantom.this.motionX) * 0.2;
+            EntityPhantom.this.motionY += (velY - EntityPhantom.this.motionY) * 0.2;
+            EntityPhantom.this.motionZ += (velZ - EntityPhantom.this.motionZ) * 0.2;
         }
+    }
+
+    public static float approach(float angle, float min, float smoothingFactor) {
+        smoothingFactor = MathHelper.abs(smoothingFactor);
+        return angle < min ? MathHelper.clamp(angle + smoothingFactor, angle, min) : MathHelper.clamp(angle - smoothingFactor, min, angle);
+    }
+
+    public static float approachDegrees(float angle, float min, float max) {
+        float diff = wrapSubtractDegrees(min, angle);
+        return approach(angle, angle + diff, max);
+    }
+
+    public static float wrapSubtractDegrees(float a, float b) {
+        float diff = MathHelper.wrapDegrees(a - b);
+        return diff < 180.0F ? diff : diff - 360.0F;
+    }
+
+    public static float degreesDifferenceAbs(float a, float b) {
+        float diff = MathHelper.wrapDegrees(a - b);
+        return diff < 180.0F ? MathHelper.abs(diff) : MathHelper.abs(diff - 360.0F);
     }
 
     static enum AttackPhase {

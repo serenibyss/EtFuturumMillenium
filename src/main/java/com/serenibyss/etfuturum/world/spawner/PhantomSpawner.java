@@ -28,20 +28,21 @@ public class PhantomSpawner {
         if(this.ticksUntilSpawn > 0)
             return 0;
 
-        this.ticksUntilSpawn += (60 + r.nextInt(60)) * 20;
+        //this.ticksUntilSpawn += (60 + r.nextInt(60)) * 20;
+        this.ticksUntilSpawn += (60);
         if(worldIn.getSkylightSubtracted() < 5 && worldIn.provider.hasSkyLight())
             return 0;
 
         int numberSpawned = 0;
         for(EntityPlayer player : worldIn.playerEntities) {
-            while(!player.isSpectator()) {
+            if(!player.isSpectator()) {
                 BlockPos block = new BlockPos(player);
-                if(!worldIn.provider.hasSkyLight() && (block.getY() >= worldIn.getSeaLevel() || worldIn.canSeeSky(block))) {
+                if(!worldIn.provider.hasSkyLight() || (block.getY() >= worldIn.getSeaLevel() && worldIn.canSeeSky(block))) {
                     DifficultyInstance diff = worldIn.getDifficultyForLocation(block);
                     if(diff.isHarderThan(r.nextFloat() * 3.0f)) {
                         StatisticsManagerServer stats = ((EntityPlayerMP)player).getStatFile();
                         int statLevel = MathHelper.clamp(stats.readStat(EFMStatList.TIME_SINCE_REST), 1, Integer.MAX_VALUE);
-                        if(r.nextInt(statLevel) > 72000) {
+                        if(r.nextInt(statLevel) > 72) {
                             BlockPos spawnLoc = block.up(20 + r.nextInt(15)).east(-10 + r.nextInt(21)).south(-10 + r.nextInt(21));
                             IBlockState spawnLocState = worldIn.getBlockState(spawnLoc);
                             if(WorldEntitySpawner.isValidEmptySpawnBlock(spawnLocState)) {
