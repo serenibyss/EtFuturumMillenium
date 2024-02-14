@@ -1,12 +1,16 @@
 [{
     "modid": "${modid}",
     "name": "${modname}",
-    "description": "An example mod for Minecraft 1.12.2 with Forge",
+    "description": "1.13+ for 1.12.2",
     "version": "${version}",
     "mcversion": "${mcversion}",
     "logoFile": "",
     "url": "",
-    "authorList": [],
+    "authorList": [
+        "serenibyss"
+    ],
     "credits": "",
-    "dependencies": []
+    "dependencies": [
+        "mixinbooter", "assetmover", "configanytime"
+    ]
 }]

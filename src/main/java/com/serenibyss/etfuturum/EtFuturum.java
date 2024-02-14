@@ -10,7 +10,11 @@ import net.minecraftforge.fml.common.event.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = EFMTags.MODID, version = EFMTags.VERSION, name = EFMTags.MODNAME, acceptedMinecraftVersions = "[1.12.2]")
+@Mod(modid = EFMTags.MODID,
+     version = EFMTags.VERSION,
+     name = EFMTags.MODNAME,
+     acceptedMinecraftVersions = "[1.12.2]",
+     dependencies = "required-after:mixinbooter;required-after:assetmover;required-after:configanytime;")
 public class EtFuturum {
 
     public static final Logger LOGGER = LogManager.getLogger(EFMTags.MODID);
