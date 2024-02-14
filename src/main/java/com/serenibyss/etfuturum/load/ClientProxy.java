@@ -1,9 +1,11 @@
 package com.serenibyss.etfuturum.load;
 
 import com.serenibyss.etfuturum.entities.EFMEntities;
+import com.serenibyss.etfuturum.event.ClientEventHandler;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -14,6 +16,9 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
+
+        MinecraftForge.EVENT_BUS.register(ClientEventHandler.class);
+
         EFMEntities.registerRenders();
     }
 
