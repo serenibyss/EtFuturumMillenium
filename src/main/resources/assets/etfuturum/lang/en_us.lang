@@ -1,2 +1,4 @@
 tile.barrel.name=Barrel
 container.barrel=Barrel
+tile.stonecutter.name=Stonecutter
+container.stonecutter=Stonecutter

@@ -12,6 +12,7 @@ public class EtFuturumSounds {
 
     public static SoundEvent BARREL_OPEN;
     public static SoundEvent BARREL_CLOSE;
+    public static SoundEvent UI_STONECUTTER_TAKE_RESULT;
 
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
@@ -20,6 +21,10 @@ public class EtFuturumSounds {
         if (Features.MC14.barrel.isEnabled()) {
             BARREL_OPEN = register(r, "block.barrel.open");
             BARREL_CLOSE = register(r, "block.barrel.close");
+        }
+
+        if (Features.MC14.stonecutter.isEnabled()) {
+            UI_STONECUTTER_TAKE_RESULT = register(r, "ui.stonecutter.take_result");
         }
     }
 

@@ -3,7 +3,6 @@ package com.serenibyss.etfuturum.blocks;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.blocks.base.EFMBlock;
 import com.serenibyss.etfuturum.load.feature.Feature;
-import com.serenibyss.etfuturum.load.feature.Features;
 import com.serenibyss.etfuturum.tiles.TileEntityBarrel;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -18,9 +17,12 @@ import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
+import static com.serenibyss.etfuturum.load.feature.Features.*;
+
 public enum EFMBlocks {
 
-    BARREL(Features.MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
+    BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
+    STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
 
     ;
 

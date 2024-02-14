@@ -1,12 +1,14 @@
 package com.serenibyss.etfuturum.containers;
 
+import com.serenibyss.etfuturum.containers.base.EFMContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.text.ITextComponent;
 
-public class ContainerBarrel extends Container {
+public class ContainerBarrel extends EFMContainer {
 
     private final IInventory inventory;
 
@@ -28,6 +30,11 @@ public class ContainerBarrel extends Container {
     @Override
     public boolean canInteractWith(EntityPlayer playerIn) {
         return inventory.isUsableByPlayer(playerIn);
+    }
+
+    @Override
+    public ITextComponent getTitle() {
+        return inventory.getDisplayName();
     }
 
     @Override

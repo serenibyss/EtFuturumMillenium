@@ -12,6 +12,7 @@ public class ConfigBlocksItems {
     // 1.14: Village & Pillage
 
     public static boolean enableBarrels = true;
+    public static boolean enableStonecutter = true;
 
     // 1.15: Buzzy Bees
 

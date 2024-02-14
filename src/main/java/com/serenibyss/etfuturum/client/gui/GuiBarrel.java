@@ -1,24 +1,21 @@
 package com.serenibyss.etfuturum.client.gui;
 
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.client.gui.base.EFMGuiContainer;
 import com.serenibyss.etfuturum.containers.ContainerBarrel;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiBarrel extends GuiContainer {
+public class GuiBarrel extends EFMGuiContainer<ContainerBarrel> {
 
     private static final ResourceLocation TEXTURE = new ResourceLocation(EFMTags.MODID, "textures/gui/container/shulker_box.png");
     private final IInventory playerInv;
-    private final IInventory inventory;
 
     public GuiBarrel(IInventory playerInv, IInventory inventory, EntityPlayer player) {
         super(new ContainerBarrel(playerInv, inventory, player));
-
         this.playerInv = playerInv;
-        this.inventory = inventory;
     }
 
     @Override
@@ -30,10 +27,8 @@ public class GuiBarrel extends GuiContainer {
 
     @Override
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY) {
-        String s = inventory.getDisplayName().getUnformattedText();
-        fontRenderer.drawString(s, 8, 6, 4210752);
-        fontRenderer.drawString(
-                playerInv.getDisplayName().getUnformattedText(), 8, ySize - 96 + 2, 4210752);
+        fontRenderer.drawString(getTitle().getUnformattedText(), 8, 6, 4210752);
+        fontRenderer.drawString(playerInv.getDisplayName().getUnformattedText(), 8, ySize - 96 + 2, 4210752);
     }
 
     @Override

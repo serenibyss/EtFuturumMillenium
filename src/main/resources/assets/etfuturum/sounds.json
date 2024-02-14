@@ -18,5 +18,27 @@
         "pitch": 1.0
       }
     ]
+  },
+  "ui.stonecutter.take_result": {
+    "sounds": [
+      {
+        "name": "etfuturum:ui/stonecutter/cut1",
+        "volume": 1
+      },
+      {
+        "name": "etfuturum:ui/stonecutter/cut1",
+        "volume": 1,
+        "pitch": 0.92
+      },
+      {
+        "name": "etfuturum:ui/stonecutter/cut2",
+        "volume": 1
+      },
+      {
+        "name": "etfuturum:ui/stonecutter/cut2",
+        "volume": 1,
+        "pitch": 0.92
+      }
+    ]
   }
 }
