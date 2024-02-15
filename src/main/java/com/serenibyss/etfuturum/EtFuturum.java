@@ -1,6 +1,7 @@
 package com.serenibyss.etfuturum;
 
 import com.serenibyss.etfuturum.load.CommonProxy;
+import com.serenibyss.etfuturum.load.EFMEnumHelper;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
@@ -28,6 +29,7 @@ public class EtFuturum {
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
+        EFMEnumHelper.init();
         if (event.getSide() == Side.CLIENT) {
             Features.initAssets();
         }
