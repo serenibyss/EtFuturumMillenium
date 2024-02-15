@@ -1,7 +1,6 @@
 package com.serenibyss.etfuturum.load.feature;
 
 import com.serenibyss.etfuturum.load.config.EtFuturumConfig;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -10,6 +9,7 @@ import java.util.function.Supplier;
 
 public class Feature {
 
+    private final String name;
     private final FeatureManager myManager;
     private final Supplier<Boolean> enabledTest;
 
@@ -17,20 +17,16 @@ public class Feature {
     protected final Set<String> sounds;
     protected final Set<String> structures;
 
-    @Nullable
-    protected String mixinPackage;
-
-    private Feature(FeatureManager myManager, Supplier<Boolean> enabledTest,
-                    Set<String> textures, Set<String> sounds, Set<String> structures,
-                    @Nullable String mixinPackage) {
+    private Feature(String name, FeatureManager myManager, Supplier<Boolean> enabledTest,
+                    Set<String> textures, Set<String> sounds, Set<String> structures) {
+        this.name = name;
         this.myManager = myManager;
         this.enabledTest = enabledTest;
         this.textures = textures;
         this.sounds = sounds;
         this.structures = structures;
-        this.mixinPackage = mixinPackage;
 
-        this.myManager.registerFeature(this);
+        this.myManager.registerFeature(this.name, this);
     }
 
     public boolean isEnabled() {
@@ -40,12 +36,18 @@ public class Feature {
         return enabledTest.get();
     }
 
-    public static Feature.Builder builder(FeatureManager manager, Supplier<Boolean> enabledTest) {
-        return new Builder(manager, enabledTest);
+    @Override
+    public String toString() {
+        return "Feature:{" + name + "}";
+    }
+
+    public static Feature.Builder builder(String name, FeatureManager manager, Supplier<Boolean> enabledTest) {
+        return new Builder(name, manager, enabledTest);
     }
 
     public static class Builder {
 
+        private final String name;
         private final FeatureManager manager;
         private final Supplier<Boolean> enabledTest;
 
@@ -53,9 +55,8 @@ public class Feature {
         private final Set<String> sounds = new HashSet<>();
         private final Set<String> structures = new HashSet<>();
 
-        private String mixinPackage;
-
-        private Builder(FeatureManager manager, Supplier<Boolean> enabledTest) {
+        private Builder(String name, FeatureManager manager, Supplier<Boolean> enabledTest) {
+            this.name = name;
             this.manager = manager;
             this.enabledTest = enabledTest;
         }
@@ -75,19 +76,8 @@ public class Feature {
             return this;
         }
 
-        /**
-         * Register mixins for this feature. Used instead of adding them to a Mixin cfg JSON.
-         *
-         * @param mixinPackage The package. Assumes that it will be located at {@link com.serenibyss.etfuturum.mixin}
-         *                     and will not have any sub-packages.
-         */
-        public Builder addMixinPackage(String mixinPackage) {
-            this.mixinPackage = mixinPackage;
-            return this;
-        }
-
         public Feature build() {
-            return new Feature(manager, enabledTest, textures, sounds, structures, mixinPackage);
+            return new Feature(name, manager, enabledTest, textures, sounds, structures);
         }
     }
 }

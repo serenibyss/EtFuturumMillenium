@@ -122,7 +122,7 @@ public class EtFuturumMixinPlugin implements IMixinConfigPlugin {
 
     public static boolean isMixinClassApplied(String name) {
         String mixinPackage = mixinClassToPackage(name);
-        Feature feature = FeatureManager.getFeatureForMixinPackage(mixinPackage);
+        Feature feature = FeatureManager.getFeatureByName(mixinPackage);
         if (feature == null) {
             LOGGER.warn("Not applying mixin '{}' as it is not associated with any feature", name);
             return false;

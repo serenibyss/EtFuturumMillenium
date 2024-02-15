@@ -5,7 +5,6 @@ import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.ApiStatus;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public abstract class FeatureManager {
 
     private static final Set<FeatureManager> FEATURE_MANAGERS = new HashSet<>();
-    private static final Object2ObjectMap<String, Feature> MIXIN_LOOKUP = new Object2ObjectOpenHashMap<>();
+    private static final Object2ObjectMap<String, Feature> FEATURE_LOOKUP = new Object2ObjectOpenHashMap<>();
 
     private final Set<Feature> featureSet = new HashSet<>();
 
@@ -24,11 +23,9 @@ public abstract class FeatureManager {
 
     public abstract MCVersion getMinecraftVersion();
 
-    protected void registerFeature(Feature feature) {
+    protected void registerFeature(String name, Feature feature) {
         featureSet.add(feature);
-        if (feature.mixinPackage != null) {
-            MIXIN_LOOKUP.put(feature.mixinPackage, feature);
-        }
+        FEATURE_LOOKUP.put(name, feature);
     }
 
     // todo cache this if it ends up needing to be called often
@@ -58,9 +55,8 @@ public abstract class FeatureManager {
         }
     }
 
-    @ApiStatus.Internal
-    public static Feature getFeatureForMixinPackage(String mixinPackage) {
-        return MIXIN_LOOKUP.get(mixinPackage);
+    public static Feature getFeatureByName(String name) {
+        return FEATURE_LOOKUP.get(name);
     }
 
     static {
