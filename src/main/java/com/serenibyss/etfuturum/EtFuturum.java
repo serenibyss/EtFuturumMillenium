@@ -1,7 +1,7 @@
 package com.serenibyss.etfuturum;
 
 import com.serenibyss.etfuturum.load.CommonProxy;
-import com.serenibyss.etfuturum.load.EFMEnumHelper;
+import com.serenibyss.etfuturum.load.enums.EFMEnumHelper;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
