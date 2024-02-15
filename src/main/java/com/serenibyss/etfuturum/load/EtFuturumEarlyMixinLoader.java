@@ -1,7 +1,6 @@
 package com.serenibyss.etfuturum.load;
 
 import com.google.common.collect.ImmutableList;
-import com.serenibyss.etfuturum.load.asset.AssetDummyMod;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.jetbrains.annotations.Nullable;

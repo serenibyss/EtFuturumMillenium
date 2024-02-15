@@ -8,6 +8,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.serenibyss.etfuturum.load.feature.MCVersion;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -299,16 +300,26 @@ public enum AssetHelper {
     }
 
     private static File getMinecraftDirectory() {
-        return switch (OS.CURRENT) {
-            case LINUX -> new File(System.getProperty("user.home"), ".minecraft");
-            case WINDOWS -> {
-                String appData = System.getenv("APPDATA");
-                String folder = appData != null ? appData : System.getProperty("user.home");
-                yield new File(folder, ".minecraft");
-            }
-            case OSX -> new File(System.getProperty("user.home"), "Library/Application Support/minecraft");
-            default -> new File(System.getProperty("user.home"), "minecraft");
-        };
+        File file;
+        try {
+            file = new File(Minecraft.getMinecraft().fileAssets.getParent());
+        } catch (Throwable ignored) {
+            // This is an experimental attempt at getting the assets from the current launcher.
+            // If this fails for absolutely any reason, we go to a more consistent asset location.
+            file = switch (OS.CURRENT) {
+                case LINUX -> new File(System.getProperty("user.home"), ".minecraft");
+                case WINDOWS -> {
+                    String appData = System.getenv("APPDATA");
+                    String folder = appData != null ? appData : System.getProperty("user.home");
+                    yield new File(folder, ".minecraft");
+                }
+                case OSX -> new File(System.getProperty("user.home"), "Library/Application Support/minecraft");
+                default -> new File(System.getProperty("user.home"), "minecraft");
+            };
+        }
+
+        AssetMover.LOGGER.info("Using minecraft directory {} for locating existing assets", file);
+        return file;
     }
 
     private static String getTime(long millis) {
