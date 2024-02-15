@@ -1,6 +1,5 @@
 package com.serenibyss.etfuturum.load.asset;
 
-import com.cleanroommc.assetmover.AssetMoverAPI;
 import com.serenibyss.etfuturum.load.feature.MCVersion;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -10,8 +9,8 @@ import java.util.*;
 @SideOnly(Side.CLIENT)
 public class AssetRequest {
 
-    private final MCVersion mcVersion;
-    private final EnumMap<AssetType, Set<String>> assetFiles = new EnumMap<>(AssetType.class);
+    protected final MCVersion mcVersion;
+    protected final EnumMap<AssetType, Set<String>> assetFiles = new EnumMap<>(AssetType.class);
 
     public AssetRequest(MCVersion mcVersion) {
         this.mcVersion = mcVersion;
@@ -29,7 +28,12 @@ public class AssetRequest {
         assetFiles.computeIfAbsent(AssetType.STRUCTURES, $ -> new HashSet<>()).addAll(structures);
     }
 
-    public void send() {
+    protected MCVersion getMinecraftVersion() {
+        return mcVersion;
+    }
+
+    protected Map<String, String> getAssetRequest() {
+        Map<String, String> assetRequest = new HashMap<>();
         for (AssetType type : AssetType.VALUES) {
             String typeName = type.name().toLowerCase();
             Set<String> assets = assetFiles.get(type);
@@ -37,11 +41,10 @@ public class AssetRequest {
                 continue;
             }
 
-            Map<String, String> assetMapping = new HashMap<>();
             for (String asset : assets) {
-                assetMapping.put("assets/minecraft/" + typeName + "/" + asset, "assets/etfuturum/" + typeName + "/" + asset);
+                assetRequest.put("assets/minecraft/" + typeName + "/" + asset, "assets/etfuturum/" + typeName + "/" + asset);
             }
-            AssetMoverAPI.fromMinecraft(mcVersion.getLatestVersion(), assetMapping);
         }
+        return assetRequest;
     }
 }

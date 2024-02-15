@@ -16,7 +16,7 @@ import org.apache.logging.log4j.Logger;
      version = EFMTags.VERSION,
      name = EFMTags.MODNAME,
      acceptedMinecraftVersions = "[1.12.2]",
-     dependencies = "required-after:mixinbooter;required-after:assetmover;required-after:configanytime;")
+     dependencies = "required-after:mixinbooter;required-after:configanytime;")
 public class EtFuturum {
 
     public static final Logger LOGGER = LogManager.getLogger(EFMTags.MODID);

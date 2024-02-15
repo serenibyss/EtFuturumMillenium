@@ -39,6 +39,5 @@
  */
 dependencies {
     // todo consider shading
-    api('com.cleanroommc:assetmover:2.5')
     api('com.cleanroommc:configanytime:2.0')
 }

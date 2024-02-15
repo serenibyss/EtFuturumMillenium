@@ -11,6 +11,6 @@
     ],
     "credits": "",
     "dependencies": [
-        "mixinbooter", "assetmover", "configanytime"
+        "mixinbooter", "configanytime"
     ]
 }]

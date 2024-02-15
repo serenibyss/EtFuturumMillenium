@@ -1,8 +1,10 @@
 package com.serenibyss.etfuturum.load.feature;
 
+import com.serenibyss.etfuturum.load.asset.AssetMover;
 import com.serenibyss.etfuturum.load.asset.AssetRequest;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,8 +53,9 @@ public abstract class FeatureManager {
                 request.addStructures(feature.structures);
                 feature.structures.clear();
             }
-            request.send();
+            AssetMover.queue(request);
         }
+        AssetMover.flush();
     }
 
     public static Feature getFeatureByName(String name) {
