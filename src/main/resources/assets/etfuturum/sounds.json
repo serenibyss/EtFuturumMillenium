@@ -40,5 +40,112 @@
         "pitch": 0.92
       }
     ]
+  },
+  "entity.phantom.ambient": {
+    "sounds": [
+      {
+        "name": "etfuturum:mob/phantom/idle1",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:mob/phantom/idle2",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:mob/phantom/idle3",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:mob/phantom/idle4",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:mob/phantom/idle5",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.phantom.ambient"
+  },
+  "entity.phantom.bite": {
+    "sounds": [
+      "etfuturum:mob/phantom/bite1",
+      "etfuturum:mob/phantom/bite2"
+    ],
+    "subtitle": "subtitles.entity.phantom.bite"
+  },
+  "entity.phantom.death": {
+    "sounds": [
+      "etfuturum:mob/phantom/death1",
+      "etfuturum:mob/phantom/death2",
+      "etfuturum:mob/phantom/death3"
+    ],
+    "subtitle": "subtitles.entity.phantom.death"
+  },
+  "entity.phantom.flap": {
+    "sounds": [
+      {
+        "name": "etfuturum:mob/phantom/flap1",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:mob/phantom/flap2",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:mob/phantom/flap3",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:mob/phantom/flap4",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:mob/phantom/flap5",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:mob/phantom/flap6",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.entity.phantom.flap"
+  },
+  "entity.phantom.hurt": {
+    "sounds": [
+      {
+        "name": "etfuturum:mob/phantom/hurt1",
+        "volume": 0.75
+      },
+      {
+        "name": "etfuturum:mob/phantom/hurt2",
+        "volume": 0.75
+      },
+      {
+        "name": "etfuturum:mob/phantom/hurt3",
+        "volume": 0.75
+      }
+    ],
+    "subtitle": "subtitles.entity.phantom.hurt"
+  },
+  "entity.phantom.swoop": {
+    "sounds": [
+      {
+        "name": "etfuturum:mob/phantom/swoop1",
+        "volume": 0.7
+      },
+      {
+        "name": "etfuturum:mob/phantom/swoop2",
+        "volume": 0.7
+      },
+      {
+        "name": "etfuturum:mob/phantom/swoop3",
+        "volume": 0.7
+      },
+      {
+        "name": "etfuturum:mob/phantom/swoop4",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.entity.phantom.swoop"
   }
 }

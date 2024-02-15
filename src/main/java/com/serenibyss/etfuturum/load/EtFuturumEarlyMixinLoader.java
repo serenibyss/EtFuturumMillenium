@@ -1,10 +1,12 @@
 package com.serenibyss.etfuturum.load;
 
+import com.google.common.collect.ImmutableList;
 import net.minecraftforge.common.ForgeVersion;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.jetbrains.annotations.Nullable;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -41,7 +43,7 @@ public class EtFuturumEarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixin
 
     @Override
     public List<String> getMixinConfigs() {
-        return Collections.emptyList(); // todo
+        return ImmutableList.of("mixins.efm.json");
     }
 
     @Override
