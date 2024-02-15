@@ -1,4 +1,4 @@
-package com.serenibyss.etfuturum.items;
+package com.serenibyss.etfuturum.items.base;
 
 import com.serenibyss.etfuturum.EtFuturum;
 import net.minecraft.creativetab.CreativeTabs;
@@ -6,9 +6,8 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.IRarity;
-import org.jetbrains.annotations.ApiStatus;
 
-public class EFMItem extends Item {
+public class EFMItem extends Item implements IModelRegister {
 
     EnumRarity rarity;
 
@@ -25,7 +24,6 @@ public class EFMItem extends Item {
         return rarity;
     }
 
-    @ApiStatus.Internal
     public void registerModel() {
         EtFuturum.proxy.registerItemRenderer(this, 0, "inventory");
     }

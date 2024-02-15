@@ -1,7 +1,9 @@
 package com.serenibyss.etfuturum.items;
 
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.items.EFMItem.Settings;
+import com.serenibyss.etfuturum.items.base.EFMItem;
+import com.serenibyss.etfuturum.items.base.EFMItem.Settings;
+import com.serenibyss.etfuturum.items.base.IModelRegister;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -23,9 +25,9 @@ public enum EFMItems {
 
     public final Feature feature;
     public final String myName;
-    public final EFMItem myItem;
+    public final Item myItem;
 
-    EFMItems(Feature feature, String myName, EFMItem myItem) {
+    EFMItems(Feature feature, String myName, Item myItem) {
         this.feature = feature;
         this.myName = myName;
         this.myItem = myItem;
@@ -36,7 +38,7 @@ public enum EFMItems {
     }
 
     @Nullable
-    public EFMItem getItem() {
+    public Item getItem() {
         if (isEnabled()) {
             return myItem;
         }
@@ -72,8 +74,8 @@ public enum EFMItems {
     @SubscribeEvent
     public static void registerModel(ModelRegistryEvent event) {
         for (EFMItems value : values()) {
-            if (value.isEnabled()) {
-                value.myItem.registerModel();
+            if (value.isEnabled() && value.myItem instanceof IModelRegister item) {
+                item.registerModel();
             }
         }
     }
