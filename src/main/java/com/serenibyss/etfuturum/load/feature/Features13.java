@@ -7,6 +7,7 @@ public class Features13 extends FeatureManager {
 
     public final Feature phantom;
     public final Feature conduit;
+    public final Feature trident;
 
     public Features13() {
         phantom = Feature.builder("phantom", this, () -> ConfigEntities.enablePhantoms)
@@ -27,6 +28,9 @@ public class Features13 extends FeatureManager {
                 .addSounds("block/conduit/activate", "block/conduit/ambient", "block/conduit/deactivate")
                 .addNumberedSounds("block/conduit/short", 1, 9)
                 .addNumberedSounds("block/conduit/attack", 1, 3)
+                .build();
+
+        trident = Feature.builder("trident", this, () -> ConfigBlocksItems.enableTridents)
                 .build();
     }
 

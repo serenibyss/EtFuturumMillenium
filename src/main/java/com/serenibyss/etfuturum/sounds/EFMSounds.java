@@ -30,6 +30,14 @@ public class EFMSounds {
     public static SoundEvent BLOCK_CONDUIT_ACTIVATE;
     public static SoundEvent BLOCK_CONDUIT_DEACTIVATE;
 
+    public static SoundEvent ITEM_TRIDENT_HIT;
+    public static SoundEvent ITEM_TRIDENT_RETURN;
+    public static SoundEvent ITEM_TRIDENT_THUNDER;
+    public static SoundEvent ITEM_TRIDENT_THROW;
+    public static SoundEvent ITEM_TRIDENT_RIPTIDE_1;
+    public static SoundEvent ITEM_TRIDENT_RIPTIDE_2;
+    public static SoundEvent ITEM_TRIDENT_RIPTIDE_3;
+
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
         IForgeRegistry<SoundEvent> r = event.getRegistry();
