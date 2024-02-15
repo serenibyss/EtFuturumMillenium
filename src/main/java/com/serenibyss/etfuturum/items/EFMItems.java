@@ -1,15 +1,23 @@
 package com.serenibyss.etfuturum.items;
 
+import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.items.EFMItem.Settings;
 import com.serenibyss.etfuturum.load.feature.Feature;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 import org.jetbrains.annotations.Nullable;
 
+import static com.serenibyss.etfuturum.load.feature.Features.*;
+
 public enum EFMItems {
+
+    PHANTOM_MEMBRANE(MC13.phantom, "phantom_membrane", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("phantom_membrane")))
 
     ;
 
@@ -55,6 +63,7 @@ public enum EFMItems {
         IForgeRegistry<Item> r = event.getRegistry();
         for (EFMItems value : values()) {
             if (value.isEnabled()) {
+                value.myItem.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
                 r.register(value.myItem);
             }
         }

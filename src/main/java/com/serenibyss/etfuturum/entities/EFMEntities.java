@@ -24,10 +24,8 @@ public class EFMEntities {
                     .id(new ResourceLocation(EFMTags.MODID, "phantom"), 0)
                     .tracker(80, 3, false)
                     .name("phantom")
-                    .egg(0x0000ff, 0x00ff00).build());
+                    .egg(0x43518A, 0x88FF00).build());
         }
-
-
     }
 
     @SideOnly(Side.CLIENT)

@@ -7,6 +7,7 @@ import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.Mod.Instance;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.*;
+import net.minecraftforge.fml.relauncher.Side;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -27,7 +28,9 @@ public class EtFuturum {
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
-        Features.init(event);
+        if (event.getSide() == Side.CLIENT) {
+            Features.initAssets();
+        }
     }
 
     @EventHandler

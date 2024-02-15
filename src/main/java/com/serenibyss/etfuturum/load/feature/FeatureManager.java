@@ -1,8 +1,11 @@
 package com.serenibyss.etfuturum.load.feature;
 
 import com.serenibyss.etfuturum.load.asset.AssetRequest;
+import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.ApiStatus;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -11,6 +14,7 @@ import java.util.stream.Collectors;
 public abstract class FeatureManager {
 
     private static final Set<FeatureManager> FEATURE_MANAGERS = new HashSet<>();
+    private static final Object2ObjectMap<String, Feature> MIXIN_LOOKUP = new Object2ObjectOpenHashMap<>();
 
     private final Set<Feature> featureSet = new HashSet<>();
 
@@ -22,6 +26,9 @@ public abstract class FeatureManager {
 
     protected void registerFeature(Feature feature) {
         featureSet.add(feature);
+        if (feature.mixinPackage != null) {
+            MIXIN_LOOKUP.put(feature.mixinPackage, feature);
+        }
     }
 
     // todo cache this if it ends up needing to be called often
@@ -49,5 +56,15 @@ public abstract class FeatureManager {
             }
             request.send();
         }
+    }
+
+    @ApiStatus.Internal
+    public static Feature getFeatureForMixinPackage(String mixinPackage) {
+        return MIXIN_LOOKUP.get(mixinPackage);
+    }
+
+    static {
+        // make sure stuff is loaded for mixins...
+        Features.init();
     }
 }

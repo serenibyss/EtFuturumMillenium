@@ -6,6 +6,7 @@ import net.minecraft.entity.Entity;
 import net.minecraft.util.math.MathHelper;
 
 public class ModelPhantom extends ModelBase {
+
     private final ModelRenderer field_203070_a;
     private final ModelRenderer field_203071_b;
     private final ModelRenderer field_203072_c;
@@ -56,7 +57,6 @@ public class ModelPhantom extends ModelBase {
         this.field_203070_a.addChild(this.field_203075_f);
         this.field_203070_a.addChild(this.field_203071_b);
         this.field_203070_a.addChild(this.field_203073_d);
-
     }
 
     @Override

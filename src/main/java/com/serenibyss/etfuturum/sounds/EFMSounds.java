@@ -1,12 +1,14 @@
 package com.serenibyss.etfuturum.sounds;
 
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.load.feature.Features;
+import com.serenibyss.etfuturum.load.feature.Feature;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
+
+import static com.serenibyss.etfuturum.load.feature.Features.*;
 
 public class EFMSounds {
 
@@ -26,27 +28,25 @@ public class EFMSounds {
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
         IForgeRegistry<SoundEvent> r = event.getRegistry();
 
-        if(Features.MC13.phantom.isEnabled()) {
-            ENTITY_PHANTOM_AMBIENT = register(r, "entity.phantom.ambient");
-            ENTITY_PHANTOM_ATTACK = register(r, "entity.phantom.attack");
-            ENTITY_PHANTOM_BITE = register(r, "entity.phantom.bite");
-            ENTITY_PHANTOM_DEATH = register(r, "entity.phantom.death");
-            ENTITY_PHANTOM_FLAP = register(r, "entity.phantom.flap");
-            ENTITY_PHANTOM_HURT = register(r, "entity.phantom.hurt");
-            ENTITY_PHANTOM_SWOOP = register(r, "entity.phantom.swoop");
-        }
+        ENTITY_PHANTOM_AMBIENT = register(MC13.phantom, r, "entity.phantom.ambient");
+        ENTITY_PHANTOM_ATTACK = register(MC13.phantom, r, "entity.phantom.attack");
+        ENTITY_PHANTOM_BITE = register(MC13.phantom, r, "entity.phantom.bite");
+        ENTITY_PHANTOM_DEATH = register(MC13.phantom, r, "entity.phantom.death");
+        ENTITY_PHANTOM_FLAP = register(MC13.phantom, r, "entity.phantom.flap");
+        ENTITY_PHANTOM_HURT = register(MC13.phantom, r, "entity.phantom.hurt");
+        ENTITY_PHANTOM_SWOOP = register(MC13.phantom, r, "entity.phantom.swoop");
 
-        if (Features.MC14.barrel.isEnabled()) {
-            BARREL_OPEN = register(r, "block.barrel.open");
-            BARREL_CLOSE = register(r, "block.barrel.close");
-        }
 
-        if (Features.MC14.stonecutter.isEnabled()) {
-            UI_STONECUTTER_TAKE_RESULT = register(r, "ui.stonecutter.take_result");
-        }
+        BARREL_OPEN = register(MC14.barrel, r, "block.barrel.open");
+        BARREL_CLOSE = register(MC14.barrel, r, "block.barrel.close");
+
+        UI_STONECUTTER_TAKE_RESULT = register(MC14.stonecutter, r, "ui.stonecutter.take_result");
     }
 
-    private static SoundEvent register(IForgeRegistry<SoundEvent> registry, String name) {
+    private static SoundEvent register(Feature feature, IForgeRegistry<SoundEvent> registry, String name) {
+        if (feature == null || !feature.isEnabled()) {
+            return null;
+        }
         SoundEvent event = new SoundEvent(new ResourceLocation(EFMTags.MODID, name));
         event.setRegistryName(event.getSoundName());
         registry.register(event);

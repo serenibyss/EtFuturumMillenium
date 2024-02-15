@@ -8,6 +8,7 @@ import com.serenibyss.etfuturum.event.EventHandler;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.recipes.EFMRecipes;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
+import com.serenibyss.etfuturum.stats.EFMStatList;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -30,6 +31,7 @@ public class CommonProxy {
     }
 
     public void init(FMLInitializationEvent event) {
+        EFMStatList.init();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

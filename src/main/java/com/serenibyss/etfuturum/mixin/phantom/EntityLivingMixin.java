@@ -1,8 +1,6 @@
-package com.serenibyss.etfuturum.mixin;
+package com.serenibyss.etfuturum.mixin.phantom;
 
 import com.serenibyss.etfuturum.entities.monster.EntityPhantom;
-import com.serenibyss.etfuturum.world.spawner.PhantomSpawner;
-import net.minecraft.entity.EntityFlying;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.world.World;
@@ -13,8 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(value = EntityLiving.class)
-abstract class EntityLivingMixin{
-
+abstract class EntityLivingMixin {
 
     @Shadow @Final private EntityLookHelper lookHelper;
 
@@ -23,7 +20,7 @@ abstract class EntityLivingMixin{
     }
 
     @Redirect(method = "updateEntityActionState", at = @At(value = "INVOKE", args = "classValue=EntityPhantom", target = "Lnet/minecraft/entity/ai/EntityLookHelper;onUpdateLook()V"))
-    public void disregardLookHelper(EntityLookHelper instance) {
+    public void etfuturum$disregardPhantomLookHelper(EntityLookHelper instance) {
         if(((EntityLiving)(Object)this) instanceof EntityPhantom phantom) {
             return;
         }

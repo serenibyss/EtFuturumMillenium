@@ -1,9 +1,8 @@
 package com.serenibyss.etfuturum.load.feature;
 
-import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-// this is the class you are looking for
 public final class Features {
 
     public static final Features13 MC13 = new Features13();
@@ -15,9 +14,10 @@ public final class Features {
     public static final Features19 MC19 = new Features19();
     public static final Features20 MC20 = new Features20();
 
-    public static void init(FMLConstructionEvent event) {
-        if (event.getSide() == Side.CLIENT) {
-            FeatureManager.gatherAssets();
-        }
+    static void init() {}
+
+    @SideOnly(Side.CLIENT)
+    public static void initAssets() {
+        FeatureManager.gatherAssets();
     }
 }

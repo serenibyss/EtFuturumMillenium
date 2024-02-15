@@ -6,8 +6,6 @@ import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.jetbrains.annotations.Nullable;
 import zone.rong.mixinbooter.IEarlyMixinLoader;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -43,11 +41,6 @@ public class EtFuturumEarlyMixinLoader implements IFMLLoadingPlugin, IEarlyMixin
 
     @Override
     public List<String> getMixinConfigs() {
-        return ImmutableList.of("mixins.efm.json");
-    }
-
-    @Override
-    public boolean shouldMixinConfigQueue(String mixinConfig) {
-        return IEarlyMixinLoader.super.shouldMixinConfigQueue(mixinConfig);
+        return ImmutableList.of("mixins.etfuturum.json");
     }
 }

@@ -4,7 +4,7 @@ import com.serenibyss.etfuturum.api.StonecutterRegistry;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import com.serenibyss.etfuturum.containers.base.EFMContainer;
 import com.serenibyss.etfuturum.containers.base.IntReferenceHolder;
-import com.serenibyss.etfuturum.sounds.EtFuturumSounds;
+import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.util.ItemStackUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.*;
@@ -221,7 +221,7 @@ public class ContainerStonecutter extends EFMContainer {
             stack.getItem().onCreated(stack, player.world, player);
             long time = world.getTotalWorldTime();
             if (lastSoundTime != time) {
-                world.playSound(null, pos, EtFuturumSounds.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
+                world.playSound(null, pos, EFMSounds.UI_STONECUTTER_TAKE_RESULT, SoundCategory.BLOCKS, 1.0F, 1.0F);
                 lastSoundTime = time;
             }
 

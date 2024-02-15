@@ -1,6 +1,13 @@
+# Tiles/Containers
 tile.barrel.name=Barrel
 container.barrel=Barrel
 tile.stonecutter.name=Stonecutter
 container.stonecutter=Stonecutter
 etfuturum.jei.category.stonecutter=Stonecutting
+
+# Entities
+entity.phantom.name=Phantom
+item.phantom_membrane.name=Phantom Membrane
+
+# Stats
 stat.timeSinceRest=Time Since Rest:
