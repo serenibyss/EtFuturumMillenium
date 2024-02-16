@@ -27,7 +27,7 @@ import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
-public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
+public class EFMBlock extends Block implements IModelRegister, IFluidloggable, IMultiItemBlock {
 
     protected final Settings settings;
 
@@ -61,8 +61,13 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
         return settings.collidable;
     }
 
-    public boolean hasItemSubtypes() {
+    public boolean getHasItemSubtypes() {
         return settings.hasItemSubtypes;
+    }
+
+    @Override
+    public String getTranslationKey(int meta) {
+        return this.getTranslationKey();
     }
 
     @Override

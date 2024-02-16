@@ -1,7 +1,6 @@
 package com.serenibyss.etfuturum.blocks;
 
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.EtFuturum;
 import com.serenibyss.etfuturum.blocks.base.EFMBlockRotatedPillar;
 import net.minecraft.block.BlockPlanks;
 import net.minecraft.block.SoundType;
@@ -12,12 +11,15 @@ import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.EnumFacing;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
 import net.minecraftforge.client.model.ModelLoader;
 
 public class BlockStrippedLog1 extends EFMBlockRotatedPillar {
@@ -29,7 +31,8 @@ public class BlockStrippedLog1 extends EFMBlockRotatedPillar {
                 .resistance(2.0F)
                 .soundType(SoundType.WOOD)
                 .creativeTab(CreativeTabs.BUILDING_BLOCKS)
-                .hasItemSubtypes());
+                .hasItemSubtypes()
+                .translationKey("stripped_log_1"));
     }
 
     @Override
@@ -47,8 +50,13 @@ public class BlockStrippedLog1 extends EFMBlockRotatedPillar {
     }
 
     @Override
+    public IBlockState getStateForPlacement(World worldIn, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer) {
+        return this.getStateFromMeta(meta).withProperty(AXIS, facing.getAxis());
+    }
+
+    @Override
     public IBlockState getStateFromMeta(int meta) {
-        IBlockState state = this.getDefaultState().withProperty(VARIANT, BlockPlanks.EnumType.byMetadata((meta & 0b0011) % 4));
+        IBlockState state = this.getDefaultState().withProperty(VARIANT, BlockPlanks.EnumType.byMetadata(meta % 4));
         IBlockState rotState = super.getStateFromMeta(meta);
 
         return state.withProperty(AXIS, rotState.getValue(AXIS));
@@ -85,5 +93,11 @@ public class BlockStrippedLog1 extends EFMBlockRotatedPillar {
         ModelLoader.setCustomModelResourceLocation(thisBlock, 1, new ModelResourceLocation(new ResourceLocation(EFMTags.MODID, "spruce_stripped_log"), "inventory"));
         ModelLoader.setCustomModelResourceLocation(thisBlock, 2, new ModelResourceLocation(new ResourceLocation(EFMTags.MODID, "birch_stripped_log"), "inventory"));
         ModelLoader.setCustomModelResourceLocation(thisBlock, 3, new ModelResourceLocation(new ResourceLocation(EFMTags.MODID, "jungle_stripped_log"), "inventory"));
+    }
+
+    @Override
+    public String getTranslationKey(int meta) {
+        IBlockState state = this.getStateFromMeta(meta);
+        return String.format("tile.%s_stripped_log", state.getValue(VARIANT).getTranslationKey());
     }
 }

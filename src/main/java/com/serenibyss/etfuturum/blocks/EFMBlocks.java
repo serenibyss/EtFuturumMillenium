@@ -128,6 +128,7 @@ public enum EFMBlocks {
                     ib.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
                     r.register(ib);
                 }
+                // todo IMultiItemBlock
             }
         }
     }

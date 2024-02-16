@@ -4,6 +4,12 @@ container.barrel=Barrel
 tile.stonecutter.name=Stonecutter
 container.stonecutter=Stonecutter
 etfuturum.jei.category.stonecutter=Stonecutting
+tile.oak_stripped_log.name=Stripped Oak Log
+tile.spruce_stripped_log.name=Stripped Spruce Log
+tile.birch_stripped_log.name=Stripped Birch Log
+tile.jungle_stripped_log.name=Stripped Jungle Log
+tile.acacia_stripped_log.name=Stripped Acacia Log
+tile.big_oak_stripped_log.name=Stripped Dark Oak Log
 tile.conduit.name=Conduit
 
 # Entities
