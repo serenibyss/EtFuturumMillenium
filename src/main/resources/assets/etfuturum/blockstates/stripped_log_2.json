@@ -1,0 +1,28 @@
+{
+  "variants": {
+    "axis=y,variant=acacia": {
+      "model": "etfuturum:acacia_stripped_log"
+    },
+    "axis=z,variant=acacia": {
+      "model": "etfuturum:acacia_stripped_log",
+      "x": 90
+    },
+    "axis=x,variant=acacia": {
+      "model": "etfuturum:acacia_stripped_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,variant=dark_oak": {
+      "model": "etfuturum:dark_oak_stripped_log"
+    },
+    "axis=z,variant=dark_oak": {
+      "model": "etfuturum:dark_oak_stripped_log",
+      "x": 90
+    },
+    "axis=x,variant=dark_oak": {
+      "model": "etfuturum:dark_oak_stripped_log",
+      "x": 90,
+      "y": 90
+    }
+  }
+}

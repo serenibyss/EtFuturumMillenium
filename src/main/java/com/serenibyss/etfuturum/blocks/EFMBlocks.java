@@ -35,6 +35,7 @@ public enum EFMBlocks {
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE_SLAB.getDoubleSlab()),
 
     STRIPPED_LOG_1(MC13.stripping, "stripped_log_1", new BlockStrippedLog1()),
+    STRIPPED_LOG_2(MC13.stripping, "stripped_log_2", new BlockStrippedLog2()),
 
     ;
 
