@@ -23,9 +23,9 @@ public enum EFMItems {
 
     ;
 
-    public final Feature feature;
-    public final String myName;
-    public final Item myItem;
+    private final Feature feature;
+    private final String myName;
+    private final Item myItem;
 
     EFMItems(Feature feature, String myName, Item myItem) {
         this.feature = feature;
