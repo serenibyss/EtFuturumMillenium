@@ -140,38 +140,40 @@ public class EntityTrident extends EntityArrow {
     @Override
     protected void onHit(RayTraceResult raytraceResultIn) {
         Entity entity = raytraceResultIn.entityHit;
-        float damage = 8.0F;
-        if(entity instanceof EntityLivingBase Elb)
-            damage += EnchantmentHelper.getModifierForCreature(this.thrownStack, Elb.getCreatureAttribute());
+        if(entity != null) {
+            float damage = 8.0F;
+            if (entity instanceof EntityLivingBase Elb)
+                damage += EnchantmentHelper.getModifierForCreature(this.thrownStack, Elb.getCreatureAttribute());
 
-        Entity myEnt = findEntity();
-        DamageSource source = EFMDamageSource.causeTridentDamage(this, (Entity)(myEnt == null ? this : myEnt));
-        this.dealtDamage = true;
-        SoundEvent sound = EFMSounds.ITEM_TRIDENT_HIT;
-        if(entity.attackEntityFrom(source, damage) && entity instanceof EntityLivingBase elb) {
-            if(myEnt instanceof EntityLivingBase) {
-                EnchantmentHelper.applyThornEnchantments(elb, myEnt);
-                EnchantmentHelper.applyArthropodEnchantments(elb, myEnt);
+            Entity myEnt = findEntity();
+            DamageSource source = EFMDamageSource.causeTridentDamage(this, (Entity) (myEnt == null ? this : myEnt));
+            this.dealtDamage = true;
+            SoundEvent sound = EFMSounds.ITEM_TRIDENT_HIT;
+            if (entity.attackEntityFrom(source, damage) && entity instanceof EntityLivingBase elb) {
+                if (myEnt instanceof EntityLivingBase) {
+                    EnchantmentHelper.applyThornEnchantments(elb, myEnt);
+                    EnchantmentHelper.applyArthropodEnchantments(elb, myEnt);
+                }
+                this.arrowHit(elb);
             }
-            this.arrowHit(elb);
-        }
 
-        this.motionX *= -0.01;
-        this.motionY *= -0.1;
-        this.motionZ *= -0.01;
-        float volume = 1.0f;
-        if(this.world.isThundering() && EnchantmentHelper.getEnchantmentLevel(EFMEnchantments.CHANNELING, this.thrownStack) > 0) {
-            BlockPos strikePos = entity.getPosition();
-            if(this.world.canSeeSky(strikePos)) {
-                EntityLightningBolt bolt = new EntityLightningBolt(this.world, (double)strikePos.getX() + 0.5, (double)strikePos.getY(), (double)strikePos.getZ() + 0.5, false);
-                // todo(onion): maybe make this an advancement trigger?
-                sound = EFMSounds.ITEM_TRIDENT_THUNDER;
-                volume = 5.0F;
+            this.motionX *= -0.01;
+            this.motionY *= -0.1;
+            this.motionZ *= -0.01;
+            float volume = 1.0f;
+            if (this.world.isThundering() && EnchantmentHelper.getEnchantmentLevel(EFMEnchantments.CHANNELING, this.thrownStack) > 0) {
+                BlockPos strikePos = entity.getPosition();
+                if (this.world.canSeeSky(strikePos)) {
+                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, (double) strikePos.getX() + 0.5, (double) strikePos.getY(), (double) strikePos.getZ() + 0.5, false);
+                    // todo(onion): maybe make this an advancement trigger?
+                    sound = EFMSounds.ITEM_TRIDENT_THUNDER;
+                    volume = 5.0F;
+                }
             }
-        }
 
-        this.playSound(sound, volume, 1.0F);
-        super.onHit(raytraceResultIn);
+            this.playSound(sound, volume, 1.0F);
+            //super.onHit(raytraceResultIn);
+        }
     }
 
     @Override

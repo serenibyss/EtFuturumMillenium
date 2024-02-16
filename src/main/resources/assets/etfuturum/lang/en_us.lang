@@ -8,7 +8,10 @@ tile.conduit.name=Conduit
 
 # Entities
 entity.phantom.name=Phantom
+
+# Items
 item.phantom_membrane.name=Phantom Membrane
+item.trident.name=Trident
 
 # Stats
 stat.timeSinceRest=Time Since Rest:

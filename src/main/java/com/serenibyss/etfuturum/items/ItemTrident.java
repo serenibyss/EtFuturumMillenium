@@ -1,8 +1,10 @@
 package com.serenibyss.etfuturum.items;
 
 import com.google.common.collect.Multimap;
+import com.serenibyss.etfuturum.EtFuturum;
 import com.serenibyss.etfuturum.enchantment.EFMEnchantments;
 import com.serenibyss.etfuturum.entities.projectile.EntityTrident;
+import com.serenibyss.etfuturum.items.base.IModelRegister;
 import com.serenibyss.etfuturum.load.enums.EFMEnumAction;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import net.minecraft.block.state.IBlockState;
@@ -24,7 +26,7 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
-public class ItemTrident extends Item {
+public class ItemTrident extends Item implements IModelRegister {
 
     public ItemTrident() {
         super();
@@ -48,6 +50,10 @@ public class ItemTrident extends Item {
     @Override
     public boolean hasEffect(ItemStack stack) {
         return false;
+    }
+
+    public void registerModel() {
+        EtFuturum.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
     @Override

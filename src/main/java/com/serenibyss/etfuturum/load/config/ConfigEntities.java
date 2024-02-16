@@ -11,7 +11,6 @@ public class ConfigEntities {
     // 1.13: Update Aquatic
 
     public static boolean enablePhantoms = true;
-    public static float phantomDamage = 2.0f;
 
     @Comment({"How much damage Phantoms should do on attack. In 1.13, they dealt 6 damage. In 1.14+, they dealt 2 damage.", "Default: 2"})
     @RangeDouble(min = 2.0D, max = 2048.0D) // range from SharedMonsterAttributes.ATTACK_DAMAGE
