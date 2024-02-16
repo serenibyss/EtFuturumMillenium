@@ -11,7 +11,6 @@ import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -77,6 +76,12 @@ public class AdvancementTrigger<T extends IAdvancementCriterion> implements ICri
         }
     }
 
+    /**
+     * Trigger an advancement for a player, and ensure an advancement-specified entity is present in the collection.
+     *
+     * @param player   The player triggering the Advancement
+     * @param entities A list of entities to test against. Typically, entities that are being attacked by the player.
+     */
     public void trigger(@NotNull EntityPlayerMP player, @NotNull Collection<? extends Entity> entities) {
         AdvancementListeners<T> listener = listeners.get(player.getAdvancements());
         if (listener != null) {
