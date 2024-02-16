@@ -6,6 +6,7 @@ import com.serenibyss.etfuturum.entities.projectile.EntityTrident;
 import com.serenibyss.etfuturum.load.enums.EFMEnumAction;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.MoverType;
@@ -30,6 +31,8 @@ public class ItemTrident extends Item {
         this.addPropertyOverride(new ResourceLocation("throwing"), (stack, world, entity) -> {
             return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0f : 0.0f;
         });
+        setCreativeTab(CreativeTabs.BREWING);
+        setTranslationKey("trident");
     }
 
     @Override
