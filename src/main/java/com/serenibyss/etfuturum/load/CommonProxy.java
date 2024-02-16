@@ -1,6 +1,7 @@
 package com.serenibyss.etfuturum.load;
 
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.advancement.EFMAdvancements;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import com.serenibyss.etfuturum.client.GuiHandler;
 import com.serenibyss.etfuturum.entities.EFMEntities;
@@ -29,6 +30,8 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(EventHandler.class);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(EFMTags.MODID, new GuiHandler());
+
+        EFMAdvancements.initTriggers();
     }
 
     public void init(FMLInitializationEvent event) {
