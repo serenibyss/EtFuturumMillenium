@@ -1,5 +1,6 @@
 package com.serenibyss.etfuturum.mixin.phantom;
 
+import com.serenibyss.etfuturum.rule.EFMGameRules;
 import com.serenibyss.etfuturum.world.spawner.PhantomSpawner;
 import net.minecraft.profiler.Profiler;
 import net.minecraft.util.IThreadListener;
@@ -26,6 +27,8 @@ abstract class WorldServerMixin extends World implements IThreadListener {
 
     @Inject(method="tick()V", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/WorldEntitySpawner;findChunksForSpawning(Lnet/minecraft/world/WorldServer;ZZZ)I"))
     public void etfuturum$tickPhantomSpawner(CallbackInfo ci) {
-        phantomSpawner.spawnMobs(this, spawnHostileMobs, spawnPeacefulMobs);
+        if (EFMGameRules.DO_INSOMNIA.getBoolean(this)) {
+            phantomSpawner.spawnMobs(this, spawnHostileMobs, spawnPeacefulMobs);
+        }
     }
 }

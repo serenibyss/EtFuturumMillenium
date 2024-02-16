@@ -9,6 +9,7 @@ import com.serenibyss.etfuturum.event.EventHandler;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.loot.EFMLootTables;
 import com.serenibyss.etfuturum.recipes.EFMRecipes;
+import com.serenibyss.etfuturum.rule.EFMGameRules;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.stats.EFMStatList;
 import net.minecraft.item.Item;
@@ -29,6 +30,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(EFMEntities.class);
         MinecraftForge.EVENT_BUS.register(EventHandler.class);
         MinecraftForge.EVENT_BUS.register(EFMAdvancements.class);
+        MinecraftForge.EVENT_BUS.register(EFMGameRules.class);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(EFMTags.MODID, new GuiHandler());
 
