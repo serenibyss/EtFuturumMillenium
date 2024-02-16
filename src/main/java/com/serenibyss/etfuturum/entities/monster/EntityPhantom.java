@@ -1,16 +1,20 @@
 package com.serenibyss.etfuturum.entities.monster;
 
+import com.serenibyss.etfuturum.entities.base.EntityFlyingMob;
+import com.serenibyss.etfuturum.load.config.ConfigEntities;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.ai.EntityAITarget;
-import net.minecraft.entity.ai.EntityLookHelper;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.item.EntityBoat;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.EnumParticleTypes;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.AxisAlignedBB;
@@ -25,8 +29,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Random;
 
-public class EntityPhantom extends EntityFlying implements IMob {
+public class EntityPhantom extends EntityFlyingMob implements IMob {
 
     private Vec3d targetVec;
     private BlockPos altitudePos;
@@ -41,6 +46,12 @@ public class EntityPhantom extends EntityFlying implements IMob {
         this.setSize(0.9f, 0.5f);
         this.moveHelper = new MoveHelper(this);
 
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        this.getEntityAttribute(SharedMonsterAttributes.ATTACK_DAMAGE).setBaseValue(ConfigEntities.phantomDamage);
     }
 
     @Override
@@ -65,9 +76,16 @@ public class EntityPhantom extends EntityFlying implements IMob {
             if(r1 > 0.0f && r2 <= 0.0f) {
                 this.world.playSound(this.posX, this.posY, this.posZ, EFMSounds.ENTITY_PHANTOM_FLAP, this.getSoundCategory(), 0.95F + this.rand.nextFloat() * 0.05f, 0.95F + this.rand.nextFloat() * 0.05f, false);
             }
+
+            int i = 0; // todo phantom size?
+            float f2 = MathHelper.cos(this.rotationYaw * ((float) Math.PI / 180.0f)) * (1.3f + 0.21f * (float) i);
+            float f3 = MathHelper.sin(this.rotationYaw * ((float) Math.PI / 180.0f)) * (1.3f + 0.21f * (float) i);
+            float f4 = (0.3f + r1 * 0.45f) * ((float) i * 0.2f + 1.0f);
+            this.world.spawnParticle(EnumParticleTypes.TOWN_AURA, this.posX + (double) f2, this.posY + (double) f4, this.posZ + (double) f3, 0, 0, 0);
+            this.world.spawnParticle(EnumParticleTypes.TOWN_AURA, this.posX - (double) f2, this.posY + (double) f4, this.posZ - (double) f3, 0, 0, 0);
         }
 
-        if(!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
+        if (!this.world.isRemote && this.world.getDifficulty() == EnumDifficulty.PEACEFUL) {
             world.removeEntity(this);
         }
     }
@@ -114,11 +132,6 @@ public class EntityPhantom extends EntityFlying implements IMob {
         return true;
     }
 
-    @Override
-    public SoundCategory getSoundCategory() {
-        return SoundCategory.HOSTILE;
-    }
-
     @Nullable
     protected SoundEvent getAmbientSound() {
         return EFMSounds.ENTITY_PHANTOM_AMBIENT;
@@ -148,11 +161,6 @@ public class EntityPhantom extends EntityFlying implements IMob {
     }
 
     @Override
-    protected float getSoundVolume() {
-        return 1.0f;
-    }
-
-    @Override
     public boolean canAttackClass(Class<? extends EntityLivingBase> cls) {
         return true;
     }
@@ -161,9 +169,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
         if (this.world.isDaytime() && !this.world.isRemote) {
             float f = this.getBrightness();
             BlockPos blockpos = this.getRidingEntity() instanceof EntityBoat ? (new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ)).up() : new BlockPos(this.posX, (double)Math.round(this.posY), this.posZ);
-            if (f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos)) {
-                return true;
-            }
+            return f > 0.5F && this.rand.nextFloat() * 30.0F < (f - 0.4F) * 2.0F && this.world.canSeeSky(blockpos);
         }
 
         return false;
@@ -186,9 +192,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
                 AxisAlignedBB aabb = EntityPhantom.this.getEntityBoundingBox().grow(16.0, 64.0, 16.0);
                 List<EntityPlayer> players = EntityPhantom.this.world.getEntitiesWithinAABB(EntityPlayer.class, aabb);
                 if(!players.isEmpty()) {
-                    players.sort((player1, player2) -> {
-                        return player1.posY > player2.posY ? -1 : 1;
-                    });
+                    players.sort((player1, player2) -> player1.posY > player2.posY ? -1 : 1);
 
                     for(EntityPlayer player : players) {
                         if(EntityAITarget.isSuitableTarget(EntityPhantom.this, player, false, false)) {
@@ -204,7 +208,11 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
         @Override
         public boolean shouldContinueExecuting() {
-            return EntityAITarget.isSuitableTarget(EntityPhantom.this, EntityPhantom.this.getAttackTarget(), false, false);
+            EntityLivingBase target = EntityPhantom.this.getAttackTarget();
+            if (target == null) {
+                return false;
+            }
+            return EntityAITarget.isSuitableTarget(EntityPhantom.this, target, false, false);
         }
     }
 
@@ -216,7 +224,11 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
         @Override
         public boolean shouldExecute() {
-            return EntityAITarget.isSuitableTarget(EntityPhantom.this, EntityPhantom.this.getAttackTarget(), false, false);
+            EntityLivingBase target = EntityPhantom.this.getAttackTarget();
+            if (target == null) {
+                return false;
+            }
+            return EntityAITarget.isSuitableTarget(EntityPhantom.this, target, false, false);
         }
 
         @Override
@@ -239,7 +251,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
                     EntityPhantom.this.attackPhase = AttackPhase.SWOOP;
                     setAltitude();
                     this.cooldown = (8 + EntityPhantom.this.rand.nextInt(4)) * 20;
-                    // TODO(ONION): play the swoop sound
+                    EntityPhantom.this.playSound(EFMSounds.ENTITY_PHANTOM_SWOOP, 10.0f, 0.95f + EntityPhantom.this.rand.nextFloat() * 0.1f);
                 }
             }
         }
@@ -266,21 +278,28 @@ public class EntityPhantom extends EntityFlying implements IMob {
         @Override
         public boolean shouldContinueExecuting() {
             EntityLivingBase target = EntityPhantom.this.getAttackTarget();
-            if (target == null) {
-                return false;
-            } else if(!target.isEntityAlive()) {
-                return false;
-            } else {
-                return !(target instanceof EntityPlayer) || !((EntityPlayer)target).isSpectator() && !((EntityPlayer)target).isCreative() ? this.shouldExecute() : false;
+            if (target == null) return false;
+            if (!target.isEntityAlive()) return false;
+            if (target instanceof EntityPlayer player && (player.isSpectator() || player.isCreative())) return false;
+            if (!this.shouldExecute()) return false;
+
+            if (EntityPhantom.this.ticksExisted % 20 == 0) {
+                AxisAlignedBB aabb = EntityPhantom.this.getEntityBoundingBox().grow(16.0, 64.0, 16.0);
+                List<EntityOcelot> cats = EntityPhantom.this.world.getEntitiesWithinAABB(EntityOcelot.class, aabb);
+                Random rand = EntityPhantom.this.rand;
+                if (!cats.isEmpty()) {
+                    for (EntityOcelot cat : cats) {
+                        cat.playSound(SoundEvents.ENTITY_CAT_PURREOW, 1.0f, cat.isChild() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.5F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+                    }
+                    return false;
+                }
             }
+            return true;
         }
 
         @Override
-        public void startExecuting() {}
-
-        @Override
         public void resetTask() {
-            EntityPhantom.this.setAttackTarget((EntityLivingBase) null);
+            EntityPhantom.this.setAttackTarget(null);
             EntityPhantom.this.attackPhase = AttackPhase.CIRCLE;
         }
 
@@ -309,7 +328,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
         @Override
         public boolean shouldExecute() {
-            return EntityPhantom.this.getAttackTarget() != null && EntityPhantom.this.attackPhase == AttackPhase.CIRCLE;
+            return EntityPhantom.this.getAttackTarget() == null || EntityPhantom.this.attackPhase == AttackPhase.CIRCLE;
         }
 
         @Override
@@ -317,6 +336,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
             this.lookRadians = 5.0f + EntityPhantom.this.rand.nextFloat() * 10.0f;
             this.pitchAngle = -4.0f + EntityPhantom.this.rand.nextFloat() * 9.0f;
             this.clockwise = EntityPhantom.this.rand.nextBoolean() ? 1.0F : -1.0F;
+            this.updateTargetVec();
         }
 
         @Override
@@ -342,12 +362,12 @@ public class EntityPhantom extends EntityFlying implements IMob {
                 updateTargetVec();
             }
 
-            if(EntityPhantom.this.targetVec.y < EntityPhantom.this.posY && !EntityPhantom.this.world.isAirBlock((new BlockPos(EntityPhantom.this)).down(1))) {
+            if(EntityPhantom.this.targetVec.y < EntityPhantom.this.posY && !EntityPhantom.this.world.isAirBlock(new BlockPos(EntityPhantom.this).down(1))) {
                 this.pitchAngle = Math.max(1.0f, this.pitchAngle);
                 updateTargetVec();
             }
 
-            if(EntityPhantom.this.targetVec.y > EntityPhantom.this.posY && !EntityPhantom.this.world.isAirBlock((new BlockPos(EntityPhantom.this)).up(1))) {
+            if(EntityPhantom.this.targetVec.y > EntityPhantom.this.posY && !EntityPhantom.this.world.isAirBlock(new BlockPos(EntityPhantom.this).up(1))) {
                 this.pitchAngle = Math.min(-1.0f, this.pitchAngle);
                 updateTargetVec();
             }
@@ -359,7 +379,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
             }
 
             this.lookAngle += this.clockwise * 15.0f * Math.PI / 180.0f;
-            EntityPhantom.this.targetVec = (new Vec3d(EntityPhantom.this.altitudePos)).add((double)(this.lookRadians * MathHelper.cos(this.lookAngle)), (double)(-4.0f + this.pitchAngle), (double)(this.lookRadians * MathHelper.sin(this.lookAngle)));
+            EntityPhantom.this.targetVec = new Vec3d(EntityPhantom.this.altitudePos).add(this.lookRadians * MathHelper.cos(this.lookAngle), -4.0f + this.pitchAngle, this.lookRadians * MathHelper.sin(this.lookAngle));
         }
     }
 
@@ -374,16 +394,6 @@ public class EntityPhantom extends EntityFlying implements IMob {
     @Override
     protected EntityBodyHelper createBodyHelper() {
         return new BodyHelper(this);
-    }
-
-    class LookHelper extends EntityLookHelper {
-
-        public LookHelper(EntityLiving entitylivingIn) {
-            super(entitylivingIn);
-        }
-
-        @Override
-        public void onUpdateLook() {}
     }
 
     class BodyHelper extends EntityBodyHelper {
@@ -409,29 +419,27 @@ public class EntityPhantom extends EntityFlying implements IMob {
 
         @Override
         public void onUpdateMoveHelper() {
-            EntityPhantom phantom;
             if(EntityPhantom.this.collidedHorizontally) {
-                phantom = EntityPhantom.this;
-                phantom.rotationYaw += 180.0f;
+                EntityPhantom.this.rotationYaw += 180.0f;
                 this.motionVec = 0.1F;
             }
 
-            float deltaX = (float)(EntityPhantom.this.targetVec.x - EntityPhantom.this.posX);
-            float deltaY = (float)(EntityPhantom.this.targetVec.y - EntityPhantom.this.posY);
-            float deltaZ = (float)(EntityPhantom.this.targetVec.z - EntityPhantom.this.posZ);
-            double mag = (double)MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+            float deltaX = (float) (EntityPhantom.this.targetVec.x - EntityPhantom.this.posX);
+            float deltaY = (float) (EntityPhantom.this.targetVec.y - EntityPhantom.this.posY);
+            float deltaZ = (float) (EntityPhantom.this.targetVec.z - EntityPhantom.this.posZ);
+            double mag = MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
 
-            double normalized = 1.0 - (double)Math.abs(deltaY * 0.7F) / mag;
+            double normalized = 1.0 - (double) Math.abs(deltaY * 0.7F) / mag;
             deltaX *= normalized;
             deltaZ *= normalized;
 
-            mag = (double)MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
+            mag = MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ);
 
-            double trueMag = (double)MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ + deltaY * deltaY);
+            double trueMag = MathHelper.sqrt(deltaX * deltaX + deltaZ * deltaZ + deltaY * deltaY);
             float currentYaw = EntityPhantom.this.rotationYaw;
-            float angle = (float)MathHelper.atan2(deltaZ, deltaX);
+            float angle = (float) MathHelper.atan2(deltaZ, deltaX);
             float yaw = MathHelper.wrapDegrees(EntityPhantom.this.rotationYaw + 90.0F);
-            float angleDeg = MathHelper.wrapDegrees((float)Math.toDegrees(angle));
+            float angleDeg = MathHelper.wrapDegrees((float) Math.toDegrees(angle));
             EntityPhantom.this.rotationYaw = approachDegrees(yaw, angleDeg, 4.0F) - 90.0F;
             EntityPhantom.this.renderYawOffset = EntityPhantom.this.rotationYaw;
             if(degreesDifferenceAbs(currentYaw, EntityPhantom.this.rotationYaw) < 3.0f) {
@@ -440,12 +448,12 @@ public class EntityPhantom extends EntityFlying implements IMob {
                 this.motionVec = approach(this.motionVec, 0.2F, 0.025F);
             }
 
-            float newPitch = (float)(-Math.toDegrees(MathHelper.atan2((double)(-deltaY), mag)));
+            float newPitch = (float) -Math.toDegrees(MathHelper.atan2(-deltaY, mag));
             EntityPhantom.this.rotationPitch = newPitch;
             float yawOffset = EntityPhantom.this.rotationYaw + 90.0F;
-            double velX = (double)(this.motionVec * MathHelper.cos((float)Math.toRadians(yawOffset))) * Math.abs((double)deltaX / trueMag);
-            double velZ = (double)(this.motionVec * MathHelper.sin((float)Math.toRadians(yawOffset))) * Math.abs((double)deltaZ / trueMag);
-            double velY = (double)(this.motionVec * MathHelper.sin((float)Math.toRadians(newPitch))) * Math.abs((double)deltaY / trueMag);
+            double velX = (double)(this.motionVec * MathHelper.cos((float) Math.toRadians(yawOffset))) * Math.abs((double) deltaX / trueMag);
+            double velZ = (double)(this.motionVec * MathHelper.sin((float) Math.toRadians(yawOffset))) * Math.abs((double) deltaZ / trueMag);
+            double velY = (double)(this.motionVec * MathHelper.sin((float) Math.toRadians(newPitch))) * Math.abs((double) deltaY / trueMag);
             EntityPhantom.this.motionX += (velX - EntityPhantom.this.motionX) * 0.2;
             EntityPhantom.this.motionY += (velY - EntityPhantom.this.motionY) * 0.2;
             EntityPhantom.this.motionZ += (velZ - EntityPhantom.this.motionZ) * 0.2;
@@ -472,10 +480,7 @@ public class EntityPhantom extends EntityFlying implements IMob {
         return diff < 180.0F ? MathHelper.abs(diff) : MathHelper.abs(diff - 360.0F);
     }
 
-    static enum AttackPhase {
-        CIRCLE,
-        SWOOP;
-
-        private AttackPhase() {}
+    enum AttackPhase {
+        CIRCLE, SWOOP
     }
 }
