@@ -61,6 +61,10 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
         return settings.collidable;
     }
 
+    public boolean hasItemSubtypes() {
+        return settings.hasItemSubtypes;
+    }
+
     @Override
     public BlockFaceShape getBlockFaceShape(IBlockAccess world, IBlockState state, BlockPos pos, EnumFacing face) {
         return isOpaqueCube(state) ? BlockFaceShape.SOLID : BlockFaceShape.UNDEFINED;
@@ -125,6 +129,7 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
         public boolean collidable = true;
         public boolean opaque = true;
         public boolean fullCube = true;
+        public boolean hasItemSubtypes = false;
         public float resistance;
         public float hardness;
         public SoundType soundType = SoundType.STONE;
@@ -219,6 +224,11 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
 
         public Settings slipperiness(float slipperiness) {
             this.slipperiness = (state, access, pos) -> slipperiness;
+            return this;
+        }
+
+        public Settings hasItemSubtypes() {
+            this.hasItemSubtypes = true;
             return this;
         }
 

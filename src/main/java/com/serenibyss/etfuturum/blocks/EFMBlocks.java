@@ -118,6 +118,9 @@ public enum EFMBlocks {
                     }
                 } else if (value.myBlock instanceof EFMBlock efmBlock) {
                     ib = new EFMItemBlock(efmBlock);
+                    if (efmBlock.hasItemSubtypes()) {
+                        ib.setHasSubtypes(true);
+                    }
                 } else {
                     ib = new ItemBlock(value.myBlock);
                 }

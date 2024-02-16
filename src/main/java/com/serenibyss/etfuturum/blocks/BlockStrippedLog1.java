@@ -24,7 +24,12 @@ public class BlockStrippedLog1 extends EFMBlockRotatedPillar {
     public static final PropertyEnum<BlockPlanks.EnumType> VARIANT = PropertyEnum.create("variant", BlockPlanks.EnumType.class, type -> type.getMetadata() < 4);
 
     public BlockStrippedLog1() {
-        super(new Settings(Material.WOOD).hardness(2.0F).resistance(2.0F).soundType(SoundType.WOOD));
+        super(new Settings(Material.WOOD)
+                .hardness(2.0F)
+                .resistance(2.0F)
+                .soundType(SoundType.WOOD)
+                .creativeTab(CreativeTabs.BUILDING_BLOCKS)
+                .hasItemSubtypes());
     }
 
     @Override
