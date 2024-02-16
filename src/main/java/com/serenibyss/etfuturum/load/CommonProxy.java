@@ -6,6 +6,7 @@ import com.serenibyss.etfuturum.client.GuiHandler;
 import com.serenibyss.etfuturum.entities.EFMEntities;
 import com.serenibyss.etfuturum.event.EventHandler;
 import com.serenibyss.etfuturum.items.EFMItems;
+import com.serenibyss.etfuturum.loot.EFMLootTables;
 import com.serenibyss.etfuturum.recipes.EFMRecipes;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.stats.EFMStatList;
@@ -32,6 +33,7 @@ public class CommonProxy {
 
     public void init(FMLInitializationEvent event) {
         EFMStatList.init();
+        EFMLootTables.init();
     }
 
     public void postInit(FMLPostInitializationEvent event) {

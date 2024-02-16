@@ -2,6 +2,7 @@ package com.serenibyss.etfuturum.entities.monster;
 
 import com.serenibyss.etfuturum.entities.base.EntityFlyingMob;
 import com.serenibyss.etfuturum.load.config.ConfigEntities;
+import com.serenibyss.etfuturum.loot.EFMLootTables;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.EntityAIBase;
@@ -13,10 +14,7 @@ import net.minecraft.entity.passive.EntityOcelot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.EnumParticleTypes;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.util.*;
 import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
@@ -149,11 +147,11 @@ public class EntityPhantom extends EntityFlyingMob implements IMob {
         return EFMSounds.ENTITY_PHANTOM_DEATH;
     }
 
-    //    @Nullable
-//    @Override
-//    protected ResourceLocation getLootTable() {
-//
-//    }
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return EFMLootTables.ENTITIES_PHANTOM;
+    }
 
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
@@ -288,10 +286,14 @@ public class EntityPhantom extends EntityFlyingMob implements IMob {
                 List<EntityOcelot> cats = EntityPhantom.this.world.getEntitiesWithinAABB(EntityOcelot.class, aabb);
                 Random rand = EntityPhantom.this.rand;
                 if (!cats.isEmpty()) {
+                    boolean shouldAttack = true;
                     for (EntityOcelot cat : cats) {
-                        cat.playSound(SoundEvents.ENTITY_CAT_PURREOW, 1.0f, cat.isChild() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.5F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+                        if (cat.isTamed()) {
+                            shouldAttack = false;
+                            cat.playSound(SoundEvents.ENTITY_CAT_PURREOW, 1.0f, cat.isChild() ? (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.5F : (rand.nextFloat() - rand.nextFloat()) * 0.2F + 1.0F);
+                        }
                     }
-                    return false;
+                    return shouldAttack;
                 }
             }
             return true;
