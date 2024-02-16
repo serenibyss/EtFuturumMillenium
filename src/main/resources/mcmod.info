@@ -11,6 +11,6 @@
     ],
     "credits": "",
     "dependencies": [
-        "mixinbooter", "configanytime"
+        "mixinbooter"
     ]
 }]

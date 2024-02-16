@@ -1,7 +1,7 @@
 package com.serenibyss.etfuturum.load.config;
 
-import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.load.EtFuturumConfigLoader;
 import net.minecraftforge.common.config.Config;
 
 // todo rename?
@@ -27,6 +27,6 @@ public class ConfigFunctions {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigFunctions.class);
+        EtFuturumConfigLoader.register(ConfigFunctions.class);
     }
 }

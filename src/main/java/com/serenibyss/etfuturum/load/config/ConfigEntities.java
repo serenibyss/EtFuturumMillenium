@@ -1,7 +1,7 @@
 package com.serenibyss.etfuturum.load.config;
 
-import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.load.EtFuturumConfigLoader;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.*;
 
@@ -33,6 +33,6 @@ public class ConfigEntities {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigEntities.class);
+        EtFuturumConfigLoader.register(ConfigEntities.class);
     }
 }

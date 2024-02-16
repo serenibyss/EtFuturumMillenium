@@ -1,7 +1,7 @@
 package com.serenibyss.etfuturum.load.config;
 
-import com.cleanroommc.configanytime.ConfigAnytime;
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.load.EtFuturumConfigLoader;
 import net.minecraftforge.common.config.Config;
 
 @Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/Tweaks")
@@ -26,6 +26,6 @@ public class ConfigTweaks {
 
     // MUST be at the bottom!
     static {
-        ConfigAnytime.register(ConfigTweaks.class);
+        EtFuturumConfigLoader.register(ConfigTweaks.class);
     }
 }

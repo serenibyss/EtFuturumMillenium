@@ -1,6 +1,7 @@
 package com.serenibyss.etfuturum;
 
 import com.serenibyss.etfuturum.load.CommonProxy;
+import com.serenibyss.etfuturum.load.EtFuturumConfigLoader;
 import com.serenibyss.etfuturum.load.enums.EFMEnumHelper;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraftforge.fml.common.Mod;
@@ -16,7 +17,7 @@ import org.apache.logging.log4j.Logger;
      version = EFMTags.VERSION,
      name = EFMTags.MODNAME,
      acceptedMinecraftVersions = "[1.12.2]",
-     dependencies = "required-after:mixinbooter;required-after:configanytime;")
+     dependencies = "required-after:mixinbooter;")
 public class EtFuturum {
 
     public static final Logger LOGGER = LogManager.getLogger(EFMTags.MODID);
@@ -26,6 +27,10 @@ public class EtFuturum {
 
     @SidedProxy(clientSide = "com.serenibyss.etfuturum.load.ClientProxy", serverSide = "com.serenibyss.etfuturum.load.CommonProxy")
     public static CommonProxy proxy;
+
+    static {
+        EtFuturumConfigLoader.init();
+    }
 
     @EventHandler
     public void onConstruction(FMLConstructionEvent event) {
