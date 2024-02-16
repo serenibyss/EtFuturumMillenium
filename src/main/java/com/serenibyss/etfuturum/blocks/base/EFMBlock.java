@@ -1,6 +1,6 @@
 package com.serenibyss.etfuturum.blocks.base;
 
-import com.serenibyss.etfuturum.EtFuturum;
+import com.serenibyss.etfuturum.util.IModelRegister;
 import com.serenibyss.etfuturum.util.VoxelShape;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -10,17 +10,15 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
-import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
-import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
-public class EFMBlock extends Block {
+public class EFMBlock extends Block implements IModelRegister {
 
     protected final Settings settings;
 
@@ -74,11 +72,6 @@ public class EFMBlock extends Block {
         return settings.mapColor != null
                 ? settings.mapColor.apply(state, world, pos)
                 : settings.material.getMaterialMapColor();
-    }
-
-    @ApiStatus.Internal
-    public void registerModel() {
-        EtFuturum.proxy.registerItemRenderer(Item.getItemFromBlock(this), 0, "inventory");
     }
 
     public static VoxelShape createShape(double x1, double y1, double z1, double x2, double y2, double z2) {

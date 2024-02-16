@@ -1,9 +1,9 @@
 package com.serenibyss.etfuturum.blocks;
 
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.blocks.base.EFMBlock;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.tiles.TileEntityBarrel;
+import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -28,15 +28,15 @@ public enum EFMBlocks {
 
     private final Feature feature;
     private final String myName;
-    private final EFMBlock myBlock;
+    private final Block myBlock;
     @Nullable
     private final Class<? extends TileEntity> myTile;
 
-    EFMBlocks(Feature feature, String myName, EFMBlock myBlock) {
+    EFMBlocks(Feature feature, String myName, Block myBlock) {
         this(feature, myName, myBlock, null);
     }
 
-    EFMBlocks(Feature feature, String myName, EFMBlock myBlock, @Nullable Class<? extends TileEntity> myTile) {
+    EFMBlocks(Feature feature, String myName, Block myBlock, @Nullable Class<? extends TileEntity> myTile) {
         this.feature = feature;
         this.myName = myName;
         this.myBlock = myBlock;
@@ -48,7 +48,7 @@ public enum EFMBlocks {
     }
 
     @Nullable
-    public EFMBlock getBlock() {
+    public Block getBlock() {
         if (isEnabled()) {
             return myBlock;
         }
@@ -107,8 +107,8 @@ public enum EFMBlocks {
     @SubscribeEvent
     public static void onModelRegister(ModelRegistryEvent event) {
         for (EFMBlocks value : values()) {
-            if (value.isEnabled()) {
-                value.myBlock.registerModel();
+            if (value.isEnabled() && value.myBlock instanceof IModelRegister block) {
+                block.registerModel();
             }
         }
     }

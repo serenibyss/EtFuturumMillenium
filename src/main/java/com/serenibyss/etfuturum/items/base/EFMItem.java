@@ -1,6 +1,6 @@
 package com.serenibyss.etfuturum.items.base;
 
-import com.serenibyss.etfuturum.EtFuturum;
+import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.EnumRarity;
 import net.minecraft.item.Item;
@@ -22,10 +22,6 @@ public class EFMItem extends Item implements IModelRegister {
     @Override
     public IRarity getForgeRarity(ItemStack stack) {
         return rarity;
-    }
-
-    public void registerModel() {
-        EtFuturum.proxy.registerItemRenderer(this, 0, "inventory");
     }
 
     public static class Settings {
