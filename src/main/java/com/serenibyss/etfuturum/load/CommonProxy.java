@@ -28,6 +28,7 @@ public class CommonProxy {
         MinecraftForge.EVENT_BUS.register(EFMRecipes.class);
         MinecraftForge.EVENT_BUS.register(EFMEntities.class);
         MinecraftForge.EVENT_BUS.register(EventHandler.class);
+        MinecraftForge.EVENT_BUS.register(EFMAdvancements.class);
 
         NetworkRegistry.INSTANCE.registerGuiHandler(EFMTags.MODID, new GuiHandler());
 

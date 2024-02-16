@@ -4,7 +4,6 @@ import com.serenibyss.etfuturum.load.asset.AssetMover;
 import com.serenibyss.etfuturum.load.asset.AssetRequest;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
-import net.minecraftforge.fml.common.ProgressManager;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -61,6 +60,14 @@ public abstract class FeatureManager {
     public static Feature getFeatureByName(String name) {
         return FEATURE_LOOKUP.get(name);
     }
+
+    public static final FeatureManager CORE_MANAGER = new FeatureManager() {
+
+        @Override
+        public MCVersion getMinecraftVersion() {
+            return MCVersion.MC1_12;
+        }
+    };
 
     static {
         // make sure stuff is loaded for mixins...
