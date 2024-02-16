@@ -10,6 +10,7 @@ public class ConfigBlocksItems {
 
     // 1.13: Update Aquatic
 
+    public static boolean enableStripping = true;
     public static boolean enableConduit = true;
     public static boolean enableTridents = true;
 
