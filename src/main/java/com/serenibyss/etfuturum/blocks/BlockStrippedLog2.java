@@ -81,7 +81,7 @@ public class BlockStrippedLog2 extends EFMBlockRotatedPillar {
 
     @Override
     public int damageDropped(IBlockState state) {
-        return state.getValue(VARIANT).getMetadata();
+        return state.getValue(VARIANT).getMetadata() - 4;
     }
 
     @Override
