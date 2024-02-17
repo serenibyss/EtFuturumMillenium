@@ -11,6 +11,7 @@ tile.jungle_stripped_log.name=Stripped Jungle Log
 tile.acacia_stripped_log.name=Stripped Acacia Log
 tile.big_oak_stripped_log.name=Stripped Dark Oak Log
 tile.conduit.name=Conduit
+subtitles.item.axe.strip=Debarking Log
 
 # Entities
 entity.phantom.name=Phantom

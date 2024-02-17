@@ -22,18 +22,15 @@ public class Features13 extends FeatureManager {
                 .build();
 
         stripping = Feature.builder("stripping", this, () -> ConfigBlocksItems.enableStripping)
-                .addTextures("block/stripped_acacia_log.png",
-                        "block/stripped_acacia_log_top.png",
-                        "block/stripped_birch_log.png",
-                        "block/stripped_birch_log_top.png",
-                        "block/stripped_dark_oak_log.png",
-                        "block/stripped_dark_oak_log_top.png",
-                        "block/stripped_jungle_log.png",
-                        "block/stripped_jungle_log_top.png",
-                        "block/stripped_oak_log.png",
-                        "block/stripped_oak_log_top.png",
-                        "block/stripped_spruce_log.png",
-                        "block/stripped_spruce_log_top.png").build();
+                .addTextures(MCVersion.MC1_14, "block/stripped_acacia_log.png",
+                        "block/stripped_acacia_log_top.png", "block/stripped_birch_log.png",
+                        "block/stripped_birch_log_top.png", "block/stripped_dark_oak_log.png",
+                        "block/stripped_dark_oak_log_top.png", "block/stripped_jungle_log.png",
+                        "block/stripped_jungle_log_top.png", "block/stripped_oak_log.png",
+                        "block/stripped_oak_log_top.png", "block/stripped_spruce_log.png",
+                        "block/stripped_spruce_log_top.png")
+                .addNumberedSounds("item/axe/strip", 1, 4)
+                .build();
 
         conduit = Feature.builder("conduit", this, () -> ConfigBlocksItems.enableConduit)
                 .addTextures("entity/conduit/base.png", "entity/conduit/cage.png", "entity/conduit/wind.png",
