@@ -33,9 +33,8 @@ public class ItemTrident extends Item implements IModelRegister {
         this.setMaxStackSize(1);
         this.setMaxDamage(250);
 
-        this.addPropertyOverride(new ResourceLocation("throwing"), (stack, world, entity) -> {
-            return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0f : 0.0f;
-        });
+        this.addPropertyOverride(new ResourceLocation("throwing"), (stack, world, entity) ->
+                entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0f : 0.0f);
         setCreativeTab(CreativeTabs.BREWING);
         setTranslationKey("trident");
     }
@@ -104,7 +103,7 @@ public class ItemTrident extends Item implements IModelRegister {
                         }
                     }
 
-                    worldIn.playSound((EntityPlayer)null, player.posX, player.posY, player.posZ, sound, SoundCategory.PLAYERS, 1.0f, 1.0f);
+                    worldIn.playSound(null, player.posX, player.posY, player.posZ, sound, SoundCategory.PLAYERS, 1.0f, 1.0f);
                 }
             }
         }
@@ -114,13 +113,13 @@ public class ItemTrident extends Item implements IModelRegister {
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
         ItemStack stack = playerIn.getHeldItem(handIn);
         if(stack.getItemDamage() > stack.getMaxDamage()) {
-            return new ActionResult(EnumActionResult.FAIL, stack);
+            return new ActionResult<>(EnumActionResult.FAIL, stack);
         } else if(EnchantmentHelper.getEnchantmentLevel(EFMEnchantments.RIPTIDE, stack) > 0 && !playerIn.isWet()) {
-            return new ActionResult(EnumActionResult.FAIL, stack);
+            return new ActionResult<>(EnumActionResult.FAIL, stack);
         }
         else {
             playerIn.setActiveHand(handIn);
-            return new ActionResult(EnumActionResult.SUCCESS, stack);
+            return new ActionResult<>(EnumActionResult.SUCCESS, stack);
         }
     }
 

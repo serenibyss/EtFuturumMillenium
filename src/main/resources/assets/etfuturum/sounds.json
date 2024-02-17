@@ -218,5 +218,113 @@
         "volume": 0.7
       }
     ]
+  },
+  "item.trident.hit": {
+    "sounds": [
+      "etfuturum:item/trident/pierce1",
+      "etfuturum:item/trident/pierce2",
+      "etfuturum:item/trident/pierce3"
+    ],
+    "subtitle": "subtitles.item.trident.hit"
+  },
+  "item.trident.hit_ground": {
+    "sounds": [
+      {
+        "name": "etfuturum:item/trident/ground_impact1",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:item/trident/ground_impact2",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:item/trident/ground_impact3",
+        "volume": 0.9
+      },
+      {
+        "name": "etfuturum:item/trident/ground_impact4",
+        "volume": 0.9
+      }
+    ],
+    "subtitle": "subtitles.item.trident.hit_ground"
+  },
+  "item.trident.return": {
+    "sounds": [
+      {
+        "name": "etfuturum:item/trident/return1",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return2",
+        "pitch": 1.2,
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return3",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return2",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return2",
+        "pitch": 1.2,
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return2",
+        "pitch": 0.8,
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return3",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return3",
+        "pitch": 1.2,
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:item/trident/return3",
+        "pitch": 0.8,
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.item.trident.return"
+  },
+  "item.trident.riptide_1": {
+    "sounds": [
+      "etfuturum:item/trident/riptide1"
+    ],
+    "subtitle": "subtitles.item.trident.riptide"
+  },
+  "item.trident.riptide_2": {
+    "sounds": [
+      "etfuturum:item/trident/riptide2"
+    ],
+    "subtitle": "subtitles.item.trident.riptide"
+  },
+  "item.trident.riptide_3": {
+    "sounds": [
+      "etfuturum:item/trident/riptide3"
+    ],
+    "subtitle": "subtitles.item.trident.riptide"
+  },
+  "item.trident.throw": {
+    "sounds": [
+      "etfuturum:item/trident/throw1",
+      "etfuturum:item/trident/throw2"
+    ],
+    "subtitle": "subtitles.item.trident.throw"
+  },
+  "item.trident.thunder": {
+    "sounds": [
+      "etfuturum:item/trident/thunder1",
+      "etfuturum:item/trident/thunder2"
+    ],
+    "subtitle": "subtitles.item.trident.thunder"
   }
 }

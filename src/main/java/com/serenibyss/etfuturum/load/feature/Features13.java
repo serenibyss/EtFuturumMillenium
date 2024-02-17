@@ -32,6 +32,12 @@ public class Features13 extends FeatureManager {
 
         trident = Feature.builder("trident", this, () -> ConfigBlocksItems.enableTridents)
                 .addTextures("entity/trident.png", "item/trident.png")
+                .addNumberedSounds("item/trident/pierce", 1, 3)
+                .addNumberedSounds("item/trident/ground_impact", 1, 4)
+                .addNumberedSounds("item/trident/return", 1, 3)
+                .addNumberedSounds("item/trident/riptide", 1, 3)
+                .addNumberedSounds("item/trident/throw", 1, 2)
+                .addNumberedSounds("item/trident/thunder", 1, 2)
                 .build();
     }
 

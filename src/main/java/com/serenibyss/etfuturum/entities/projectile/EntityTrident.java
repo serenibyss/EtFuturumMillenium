@@ -8,7 +8,6 @@ import com.serenibyss.etfuturum.util.EFMDamageSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
-import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -16,7 +15,6 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -30,30 +28,27 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
 import static net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND;
 
 public class EntityTrident extends EntityArrow {
 
-    public static final DataParameter<Byte> LOYALTY_LEVEL;
+    public static final DataParameter<Byte> LOYALTY_LEVEL = EntityDataManager.createKey(EntityTrident.class, DataSerializers.BYTE);
     private ItemStack thrownStack;
     private boolean dealtDamage;
     public int returningTicks;
 
     public EntityTrident(World worldIn) {
         super(worldIn);
-        this.thrownStack = new ItemStack(EFMItems.TRIDENT.getItem());
+        this.thrownStack = EFMItems.TRIDENT.getItemStack();
     }
 
     public EntityTrident(World worldIn, double x, double y, double z) {
         super(worldIn, x, y, z);
-        this.thrownStack = new ItemStack(EFMItems.TRIDENT.getItem());
+        this.thrownStack = EFMItems.TRIDENT.getItemStack();
     }
 
     public EntityTrident(World worldIn, EntityLivingBase shooter, ItemStack stack) {
         super(worldIn, shooter);
-        this.thrownStack = new ItemStack(EFMItems.TRIDENT.getItem());
         this.thrownStack = stack.copy();
         this.dataManager.set(LOYALTY_LEVEL, (byte) EnchantmentHelper.getEnchantmentLevel(EFMEnchantments.LOYALTY, stack));
     }
@@ -167,14 +162,14 @@ public class EntityTrident extends EntityArrow {
 
             if ((block != ((EntityArrowAccessor)this).getInTile() || j != ((EntityArrowAccessor)this).getInData()) && !this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(0.05D))) {
                 this.inGround = false;
-                this.motionX *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionY *= (double)(this.rand.nextFloat() * 0.2F);
-                this.motionZ *= (double)(this.rand.nextFloat() * 0.2F);
+                this.motionX *= this.rand.nextFloat() * 0.2F;
+                this.motionY *= this.rand.nextFloat() * 0.2F;
+                this.motionZ *= this.rand.nextFloat() * 0.2F;
                 ((EntityArrowAccessor)this).setTicksInGround(0);
                 ((EntityArrowAccessor)this).setTicksInAir(0);
             }
             else {
-                int loyalLevel = (Byte)this.dataManager.get(LOYALTY_LEVEL);
+                int loyalLevel = this.dataManager.get(LOYALTY_LEVEL);
                 if(this.pickupStatus != PickupStatus.ALLOWED || loyalLevel <= 0) {
                     ((EntityArrowAccessor)this).setTicksInGround(((EntityArrowAccessor)this).getTicksInGround() + 1);
                     //++this.ticksInGround;
@@ -235,9 +230,7 @@ public class EntityTrident extends EntityArrow {
                 this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
             }
 
-            for (this.rotationPitch = (float)(MathHelper.atan2(this.motionY, (double)f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F) {
-                ;
-            }
+            for (this.rotationPitch = (float)(MathHelper.atan2(this.motionY, f4) * (180D / Math.PI)); this.rotationPitch - this.prevRotationPitch < -180.0F; this.prevRotationPitch -= 360.0F);
 
             while (this.rotationPitch - this.prevRotationPitch >= 180.0F) {
                 this.prevRotationPitch += 360.0F;
@@ -254,22 +247,17 @@ public class EntityTrident extends EntityArrow {
             this.rotationPitch = this.prevRotationPitch + (this.rotationPitch - this.prevRotationPitch) * 0.2F;
             this.rotationYaw = this.prevRotationYaw + (this.rotationYaw - this.prevRotationYaw) * 0.2F;
             float f1 = 0.99F;
-            float f2 = 0.05F;
 
             if (this.isInWater()) {
                 for (int i = 0; i < 4; ++i) {
-                    float f3 = 0.25F;
                     this.world.spawnParticle(EnumParticleTypes.WATER_BUBBLE, this.posX - this.motionX * 0.25D, this.posY - this.motionY * 0.25D, this.posZ - this.motionZ * 0.25D, this.motionX, this.motionY, this.motionZ);
                 }
-
-                f1 = 0.99F;
             }
-            this.motionX *= (double)f1;
-            this.motionY *= (double)f1;
-            this.motionZ *= (double)f1;
+            this.motionX *= f1;
+            this.motionY *= f1;
+            this.motionZ *= f1;
 
-            if (!this.hasNoGravity() && !loyalty)
-            {
+            if (!this.hasNoGravity() && !loyalty) {
                 this.motionY -= 0.05000000074505806D;
             }
 
@@ -290,10 +278,6 @@ public class EntityTrident extends EntityArrow {
         return this.thrownStack.copy();
     }
 
-    public Random getRand() {
-        return this.rand;
-    }
-
     @Nullable
     @Override
     protected Entity findEntityOnPath(Vec3d start, Vec3d end) {
@@ -305,11 +289,12 @@ public class EntityTrident extends EntityArrow {
         Entity entity = raytraceResultIn.entityHit;
         if(entity != null) {
             float damage = 8.0F;
-            if (entity instanceof EntityLivingBase Elb)
+            if (entity instanceof EntityLivingBase Elb) {
                 damage += EnchantmentHelper.getModifierForCreature(this.thrownStack, Elb.getCreatureAttribute());
+            }
 
             Entity myEnt = findEntity();
-            DamageSource source = EFMDamageSource.causeTridentDamage(this, (Entity) (myEnt == null ? this : myEnt));
+            DamageSource source = EFMDamageSource.causeTridentDamage(this, (myEnt == null ? this : myEnt));
             this.dealtDamage = true;
             SoundEvent sound = EFMSounds.ITEM_TRIDENT_HIT;
             if (entity.attackEntityFrom(source, damage) && entity instanceof EntityLivingBase elb) {
@@ -327,8 +312,8 @@ public class EntityTrident extends EntityArrow {
             if (this.world.isThundering() && EnchantmentHelper.getEnchantmentLevel(EFMEnchantments.CHANNELING, this.thrownStack) > 0) {
                 BlockPos strikePos = entity.getPosition();
                 if (this.world.canSeeSky(strikePos)) {
-                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, (double) strikePos.getX() + 0.5, (double) strikePos.getY(), (double) strikePos.getZ() + 0.5, false);
-                    // todo(onion): maybe make this an advancement trigger?S
+                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, (double) strikePos.getX() + 0.5, strikePos.getY(), (double) strikePos.getZ() + 0.5, false);
+                    // todo: set lightning caster
                     ((WorldServer)this.world).addWeatherEffect(bolt);
                     sound = EFMSounds.ITEM_TRIDENT_THUNDER;
                     volume = 5.0F;
@@ -370,7 +355,12 @@ public class EntityTrident extends EntityArrow {
         return true;
     }
 
-    static {
-        LOYALTY_LEVEL = EntityDataManager.createKey(EntityTrident.class, DataSerializers.BYTE);
+    @Override
+    public void playSound(SoundEvent soundIn, float volume, float pitch) {
+        // redirect an arrow sound to a trident sound
+        if (soundIn == SoundEvents.ENTITY_ARROW_HIT) {
+            soundIn = EFMSounds.ITEM_TRIDENT_HIT_GROUND;
+        }
+        super.playSound(soundIn, volume, pitch);
     }
 }

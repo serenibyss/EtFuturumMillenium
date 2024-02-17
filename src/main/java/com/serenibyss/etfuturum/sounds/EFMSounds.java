@@ -17,7 +17,6 @@ public class EFMSounds {
     public static SoundEvent UI_STONECUTTER_TAKE_RESULT;
 
     public static SoundEvent ENTITY_PHANTOM_AMBIENT;
-    public static SoundEvent ENTITY_PHANTOM_ATTACK;
     public static SoundEvent ENTITY_PHANTOM_BITE;
     public static SoundEvent ENTITY_PHANTOM_DEATH;
     public static SoundEvent ENTITY_PHANTOM_FLAP;
@@ -34,6 +33,7 @@ public class EFMSounds {
     public static SoundEvent ITEM_TRIDENT_RETURN;
     public static SoundEvent ITEM_TRIDENT_THUNDER;
     public static SoundEvent ITEM_TRIDENT_THROW;
+    public static SoundEvent ITEM_TRIDENT_HIT_GROUND;
     public static SoundEvent ITEM_TRIDENT_RIPTIDE_1;
     public static SoundEvent ITEM_TRIDENT_RIPTIDE_2;
     public static SoundEvent ITEM_TRIDENT_RIPTIDE_3;
@@ -43,7 +43,6 @@ public class EFMSounds {
         IForgeRegistry<SoundEvent> r = event.getRegistry();
 
         ENTITY_PHANTOM_AMBIENT = register(MC13.phantom, r, "entity.phantom.ambient");
-        ENTITY_PHANTOM_ATTACK = register(MC13.phantom, r, "entity.phantom.attack");
         ENTITY_PHANTOM_BITE = register(MC13.phantom, r, "entity.phantom.bite");
         ENTITY_PHANTOM_DEATH = register(MC13.phantom, r, "entity.phantom.death");
         ENTITY_PHANTOM_FLAP = register(MC13.phantom, r, "entity.phantom.flap");
@@ -55,6 +54,15 @@ public class EFMSounds {
         BLOCK_CONDUIT_ATTACK_TARGET = register(MC13.conduit, r, "block.conduit.attack.target");
         BLOCK_CONDUIT_ACTIVATE = register(MC13.conduit, r, "block.conduit.activate");
         BLOCK_CONDUIT_DEACTIVATE = register(MC13.conduit, r, "block.conduit.deactivate");
+
+        ITEM_TRIDENT_HIT = register(MC13.trident, r, "item.trident.hit");
+        ITEM_TRIDENT_RETURN = register(MC13.trident, r, "item.trident.return");
+        ITEM_TRIDENT_THUNDER = register(MC13.trident, r, "item.trident.thunder");
+        ITEM_TRIDENT_THROW = register(MC13.trident, r, "item.trident.throw");
+        ITEM_TRIDENT_HIT_GROUND = register(MC13.trident, r, "item.trident.hit_ground");
+        ITEM_TRIDENT_RIPTIDE_1 = register(MC13.trident, r, "item.trident.riptide_1");
+        ITEM_TRIDENT_RIPTIDE_2 = register(MC13.trident, r, "item.trident.riptide_2");
+        ITEM_TRIDENT_RIPTIDE_3 = register(MC13.trident, r, "item.trident.riptide_3");
 
 
         BARREL_OPEN = register(MC14.barrel, r, "block.barrel.open");
