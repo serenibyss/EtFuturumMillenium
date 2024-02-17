@@ -36,6 +36,7 @@ public class EtFuturum {
     public void onConstruction(FMLConstructionEvent event) {
         EFMEnumHelper.init();
         if (event.getSide() == Side.CLIENT) {
+            EFMEnumHelper.initClient();
             Features.initAssets();
         }
     }
