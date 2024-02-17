@@ -147,5 +147,76 @@
       }
     ],
     "subtitle": "subtitles.entity.phantom.swoop"
+  },
+  "block.conduit.activate": {
+    "sounds": [
+      {
+        "name": "etfuturum:block/conduit/activate",
+        "volume": 0.9
+      }
+    ]
+  },
+  "block.conduit.ambient": {
+    "sounds": [
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/ambient"
+      }
+    ]
+  },
+  "block.conduit.ambient.short": {
+    "sounds": [
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short1"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short2"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short3"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short4"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short5"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short6"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short7"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short8"
+      },
+      {
+        "attenuation_distance": 8,
+        "name": "etfuturum:block/conduit/short9"
+      }
+    ]
+  },
+  "block.conduit.attack.target": {
+    "sounds": [
+      "etfuturum:block/conduit/attack1",
+      "etfuturum:block/conduit/attack2",
+      "etfuturum:block/conduit/attack3"
+    ]
+  },
+  "block.conduit.deactivate": {
+    "sounds": [
+      {
+        "name": "etfuturum:block/conduit/deactivate",
+        "volume": 0.7
+      }
+    ]
   }
 }

@@ -24,6 +24,12 @@ public class EFMSounds {
     public static SoundEvent ENTITY_PHANTOM_HURT;
     public static SoundEvent ENTITY_PHANTOM_SWOOP;
 
+    public static SoundEvent BLOCK_CONDUIT_AMBIENT;
+    public static SoundEvent BLOCK_CONDUIT_AMBIENT_SHORT;
+    public static SoundEvent BLOCK_CONDUIT_ATTACK_TARGET;
+    public static SoundEvent BLOCK_CONDUIT_ACTIVATE;
+    public static SoundEvent BLOCK_CONDUIT_DEACTIVATE;
+
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
         IForgeRegistry<SoundEvent> r = event.getRegistry();
@@ -35,6 +41,12 @@ public class EFMSounds {
         ENTITY_PHANTOM_FLAP = register(MC13.phantom, r, "entity.phantom.flap");
         ENTITY_PHANTOM_HURT = register(MC13.phantom, r, "entity.phantom.hurt");
         ENTITY_PHANTOM_SWOOP = register(MC13.phantom, r, "entity.phantom.swoop");
+
+        BLOCK_CONDUIT_AMBIENT = register(MC13.conduit, r, "block.conduit.ambient");
+        BLOCK_CONDUIT_AMBIENT_SHORT = register(MC13.conduit, r, "block.conduit.ambient.short");
+        BLOCK_CONDUIT_ATTACK_TARGET = register(MC13.conduit, r, "block.conduit.attack.target");
+        BLOCK_CONDUIT_ACTIVATE = register(MC13.conduit, r, "block.conduit.activate");
+        BLOCK_CONDUIT_DEACTIVATE = register(MC13.conduit, r, "block.conduit.deactivate");
 
 
         BARREL_OPEN = register(MC14.barrel, r, "block.barrel.open");

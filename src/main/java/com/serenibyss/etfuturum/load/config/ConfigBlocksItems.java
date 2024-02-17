@@ -9,6 +9,8 @@ public class ConfigBlocksItems {
 
     // 1.13: Update Aquatic
 
+    public static boolean enableConduit = true;
+
     // 1.14: Village & Pillage
 
     public static boolean enableBarrels = true;

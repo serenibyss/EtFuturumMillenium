@@ -30,7 +30,9 @@ public final class AssetMover {
     static ProgressManager.ProgressBar PROGRESS_BAR;
 
     public static void queue(AssetRequest request) {
-        REQUESTS.add(request);
+        if (!request.isEmpty()) {
+            REQUESTS.add(request);
+        }
     }
 
     public static void flush() {

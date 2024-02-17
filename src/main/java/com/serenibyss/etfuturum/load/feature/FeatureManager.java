@@ -2,12 +2,15 @@ package com.serenibyss.etfuturum.load.feature;
 
 import com.serenibyss.etfuturum.load.asset.AssetMover;
 import com.serenibyss.etfuturum.load.asset.AssetRequest;
+import com.serenibyss.etfuturum.load.asset.AssetType;
 import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.util.EnumMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -29,6 +32,14 @@ public abstract class FeatureManager {
         FEATURE_LOOKUP.put(name, feature);
     }
 
+    private void addAllAssets(Map<MCVersion, AssetRequest> requestMap) {
+        for (AssetType type : AssetType.VALUES) {
+            for (Feature feature : featureSet) {
+                feature.addAssets(type, requestMap);
+            }
+        }
+    }
+
     // todo cache this if it ends up needing to be called often
     public static Set<Feature> getAllLoadedFeatures() {
         Set<Feature> features = new HashSet<>();
@@ -40,18 +51,16 @@ public abstract class FeatureManager {
 
     @SideOnly(Side.CLIENT)
     public static void gatherAssets() {
+        Map<MCVersion, AssetRequest> requests = new EnumMap<>(MCVersion.class);
+        for (MCVersion version : MCVersion.values()) {
+            requests.put(version, new AssetRequest(version));
+        }
+
         for (FeatureManager manager : FEATURE_MANAGERS) {
-            AssetRequest request = new AssetRequest(manager.getMinecraftVersion());
-            for (Feature feature : manager.featureSet) {
-                request.addTextures(feature.textures);
-                feature.textures.clear();
+            manager.addAllAssets(requests);
+        }
 
-                request.addSounds(feature.sounds);
-                feature.sounds.clear();
-
-                request.addStructures(feature.structures);
-                feature.structures.clear();
-            }
+        for (AssetRequest request : requests.values()) {
             AssetMover.queue(request);
         }
         AssetMover.flush();

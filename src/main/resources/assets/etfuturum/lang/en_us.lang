@@ -4,6 +4,7 @@ container.barrel=Barrel
 tile.stonecutter.name=Stonecutter
 container.stonecutter=Stonecutter
 etfuturum.jei.category.stonecutter=Stonecutting
+tile.conduit.name=Conduit
 
 # Entities
 entity.phantom.name=Phantom

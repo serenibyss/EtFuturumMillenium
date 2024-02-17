@@ -10,6 +10,7 @@ import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.EnumRarity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -93,6 +94,7 @@ public class EFMBlock extends Block implements IModelRegister {
         SoundType soundType = SoundType.STONE;
         ContextFunction<Integer> lightValue = (state, world, pos) -> 0;
         ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
+        EnumRarity rarity;
 
         public Settings(Material material) {
             this(material, material.getMaterialMapColor());
@@ -181,6 +183,11 @@ public class EFMBlock extends Block implements IModelRegister {
 
         public Settings slipperiness(float slipperiness) {
             this.slipperiness = (state, access, pos) -> slipperiness;
+            return this;
+        }
+
+        public Settings rarity(EnumRarity rarity) {
+            this.rarity = rarity;
             return this;
         }
 

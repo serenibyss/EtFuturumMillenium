@@ -30,9 +30,12 @@ public class EFMRecipes {
     private static void additions() {
         addShapedRecipe("barrel", EFMBlocks.BARREL.getItemStack(), "XSX", "X X", "XSX", 'X', "plankWood", 'S', "slabWood");
         addShapedRecipe("stonecutter", EFMBlocks.STONECUTTER.getItemStack(), " X ", "SSS", 'X', "ingotIron", 'S', new ItemStack(Blocks.STONE));
+
+        // todo: Uncomment when Nautilus Shell and Heart of the Sea are added
+        //addShapedRecipe("conduit", EFMBlocks.CONDUIT.getItemStack(), "XXX", "XSX", "XXX", 'X', EFMItems.NAUTILUS_SHELL.getItemStack(), 'S', EFMItems.HEART_OF_THE_SEA.getItemStack());
     }
 
-    // todo add in the remaining recipes. make sure that the order matches latest vanilla
+    // todo add in the remaining stonecutter recipes. make sure that the order matches latest vanilla
     private static void stonecutterRecipes() {
         StonecutterRegistry r = StonecutterRegistry.instance();
         r.addRecipe(new ItemStack(Blocks.COBBLESTONE),

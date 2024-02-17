@@ -1,8 +1,11 @@
 package com.serenibyss.etfuturum.blocks;
 
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.blocks.base.EFMBlock;
+import com.serenibyss.etfuturum.blocks.base.EFMItemBlock;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.tiles.TileEntityBarrel;
+import com.serenibyss.etfuturum.tiles.TileEntityConduit;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -20,6 +23,8 @@ import org.jetbrains.annotations.Nullable;
 import static com.serenibyss.etfuturum.load.feature.Features.*;
 
 public enum EFMBlocks {
+
+    CONDUIT(MC13.conduit, "conduit", new BlockConduit(), TileEntityConduit.class),
 
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
@@ -97,7 +102,12 @@ public enum EFMBlocks {
         IForgeRegistry<Item> r = event.getRegistry();
         for (EFMBlocks value : values()) {
             if (value.isEnabled()) {
-                ItemBlock ib = new ItemBlock(value.myBlock);
+                ItemBlock ib;
+                if (value.myBlock instanceof EFMBlock efmBlock) {
+                    ib = new EFMItemBlock(efmBlock);
+                } else {
+                    ib = new ItemBlock(value.myBlock);
+                }
                 ib.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));
                 r.register(ib);
             }

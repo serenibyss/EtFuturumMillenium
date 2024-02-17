@@ -16,16 +16,12 @@ public class AssetRequest {
         this.mcVersion = mcVersion;
     }
 
-    public void addTextures(Set<String> textures) {
-        assetFiles.computeIfAbsent(AssetType.TEXTURES, $ -> new HashSet<>()).addAll(textures);
+    public void add(AssetType type, String entry) {
+        assetFiles.computeIfAbsent(type, $ -> new HashSet<>()).add(entry);
     }
 
-    public void addSounds(Set<String> sounds) {
-        assetFiles.computeIfAbsent(AssetType.SOUNDS, $ -> new HashSet<>()).addAll(sounds);
-    }
-
-    public void addStructures(Set<String> structures) {
-        assetFiles.computeIfAbsent(AssetType.STRUCTURES, $ -> new HashSet<>()).addAll(structures);
+    public boolean isEmpty() {
+        return assetFiles.isEmpty();
     }
 
     protected MCVersion getMinecraftVersion() {
