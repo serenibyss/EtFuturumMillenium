@@ -41,6 +41,15 @@ public class EFMSounds {
     public static SoundEvent ITEM_TRIDENT_RIPTIDE_2;
     public static SoundEvent ITEM_TRIDENT_RIPTIDE_3;
 
+    public static SoundEvent ENTITY_TURTLE_AMBIENT_LAND;
+    public static SoundEvent ENTITY_TURTLE_SWIM;
+    public static SoundEvent ENTITY_TURTLE_HURT;
+    public static SoundEvent ENTITY_TURTLE_HURT_BABY;
+    public static SoundEvent ENTITY_TURTLE_DEATH;
+    public static SoundEvent ENTITY_TURTLE_DEATH_BABY;
+    public static SoundEvent ENTITY_TURTLE_SHAMBLE;
+    public static SoundEvent ENTITY_TURTLE_SHAMBLE_BABY;
+
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
         IForgeRegistry<SoundEvent> r = event.getRegistry();

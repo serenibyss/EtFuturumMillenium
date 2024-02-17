@@ -10,6 +10,8 @@ public class Features13 extends FeatureManager {
     public final Feature conduit;
     public final Feature trident;
 
+    public final Feature turtle;
+
     public Features13() {
         phantom = Feature.builder("phantom", this, () -> ConfigEntities.enablePhantoms)
                 .addTextures("entity/phantom.png", "entity/phantom_eyes.png", "item/phantom_membrane.png")
@@ -50,6 +52,9 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("item/trident/riptide", 1, 3)
                 .addNumberedSounds("item/trident/throw", 1, 2)
                 .addNumberedSounds("item/trident/thunder", 1, 2)
+                .build();
+
+        turtle = Feature.builder("turtle", this, () -> ConfigEntities.enableTurtles)
                 .build();
     }
 
