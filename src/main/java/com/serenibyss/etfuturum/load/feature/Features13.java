@@ -31,6 +31,7 @@ public class Features13 extends FeatureManager {
                 .build();
 
         trident = Feature.builder("trident", this, () -> ConfigBlocksItems.enableTridents)
+                .addTextures("entity/trident.png", "item/trident.png")
                 .build();
     }
 

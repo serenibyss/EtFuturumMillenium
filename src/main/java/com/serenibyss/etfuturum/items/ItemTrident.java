@@ -4,9 +4,9 @@ import com.google.common.collect.Multimap;
 import com.serenibyss.etfuturum.EtFuturum;
 import com.serenibyss.etfuturum.enchantment.EFMEnchantments;
 import com.serenibyss.etfuturum.entities.projectile.EntityTrident;
-import com.serenibyss.etfuturum.items.base.IModelRegister;
 import com.serenibyss.etfuturum.load.enums.EFMEnumAction;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
+import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -30,6 +30,9 @@ public class ItemTrident extends Item implements IModelRegister {
 
     public ItemTrident() {
         super();
+        this.setMaxStackSize(1);
+        this.setMaxDamage(250);
+
         this.addPropertyOverride(new ResourceLocation("throwing"), (stack, world, entity) -> {
             return entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0f : 0.0f;
         });

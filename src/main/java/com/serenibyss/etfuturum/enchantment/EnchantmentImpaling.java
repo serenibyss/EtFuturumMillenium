@@ -8,6 +8,7 @@ import net.minecraft.inventory.EntityEquipmentSlot;
 public class EnchantmentImpaling extends Enchantment{
     protected EnchantmentImpaling(Enchantment.Rarity rarityIn, EntityEquipmentSlot... slots) {
         super(rarityIn, EFMEnumEnchantmentType.TRIDENT, slots);
+        this.setName("impaling");
     }
 
     @Override

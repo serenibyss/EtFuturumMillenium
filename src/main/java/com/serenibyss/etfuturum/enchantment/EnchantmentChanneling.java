@@ -8,6 +8,7 @@ public class EnchantmentChanneling extends Enchantment {
 
     protected EnchantmentChanneling(Enchantment.Rarity rarityIn, EntityEquipmentSlot... slots) {
         super(rarityIn, EFMEnumEnchantmentType.TRIDENT, slots);
+        this.setName("channeling");
     }
 
     @Override

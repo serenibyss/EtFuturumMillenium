@@ -9,6 +9,7 @@ public class EnchantmentRiptide extends Enchantment {
 
     protected EnchantmentRiptide(Rarity rarityIn, EntityEquipmentSlot... slots) {
         super(rarityIn, EFMEnumEnchantmentType.TRIDENT, slots);
+        this.setName("riptide");
     }
 
     @Override
@@ -28,6 +29,6 @@ public class EnchantmentRiptide extends Enchantment {
 
     @Override
     protected boolean canApplyTogether(Enchantment ench) {
-        return super.canApplyTogether(ench) ;
+        return super.canApplyTogether(ench) && ench != EFMEnchantments.LOYALTY && ench != EFMEnchantments.CHANNELING;
     }
 }

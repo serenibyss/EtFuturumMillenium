@@ -19,19 +19,21 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 public class EFMEntities {
 
+    static int id = 0;
+
     @SubscribeEvent
     public static void registerEntities(RegistryEvent.Register<EntityEntry> event) {
         if(Features.MC13.phantom.isEnabled()) {
             event.getRegistry().register(EntityEntryBuilder.create().entity(EntityPhantom.class)
-                    .id(new ResourceLocation(EFMTags.MODID, "phantom"), 0)
-                    .tracker(80, 3, false)
+                    .id(new ResourceLocation(EFMTags.MODID, "phantom"), id++)
+                    .tracker(80, 3, true)
                     .name("phantom")
                     .egg(0x43518A, 0x88FF00).build());
         }
         if(Features.MC13.trident.isEnabled()) {
             event.getRegistry().register(EntityEntryBuilder.create().entity(EntityTrident.class)
-                    .id(new ResourceLocation(EFMTags.MODID, "trident"), 0)
-                    .tracker(80, 3, false)
+                    .id(new ResourceLocation(EFMTags.MODID, "trident"), id++)
+                    .tracker(64, 2, true)
                     .name("trident")
                     .build());
         }

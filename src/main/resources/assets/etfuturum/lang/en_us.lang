@@ -13,5 +13,11 @@ entity.phantom.name=Phantom
 item.phantom_membrane.name=Phantom Membrane
 item.trident.name=Trident
 
+# Enchants
+enchantment.channeling=Channeling
+enchantment.riptide=Riptide
+enchantment.impaling=Impaling
+enchantment.loyalty=Loyalty
+
 # Stats
 stat.timeSinceRest=Time Since Rest:

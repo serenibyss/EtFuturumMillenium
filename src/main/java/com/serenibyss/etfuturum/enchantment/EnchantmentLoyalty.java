@@ -9,6 +9,7 @@ public class EnchantmentLoyalty extends Enchantment {
 
     protected EnchantmentLoyalty(Rarity rarityIn,  EntityEquipmentSlot... slots) {
         super(rarityIn, EFMEnumEnchantmentType.TRIDENT, slots);
+        this.setName("loyalty");
     }
 
     @Override
