@@ -46,10 +46,10 @@ class AdvancementListeners<T extends IAdvancementCriterion> {
         grantCriterion(list);
     }
 
-    public void trigger(EntityPlayerMP player, Collection<? extends Entity> entities) {
+    public void trigger(EntityPlayerMP player, Entity entity) {
         List<Listener<T>> list = new ArrayList<>();
         for (Listener<T> listener : listeners) {
-            if (listener.getCriterionInstance().test(player, entities)) {
+            if (listener.getCriterionInstance().test(player, entity)) {
                 list.add(listener);
             }
         }

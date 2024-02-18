@@ -82,10 +82,10 @@ public class AdvancementTrigger<T extends IAdvancementCriterion> implements ICri
      * @param player   The player triggering the Advancement
      * @param entities A list of entities to test against. Typically, entities that are being attacked by the player.
      */
-    public void trigger(@NotNull EntityPlayerMP player, @NotNull Collection<? extends Entity> entities) {
+    public void trigger(@NotNull EntityPlayerMP player, @NotNull Entity entity) {
         AdvancementListeners<T> listener = listeners.get(player.getAdvancements());
         if (listener != null) {
-            listener.trigger(player, entities);
+            listener.trigger(player, entity);
         }
     }
 }

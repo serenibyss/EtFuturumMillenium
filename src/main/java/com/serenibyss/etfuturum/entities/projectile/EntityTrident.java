@@ -1,6 +1,7 @@
 package com.serenibyss.etfuturum.entities.projectile;
 
 import com.serenibyss.etfuturum.enchantment.EFMEnchantments;
+import com.serenibyss.etfuturum.entities.weather.EFMEntityLightningBolt;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.mixin.trident.EntityArrowAccessor;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
@@ -11,8 +12,8 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.entity.projectile.EntityArrow;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemStack;
@@ -74,7 +75,7 @@ public class EntityTrident extends EntityArrow {
         }
     }
 
-    public boolean getLoyalty() {
+    public boolean isNoPhysics() {
         if(!this.world.isRemote) {
             return this.noClip;
         }
@@ -90,8 +91,8 @@ public class EntityTrident extends EntityArrow {
         }
 
         Entity shootingEntity = this.shootingEntity;
-        boolean loyalty = getLoyalty();
-        if((this.dealtDamage || loyalty) && shootingEntity != null) {
+        boolean noPhys = isNoPhysics();
+        if((this.dealtDamage || noPhys) && shootingEntity != null) {
             int loyalLevel = (Byte)this.dataManager.get(LOYALTY_LEVEL);
             if(loyalLevel > 0 && this.shouldReturnToThrower()) {
                 if(!this.world.isRemote && this.pickupStatus == PickupStatus.ALLOWED) {
@@ -141,7 +142,7 @@ public class EntityTrident extends EntityArrow {
         IBlockState iblockstate = this.world.getBlockState(blockpos);
         Block block = iblockstate.getBlock();
 
-        if (iblockstate.getMaterial() != Material.AIR && !loyalty) {
+        if (iblockstate.getMaterial() != Material.AIR && !noPhys) {
             AxisAlignedBB axisalignedbb = iblockstate.getCollisionBoundingBox(this.world, blockpos);
 
             if (axisalignedbb != Block.NULL_AABB && axisalignedbb.offset(blockpos).contains(new Vec3d(this.posX, this.posY, this.posZ))) {
@@ -157,7 +158,7 @@ public class EntityTrident extends EntityArrow {
             this.extinguish();
         }
 
-        if (this.inGround && !loyalty) {
+        if (this.inGround && !noPhys) {
             int j = block.getMetaFromState(iblockstate);
 
             if ((block != ((EntityArrowAccessor)this).getInTile() || j != ((EntityArrowAccessor)this).getInData()) && !this.world.collidesWithAnyBlock(this.getEntityBoundingBox().grow(0.05D))) {
@@ -209,7 +210,7 @@ public class EntityTrident extends EntityArrow {
                 }
             }
 
-            if (raytraceresult != null && !loyalty && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
+            if (raytraceresult != null && !noPhys && !net.minecraftforge.event.ForgeEventFactory.onProjectileImpact(this, raytraceresult)) {
                 this.onHit(raytraceresult);
                 this.isAirBorne = true;
             }
@@ -224,7 +225,7 @@ public class EntityTrident extends EntityArrow {
             this.posY += this.motionY;
             this.posZ += this.motionZ;
             float f4 = MathHelper.sqrt(this.motionX * this.motionX + this.motionZ * this.motionZ);
-            if(loyalty) {
+            if(noPhys) {
                 this.rotationYaw = (float) (MathHelper.atan2(-this.motionX, -this.motionZ) * (180D / Math.PI));
             } else {
                 this.rotationYaw = (float) (MathHelper.atan2(this.motionX, this.motionZ) * (180D / Math.PI));
@@ -257,7 +258,7 @@ public class EntityTrident extends EntityArrow {
             this.motionY *= f1;
             this.motionZ *= f1;
 
-            if (!this.hasNoGravity() && !loyalty) {
+            if (!this.hasNoGravity() && !noPhys) {
                 this.motionY -= 0.05000000074505806D;
             }
 
@@ -312,9 +313,9 @@ public class EntityTrident extends EntityArrow {
             if (this.world.isThundering() && EnchantmentHelper.getEnchantmentLevel(EFMEnchantments.CHANNELING, this.thrownStack) > 0) {
                 BlockPos strikePos = entity.getPosition();
                 if (this.world.canSeeSky(strikePos)) {
-                    EntityLightningBolt bolt = new EntityLightningBolt(this.world, (double) strikePos.getX() + 0.5, strikePos.getY(), (double) strikePos.getZ() + 0.5, false);
-                    // todo: set lightning caster
-                    ((WorldServer)this.world).addWeatherEffect(bolt);
+                    EFMEntityLightningBolt bolt = new EFMEntityLightningBolt(this.world, (double) strikePos.getX() + 0.5, strikePos.getY(), (double) strikePos.getZ() + 0.5, false);
+                    bolt.setCaster(myEnt instanceof EntityPlayerMP playerMP ? playerMP : null);
+                    this.world.addWeatherEffect(bolt);
                     sound = EFMSounds.ITEM_TRIDENT_THUNDER;
                     volume = 5.0F;
                 }
@@ -328,8 +329,19 @@ public class EntityTrident extends EntityArrow {
 
     @Override
     public void onCollideWithPlayer(EntityPlayer entityIn) {
-        if(this.shootingEntity == null || this.shootingEntity.getUniqueID() == entityIn.getUniqueID())
-            super.onCollideWithPlayer(entityIn);
+        if (this.shootingEntity == null || this.shootingEntity.getUniqueID() == entityIn.getUniqueID()) {
+            if (!this.world.isRemote && (this.inGround || this.isNoPhysics()) && this.arrowShake <= 0) {
+                boolean flag = this.pickupStatus == EntityArrow.PickupStatus.ALLOWED || this.pickupStatus == EntityArrow.PickupStatus.CREATIVE_ONLY && entityIn.capabilities.isCreativeMode || this.isNoPhysics() && this.shootingEntity.getUniqueID() == entityIn.getUniqueID();
+                if (this.pickupStatus == EntityArrow.PickupStatus.ALLOWED && !entityIn.inventory.addItemStackToInventory(this.getArrowStack())) {
+                    flag = false;
+                }
+
+                if (flag) {
+                    entityIn.onItemPickup(this, 1);
+                    this.setDead();
+                }
+            }
+        }
     }
 
     @Override

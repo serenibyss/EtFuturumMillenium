@@ -17,6 +17,8 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.List;
+
 import static com.serenibyss.etfuturum.load.feature.Features.*;
 
 @SuppressWarnings("unused")
@@ -38,21 +40,30 @@ public class ClientProxy extends CommonProxy {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
     }
 
+    @Override
+    public boolean isClientSide() {
+        return true;
+    }
+
     @SubscribeEvent
     public static void registerSpecialRenderers(ModelRegistryEvent event) {
         registerSpecialRenderer(MC13.conduit, TileEntityConduit.class, new TileEntityConduitRenderer());
     }
 
-    private static <T extends TileEntity> void registerSpecialRenderer(Feature feature, Class<T> tileClass,
-                                                                       TileEntitySpecialRenderer<? super T> renderer) {
-        if (!feature.isEnabled()) {
-            return;
-        }
-        ClientRegistry.bindTileEntitySpecialRenderer(tileClass, renderer);
+    public static void registerCustomItemModels(List<String> m) {
+        registerCustomItemModel(MC13.trident, m, "item/trident_in_hand");
     }
 
-    @Override
-    public boolean isClientSide() {
-        return true;
+    private static <T extends TileEntity> void registerSpecialRenderer(Feature feature, Class<T> tileClass,
+                                                                       TileEntitySpecialRenderer<? super T> renderer) {
+        if (feature.isEnabled()) {
+            ClientRegistry.bindTileEntitySpecialRenderer(tileClass, renderer);
+        }
+    }
+
+    private static void registerCustomItemModel(Feature feature, List<String> customModels, String modelName) {
+        if (feature.isEnabled()) {
+            customModels.add(modelName);
+        }
     }
 }

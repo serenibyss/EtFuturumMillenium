@@ -5,39 +5,33 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.serenibyss.etfuturum.advancement.base.AbstractCriterion;
+import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.JsonUtils;
-import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.fml.common.registry.EntityEntry;
-import net.minecraftforge.fml.common.registry.EntityRegistry;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 public class TridentChannelingCriterion extends AbstractCriterion {
 
-    private final List<ResourceLocation> entityNames = new ArrayList<>();
+    private EntityPredicate[] entityPredicates = { EntityPredicate.ANY };
 
     @Override
     public void deserialize(JsonObject json, JsonDeserializationContext context) {
-        JsonArray entityArray = json.getAsJsonArray("victims");
-        if (entityArray == null) return; // no entities specified
-        for (JsonElement element : entityArray) {
-            ResourceLocation entityId = new ResourceLocation(JsonUtils.getString(element, "type"));
-            entityNames.add(entityId);
+        JsonElement element = json.get("victims");
+        if (element != null && !element.isJsonNull()) {
+            JsonArray array = JsonUtils.getJsonArray(element, "entities");
+            EntityPredicate[] predicates = new EntityPredicate[array.size()];
+
+            for (int i = 0; i < array.size(); i++) {
+                predicates[i] = EntityPredicate.deserialize(array.get(i));
+            }
+            entityPredicates = predicates;
         }
     }
 
     @Override
-    public boolean test(EntityPlayerMP player, Collection<? extends Entity> entities) {
-        if (entityNames.isEmpty()) {
-            return true;
-        }
-        for (Entity entity : entities) {
-            EntityEntry entry = EntityRegistry.getEntry(entity.getClass());
-            if (entityNames.contains(entry.getRegistryName())) {
+    public boolean test(EntityPlayerMP player, Entity entity) {
+        for (EntityPredicate predicate : entityPredicates) {
+            if (predicate.test(player, entity)) {
                 return true;
             }
         }

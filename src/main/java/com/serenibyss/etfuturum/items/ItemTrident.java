@@ -16,6 +16,7 @@ import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -37,6 +38,11 @@ public class ItemTrident extends Item implements IModelRegister {
                 entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0f : 0.0f);
         setCreativeTab(CreativeTabs.BREWING);
         setTranslationKey("trident");
+    }
+
+    @Override
+    public boolean canDestroyBlockInCreative(World world, BlockPos pos, ItemStack stack, EntityPlayer player) {
+        return false;
     }
 
     @Override
@@ -135,6 +141,11 @@ public class ItemTrident extends Item implements IModelRegister {
             stack.damageItem(2, entityLiving);
         }
         return true;
+    }
+
+    @Override
+    public boolean canHarvestBlock(IBlockState blockIn) {
+        return blockIn.getBlock() == Blocks.WEB;
     }
 
     @Override

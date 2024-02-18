@@ -21,3 +21,9 @@ enchantment.loyalty=Loyalty
 
 # Stats
 stat.timeSinceRest=Time Since Rest:
+
+# Advancements
+advancements.adventure.throw_trident.title=A Throwaway Joke
+advancements.adventure.throw_trident.description=Throw a Trident at something. Note: Throwing away your only weapon is not a good idea.
+advancements.adventure.very_very_frightening.title=Very Very Frightening
+advancements.adventure.very_very_frightening.description=Strike a Villager with lightning

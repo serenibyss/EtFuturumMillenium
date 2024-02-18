@@ -20,5 +20,5 @@ public interface IAdvancementCriterion extends ICriterionInstance {
     // Implement AT LEAST ONE of these test functions in your criterion.
 
     default boolean test(EntityPlayerMP player) { throw new UnsupportedOperationException("Criteria for [player] not supported"); }
-    default boolean test(EntityPlayerMP player, Collection<? extends Entity> entities) { throw new UnsupportedOperationException("Criteria for [player, entities] not supported"); };
+    default boolean test(EntityPlayerMP player, Entity entity) { throw new UnsupportedOperationException("Criteria for [player, entities] not supported"); };
 }
