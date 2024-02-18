@@ -4,13 +4,14 @@ import com.serenibyss.etfuturum.load.feature.Feature;
 import net.minecraft.item.EnumAction;
 import net.minecraftforge.common.util.EnumHelper;
 
+import static com.serenibyss.etfuturum.load.feature.Features.MC13;
+
 public class EFMEnumAction {
 
     public static EnumAction SPEAR;
 
     protected static void init() {
-        // todo:onion
-        //SPEAR = addAction(MC13.trident, "spear");
+        SPEAR = addAction(MC13.trident, "spear");
     }
 
     private static EnumAction addAction(Feature feature, String name) {

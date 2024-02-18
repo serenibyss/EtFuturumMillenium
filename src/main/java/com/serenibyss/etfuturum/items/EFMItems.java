@@ -19,7 +19,8 @@ import static com.serenibyss.etfuturum.load.feature.Features.*;
 
 public enum EFMItems {
 
-    PHANTOM_MEMBRANE(MC13.phantom, "phantom_membrane", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("phantom_membrane")))
+    PHANTOM_MEMBRANE(MC13.phantom, "phantom_membrane", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("phantom_membrane"))),
+    TRIDENT(MC13.trident, "trident", new ItemTrident()),
 
     ;
 

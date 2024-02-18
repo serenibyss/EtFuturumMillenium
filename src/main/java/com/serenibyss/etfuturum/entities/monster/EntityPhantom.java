@@ -312,7 +312,7 @@ public class EntityPhantom extends EntityFlyingMob implements IMob {
             if(EntityPhantom.this.getEntityBoundingBox().grow(0.2).intersects(target.getEntityBoundingBox())) {
                 EntityPhantom.this.attackEntityAsMob(target);
                 EntityPhantom.this.attackPhase = AttackPhase.CIRCLE;
-                EntityPhantom.this.world.playSound(null, new BlockPos(EntityPhantom.this), EFMSounds.ENTITY_PHANTOM_ATTACK, SoundCategory.HOSTILE, 1.0f, 1.0f);
+                EntityPhantom.this.world.playSound(null, new BlockPos(EntityPhantom.this), EFMSounds.ENTITY_PHANTOM_BITE, SoundCategory.HOSTILE, 1.0f, 1.0f);
             } else if(EntityPhantom.this.collidedHorizontally || EntityPhantom.this.hurtTime > 0) {
                 EntityPhantom.this.attackPhase = AttackPhase.CIRCLE;
             }

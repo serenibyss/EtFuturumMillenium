@@ -28,8 +28,8 @@ public class PhantomSpawner {
         if(this.ticksUntilSpawn > 0)
             return 0;
 
-        //this.ticksUntilSpawn += (60 + r.nextInt(60)) * 20;
-        this.ticksUntilSpawn += (60);
+        this.ticksUntilSpawn += (60 + r.nextInt(60)) * 20;
+        //this.ticksUntilSpawn += (60);
         if(worldIn.getSkylightSubtracted() < 5 && worldIn.provider.hasSkyLight())
             return 0;
 
@@ -42,7 +42,7 @@ public class PhantomSpawner {
                     if(diff.isHarderThan(r.nextFloat() * 3.0f)) {
                         StatisticsManagerServer stats = ((EntityPlayerMP)player).getStatFile();
                         int statLevel = MathHelper.clamp(stats.readStat(EFMStatList.TIME_SINCE_REST), 1, Integer.MAX_VALUE);
-                        if(r.nextInt(statLevel) > 72) {
+                        if(r.nextInt(statLevel) > 72000) {
                             BlockPos spawnLoc = block.up(20 + r.nextInt(15)).east(-10 + r.nextInt(21)).south(-10 + r.nextInt(21));
                             IBlockState spawnLocState = worldIn.getBlockState(spawnLoc);
                             if(WorldEntitySpawner.isValidEmptySpawnBlock(spawnLocState)) {
