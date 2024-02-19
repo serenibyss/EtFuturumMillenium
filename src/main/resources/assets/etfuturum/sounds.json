@@ -367,5 +367,130 @@
       "etfuturum:item/trident/thunder2"
     ],
     "subtitle": "subtitles.item.trident.thunder"
+  },
+  "entity.turtle.ambient_land": {
+    "sounds": [
+      {
+        "name": "etfuturum:mob/turtle/idle1",
+        "volume": 0.8
+      },
+      {
+        "name": "etfuturum:mob/turtle/idle2",
+        "volume": 0.7
+      },
+      {
+        "name": "etfuturum:mob/turtle/idle3",
+        "volume": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.turtle.ambient_land"
+  },
+  "entity.turtle.death": {
+    "sounds": [
+      "etfuturum:mob/turtle/death1",
+      "etfuturum:mob/turtle/death2",
+      "etfuturum:mob/turtle/death3"
+    ],
+    "subtitle": "subtitles.entity.turtle.death"
+  },
+  "entity.turtle.death_baby": {
+    "sounds": [
+      "etfuturum:mob/turtle/baby/death1",
+      "etfuturum:mob/turtle/baby/death2"
+    ],
+    "subtitle": "subtitles.entity.turtle.death_baby"
+  },
+  "entity.turtle.egg_break": {
+    "sounds": [
+      "etfuturum:mob/turtle/egg/egg_break1",
+      "etfuturum:mob/turtle/egg/egg_break2"
+    ],
+    "subtitle": "subtitles.entity.turtle.egg_break"
+  },
+  "entity.turtle.egg_crack": {
+    "sounds": [
+      "etfuturum:mob/turtle/egg/egg_crack1",
+      "etfuturum:mob/turtle/egg/egg_crack2",
+      "etfuturum:mob/turtle/egg/egg_crack3",
+      "etfuturum:mob/turtle/egg/egg_crack4",
+      "etfuturum:mob/turtle/egg/egg_crack5"
+    ],
+    "subtitle": "subtitles.entity.turtle.egg_crack"
+  },
+  "entity.turtle.egg_hatch": {
+    "sounds": [
+      "etfuturum:mob/turtle/baby/egg_hatched1",
+      "etfuturum:mob/turtle/baby/egg_hatched2",
+      "etfuturum:mob/turtle/baby/egg_hatched3"
+    ],
+    "subtitle": "subtitles.entity.turtle.egg_hatch"
+  },
+  "entity.turtle.hurt": {
+    "sounds": [
+      "etfuturum:mob/turtle/hurt1",
+      "etfuturum:mob/turtle/hurt2",
+      "etfuturum:mob/turtle/hurt3",
+      "etfuturum:mob/turtle/hurt4",
+      "etfuturum:mob/turtle/hurt5"
+    ],
+    "subtitle": "subtitles.entity.turtle.hurt"
+  },
+  "entity.turtle.hurt_baby": {
+    "sounds": [
+      "etfuturum:mob/turtle/baby/hurt1",
+      "etfuturum:mob/turtle/baby/hurt2"
+    ],
+    "subtitle": "subtitles.entity.turtle.hurt_baby"
+  },
+  "entity.turtle.lay_egg": {
+    "sounds": [
+      "etfuturum:mob/turtle/egg/drop_egg1",
+      "etfuturum:mob/turtle/egg/drop_egg2"
+    ],
+    "subtitle": "subtitles.entity.turtle.lay_egg"
+  },
+  "entity.turtle.shamble": {
+    "sounds": [
+      "etfuturum:mob/turtle/walk1",
+      "etfuturum:mob/turtle/walk2",
+      "etfuturum:mob/turtle/walk3",
+      "etfuturum:mob/turtle/walk4",
+      "etfuturum:mob/turtle/walk5"
+    ],
+    "subtitle": "subtitles.entity.turtle.shamble"
+  },
+  "entity.turtle.shamble_baby": {
+    "sounds": [
+      "etfuturum:mob/turtle/baby/shamble1",
+      "etfuturum:mob/turtle/baby/shamble2",
+      "etfuturum:mob/turtle/baby/shamble3",
+      "etfuturum:mob/turtle/baby/shamble4"
+    ],
+    "subtitle": "subtitles.entity.turtle.shamble_baby"
+  },
+  "entity.turtle.swim": {
+    "sounds": [
+      {
+        "name": "etfuturum:mob/turtle/swim/swim1",
+        "volume": 0.6
+      },
+      {
+        "name": "etfuturum:mob/turtle/swim/swim2",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:mob/turtle/swim/swim3",
+        "volume": 0.2
+      },
+      {
+        "name": "etfuturum:mob/turtle/swim/swim4",
+        "volume": 0.6
+      },
+      {
+        "name": "etfuturum:mob/turtle/swim/swim5",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.turtle.swim"
   }
 }

@@ -3,7 +3,9 @@ package com.serenibyss.etfuturum.entities;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.client.render.entity.RenderPhantom;
 import com.serenibyss.etfuturum.client.render.entity.RenderTrident;
+import com.serenibyss.etfuturum.client.render.entity.RenderTurtle;
 import com.serenibyss.etfuturum.entities.monster.EntityPhantom;
+import com.serenibyss.etfuturum.entities.passive.EntityTurtle;
 import com.serenibyss.etfuturum.entities.projectile.EntityTrident;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.entity.Entity;
@@ -37,6 +39,13 @@ public class EFMEntities {
                     .name("trident")
                     .build());
         }
+        if(Features.MC13.turtle.isEnabled()) {
+            event.getRegistry().register(EntityEntryBuilder.create().entity(EntityTurtle.class)
+                    .id(new ResourceLocation(EFMTags.MODID, "turtle"), id++)
+                    .tracker(80, 3, true)
+                    .name("turtle")
+                    .egg(0xE7E7E7, 0x00AFAF).build());
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -47,5 +56,9 @@ public class EFMEntities {
         if(Features.MC13.trident.isEnabled()) {
             RenderingRegistry.registerEntityRenderingHandler(EntityTrident.class, RenderTrident::new);
         }
+        if(Features.MC13.turtle.isEnabled()) {
+            RenderingRegistry.registerEntityRenderingHandler(EntityTurtle.class, RenderTurtle::new);
+        }
+
     }
 }

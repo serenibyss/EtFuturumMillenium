@@ -1,9 +1,9 @@
 package com.serenibyss.etfuturum.pathfinding;
 
+import com.serenibyss.etfuturum.load.enums.EFMPathNodeType;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockRailBase;
 import net.minecraft.entity.EntityLiving;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.pathfinding.PathNodeType;
 import net.minecraft.pathfinding.PathPoint;
@@ -13,7 +13,6 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.util.math.BlockPos;
-import net.minecraft.block.state.IBlockState;
 
 import java.util.EnumSet;
 
@@ -41,7 +40,7 @@ public class WalkAndSwimNodeProcessor extends WalkNodeProcessor {
 
     @Override
     public PathPoint getStart() {
-        return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(this.entity.getEntityBoundingBox().minY + 0.5), MathHelper.floor(this.entity.getEntityBoundingBox().minZ))
+        return this.openPoint(MathHelper.floor(this.entity.getEntityBoundingBox().minX), MathHelper.floor(this.entity.getEntityBoundingBox().minY + 0.5), MathHelper.floor(this.entity.getEntityBoundingBox().minZ));
     }
 
     @Override
@@ -232,7 +231,7 @@ public class WalkAndSwimNodeProcessor extends WalkNodeProcessor {
 
     @Override
     public PathNodeType getPathNodeType(IBlockAccess blockaccessIn, int x, int y, int z) {
-        PathNodeType pathnodetype = this.getPathNodeType(blockaccessIn, x, y, z);
+        PathNodeType pathnodetype = this.getPathNodeTypeRaw(blockaccessIn, x, y, z);
         if (pathnodetype == PathNodeType.WATER) {
             for(EnumFacing enumFacing : EnumFacing.values()) {
                 PathNodeType pathnodetype2 = this.getPathNodeTypeRaw(blockaccessIn, x + enumFacing.getXOffset(), y + enumFacing.getYOffset(), z + enumFacing.getZOffset());

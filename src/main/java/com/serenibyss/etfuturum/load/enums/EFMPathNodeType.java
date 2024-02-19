@@ -1,4 +1,4 @@
-package com.serenibyss.etfuturum.pathfinding;
+package com.serenibyss.etfuturum.load.enums;
 
 import com.serenibyss.etfuturum.load.feature.Feature;
 import net.minecraft.pathfinding.PathNodeType;

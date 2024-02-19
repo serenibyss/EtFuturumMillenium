@@ -1,15 +1,23 @@
 package com.serenibyss.etfuturum.entities.passive;
 
+import com.google.common.collect.Sets;
+import com.serenibyss.etfuturum.blocks.BlockTurtleEgg;
+import com.serenibyss.etfuturum.blocks.EFMBlocks;
+import com.serenibyss.etfuturum.load.enums.EFMEnumCreatureAttribute;
 import com.serenibyss.etfuturum.pathfinding.WalkAndSwimNodeProcessor;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
+import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.datasync.DataParameter;
@@ -18,15 +26,21 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.pathfinding.PathFinder;
 import net.minecraft.pathfinding.PathNavigate;
 import net.minecraft.pathfinding.PathNavigateSwimmer;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
-import net.minecraftforge.fml.common.Optional;
+import net.minecraft.world.gen.structure.StructureBoundingBox;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Random;
+import java.util.Set;
 import java.util.function.Predicate;
 
 //@Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
@@ -156,13 +170,13 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
 
     @Override
     protected void initEntityAI() {
-        //this.tasks.addTask(0, new EntityTurtle.AIPanic(this, 1.2));
-        //this.tasks.addTask(1, new EntityTurtle.AIMate(this, 1.0));
-        //this.tasks.addTask(1, new EntityTurtle.AILayEgg(this, 1.2));
-        //this.tasks.addTask(2, new EntityTurtle.AIPlayerTempt(this, 1.2));
-        //this.tasks.addTask(3, new EntityTurtle.AIGoToWater(this, 1.2));
+        this.tasks.addTask(0, new EntityTurtle.AIPanic(this, 1.2));
+        this.tasks.addTask(1, new EntityTurtle.AIMate(this, 1.0));
+        this.tasks.addTask(1, new EntityTurtle.AILayEgg(this, 1.2));
+        this.tasks.addTask(2, new EntityTurtle.AIPlayerTempt(this, 1.2, Items.WHEAT_SEEDS)); // todo change to seagrass
+        this.tasks.addTask(3, new EntityTurtle.AIGoToWater(this, 1.2));
         this.tasks.addTask(4, new EntityTurtle.AIGoHome(this, 1.0));
-        //this.tasks.addTask(7, new EntityTurtle.AITravel(this, 1.0));
+        this.tasks.addTask(7, new EntityTurtle.AITravel(this, 1.0));
         this.tasks.addTask(8, new EntityAIWatchClosest(this, EntityPlayer.class, 8.0F));
         this.tasks.addTask(9, new EntityTurtle.AIWander(this, 1.0, 100));
     }
@@ -186,7 +200,7 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
 
     @Override
     public EnumCreatureAttribute getCreatureAttribute() {
-        return EnumCreatureAttribute.UNDEFINED; // todo(onion) change to EFM#WATER
+        return EFMEnumCreatureAttribute.WATER;
     }
 
     @Override
@@ -372,33 +386,106 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
     }
 
     static class AIGoToWater extends EntityAIMoveToBlock {
+        private final EntityTurtle turtle;
 
-        public AIGoToWater(EntityCreature creature, double speedIn, int length) {
-            super(creature, speedIn, length);
+        public AIGoToWater(EntityTurtle creature, double speedIn) {
+            super(creature, creature.isChild() ? 2.0 : speedIn, 24);
+            this.turtle = creature;
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            return !turtle.isInWater() && timeoutCounter <= 1200 && this.shouldMoveTo(turtle.world, destinationBlock);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            if(turtle.isChild() && !turtle.isInWater()) {
+                return super.shouldExecute();
+            } else {
+                return !turtle.isGoingHome() && !turtle.isInWater() && !turtle.hasEgg() ? super.shouldExecute() : false;
+            }
         }
 
         @Override
         protected boolean shouldMoveTo(World worldIn, BlockPos pos) {
-            return false;
+            Block block = worldIn.getBlockState(pos).getBlock();
+            return block == Blocks.WATER;
         }
     }
 
     static class AILayEgg extends EntityAIMoveToBlock {
+        private final EntityTurtle turtle;
 
-        public AILayEgg(EntityCreature creature, double speedIn, int length) {
-            super(creature, speedIn, length);
+        public AILayEgg(EntityTurtle creature, double speedIn) {
+            super(creature, speedIn, 16);
+            this.turtle = creature;
+        }
+
+        @Override
+        public void updateTask() {
+            super.updateTask();
+            BlockPos pos = new BlockPos(turtle);
+            if(!turtle.isInWater() && getIsAboveDestination()) {
+                if(turtle.isDigging < 1) {
+                    turtle.setDigging(true);
+                } else if(turtle.isDigging > 200) {
+                    World world = turtle.world;
+                    world.playSound((EntityPlayer)null, pos, EFMSounds.ENTITY_TURTLE_LAY_EGG, SoundCategory.BLOCKS, 0.3f, 0.9f + world.rand.nextFloat() * 0.2f);
+                    world.setBlockState(destinationBlock.up(), EFMBlocks.TURTLE_EGG.getBlock().getDefaultState().withProperty(BlockTurtleEgg.EGGS, Integer.valueOf(turtle.rand.nextInt(4) + 1)), 3);
+                    turtle.setHasEgg(false);
+                    turtle.setDigging(false);
+                    turtle.setInLove(null);
+                }
+
+                if(turtle.getDigging()) {
+                    turtle.isDigging++;
+                }
+            }
         }
 
         @Override
         protected boolean shouldMoveTo(World worldIn, BlockPos pos) {
-            return false;
+            if(!worldIn.isAirBlock(pos.up())) {
+                return false;
+            } else {
+                Block block = worldIn.getBlockState(pos).getBlock();
+                return block == Blocks.SAND;
+            }
         }
     }
 
     static class AIMate extends EntityAIMate {
+        private final EntityTurtle turtle;
 
-        public AIMate(EntityAnimal animal, double speedIn) {
+        public AIMate(EntityTurtle animal, double speedIn) {
             super(animal, speedIn);
+            this.turtle = animal;
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            return super.shouldExecute() && !turtle.hasEgg();
+        }
+
+        public void spawnBaby() {
+            EntityPlayerMP player = animal.getLoveCause();
+            if(player == null && targetMate.getLoveCause() != null) {
+                player = targetMate.getLoveCause();
+            }
+
+            if(player != null) {
+                player.addStat(StatList.ANIMALS_BRED);
+                CriteriaTriggers.BRED_ANIMALS.trigger(player, animal, targetMate, (EntityAgeable) null);
+            }
+
+            this.turtle.setHasEgg(true);
+            animal.resetInLove();
+            targetMate.resetInLove();
+            Random r = animal.getRNG();
+            if(turtle.world.getGameRules().getBoolean("doMobLoot")) {
+                turtle.world.spawnEntity(new EntityXPOrb(turtle.world, animal.posX, animal.posY, animal.posZ, r.nextInt(7) + 1));
+            }
         }
     }
 
@@ -407,21 +494,148 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
         public AIPanic(EntityCreature creature, double speedIn) {
             super(creature, speedIn);
         }
-    }
-
-    static class AIPlayerTempt extends EntityAIBase {
 
         @Override
         public boolean shouldExecute() {
-            return false;
+            if(creature.getRevengeTarget() == null && !creature.isBurning()) {
+                return false;
+            } else {
+                BlockPos pos = this.getRandPos(creature.world, creature, 7, 4);
+                if(pos != null) {
+                    randPosX = pos.getX();
+                    randPosY = pos.getY();
+                    randPosZ = pos.getZ();
+                    return true;
+                } else {
+                    return findRandomPosition();
+                }
+            }
+        }
+    }
+
+    static class AIPlayerTempt extends EntityAIBase {
+        private final EntityTurtle turtle;
+        private final double speed;
+        private EntityPlayer player;
+        private int tempingTime;
+        private final Set<Item> attractItem;
+
+        AIPlayerTempt(EntityTurtle turtle, double speed, Item attract) {
+            this.turtle = turtle;
+            this.speed = speed;
+            this.attractItem = Sets.newHashSet(attract);
+            this.setMutexBits(3);
+        }
+
+        @Override
+        public boolean shouldExecute() {
+            if(tempingTime > 0) {
+                --tempingTime;
+                return false;
+            } else {
+                player = turtle.world.getClosestPlayerToEntity(turtle, 10.0);
+                if(player == null) {
+                    return false;
+                } else {
+                    return attractItem.contains(player.getHeldItemMainhand().getItem()) || attractItem.contains(player.getHeldItemOffhand().getItem());
+                }
+            }
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            return this.shouldExecute();
+        }
+
+        @Override
+        public void resetTask() {
+            player = null;
+            turtle.getNavigator().clearPath();
+            tempingTime = 100;
+        }
+
+        @Override
+        public void updateTask() {
+            turtle.getLookHelper().setLookPositionWithEntity(player, (float)(turtle.getHorizontalFaceSpeed() + 20), (float) turtle.getVerticalFaceSpeed());
+            if(turtle.getDistanceSq(player) < 6.25) {
+                turtle.getNavigator().clearPath();
+            } else {
+                turtle.getNavigator().tryMoveToEntityLiving(player, speed);
+            }
         }
     }
 
     static class AITravel extends EntityAIBase {
 
+        private final EntityTurtle turtle;
+        private final double speed;
+        private boolean interest;
+
+        AITravel(EntityTurtle turtle, double speed) {
+            this.turtle = turtle;
+            this.speed = speed;
+        }
+
         @Override
         public boolean shouldExecute() {
-            return false;
+            return !turtle.isGoingHome() && !turtle.hasEgg() && turtle.isInWater();
+        }
+
+        @Override
+        public void startExecuting() {
+            int i = 512;
+            int j = 4;
+            Random random = this.turtle.rand;
+            int x = random.nextInt(1025) - 512;
+            int y = random.nextInt(9) - 4;
+            int z = random.nextInt(1025) - 512;
+            if((double)y + turtle.posY > (double)(turtle.world.getSeaLevel() - 1)) {
+                y = 0;
+            }
+
+            BlockPos pos = new BlockPos((double)x + turtle.posX, (double)y + turtle.posY, (double)z + turtle.posZ);
+            turtle.setTravelPos(pos);
+            turtle.setTravelling(true);
+            this.interest = false;
+        }
+
+        @Override
+        public void updateTask() {
+            if(turtle.getNavigator().noPath()) {
+                BlockPos pos = turtle.getTravelPos();
+                Vec3d vec = RandomPositionGenerator.findRandomTargetBlockTowards(turtle, 16, 3, new Vec3d((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()));
+                if(vec == null) {
+                    vec = RandomPositionGenerator.findRandomTargetBlockTowards(turtle, 8, 7, new Vec3d((double)pos.getX(), (double)pos.getY(), (double)pos.getZ()));
+                }
+
+                if(vec != null) {
+                    int i = MathHelper.floor(vec.x);
+                    int j = MathHelper.floor(vec.z);
+
+                    StructureBoundingBox mutableBoundingBox = new StructureBoundingBox(i - 34, 0, j - 34, i + 34, 0, j + 34);
+                    if(!turtle.world.isAreaLoaded(mutableBoundingBox)) {
+                        vec = null;
+                    }
+                }
+
+                if(vec == null) {
+                    interest = true;
+                    return;
+                }
+
+                turtle.getNavigator().tryMoveToXYZ(vec.x, vec.y, vec.z, this.speed);
+            }
+        }
+
+        @Override
+        public boolean shouldContinueExecuting() {
+            return turtle.getNavigator().noPath() && !interest && turtle.isGoingHome() && turtle.isInLove() && !turtle.hasEgg();
+        }
+
+        @Override
+        public void resetTask() {
+            turtle.setTravelling(false);
+            super.resetTask();
         }
     }
 
@@ -465,14 +679,13 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
         }
 
         @Override
-        protected PathFinder getPathFinder() {
+        protected @NotNull PathFinder getPathFinder() {
             return new PathFinder(new WalkAndSwimNodeProcessor());
         }
 
         @Override
         public boolean canEntityStandOnPos(BlockPos pos) {
-            if(this.entity instanceof EntityTurtle) {
-                EntityTurtle entityTurtle = (EntityTurtle)this.entity;
+            if(this.entity instanceof EntityTurtle entityTurtle) {
                 if(entityTurtle.isTravelling())
                     return this.world.getBlockState(pos).getBlock() == Blocks.WATER;
             }

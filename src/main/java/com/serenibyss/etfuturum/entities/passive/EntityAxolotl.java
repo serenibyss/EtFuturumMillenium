@@ -1,4 +1,4 @@
-package com.serenibyss.etfuturum.entities.animal;
+package com.serenibyss.etfuturum.entities.passive;
 
 import net.minecraft.entity.EntityAgeable;
 import net.minecraft.entity.passive.EntityAnimal;

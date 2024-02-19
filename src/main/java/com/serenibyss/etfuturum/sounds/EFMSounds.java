@@ -49,6 +49,11 @@ public class EFMSounds {
     public static SoundEvent ENTITY_TURTLE_DEATH_BABY;
     public static SoundEvent ENTITY_TURTLE_SHAMBLE;
     public static SoundEvent ENTITY_TURTLE_SHAMBLE_BABY;
+    public static SoundEvent ENTITY_TURTLE_EGG_CRACK;
+    public static SoundEvent ENTITY_TURTLE_EGG_HATCH;
+    public static SoundEvent ENTITY_TURTLE_EGG_BREAK;
+    public static SoundEvent ENTITY_TURTLE_LAY_EGG;
+
 
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
@@ -77,6 +82,19 @@ public class EFMSounds {
         ITEM_TRIDENT_RIPTIDE_1 = register(MC13.trident, r, "item.trident.riptide_1");
         ITEM_TRIDENT_RIPTIDE_2 = register(MC13.trident, r, "item.trident.riptide_2");
         ITEM_TRIDENT_RIPTIDE_3 = register(MC13.trident, r, "item.trident.riptide_3");
+
+        ENTITY_TURTLE_AMBIENT_LAND = register(MC13.turtle, r, "entity.turtle.ambient_land");
+        ENTITY_TURTLE_DEATH = register(MC13.turtle, r, "entity.turtle.death");
+        ENTITY_TURTLE_DEATH_BABY = register(MC13.turtle, r, "entity.turtle.death_baby");
+        ENTITY_TURTLE_EGG_BREAK = register(MC13.turtle, r, "entity.turtle.egg_break");
+        ENTITY_TURTLE_EGG_CRACK = register(MC13.turtle, r, "entity.turtle.egg_crack");
+        ENTITY_TURTLE_EGG_HATCH = register(MC13.turtle, r, "entity.turtle.egg_hatch");
+        ENTITY_TURTLE_HURT = register(MC13.turtle, r, "entity.turtle.hurt");
+        ENTITY_TURTLE_HURT_BABY = register(MC13.turtle, r, "entity.turtle.hurt_baby");
+        ENTITY_TURTLE_LAY_EGG = register(MC13.turtle, r, "entity.turtle.lay_egg");
+        ENTITY_TURTLE_SHAMBLE = register(MC13.turtle, r, "entity.turtle.shamble");
+        ENTITY_TURTLE_SHAMBLE_BABY = register(MC13.turtle, r, "entity.turtle.shamble_baby");
+        ENTITY_TURTLE_SWIM = register(MC13.turtle, r, "entity.turtle.swim");
 
 
         BARREL_OPEN = register(MC14.barrel, r, "block.barrel.open");

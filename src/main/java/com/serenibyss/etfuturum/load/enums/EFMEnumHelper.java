@@ -9,6 +9,7 @@ public class EFMEnumHelper {
         EFMEnumAction.init();
         EFMEnumEnchantmentType.init();
         EFMEnumCreatureAttribute.init();
+        EFMPathNodeType.init();
     }
 
     @SideOnly(Side.CLIENT)

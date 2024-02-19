@@ -1,0 +1,6 @@
+{
+  "parent": "block/four_turtle_eggs",
+  "textures": {
+    "all": "etfuturum:block/turtle_egg_very_cracked"
+  }
+}

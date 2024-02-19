@@ -1,0 +1,7 @@
+{
+  "parent": "block/turtle_egg",
+  "textures": {
+    "particle": "etfuturum:block/turtle_egg_slightly_cracked",
+    "all": "etfuturum:block/turtle_egg_slightly_cracked"
+  }
+}
