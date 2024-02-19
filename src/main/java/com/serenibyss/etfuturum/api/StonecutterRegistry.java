@@ -8,6 +8,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public final class StonecutterRegistry {
 
@@ -20,8 +21,20 @@ public final class StonecutterRegistry {
     }
 
     public void addRecipe(ItemStack input, ItemStack... output) {
-        ObjectList<ItemStack> list = recipes.computeIfAbsent(input, $ -> new ObjectArrayList<>());
-        Arrays.stream(output).map(ItemStack::copy).forEach(list::add);
+        ObjectList<ItemStack> list = new ObjectArrayList<>();
+        Arrays.stream(output)
+                .filter(Objects::nonNull)
+                .filter(stack -> !stack.isEmpty() && stack.getCount() > 0)
+                .map(ItemStack::copy)
+                .forEach(list::add);
+        if (!list.isEmpty()) {
+            ObjectList<ItemStack> existing = recipes.get(input);
+            if (existing == null) {
+                recipes.put(input, list);
+            } else {
+                existing.addAll(list);
+            }
+        }
     }
 
     @NotNull

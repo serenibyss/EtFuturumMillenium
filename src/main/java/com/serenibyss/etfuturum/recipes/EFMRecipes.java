@@ -1,7 +1,6 @@
 package com.serenibyss.etfuturum.recipes;
 
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.api.StonecutterRegistry;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.init.Blocks;
@@ -23,7 +22,7 @@ public class EFMRecipes {
 
         additions();
         if (Features.MC14.stonecutter.isEnabled()) {
-            stonecutterRecipes();
+            StonecutterRecipes.init();
         }
     }
 
@@ -33,14 +32,5 @@ public class EFMRecipes {
 
         // todo: Uncomment when Nautilus Shell and Heart of the Sea are added
         //addShapedRecipe("conduit", EFMBlocks.CONDUIT.getItemStack(), "XXX", "XSX", "XXX", 'X', EFMItems.NAUTILUS_SHELL.getItemStack(), 'S', EFMItems.HEART_OF_THE_SEA.getItemStack());
-    }
-
-    // todo add in the remaining stonecutter recipes. make sure that the order matches latest vanilla
-    private static void stonecutterRecipes() {
-        StonecutterRegistry r = StonecutterRegistry.instance();
-        r.addRecipe(new ItemStack(Blocks.COBBLESTONE),
-                new ItemStack(Blocks.STONE_STAIRS),
-                new ItemStack(Blocks.STONE_SLAB, 2, 3),
-                new ItemStack(Blocks.COBBLESTONE_WALL));
     }
 }
