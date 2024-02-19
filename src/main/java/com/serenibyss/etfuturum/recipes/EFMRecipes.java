@@ -12,7 +12,7 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.oredict.RecipeSorter;
 
-import static com.serenibyss.etfuturum.recipes.RecipeHelpers.addShapedRecipe;
+import static com.serenibyss.etfuturum.recipes.RecipeHelpers.*;
 
 public class EFMRecipes {
 
@@ -42,6 +42,23 @@ public class EFMRecipes {
 
         // todo: Uncomment when Nautilus Shell and Heart of the Sea are added
         //addShapedRecipe("conduit", EFMBlocks.CONDUIT.getItemStack(), "XXX", "XSX", "XXX", 'X', EFMItems.NAUTILUS_SHELL.getItemStack(), 'S', EFMItems.HEART_OF_THE_SEA.getItemStack());
+
+        // replacing planks recipe with our own that uses oredict
+        if (Features.MC13.stripping.isEnabled()) {
+            removeRecipeByName("minecraft:oak_planks");
+            removeRecipeByName("minecraft:spruce_planks");
+            removeRecipeByName("minecraft:birch_planks");
+            removeRecipeByName("minecraft:jungle_planks");
+            removeRecipeByName("minecraft:acacia_planks");
+            removeRecipeByName("minecraft:dark_oak_planks");
+
+            addShapelessRecipe("oak_planks", new ItemStack(Blocks.PLANKS, 1, 0), EFMOreDict.LOG_WOOD_OAK);
+            addShapelessRecipe("spruce_planks", new ItemStack(Blocks.PLANKS, 1, 1), EFMOreDict.LOG_WOOD_SPRUCE);
+            addShapelessRecipe("birch_planks", new ItemStack(Blocks.PLANKS, 1, 2), EFMOreDict.LOG_WOOD_BIRCH);
+            addShapelessRecipe("jungle_planks", new ItemStack(Blocks.PLANKS, 1, 3), EFMOreDict.LOG_WOOD_JUNGLE);
+            addShapelessRecipe("acacia_planks", new ItemStack(Blocks.PLANKS, 1, 4), EFMOreDict.LOG_WOOD_ACACIA);
+            addShapelessRecipe("dark_oak_planks", new ItemStack(Blocks.PLANKS, 1, 5), EFMOreDict.LOG_WOOD_DARK_OAK);
+        }
     }
 
     @SuppressWarnings("deprecation")
