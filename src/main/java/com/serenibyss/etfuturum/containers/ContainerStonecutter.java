@@ -83,9 +83,8 @@ public class ContainerStonecutter extends EFMContainer {
         return isWithinUsableDistance(world, pos, player, EFMBlocks.STONECUTTER.getBlock());
     }
 
-    // handles a button click on the server, ignore the name
     @Override
-    public boolean enchantItem(EntityPlayer playerIn, int id) {
+    public boolean clickMenuButton(EntityPlayer playerIn, int id) {
         if (isValidRecipeIndex(id)) {
             recipeIndex.set(id);
             setupResultSlot();

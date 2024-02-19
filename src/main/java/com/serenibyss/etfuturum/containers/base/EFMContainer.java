@@ -10,6 +10,7 @@ import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,17 @@ public abstract class EFMContainer extends Container {
     @Override
     public void updateProgressBar(int id, int data) {
         this.dataSlots.get(id).set(data);
+    }
+
+    // get a better method name for this stupid mc method
+    @Override
+    public final boolean enchantItem(@NotNull EntityPlayer player, int id) {
+        return clickMenuButton(player, id);
+    }
+
+    /** Better named version of {@link #enchantItem(EntityPlayer, int)}. */
+    public boolean clickMenuButton(@NotNull EntityPlayer player, int id) {
+        return super.enchantItem(player, id);
     }
 
     protected static boolean isWithinUsableDistance(World world, BlockPos pos, EntityPlayer player, Block targetBlock) {

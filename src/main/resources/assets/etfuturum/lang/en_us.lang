@@ -20,7 +20,8 @@ enchantment.impaling=Impaling
 enchantment.loyalty=Loyalty
 
 # Stats
-stat.timeSinceRest=Time Since Rest:
+stat.timeSinceRest=Time Since Rest
+stat.interactWithStonecutter=Interactions with Stonecutter
 
 # Advancements
 advancements.adventure.throw_trident.title=A Throwaway Joke

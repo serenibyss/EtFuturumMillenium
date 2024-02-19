@@ -101,9 +101,9 @@ public class GuiStonecutter extends EFMGuiContainer<ContainerStonecutter> {
                 int i1 = l - this.startIndex;
                 double d0 = mouseX - (double) (i + i1 % 4 * 16);
                 double d1 = mouseY - (double) (j + i1 / 4 * 18);
-                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && getContainer().enchantItem(mc.player, l)) {
+                if (d0 >= 0.0D && d1 >= 0.0D && d0 < 16.0D && d1 < 18.0D && clickMenuButton(mc.player, l)) {
                     mc.getSoundHandler().playSound(PositionedSoundRecord.getMasterRecord(SoundEvents.UI_BUTTON_CLICK, 1.0F));
-                    mc.playerController.sendEnchantPacket(getContainer().windowId, l);
+                    handleButtonClick(getContainer().windowId, l);
                     return;
                 }
             }

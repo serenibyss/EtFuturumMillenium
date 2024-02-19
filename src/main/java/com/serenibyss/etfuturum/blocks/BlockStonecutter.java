@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.blocks;
 import com.serenibyss.etfuturum.EtFuturum;
 import com.serenibyss.etfuturum.blocks.base.EFMBlockHorizontal;
 import com.serenibyss.etfuturum.client.EFMGuiIDs;
+import com.serenibyss.etfuturum.stats.EFMStatList;
 import com.serenibyss.etfuturum.util.VoxelShape;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -35,8 +36,7 @@ public class BlockStonecutter extends EFMBlockHorizontal {
     public boolean onBlockActivated(World world, BlockPos pos, IBlockState state, EntityPlayer player, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         if (!world.isRemote) {
             player.openGui(EtFuturum.INSTANCE, EFMGuiIDs.GUI_STONECUTTER, world, pos.getX(), pos.getY(), pos.getZ());
-            // todo stats
-            // player.addStat(EFMStats.INTERACT_WITH_STONECUTTER);
+            player.addStat(EFMStatList.INTERACT_WITH_STONECUTTER);
         }
         return true;
     }
