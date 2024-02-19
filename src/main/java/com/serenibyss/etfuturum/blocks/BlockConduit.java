@@ -3,11 +3,10 @@ package com.serenibyss.etfuturum.blocks;
 import com.serenibyss.etfuturum.blocks.base.EFMBlock;
 import com.serenibyss.etfuturum.blocks.base.EFMBlockContainer;
 import com.serenibyss.etfuturum.tiles.TileEntityConduit;
-import com.serenibyss.etfuturum.util.ModIDs;
 import com.serenibyss.etfuturum.util.VoxelShape;
-import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.state.BlockFaceShape;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
@@ -21,15 +20,10 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fml.common.Optional;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 @SuppressWarnings("deprecation")
-@Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
-public class BlockConduit extends EFMBlockContainer implements IFluidloggable {
+public class BlockConduit extends EFMBlockContainer {
 
     private static final VoxelShape SHAPE = EFMBlock.createShape(5.0D, 5.0D, 5.0D, 11.0D, 11.0D, 11.0D);
 
@@ -45,15 +39,8 @@ public class BlockConduit extends EFMBlockContainer implements IFluidloggable {
                 .translationKey("conduit"));
     }
 
-    @Optional.Method(modid = ModIDs.FLUIDLOGGED)
     @Override
-    public boolean isFluidValid(@NotNull IBlockState state, @NotNull World world, @NotNull BlockPos pos, @NotNull Fluid fluid) {
-        return fluid == FluidRegistry.WATER;
-    }
-
-    @Optional.Method(modid = ModIDs.FLUIDLOGGED)
-    @Override
-    public boolean canFluidFlow(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState here, @NotNull EnumFacing side) {
+    public boolean isWaterloggable(IBlockState state, World world, BlockPos pos) {
         return true;
     }
 

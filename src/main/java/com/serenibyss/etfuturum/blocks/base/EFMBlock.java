@@ -1,7 +1,9 @@
 package com.serenibyss.etfuturum.blocks.base;
 
 import com.serenibyss.etfuturum.util.IModelRegister;
+import com.serenibyss.etfuturum.util.ModIDs;
 import com.serenibyss.etfuturum.util.VoxelShape;
+import git.jbredwards.fluidlogged_api.api.block.IFluidloggable;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
@@ -14,12 +16,18 @@ import net.minecraft.item.EnumRarity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fml.common.Optional;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
-public class EFMBlock extends Block implements IModelRegister {
+@Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
+public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
 
     protected final Settings settings;
 
@@ -73,6 +81,34 @@ public class EFMBlock extends Block implements IModelRegister {
         return settings.mapColor != null
                 ? settings.mapColor.apply(state, world, pos)
                 : settings.material.getMaterialMapColor();
+    }
+
+    @Optional.Method(modid = ModIDs.FLUIDLOGGED)
+    @Override
+    public final boolean isFluidloggable(IBlockState state, World world, BlockPos pos) {
+        return isWaterloggable(state, world, pos);
+    }
+
+    @Optional.Method(modid = ModIDs.FLUIDLOGGED)
+    @Override
+    public final boolean isFluidValid(IBlockState state, World world, BlockPos pos, Fluid fluid) {
+        return fluid == FluidRegistry.WATER;
+    }
+
+    @Optional.Method(modid = ModIDs.FLUIDLOGGED)
+    @Override
+    public final boolean canFluidFlow(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EnumFacing side) {
+        return canWaterFlow(world, pos, state, side);
+    }
+
+    /** Whether this block can be water-logged or not. */
+    public boolean isWaterloggable(IBlockState state, World world, BlockPos pos) {
+        return false;
+    }
+
+    /** Whether water can flow into/out of this block. */
+    public boolean canWaterFlow(IBlockAccess world, BlockPos pos, IBlockState state, EnumFacing side) {
+        return state.getBlockFaceShape(world, pos, side) != BlockFaceShape.SOLID;
     }
 
     public static VoxelShape createShape(double x1, double y1, double z1, double x2, double y2, double z2) {
