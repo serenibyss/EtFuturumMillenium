@@ -40,7 +40,7 @@ public class BlockConduit extends EFMBlockContainer {
     }
 
     @Override
-    public boolean isWaterloggable(IBlockState state, World world, BlockPos pos) {
+    public boolean isWaterloggable(IBlockState state, IBlockAccess world, BlockPos pos) {
         return true;
     }
 

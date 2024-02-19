@@ -92,17 +92,17 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
     @Optional.Method(modid = ModIDs.FLUIDLOGGED)
     @Override
     public final boolean isFluidValid(IBlockState state, World world, BlockPos pos, Fluid fluid) {
-        return fluid == FluidRegistry.WATER;
+        return isWaterloggable(state, world, pos) && fluid == FluidRegistry.WATER;
     }
 
     @Optional.Method(modid = ModIDs.FLUIDLOGGED)
     @Override
     public final boolean canFluidFlow(@NotNull IBlockAccess world, @NotNull BlockPos pos, @NotNull IBlockState state, @NotNull EnumFacing side) {
-        return canWaterFlow(world, pos, state, side);
+        return isWaterloggable(state, world, pos) && canWaterFlow(world, pos, state, side);
     }
 
     /** Whether this block can be water-logged or not. */
-    public boolean isWaterloggable(IBlockState state, World world, BlockPos pos) {
+    public boolean isWaterloggable(IBlockState state, IBlockAccess world, BlockPos pos) {
         return false;
     }
 
