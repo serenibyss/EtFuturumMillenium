@@ -11,6 +11,7 @@ entity.phantom.name=Phantom
 
 # Blocks
 tile.stone_stairs.name=Stone Stairs
+tile.stone_slab.name=Stone Slab
 
 # Items
 item.phantom_membrane.name=Phantom Membrane

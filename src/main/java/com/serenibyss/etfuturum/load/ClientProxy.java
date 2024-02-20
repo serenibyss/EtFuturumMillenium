@@ -6,6 +6,10 @@ import com.serenibyss.etfuturum.entities.EFMEntities;
 import com.serenibyss.etfuturum.event.ClientEventHandler;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.tiles.TileEntityConduit;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.Item;
@@ -17,7 +21,10 @@ import net.minecraftforge.fml.client.registry.ClientRegistry;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.serenibyss.etfuturum.load.feature.Features.*;
 
@@ -38,6 +45,42 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void registerItemRenderer(Item item, int meta, String id) {
         ModelLoader.setCustomModelResourceLocation(item, meta, new ModelResourceLocation(item.getRegistryName(), id));
+    }
+
+    @Override
+    public void registerItemRendererWithOverride(Block block, Map<IProperty<?>, Comparable<?>> stateOverrides) {
+        for (IBlockState state : block.getBlockState().getValidStates()) {
+            Map<IProperty<?>, Comparable<?>> properties = new Object2ObjectOpenHashMap<>(state.getProperties());
+            properties.putAll(stateOverrides);
+            ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block),
+                    block.getMetaFromState(state),
+                    new ModelResourceLocation(block.getRegistryName(), statePropertiesToString(properties)));
+        }
+    }
+
+    private static String statePropertiesToString(Map<IProperty<?>, Comparable<?>> properties) {
+        StringBuilder stringbuilder = new StringBuilder();
+
+        List<Map.Entry<IProperty<?>, Comparable<?>>> entries = properties.entrySet().stream()
+                .sorted(Comparator.comparing(c -> c.getKey().getName()))
+                .collect(Collectors.toList());
+
+        for (Map.Entry<IProperty<?>, Comparable<?>> entry : entries) {
+            if (stringbuilder.length() != 0) {
+                stringbuilder.append(",");
+            }
+
+            IProperty<?> property = entry.getKey();
+            stringbuilder.append(property.getName());
+            stringbuilder.append("=");
+            //stringbuilder.append(property.getName(entry.getValue()));
+        }
+
+        if (stringbuilder.length() == 0) {
+            stringbuilder.append("normal");
+        }
+
+        return stringbuilder.toString();
     }
 
     @Override

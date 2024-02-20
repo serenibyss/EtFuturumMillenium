@@ -6,9 +6,11 @@ import com.serenibyss.etfuturum.load.config.ConfigBlocksItems;
 public class FeaturesMisc extends FeatureManager {
 
     public final Feature newStairs;
+    public final Feature newSlabs;
 
     protected FeaturesMisc() {
         newStairs = Feature.builder("new_stairs", this, () -> ConfigBlocksItems.enableNewStairs).build();
+        newSlabs = Feature.builder("new_slabs", this, () -> ConfigBlocksItems.enableNewSlabs).build();
     }
 
     @Override

@@ -118,19 +118,19 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
     /** Created to be similar to modern MC's way of defining block properties */
     public static class Settings {
 
-        final Material material;
-        final ContextFunction<MapColor> mapColor;
-        String translationKey;
-        CreativeTabs tab;
-        boolean collidable = true;
-        boolean opaque = true;
-        boolean fullCube = true;
-        float resistance;
-        float hardness;
-        SoundType soundType = SoundType.STONE;
-        ContextFunction<Integer> lightValue = (state, world, pos) -> 0;
-        ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
-        EnumRarity rarity;
+        public final Material material;
+        public final ContextFunction<MapColor> mapColor;
+        public String translationKey;
+        public CreativeTabs tab;
+        public boolean collidable = true;
+        public boolean opaque = true;
+        public boolean fullCube = true;
+        public float resistance;
+        public float hardness;
+        public SoundType soundType = SoundType.STONE;
+        public ContextFunction<Integer> lightValue = (state, world, pos) -> 0;
+        public ContextFunction<Float> slipperiness = (state, world, pos) -> 0.6F;
+        public EnumRarity rarity;
 
         public Settings(Material material) {
             this(material, material.getMaterialMapColor());

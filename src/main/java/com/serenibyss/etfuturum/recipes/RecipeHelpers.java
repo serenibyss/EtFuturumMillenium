@@ -115,12 +115,23 @@ public class RecipeHelpers {
         ForgeRegistries.RECIPES.register(new DummyRecipe().setRegistryName(rl));
     }
 
+    @SuppressWarnings("all")
     public static void addStairsRecipe(String name, ItemStack stairs, ItemStack block) {
         if (stairs == null || stairs.isEmpty() || block == null || block.isEmpty()) return;
         stairs = stairs.copy();
         stairs.setCount(4);
         block = block.copy();
         block.setCount(1);
-        addShapedRecipe(name, stairs, "X  ", "XX ", "XXX", 'X', block);
+        addShapedRecipe(name, stairs, true, new Object[]{"X  ", "XX ", "XXX", 'X', block});
+    }
+
+    @SuppressWarnings("all")
+    public static void addSlabRecipe(String name, ItemStack slab, ItemStack block) {
+        if (slab == null || slab.isEmpty() || block == null || block.isEmpty()) return;
+        slab = slab.copy();
+        slab.setCount(6);
+        block = block.copy();
+        block.setCount(1);
+        addShapedRecipe(name, slab, true, new Object[]{"XXX", 'X', block});
     }
 }

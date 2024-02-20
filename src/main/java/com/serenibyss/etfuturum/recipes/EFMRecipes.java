@@ -32,6 +32,9 @@ public class EFMRecipes {
 
         addStairsRecipe("stone_stairs", EFMBlocks.STONE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE));
 
+        // todo fix 1.12 vanilla stone slab recipe
+        addSlabRecipe("stone_slab", EFMBlocks.STONE_SLAB.getItemStack(), new ItemStack(Blocks.STONE));
+
         // todo: Uncomment when Nautilus Shell and Heart of the Sea are added
         //addShapedRecipe("conduit", EFMBlocks.CONDUIT.getItemStack(), "XXX", "XSX", "XXX", 'X', EFMItems.NAUTILUS_SHELL.getItemStack(), 'S', EFMItems.HEART_OF_THE_SEA.getItemStack());
     }

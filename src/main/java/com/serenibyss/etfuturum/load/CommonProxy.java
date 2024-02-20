@@ -13,12 +13,16 @@ import com.serenibyss.etfuturum.recipes.EFMRecipes;
 import com.serenibyss.etfuturum.rule.EFMGameRules;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.stats.EFMStatList;
+import net.minecraft.block.Block;
+import net.minecraft.block.properties.IProperty;
 import net.minecraft.item.Item;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.network.NetworkRegistry;
+
+import java.util.Map;
 
 @SuppressWarnings("unused")
 public class CommonProxy {
@@ -49,6 +53,9 @@ public class CommonProxy {
     }
 
     public void registerItemRenderer(Item item, int meta, String id) {
+    }
+
+    public void registerItemRendererWithOverride(Block block, Map<IProperty<?>, Comparable<?>> stateOverrides) {
     }
 
     public boolean isClientSide() {

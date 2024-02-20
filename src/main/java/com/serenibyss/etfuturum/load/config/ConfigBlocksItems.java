@@ -35,6 +35,9 @@ public class ConfigBlocksItems {
     @Comment("Adds new Stair blocks. Included are: Stone Stairs")
     public static boolean enableNewStairs = true;
 
+    @Comment("Adds new Slab blocks. Included are: Stone Slab")
+    public static boolean enableNewSlabs = true;
+
 
     // MUST be at the bottom!
     static {

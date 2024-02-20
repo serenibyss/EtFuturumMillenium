@@ -17,7 +17,7 @@ final class StonecutterRecipes {
                 new ItemStack(Blocks.STONE_BRICK_STAIRS), // Stone Brick Stairs, 1
                 // EFMBlocks.WALL.getItemStack(1, meta),  // Stone Wall, 1
                 new ItemStack(Blocks.STONEBRICK),         // Stone Bricks, 1
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Stone Slab, 2
+                EFMBlocks.STONE_SLAB.getItemStack(2),     // Stone Slab, 2
                 EFMBlocks.STONE_STAIRS.getItemStack()     // Stone Stairs, 1
         );
 
