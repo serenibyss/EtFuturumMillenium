@@ -2,6 +2,7 @@ package com.serenibyss.etfuturum.load.asset;
 
 import com.google.common.eventbus.EventBus;
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.load.asset.pack.AssetResourcePack;
 import net.minecraftforge.fml.common.DummyModContainer;
 import net.minecraftforge.fml.common.LoadController;
 import net.minecraftforge.fml.common.ModMetadata;
@@ -25,7 +26,7 @@ public class AssetDummyMod extends DummyModContainer {
 
     @Override
     public Class<?> getCustomResourcePackClass() {
-        return InternalResourcePack.class;
+        return AssetResourcePack.class;
     }
 
     @SuppressWarnings("UnstableApiUsage")

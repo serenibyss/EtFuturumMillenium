@@ -1,6 +1,7 @@
-package com.serenibyss.etfuturum.load.asset;
+package com.serenibyss.etfuturum.load.asset.pack;
 
 import com.google.gson.JsonObject;
+import com.serenibyss.etfuturum.load.asset.AssetHelper;
 import net.minecraft.client.resources.FolderResourcePack;
 import net.minecraft.client.resources.data.IMetadataSection;
 import net.minecraft.client.resources.data.MetadataSerializer;
@@ -15,11 +16,11 @@ import java.io.File;
 import java.util.Set;
 
 @SideOnly(Side.CLIENT)
-public class InternalResourcePack extends FolderResourcePack implements FMLContainerHolder {
+public class AssetResourcePack extends FolderResourcePack implements FMLContainerHolder {
 
     private final ModContainer mc;
 
-    public InternalResourcePack(ModContainer mc) {
+    public AssetResourcePack(ModContainer mc) {
         super(new File(Launch.minecraftHome, "etfuturumassets"));
         this.mc = mc;
     }

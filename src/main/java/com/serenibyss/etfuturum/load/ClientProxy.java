@@ -4,6 +4,7 @@ import com.serenibyss.etfuturum.client.particle.EFMParticleHandler;
 import com.serenibyss.etfuturum.client.render.tile.TileEntityConduitRenderer;
 import com.serenibyss.etfuturum.entities.EFMEntities;
 import com.serenibyss.etfuturum.event.ClientEventHandler;
+import com.serenibyss.etfuturum.load.asset.pack.BuiltInResourcePack;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.tiles.TileEntityConduit;
 import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
@@ -40,6 +41,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForge.EVENT_BUS.register(EFMParticleHandler.class);
 
         EFMEntities.registerRenders();
+        BuiltInResourcePack.init();
     }
 
     @Override

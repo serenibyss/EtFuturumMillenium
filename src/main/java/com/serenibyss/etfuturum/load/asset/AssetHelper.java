@@ -39,7 +39,7 @@ public enum AssetHelper {
     private static Map<String, Map<String, String>> ASSET_MAPPING = new Object2ObjectOpenHashMap<>();
     private static JsonArray VERSIONS_ARRAY;
 
-    static void haltAndFlush() {
+    public static void haltAndFlush() {
         if (EXECUTOR != null) {
             boolean successfullyTerminated;
             InterruptedException exception = null;
