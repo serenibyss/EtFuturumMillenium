@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.load.config;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.load.EtFuturumConfigLoader;
 import net.minecraftforge.common.config.Config;
+import net.minecraftforge.common.config.Config.*;
 
 @Config(modid = EFMTags.MODID, name = EFMTags.MODID + "/BlocksAndItems")
 public class ConfigBlocksItems {
@@ -28,6 +29,11 @@ public class ConfigBlocksItems {
     // 1.19: The Wild Update
 
     // 1.20: Trails & Tales
+
+    // Misc: Too spread out or small to set to one specific version
+
+    @Comment("Adds new Stair blocks. Included are: Stone Stairs")
+    public static boolean enableNewStairs = true;
 
 
     // MUST be at the bottom!

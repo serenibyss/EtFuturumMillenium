@@ -18,6 +18,8 @@ public final class Features {
     public static final Features19 MC19 = new Features19();
     public static final Features20 MC20 = new Features20();
 
+    public static final FeaturesMisc MISC = new FeaturesMisc();
+
     static void init() {}
 
     @SideOnly(Side.CLIENT)

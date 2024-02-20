@@ -9,6 +9,9 @@ tile.conduit.name=Conduit
 # Entities
 entity.phantom.name=Phantom
 
+# Blocks
+tile.stone_stairs.name=Stone Stairs
+
 # Items
 item.phantom_membrane.name=Phantom Membrane
 item.trident.name=Trident

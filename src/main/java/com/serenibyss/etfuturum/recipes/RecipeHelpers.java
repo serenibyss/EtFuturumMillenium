@@ -114,4 +114,13 @@ public class RecipeHelpers {
     public static void removeRecipeByName(ResourceLocation rl) {
         ForgeRegistries.RECIPES.register(new DummyRecipe().setRegistryName(rl));
     }
+
+    public static void addStairsRecipe(String name, ItemStack stairs, ItemStack block) {
+        if (stairs == null || stairs.isEmpty() || block == null || block.isEmpty()) return;
+        stairs = stairs.copy();
+        stairs.setCount(4);
+        block = block.copy();
+        block.setCount(1);
+        addShapedRecipe(name, stairs, "X  ", "XX ", "XXX", 'X', block);
+    }
 }
