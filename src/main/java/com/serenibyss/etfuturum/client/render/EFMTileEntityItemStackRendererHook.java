@@ -1,33 +1,33 @@
-package com.serenibyss.etfuturum.mixin.trident;
+package com.serenibyss.etfuturum.client.render;
 
+import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import com.serenibyss.etfuturum.client.render.entity.model.ModelTrident;
 import com.serenibyss.etfuturum.items.EFMItems;
-import com.serenibyss.etfuturum.load.annotation.ClientMixin;
+import com.serenibyss.etfuturum.tiles.TileEntityConduit;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntityItemStackRenderer;
+import net.minecraft.client.renderer.tileentity.TileEntityRendererDispatcher;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
-@ClientMixin
-@Mixin(TileEntityItemStackRenderer.class)
-public class TileEntityItemStackRendererMixin {
+@SideOnly(Side.CLIENT)
+public class EFMTileEntityItemStackRendererHook {
 
-    @Unique
-    private final ModelTrident trident = new ModelTrident();
+    private static final ResourceLocation resItemGlint = new ResourceLocation("textures/misc/enchanted_item_glint.png");
 
-    @Unique
-    private final ResourceLocation resItemGlint = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+    private static final ModelTrident trident = new ModelTrident();
+    private static final TileEntityConduit conduit = new TileEntityConduit();
 
-    @Inject(method = "renderByItem(Lnet/minecraft/item/ItemStack;F)V", at = @At("HEAD"), cancellable = true)
-    public void etfuturum$renderTridentItem(ItemStack stack, float partialTicks, CallbackInfo ci) {
+    /**
+     * Specify a custom renderer. Return true if successfully rendered.
+     * This is called from the top of {@link TileEntityItemStackRenderer#renderByItem(ItemStack, float)}.
+     */
+    public static boolean getRenderByItem(ItemStack stack, float partialTicks) {
         if (stack.getItem() == EFMItems.TRIDENT.getItem()) {
             Minecraft.getMinecraft().getTextureManager().bindTexture(ModelTrident.TEXTURE_LOCATION);
             GlStateManager.pushMatrix();
@@ -36,15 +36,21 @@ public class TileEntityItemStackRendererMixin {
             if (stack.hasEffect()) {
                 GlStateManager.color(0.5019608f, 0.2509804f, 0.8f);
                 Minecraft.getMinecraft().getTextureManager().bindTexture(resItemGlint);
-                renderEffect(Minecraft.getMinecraft().getTextureManager(), this.trident::renderer, 1);
+                renderEffect(Minecraft.getMinecraft().getTextureManager(), trident::renderer, 1);
             }
             GlStateManager.popMatrix();
-            ci.cancel();
+            return true;
         }
+
+        if (stack.getItem() == EFMBlocks.CONDUIT.getItem()) {
+            TileEntityRendererDispatcher.instance.render(conduit, 0, 0, 0, 0, partialTicks);
+            return true;
+        }
+        return false;
     }
 
-    @Unique
-    private void renderEffect(TextureManager textureManagerIn, Runnable renderModelFunction, int scale) {
+    /** Renders the effect glint on an item. */
+    public static void renderEffect(TextureManager textureManagerIn, Runnable renderModelFunction, int scale) {
         GlStateManager.depthMask(false);
         GlStateManager.depthFunc(514);
         GlStateManager.disableLighting();
