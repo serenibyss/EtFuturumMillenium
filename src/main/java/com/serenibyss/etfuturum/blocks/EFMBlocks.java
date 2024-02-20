@@ -29,6 +29,8 @@ public enum EFMBlocks {
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
     TURTLE_EGG(MC13.turtle, "turtle_egg", new BlockTurtleEgg()),
+    SEA_GRASS(MC13.turtle, "sea_grass", new BlockSeaGrass()),
+    SEA_GRASS_TALL(MC13.turtle, "sea_grass_tall", new BlockSeaGrassTall()),
 
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
 
