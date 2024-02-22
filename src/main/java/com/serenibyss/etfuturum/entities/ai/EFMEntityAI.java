@@ -1,4 +1,4 @@
-package com.serenibyss.etfuturum.entities;
+package com.serenibyss.etfuturum.entities.ai;
 
 import com.serenibyss.etfuturum.entities.passive.EntityTurtle;
 import net.minecraft.entity.EntityLiving;

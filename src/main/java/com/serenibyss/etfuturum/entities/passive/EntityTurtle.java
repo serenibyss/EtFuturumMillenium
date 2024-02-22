@@ -4,6 +4,7 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Sets;
 import com.serenibyss.etfuturum.blocks.BlockTurtleEgg;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
+import com.serenibyss.etfuturum.entities.ai.EFMEntityAIMoveToBlock;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.load.enums.EFMEnumCreatureAttribute;
 import com.serenibyss.etfuturum.pathfinding.WalkAndSwimNodeProcessor;
@@ -11,6 +12,7 @@ import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.util.MathUtils;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.effect.EntityLightningBolt;
@@ -312,6 +314,7 @@ public class EntityTurtle extends EntityAnimal {
     }
 
     static class AIGoHome extends EntityAIBase {
+
         private final EntityTurtle turtle;
         private final double speed;
         private boolean closeToHome;
@@ -375,7 +378,7 @@ public class EntityTurtle extends EntityAnimal {
         }
     }
 
-    static class AIGoToWater extends EntityAIMoveToBlock {
+    static class AIGoToWater extends EFMEntityAIMoveToBlock {
 
         private final EntityTurtle turtle;
 
@@ -389,12 +392,15 @@ public class EntityTurtle extends EntityAnimal {
             return !turtle.isInWater() && timeoutCounter <= 1200 && this.shouldMoveTo(turtle.world, destinationBlock);
         }
 
-        // todo shouldMove() method substitute
-
         @Override
         public boolean shouldExecute() {
             if (turtle.isChild() && !turtle.isInWater()) return super.shouldExecute();
             return !turtle.isGoingHome() && !turtle.isInWater() && !turtle.hasEgg() && super.shouldExecute();
+        }
+
+        @Override
+        public boolean shouldMove() {
+            return this.timeoutCounter % 160 == 0;
         }
 
         @Override
@@ -675,13 +681,13 @@ public class EntityTurtle extends EntityAnimal {
                 double d1 = this.posY - this.turtle.posY;
                 double d2 = this.posZ - this.turtle.posZ;
                 double d3 = MathHelper.sqrt(d0 * d0 + d1 * d1 + d2 * d2);
-                d1 = d1 / d3;
+                d1 /= d3;
                 float f = (float) (MathHelper.atan2(d2, d0) * (double) (180F / (float) Math.PI)) - 90.0F;
                 this.turtle.rotationYaw = this.limitAngle(this.turtle.rotationYaw, f, 90.0F);
                 this.turtle.renderYawOffset = this.turtle.rotationYaw;
                 float f1 = (float) (this.speed * this.turtle.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
                 this.turtle.setAIMoveSpeed(MathUtils.lerp(0.125F, this.turtle.getAIMoveSpeed(), f1));
-                this.turtle.motionY = this.turtle.getAIMoveSpeed() * d1 * 0.1D;
+                this.turtle.motionY += this.turtle.getAIMoveSpeed() * d1 * 0.1D;
             } else {
                 this.turtle.setAIMoveSpeed(0);
             }
@@ -709,7 +715,7 @@ public class EntityTurtle extends EntityAnimal {
             if (this.entity instanceof EntityTurtle turtle && turtle.isTravelling()) {
                 return this.world.getBlockState(pos).getBlock() == Blocks.WATER;
             }
-            return this.world.getBlockState(pos.down()).getBlock() != Blocks.AIR;
+            return this.world.getBlockState(pos.down()).getMaterial() != Material.AIR;
         }
     }
 }

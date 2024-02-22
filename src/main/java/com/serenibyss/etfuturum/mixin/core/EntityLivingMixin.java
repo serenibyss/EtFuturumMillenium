@@ -1,6 +1,6 @@
 package com.serenibyss.etfuturum.mixin.core;
 
-import com.serenibyss.etfuturum.entities.EFMEntityAI;
+import com.serenibyss.etfuturum.entities.ai.EFMEntityAI;
 import net.minecraft.entity.EntityLiving;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
