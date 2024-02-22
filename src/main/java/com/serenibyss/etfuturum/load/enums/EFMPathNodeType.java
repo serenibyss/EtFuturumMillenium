@@ -16,4 +16,6 @@ public class EFMPathNodeType {
 
         return EnumHelper.addEnum(PathNodeType.class, name, new Class[]{float.class}, value);
     }
+
+    protected static void init() {}
 }

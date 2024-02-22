@@ -29,27 +29,57 @@ public class AdvancementHacks {
         conditions.add("entity", entityObj);
         root.add("conditions", conditions);
 
-        Criterion criterion = Criterion.criterionFromJson(root, null);
+        String criterionName = entityResLoc.getPath();
+        Advancement.Builder newBuilder = addCriterion(builder, criterionName, root);
+        if (newBuilder != null) {
+            map.put(new ResourceLocation(advancementName), newBuilder);
+        }
+    }
+
+    public static void addBredTrigger(Feature feature, String advancementName,
+                                      Map<ResourceLocation, Advancement.Builder> map, String entityId) {
+        Advancement.Builder builder = getBuilder(feature, advancementName, map);
+        if (builder == null) {
+            return;
+        }
+
+        ResourceLocation entityResLoc = new ResourceLocation(entityId);
+        JsonObject root = new JsonObject();
+        root.addProperty("trigger", "minecraft:bred_animals");
+        JsonObject conditions = new JsonObject();
+        JsonObject entityObj = new JsonObject();
+        entityObj.addProperty("type", entityResLoc.toString());
+        conditions.add("parent", entityObj);
+        root.add("conditions", conditions);
+
+        String criterionName = "bred_" + entityResLoc.getPath();
+        Advancement.Builder newBuilder = addCriterion(builder, criterionName, root);
+        if (newBuilder != null) {
+            map.put(new ResourceLocation(advancementName), builder);
+        }
+    }
+
+    private static Advancement.Builder addCriterion(Advancement.Builder builder, String name, JsonObject criterionJson) {
+        Criterion criterion = Criterion.criterionFromJson(criterionJson, null);
         Map<String, Criterion> criterionMap = ((AdvancementBuilderAccessor) builder).getCriteria();
-        criterionMap.put(entityResLoc.getPath(), criterion);
+        criterionMap.put(name, criterion);
 
         String[][] reqs = ((AdvancementBuilderAccessor) builder).getRequirements();
         if (reqs.length == 1) {
-            // insert into the single array, these criterion are "complete one"
+            // insert into the single array
             String[] requirements = reqs[0];
             String[] newRequirements = new String[requirements.length + 1];
             System.arraycopy(requirements, 0, newRequirements, 0, requirements.length);
-            newRequirements[requirements.length] = entityResLoc.getPath();
+            newRequirements[requirements.length] = name;
             reqs[0] = newRequirements;
+            return null;
         } else {
-            // insert into a new array in the matrix, these criterion are "complete all"
+            // insert into a new array
             String[][] newRequirements = new String[reqs.length + 1][];
             System.arraycopy(reqs, 0, newRequirements, 0, reqs.length);
-            newRequirements[reqs.length] = new String[]{entityResLoc.getPath()};
-
-            // rebuild, since the outer array changed
-            builder = rebuild(entityResLoc.toString(), builder, null, null, null, newRequirements);
-            if (builder != null) map.put(new ResourceLocation(advancementName), builder);
+            newRequirements[reqs.length] = new String[]{name};
+            // rebuild the array since we expanded the outer array, which is final on the builder
+            return rebuild(name, builder, null, null, null, newRequirements);
         }
     }
 

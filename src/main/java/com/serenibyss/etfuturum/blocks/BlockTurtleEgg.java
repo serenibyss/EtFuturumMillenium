@@ -3,7 +3,9 @@ package com.serenibyss.etfuturum.blocks;
 import com.serenibyss.etfuturum.blocks.base.EFMBlock;
 import com.serenibyss.etfuturum.entities.passive.EntityTurtle;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
+import com.serenibyss.etfuturum.util.VoxelShape;
 import net.minecraft.block.Block;
+import net.minecraft.block.SoundType;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -27,25 +29,32 @@ import net.minecraft.util.math.AxisAlignedBB;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.event.ForgeEventFactory;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Random;
 
+@SuppressWarnings("deprecation")
 public class BlockTurtleEgg extends EFMBlock {
 
-    private static final AxisAlignedBB minAABB = new AxisAlignedBB(0.1875f, 0.0f, 0.1875f, .75f, 0.4375f, .75f);
-    private static final AxisAlignedBB maxAABB = new AxisAlignedBB(0.0625f, 0.0f, 0.0625f, .9375f, 0.4375f, 0.9375f);
+    private static final VoxelShape ONE_EGG_SHAPE = createShape(3, 0, 3, 12, 7, 12);
+    private static final VoxelShape MULTI_EGG_SHAPE = createShape(1, 0, 1, 15, 7, 15);
+
     public static final PropertyInteger HATCH = PropertyInteger.create("hatch", 0, 2);
     public static final PropertyInteger EGGS = PropertyInteger.create("eggs", 1, 4);
+
     public BlockTurtleEgg() {
-        super(new EFMBlock.Settings(Material.DRAGON_EGG, MapColor.SAND)
+        super(new Settings(Material.DRAGON_EGG, MapColor.SAND)
                 .hardness(0.5f)
                 .resistance(0.5f)
                 .translationKey("turtle_egg")
+                .soundType(SoundType.METAL)
                 .creativeTab(CreativeTabs.MISC)
                 .nonOpaque()
                 .nonFullCube());
         setDefaultState(getBlockState().getBaseState().withProperty(EGGS, 1).withProperty(HATCH, 0));
+        setTickRandomly(true);
     }
 
     @Override
@@ -69,7 +78,7 @@ public class BlockTurtleEgg extends EFMBlock {
     }
 
     private void tryTrample(World world, BlockPos pos, Entity entity, int chance) {
-        if(!isTurtle(world, entity)) {
+        if (!isTurtle(world, entity)) {
             super.onEntityWalk(world, pos, entity);
         } else {
             if(!world.isRemote && world.rand.nextInt(chance) == 0) {
@@ -79,33 +88,33 @@ public class BlockTurtleEgg extends EFMBlock {
     }
 
     private void removeOneEgg(World world, BlockPos pos, IBlockState blockState) {
-        world.playSound((EntityPlayer) null, pos, EFMSounds.ENTITY_TURTLE_EGG_BREAK, SoundCategory.BLOCKS, 0.7f, 0.9f + world.rand.nextFloat() * 0.2f);
+        world.playSound(null, pos, EFMSounds.ENTITY_TURTLE_EGG_BREAK, SoundCategory.BLOCKS, 0.7f, 0.9f + world.rand.nextFloat() * 0.2f);
         int i = blockState.getValue(EGGS);
-        if(i <= 1) {
+        if (i <= 1) {
             world.destroyBlock(pos, false);
         } else {
-            world.setBlockState(pos, blockState.withProperty(EGGS, Integer.valueOf(i - 1)), 2);
-            world.playEvent(2001, pos, Block.getStateId(blockState));
+            world.setBlockState(pos, blockState.withProperty(EGGS, i - 1), 2);
+            world.playEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getStateId(blockState));
         }
     }
 
     @Override
     public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand) {
-        if(this.canGrow(worldIn) && hasProperHabitat(worldIn, pos)) {
+        if (this.canGrow(worldIn) && hasProperHabitat(worldIn, pos)) {
             int i = state.getValue(HATCH);
-            if(i < 2) {
-                worldIn.playSound((EntityPlayer) null, pos, EFMSounds.ENTITY_TURTLE_EGG_CRACK, SoundCategory.BLOCKS, 0.7F, 0.9F + rand.nextFloat() * 0.2F);
-                worldIn.setBlockState(pos, state.withProperty(HATCH, Integer.valueOf(i + i)), 2);
+            if (i < 2) {
+                worldIn.playSound(null, pos, EFMSounds.ENTITY_TURTLE_EGG_CRACK, SoundCategory.BLOCKS, 0.7F, 0.9F + rand.nextFloat() * 0.2F);
+                worldIn.setBlockState(pos, state.withProperty(HATCH, i + 1), 2);
             } else {
-                worldIn.playSound((EntityPlayer) null, pos, EFMSounds.ENTITY_TURTLE_EGG_HATCH, SoundCategory.BLOCKS, 0.7F, 0.9F + rand.nextFloat() * 0.2F);
+                worldIn.playSound(null, pos, EFMSounds.ENTITY_TURTLE_EGG_HATCH, SoundCategory.BLOCKS, 0.7F, 0.9F + rand.nextFloat() * 0.2F);
                 worldIn.destroyBlock(pos, false);
-                if(!worldIn.isRemote) {
-                    for(int l = 0; l < state.getValue(EGGS); l++) {
-                        worldIn.playEvent(2001, pos, Block.getStateId(state));
+                if (!worldIn.isRemote) {
+                    for (int l = 0; l < state.getValue(EGGS); l++) {
+                        worldIn.playEvent(Constants.WorldEvents.BREAK_BLOCK_EFFECTS, pos, Block.getStateId(state));
                         EntityTurtle turtle = new EntityTurtle(worldIn);
                         turtle.setGrowingAge(-24000);
                         turtle.setHome(pos);
-                        turtle.setLocationAndAngles((double)pos.getX() + 0.3 + l * 0.2, (double)pos.getY(), (double)pos.getZ() + 0.3, 0.0f, 0.0f);
+                        turtle.setLocationAndAngles(pos.getX() + 0.3 + l * 0.2, pos.getY(), pos.getZ() + 0.3, 0.0f, 0.0f);
                         worldIn.spawnEntity(turtle);
                     }
                 }
@@ -119,18 +128,17 @@ public class BlockTurtleEgg extends EFMBlock {
 
     @Override
     public void onBlockAdded(World worldIn, BlockPos pos, IBlockState state) {
-        if(this.hasProperHabitat(worldIn, pos) && !worldIn.isRemote) {
-            worldIn.playEvent(2005, pos, 0);
+        if (this.hasProperHabitat(worldIn, pos) && !worldIn.isRemote) {
+            worldIn.playEvent(Constants.WorldEvents.BONEMEAL_PARTICLES, pos, 0);
         }
     }
 
     private boolean canGrow(World world) {
         float f = world.getCelestialAngle(1.0f);
-        if((double) f < 0.69D && (double) f > 0.65D) {
+        if (f > 0.65 && f < 0.69) {
             return true;
-        } else {
-            return world.rand.nextInt(500) == 0;
         }
+        return world.rand.nextInt(500) == 0;
     }
 
     @Override
@@ -152,10 +160,10 @@ public class BlockTurtleEgg extends EFMBlock {
     @Override
     public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn, EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
         ItemStack stack = playerIn.getHeldItem(hand);
-        if(!stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(this)) {
+        if (!stack.isEmpty() && stack.getItem() == Item.getItemFromBlock(this)) {
             int egg = state.getValue(EGGS);
-            if(egg < 4) {
-                if(!worldIn.isRemote) {
+            if (egg < 4) {
+                if (!worldIn.isRemote) {
                     worldIn.setBlockState(pos, state.withProperty(EGGS, egg + 1), 3);
                 }
                 return true;
@@ -167,7 +175,7 @@ public class BlockTurtleEgg extends EFMBlock {
     @Override
     public IBlockState getStateForPlacement(World world, BlockPos pos, EnumFacing facing, float hitX, float hitY, float hitZ, int meta, EntityLivingBase placer, EnumHand hand) {
         IBlockState state = world.getBlockState(pos);
-        return state.getBlock() == this ? state.withProperty(EGGS, Integer.valueOf((Math.min(4, state.getValue(EGGS) + 1)))) : super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
+        return state.getBlock() == this ? state.withProperty(EGGS, Math.min(4, state.getValue(EGGS) + 1)) : super.getStateForPlacement(world, pos, facing, hitX, hitY, hitZ, meta, placer, hand);
     }
 
     @Override
@@ -177,12 +185,7 @@ public class BlockTurtleEgg extends EFMBlock {
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return getDefaultState().withProperty(HATCH, meta & 3).withProperty(EGGS,((meta >> 2) & 3) + 1);
-    }
-
-    @Override
-    public boolean isFullCube(IBlockState state) {
-        return false;
+        return getDefaultState().withProperty(HATCH, meta & 3).withProperty(EGGS, ((meta >> 2) & 3) + 1);
     }
 
     @Override
@@ -193,18 +196,17 @@ public class BlockTurtleEgg extends EFMBlock {
     @Nullable
     @Override
     public AxisAlignedBB getCollisionBoundingBox(IBlockState blockState, IBlockAccess worldIn, BlockPos pos) {
-        return blockState.getValue(EGGS) > 1 ? maxAABB : minAABB;
+        return blockState.getValue(EGGS) > 1 ? MULTI_EGG_SHAPE : ONE_EGG_SHAPE;
     }
 
     @Override
     public AxisAlignedBB getBoundingBox(IBlockState state, IBlockAccess source, BlockPos pos) {
-        return state.getValue(EGGS) > 1 ? maxAABB : minAABB;
+        return state.getValue(EGGS) > 1 ? MULTI_EGG_SHAPE : ONE_EGG_SHAPE;
     }
 
     private boolean isTurtle(World world, Entity entity) {
-        if(entity instanceof EntityTurtle)
-            return false;
-        else
-            return entity instanceof EntityLivingBase && !(entity instanceof EntityPlayer) ? world.getGameRules().getBoolean("mobGriefing") : true;
+        if (entity instanceof EntityTurtle) return false;
+        if (entity instanceof EntityPlayer) return true;
+        return entity instanceof EntityLivingBase && ForgeEventFactory.getMobGriefingEvent(world, entity);
     }
 }

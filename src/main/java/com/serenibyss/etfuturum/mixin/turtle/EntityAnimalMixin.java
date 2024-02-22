@@ -13,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(EntityAnimal.class)
 public class EntityAnimalMixin {
 
-
     @Shadow private int inLove;
 
     @Unique
@@ -21,11 +20,10 @@ public class EntityAnimalMixin {
         return this.inLove <= 0;
     }
 
-    @Inject(method = "processInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/EntityAnimal;getGrowingAge()I", ordinal = 0))
+    @Inject(method = "processInteract", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/passive/EntityAnimal;getGrowingAge()I", ordinal = 0), cancellable = true)
     private void etfuturum$addCanBreedOverride(EntityPlayer player, EnumHand hand, CallbackInfoReturnable<Boolean> cir) {
-        if(!canBreed()) {
+        if (!canBreed()) {
             cir.setReturnValue(false);
         }
     }
-
 }

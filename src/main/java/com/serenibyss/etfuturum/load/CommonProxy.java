@@ -8,6 +8,7 @@ import com.serenibyss.etfuturum.enchantment.EFMEnchantments;
 import com.serenibyss.etfuturum.entities.EFMEntities;
 import com.serenibyss.etfuturum.event.EventHandler;
 import com.serenibyss.etfuturum.items.EFMItems;
+import com.serenibyss.etfuturum.load.enums.EFMEnumHelper;
 import com.serenibyss.etfuturum.loot.EFMLootTables;
 import com.serenibyss.etfuturum.recipes.EFMOreDict;
 import com.serenibyss.etfuturum.recipes.EFMRecipes;
@@ -42,6 +43,7 @@ public class CommonProxy {
         NetworkRegistry.INSTANCE.registerGuiHandler(EFMTags.MODID, new GuiHandler());
 
         EFMAdvancements.initTriggers();
+        EFMEnumHelper.initEarlyEnums();
     }
 
     public void init(FMLInitializationEvent event) {
