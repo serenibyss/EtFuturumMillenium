@@ -6,6 +6,7 @@ import com.serenibyss.etfuturum.load.config.ConfigEntities;
 public class Features13 extends FeatureManager {
 
     public final Feature phantom;
+    public final Feature stripping;
     public final Feature conduit;
     public final Feature trident;
 
@@ -18,6 +19,17 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("mob/phantom/death", 1, 3)
                 .addNumberedSounds("mob/phantom/bite", 1, 2)
                 .addNumberedSounds("mob/phantom/idle", 1, 5)
+                .build();
+
+        stripping = Feature.builder("stripping", this, () -> ConfigBlocksItems.enableStripping)
+                .addTextures(MCVersion.MC1_14, "block/stripped_acacia_log.png",
+                        "block/stripped_acacia_log_top.png", "block/stripped_birch_log.png",
+                        "block/stripped_birch_log_top.png", "block/stripped_dark_oak_log.png",
+                        "block/stripped_dark_oak_log_top.png", "block/stripped_jungle_log.png",
+                        "block/stripped_jungle_log_top.png", "block/stripped_oak_log.png",
+                        "block/stripped_oak_log_top.png", "block/stripped_spruce_log.png",
+                        "block/stripped_spruce_log_top.png")
+                .addNumberedSounds("item/axe/strip", 1, 4)
                 .build();
 
         conduit = Feature.builder("conduit", this, () -> ConfigBlocksItems.enableConduit)

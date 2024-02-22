@@ -27,7 +27,7 @@ import java.util.function.Function;
 
 @SuppressWarnings("deprecation")
 @Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
-public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
+public class EFMBlock extends Block implements IModelRegister, IFluidloggable, IMultiItemBlock {
 
     protected final Settings settings;
 
@@ -59,6 +59,15 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
     @Override
     public boolean isCollidable() {
         return settings.collidable;
+    }
+
+    public boolean getHasItemSubtypes() {
+        return settings.hasItemSubtypes;
+    }
+
+    @Override
+    public String getTranslationKey(int meta) {
+        return this.getTranslationKey();
     }
 
     @Override
@@ -125,6 +134,7 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
         public boolean collidable = true;
         public boolean opaque = true;
         public boolean fullCube = true;
+        public boolean hasItemSubtypes = false;
         public float resistance;
         public float hardness;
         public SoundType soundType = SoundType.STONE;
@@ -219,6 +229,11 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable {
 
         public Settings slipperiness(float slipperiness) {
             this.slipperiness = (state, access, pos) -> slipperiness;
+            return this;
+        }
+
+        public Settings hasItemSubtypes() {
+            this.hasItemSubtypes = true;
             return this;
         }
 

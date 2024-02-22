@@ -34,6 +34,9 @@ public enum EFMBlocks {
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE_SLAB.getHalfSlab()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE_SLAB.getDoubleSlab()),
 
+    STRIPPED_LOG_1(MC13.stripping, "stripped_log_1", new BlockStrippedLog1()),
+    STRIPPED_LOG_2(MC13.stripping, "stripped_log_2", new BlockStrippedLog2()),
+
     ;
 
     private final Feature feature;
@@ -117,7 +120,7 @@ public enum EFMBlocks {
                 } else if (value.myBlock instanceof EFMBlock efmBlock) {
                     ib = new EFMItemBlock(efmBlock);
                 } else {
-                    ib = new ItemBlock(value.myBlock);
+                    ib = new EFMItemBlock(value.myBlock);
                 }
                 if (ib != null) {
                     ib.setRegistryName(new ResourceLocation(EFMTags.MODID, value.myName));

@@ -8,7 +8,8 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static com.serenibyss.etfuturum.load.feature.Features.*;
+import static com.serenibyss.etfuturum.load.feature.Features.MC13;
+import static com.serenibyss.etfuturum.load.feature.Features.MC14;
 
 public class EFMSounds {
 
@@ -28,6 +29,8 @@ public class EFMSounds {
     public static SoundEvent BLOCK_CONDUIT_ATTACK_TARGET;
     public static SoundEvent BLOCK_CONDUIT_ACTIVATE;
     public static SoundEvent BLOCK_CONDUIT_DEACTIVATE;
+
+    public static SoundEvent ITEM_AXE_STRIP_LOG;
 
     public static SoundEvent ITEM_TRIDENT_HIT;
     public static SoundEvent ITEM_TRIDENT_RETURN;
@@ -54,6 +57,8 @@ public class EFMSounds {
         BLOCK_CONDUIT_ATTACK_TARGET = register(MC13.conduit, r, "block.conduit.attack.target");
         BLOCK_CONDUIT_ACTIVATE = register(MC13.conduit, r, "block.conduit.activate");
         BLOCK_CONDUIT_DEACTIVATE = register(MC13.conduit, r, "block.conduit.deactivate");
+
+        ITEM_AXE_STRIP_LOG = register(MC13.stripping, r, "item.axe.strip");
 
         ITEM_TRIDENT_HIT = register(MC13.trident, r, "item.trident.hit");
         ITEM_TRIDENT_RETURN = register(MC13.trident, r, "item.trident.return");

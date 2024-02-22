@@ -1,0 +1,52 @@
+{
+  "variants": {
+    "axis=y,variant=oak": {
+      "model": "etfuturum:oak_stripped_log"
+    },
+    "axis=z,variant=oak": {
+      "model": "etfuturum:oak_stripped_log",
+      "x": 90
+    },
+    "axis=x,variant=oak": {
+      "model": "etfuturum:oak_stripped_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,variant=spruce": {
+      "model": "etfuturum:spruce_stripped_log"
+    },
+    "axis=z,variant=spruce": {
+      "model": "etfuturum:spruce_stripped_log",
+      "x": 90
+    },
+    "axis=x,variant=spruce": {
+      "model": "etfuturum:spruce_stripped_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,variant=birch": {
+      "model": "etfuturum:birch_stripped_log"
+    },
+    "axis=z,variant=birch": {
+      "model": "etfuturum:birch_stripped_log",
+      "x": 90
+    },
+    "axis=x,variant=birch": {
+      "model": "etfuturum:birch_stripped_log",
+      "x": 90,
+      "y": 90
+    },
+    "axis=y,variant=jungle": {
+      "model": "etfuturum:jungle_stripped_log"
+    },
+    "axis=z,variant=jungle": {
+      "model": "etfuturum:jungle_stripped_log",
+      "x": 90
+    },
+    "axis=x,variant=jungle": {
+      "model": "etfuturum:jungle_stripped_log",
+      "x": 90,
+      "y": 90
+    }
+  }
+}
