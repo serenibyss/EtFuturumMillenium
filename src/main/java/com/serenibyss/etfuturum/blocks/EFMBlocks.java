@@ -25,20 +25,19 @@ import static com.serenibyss.etfuturum.load.feature.Features.*;
 public enum EFMBlocks {
 
     CONDUIT(MC13.conduit, "conduit", new BlockConduit(), TileEntityConduit.class),
+    STRIPPED_LOG_1(MC13.stripping, "stripped_log_1", new BlockStrippedLog1()),
+    STRIPPED_LOG_2(MC13.stripping, "stripped_log_2", new BlockStrippedLog2()),
+    TURTLE_EGG(MC13.turtle, "turtle_egg", new BlockTurtleEgg()),
+    // SEA_GRASS(MC13.turtle, "sea_grass", new BlockSeaGrass()),
+    // SEA_GRASS_TALL(MC13.turtle, "sea_grass_tall", new BlockSeaGrassTall()),
 
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
-    TURTLE_EGG(MC13.turtle, "turtle_egg", new BlockTurtleEgg()),
-    SEA_GRASS(MC13.turtle, "sea_grass", new BlockSeaGrass()),
-    SEA_GRASS_TALL(MC13.turtle, "sea_grass_tall", new BlockSeaGrassTall()),
 
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
 
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE_SLAB.getHalfSlab()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE_SLAB.getDoubleSlab()),
-
-    STRIPPED_LOG_1(MC13.stripping, "stripped_log_1", new BlockStrippedLog1()),
-    STRIPPED_LOG_2(MC13.stripping, "stripped_log_2", new BlockStrippedLog2()),
 
     ;
 

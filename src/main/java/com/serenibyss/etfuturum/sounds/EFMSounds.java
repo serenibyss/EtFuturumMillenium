@@ -53,7 +53,7 @@ public class EFMSounds {
     public static SoundEvent ENTITY_TURTLE_EGG_HATCH;
     public static SoundEvent ENTITY_TURTLE_EGG_BREAK;
     public static SoundEvent ENTITY_TURTLE_LAY_EGG;
-
+    public static SoundEvent ITEM_ARMOR_EQUIP_TURTLE;
 
     @SubscribeEvent
     public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
@@ -95,6 +95,7 @@ public class EFMSounds {
         ENTITY_TURTLE_SHAMBLE = register(MC13.turtle, r, "entity.turtle.shamble");
         ENTITY_TURTLE_SHAMBLE_BABY = register(MC13.turtle, r, "entity.turtle.shamble_baby");
         ENTITY_TURTLE_SWIM = register(MC13.turtle, r, "entity.turtle.swim");
+        ITEM_ARMOR_EQUIP_TURTLE = register(MC13.turtle, r, "item.armor.equip_turtle");
 
 
         BARREL_OPEN = register(MC14.barrel, r, "block.barrel.open");

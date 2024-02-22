@@ -56,13 +56,14 @@ public class BlockSeaGrass extends EFMBlockBush implements IPlantable, IGrowable
 
     @Override
     public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+        /*
         IBlockState state1 = EFMBlocks.SEA_GRASS_TALL.getBlock().getDefaultState();
         IBlockState state2 = state1.withProperty(HALF, BlockDoublePlant.EnumBlockHalf.UPPER);
         BlockPos blockPos = pos.up();
         if(worldIn.getBlockState(blockPos).getBlock() == Blocks.WATER) {
             worldIn.setBlockState(pos, state1, 2);
             worldIn.setBlockState(blockPos, state2, 2);
-        }
+        }*/
     }
 
     @Override

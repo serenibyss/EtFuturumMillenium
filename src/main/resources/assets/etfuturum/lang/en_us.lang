@@ -15,14 +15,18 @@ subtitles.item.axe.strip=Debarking Log
 
 # Entities
 entity.phantom.name=Phantom
+entity.turtle.name=Turtle
 
 # Blocks
 tile.stone_stairs.name=Stone Stairs
 tile.stone_slab.name=Stone Slab
+tile.turtle_egg.name=Turtle Egg
 
 # Items
 item.phantom_membrane.name=Phantom Membrane
 item.trident.name=Trident
+item.scute.name=Scute
+item.turtle_helmet.name=Turtle Shell
 
 # Enchants
 enchantment.channeling=Channeling

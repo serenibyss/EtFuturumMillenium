@@ -492,5 +492,19 @@
       }
     ],
     "subtitle": "subtitles.entity.turtle.swim"
+  },
+  "item.armor.equip_turtle": {
+    "sounds": [
+      "etfuturum:mob/turtle/armor",
+      {
+        "name": "etfuturum:mob/turtle/armor",
+        "pitch": 0.85
+      },
+      {
+        "name": "etfuturum:mob/turtle/armor",
+        "pitch": 1.1
+      }
+    ],
+    "subtitle": "subtitles.item.armor.equip_turtle"
   }
 }

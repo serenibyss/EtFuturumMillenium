@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.entities.passive;
 import com.google.common.collect.Sets;
 import com.serenibyss.etfuturum.blocks.BlockTurtleEgg;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
+import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.load.enums.EFMEnumCreatureAttribute;
 import com.serenibyss.etfuturum.pathfinding.WalkAndSwimNodeProcessor;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
@@ -43,8 +44,7 @@ import java.util.Random;
 import java.util.Set;
 import java.util.function.Predicate;
 
-//@Optional.Interface(iface = "git.jbredwards.fluidlogged_api.api.block.IFluidloggable", modid = ModIDs.FLUIDLOGGED)
-public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
+public class EntityTurtle extends EntityAnimal {
 
     private static final DataParameter<BlockPos> HOME_POS = EntityDataManager.createKey(EntityTurtle.class, DataSerializers.BLOCK_POS);
     private static final DataParameter<Boolean> HAS_EGG = EntityDataManager.createKey(EntityTurtle.class, DataSerializers.BOOLEAN);
@@ -53,7 +53,9 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
     private static final DataParameter<Boolean> GOING_HOME = EntityDataManager.createKey(EntityTurtle.class, DataSerializers.BOOLEAN);
     private static final DataParameter<Boolean> TRAVELLING = EntityDataManager.createKey(EntityTurtle.class, DataSerializers.BOOLEAN);
     private int isDigging;
-    private static final Predicate<Entity> TARGET_DRY_BABY = (baby) -> {
+
+    // todo: add AI task to various mobs to attack baby turtles
+    public static final Predicate<Entity> TARGET_DRY_BABY = (baby) -> {
         if(baby instanceof EntityLivingBase elb) {
             return elb.isChild() && baby.isInWater();
         }
@@ -214,10 +216,6 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
         return !this.isInWater() && this.onGround && !this.isChild() ? EFMSounds.ENTITY_TURTLE_AMBIENT_LAND : super.getAmbientSound();
     }
 
-    protected void playSwimSound(float volume) {
-        this.playSound(this.getSwimSound(), volume, 1.0F + (this.rand.nextFloat() - this.rand.nextFloat()) * 0.4F);
-    }
-
     @Override
     protected SoundEvent getSwimSound() {
         return EFMSounds.ENTITY_TURTLE_SWIM;
@@ -276,8 +274,8 @@ public class EntityTurtle extends EntityAnimal { //implements IFluidloggable{
     @Override
     protected void onGrowingAdult() {
         super.onGrowingAdult();
-        if(this.world.getGameRules().getBoolean("doModLoot")) {
-            // todo(onion) drop a scute
+        if (this.world.getGameRules().getBoolean("doMobLoot")) {
+            this.entityDropItem(EFMItems.SCUTE.getItemStack(), 1.0f);
         }
     }
 

@@ -80,7 +80,7 @@ public class EFMBlockBush extends EFMBlock implements IPlantable {
 
     @Override
     public EnumPlantType getPlantType(IBlockAccess world, BlockPos pos) {
-        if(this == EFMBlocks.SEA_GRASS.getBlock()) return EnumPlantType.Water;
+        //if(this == EFMBlocks.SEA_GRASS.getBlock()) return EnumPlantType.Water;
         return EnumPlantType.Plains;
     }
 

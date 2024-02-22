@@ -37,7 +37,8 @@ public class BlockSeaGrassTall extends BlockDoublePlant implements IFluidloggabl
 
     @Override
     public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
-        return EFMBlocks.SEA_GRASS.getItemStack();
+        return super.getItem(worldIn, pos, state);
+        //return EFMBlocks.SEA_GRASS.getItemStack();
     }
 
     @Optional.Method(modid = ModIDs.FLUIDLOGGED)
