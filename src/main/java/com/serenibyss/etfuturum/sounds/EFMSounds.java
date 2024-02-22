@@ -8,81 +8,74 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-import static com.serenibyss.etfuturum.load.feature.Features.MC13;
-import static com.serenibyss.etfuturum.load.feature.Features.MC14;
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.serenibyss.etfuturum.load.feature.Features.*;
 
 public class EFMSounds {
 
-    public static SoundEvent BARREL_OPEN;
-    public static SoundEvent BARREL_CLOSE;
-    public static SoundEvent UI_STONECUTTER_TAKE_RESULT;
+    private static final List<SoundEvent> ALL_SOUNDS = new ArrayList<>();
 
-    public static SoundEvent ENTITY_PHANTOM_AMBIENT;
-    public static SoundEvent ENTITY_PHANTOM_BITE;
-    public static SoundEvent ENTITY_PHANTOM_DEATH;
-    public static SoundEvent ENTITY_PHANTOM_FLAP;
-    public static SoundEvent ENTITY_PHANTOM_HURT;
-    public static SoundEvent ENTITY_PHANTOM_SWOOP;
+    public static final SoundEvent BARREL_OPEN = create(MC14.barrel, "block.barrel.open");
+    public static final SoundEvent BARREL_CLOSE = create(MC14.barrel, "block.barrel.close");
+    public static final SoundEvent UI_STONECUTTER_TAKE_RESULT = create(MC14.stonecutter, "ui.stonecutter.take_result");
 
-    public static SoundEvent BLOCK_CONDUIT_AMBIENT;
-    public static SoundEvent BLOCK_CONDUIT_AMBIENT_SHORT;
-    public static SoundEvent BLOCK_CONDUIT_ATTACK_TARGET;
-    public static SoundEvent BLOCK_CONDUIT_ACTIVATE;
-    public static SoundEvent BLOCK_CONDUIT_DEACTIVATE;
+    public static final SoundEvent ENTITY_PHANTOM_AMBIENT = create(MC13.phantom, "entity.phantom.ambient");
+    public static final SoundEvent ENTITY_PHANTOM_BITE = create(MC13.phantom, "entity.phantom.bite");
+    public static final SoundEvent ENTITY_PHANTOM_DEATH = create(MC13.phantom, "entity.phantom.death");
+    public static final SoundEvent ENTITY_PHANTOM_FLAP = create(MC13.phantom, "entity.phantom.flap");
+    public static final SoundEvent ENTITY_PHANTOM_HURT = create(MC13.phantom, "entity.phantom.hurt");
+    public static final SoundEvent ENTITY_PHANTOM_SWOOP = create(MC13.phantom, "entity.phantom.swoop");
 
-    public static SoundEvent ITEM_AXE_STRIP_LOG;
+    public static final SoundEvent BLOCK_CONDUIT_AMBIENT = create(MC13.conduit, "block.conduit.ambient");
+    public static final SoundEvent BLOCK_CONDUIT_AMBIENT_SHORT = create(MC13.conduit, "block.conduit.ambient.short");
+    public static final SoundEvent BLOCK_CONDUIT_ATTACK_TARGET = create(MC13.conduit, "block.conduit.attack.target");
+    public static final SoundEvent BLOCK_CONDUIT_ACTIVATE = create(MC13.conduit, "block.conduit.activate");
+    public static final SoundEvent BLOCK_CONDUIT_DEACTIVATE = create(MC13.conduit, "block.conduit.deactivate");
 
-    public static SoundEvent ITEM_TRIDENT_HIT;
-    public static SoundEvent ITEM_TRIDENT_RETURN;
-    public static SoundEvent ITEM_TRIDENT_THUNDER;
-    public static SoundEvent ITEM_TRIDENT_THROW;
-    public static SoundEvent ITEM_TRIDENT_HIT_GROUND;
-    public static SoundEvent ITEM_TRIDENT_RIPTIDE_1;
-    public static SoundEvent ITEM_TRIDENT_RIPTIDE_2;
-    public static SoundEvent ITEM_TRIDENT_RIPTIDE_3;
+    public static final SoundEvent ITEM_AXE_STRIP_LOG = create(MC13.stripping, "item.axe.strip");
 
-    @SubscribeEvent
-    public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
-        IForgeRegistry<SoundEvent> r = event.getRegistry();
+    public static final SoundEvent ITEM_TRIDENT_HIT = create(MC13.trident, "item.trident.hit");
+    public static final SoundEvent ITEM_TRIDENT_RETURN = create(MC13.trident, "item.trident.return");
+    public static final SoundEvent ITEM_TRIDENT_THUNDER = create(MC13.trident, "item.trident.thunder");
+    public static final SoundEvent ITEM_TRIDENT_THROW = create(MC13.trident, "item.trident.throw");
+    public static final SoundEvent ITEM_TRIDENT_HIT_GROUND = create(MC13.trident, "item.trident.hit_ground");
+    public static final SoundEvent ITEM_TRIDENT_RIPTIDE_1 = create(MC13.trident, "item.trident.riptide_1");
+    public static final SoundEvent ITEM_TRIDENT_RIPTIDE_2 = create(MC13.trident, "item.trident.riptide_2");
+    public static final SoundEvent ITEM_TRIDENT_RIPTIDE_3 = create(MC13.trident, "item.trident.riptide_3");
 
-        ENTITY_PHANTOM_AMBIENT = register(MC13.phantom, r, "entity.phantom.ambient");
-        ENTITY_PHANTOM_BITE = register(MC13.phantom, r, "entity.phantom.bite");
-        ENTITY_PHANTOM_DEATH = register(MC13.phantom, r, "entity.phantom.death");
-        ENTITY_PHANTOM_FLAP = register(MC13.phantom, r, "entity.phantom.flap");
-        ENTITY_PHANTOM_HURT = register(MC13.phantom, r, "entity.phantom.hurt");
-        ENTITY_PHANTOM_SWOOP = register(MC13.phantom, r, "entity.phantom.swoop");
+    public static final SoundEvent ENTITY_TURTLE_AMBIENT_LAND = create(MC13.turtle, "entity.turtle.ambient_land");
+    public static final SoundEvent ENTITY_TURTLE_SWIM = create(MC13.turtle, "entity.turtle.swim");
+    public static final SoundEvent ENTITY_TURTLE_HURT = create(MC13.turtle, "entity.turtle.hurt");
+    public static final SoundEvent ENTITY_TURTLE_HURT_BABY = create(MC13.turtle, "entity.turtle.hurt_baby");
+    public static final SoundEvent ENTITY_TURTLE_DEATH = create(MC13.turtle, "entity.turtle.death");
+    public static final SoundEvent ENTITY_TURTLE_DEATH_BABY = create(MC13.turtle, "entity.turtle.death_baby");
+    public static final SoundEvent ENTITY_TURTLE_SHAMBLE = create(MC13.turtle, "entity.turtle.shamble");
+    public static final SoundEvent ENTITY_TURTLE_SHAMBLE_BABY = create(MC13.turtle, "entity.turtle.shamble_baby");
+    public static final SoundEvent ENTITY_TURTLE_EGG_CRACK = create(MC13.turtle, "entity.turtle.egg_crack");
+    public static final SoundEvent ENTITY_TURTLE_EGG_HATCH = create(MC13.turtle, "entity.turtle.egg_hatch");
+    public static final SoundEvent ENTITY_TURTLE_EGG_BREAK = create(MC13.turtle, "entity.turtle.egg_break");
+    public static final SoundEvent ENTITY_TURTLE_LAY_EGG = create(MC13.turtle, "entity.turtle.lay_egg");
+    public static final SoundEvent ITEM_ARMOR_EQUIP_TURTLE = create(MC13.turtle, "item.armor.equip_turtle");
 
-        BLOCK_CONDUIT_AMBIENT = register(MC13.conduit, r, "block.conduit.ambient");
-        BLOCK_CONDUIT_AMBIENT_SHORT = register(MC13.conduit, r, "block.conduit.ambient.short");
-        BLOCK_CONDUIT_ATTACK_TARGET = register(MC13.conduit, r, "block.conduit.attack.target");
-        BLOCK_CONDUIT_ACTIVATE = register(MC13.conduit, r, "block.conduit.activate");
-        BLOCK_CONDUIT_DEACTIVATE = register(MC13.conduit, r, "block.conduit.deactivate");
-
-        ITEM_AXE_STRIP_LOG = register(MC13.stripping, r, "item.axe.strip");
-
-        ITEM_TRIDENT_HIT = register(MC13.trident, r, "item.trident.hit");
-        ITEM_TRIDENT_RETURN = register(MC13.trident, r, "item.trident.return");
-        ITEM_TRIDENT_THUNDER = register(MC13.trident, r, "item.trident.thunder");
-        ITEM_TRIDENT_THROW = register(MC13.trident, r, "item.trident.throw");
-        ITEM_TRIDENT_HIT_GROUND = register(MC13.trident, r, "item.trident.hit_ground");
-        ITEM_TRIDENT_RIPTIDE_1 = register(MC13.trident, r, "item.trident.riptide_1");
-        ITEM_TRIDENT_RIPTIDE_2 = register(MC13.trident, r, "item.trident.riptide_2");
-        ITEM_TRIDENT_RIPTIDE_3 = register(MC13.trident, r, "item.trident.riptide_3");
-
-
-        BARREL_OPEN = register(MC14.barrel, r, "block.barrel.open");
-        BARREL_CLOSE = register(MC14.barrel, r, "block.barrel.close");
-
-        UI_STONECUTTER_TAKE_RESULT = register(MC14.stonecutter, r, "ui.stonecutter.take_result");
-    }
-
-    private static SoundEvent register(Feature feature, IForgeRegistry<SoundEvent> registry, String name) {
+    private static SoundEvent create(Feature feature, String name) {
         if (feature == null || !feature.isEnabled()) {
             return null;
         }
         SoundEvent event = new SoundEvent(new ResourceLocation(EFMTags.MODID, name));
-        event.setRegistryName(event.getSoundName());
-        registry.register(event);
+        ALL_SOUNDS.add(event);
         return event;
+    }
+
+    @SubscribeEvent
+    public static void onSoundRegister(RegistryEvent.Register<SoundEvent> event) {
+        final IForgeRegistry<SoundEvent> r = event.getRegistry();
+
+        for (SoundEvent sound : ALL_SOUNDS) {
+            sound.setRegistryName(sound.getSoundName());
+            r.register(sound);
+        }
+        ALL_SOUNDS.clear();
     }
 }

@@ -8,11 +8,7 @@ import static com.serenibyss.etfuturum.load.feature.Features.MC13;
 
 public class EFMEnumAction {
 
-    public static EnumAction SPEAR;
-
-    protected static void init() {
-        SPEAR = addAction(MC13.trident, "spear");
-    }
+    public static final EnumAction SPEAR = addAction(MC13.trident, "spear");
 
     private static EnumAction addAction(Feature feature, String name) {
         if (!feature.isEnabled()) {

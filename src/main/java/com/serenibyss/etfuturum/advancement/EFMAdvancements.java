@@ -36,6 +36,9 @@ public class EFMAdvancements {
     private static void initHacks(Map<ResourceLocation, Advancement.Builder> map) {
         addKilledTrigger(MC13.phantom, "minecraft:adventure/kill_a_mob", map, "etfuturum:phantom");
         addKilledTrigger(MC13.phantom, "minecraft:adventure/kill_all_mobs", map, "etfuturum:phantom");
+
+        addBredTrigger(MC13.turtle, "minecraft:husbandry/breed_an_animal", map, "etfuturum:turtle");
+        addBredTrigger(MC13.turtle, "minecraft:husbandry/bred_all_animals", map, "etfuturum:turtle");
     }
 
     public static void initAdvancementHacks(Map<ResourceLocation, Advancement.Builder> map) {

@@ -3,10 +3,14 @@ package com.serenibyss.etfuturum.items;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.items.base.EFMItem;
 import com.serenibyss.etfuturum.items.base.EFMItem.Settings;
+import com.serenibyss.etfuturum.items.base.EFMItemArmor;
+import com.serenibyss.etfuturum.load.enums.EFMArmorMaterial;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.client.event.ModelRegistryEvent;
@@ -21,6 +25,8 @@ public enum EFMItems {
 
     PHANTOM_MEMBRANE(MC13.phantom, "phantom_membrane", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("phantom_membrane"))),
     TRIDENT(MC13.trident, "trident", new ItemTrident()),
+    SCUTE(MC13.turtle, "scute", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("scute"))),
+    TURTLE_HELMET(MC13.turtle, "turtle_helmet", new ItemTurtleHelmet()),
 
     ;
 

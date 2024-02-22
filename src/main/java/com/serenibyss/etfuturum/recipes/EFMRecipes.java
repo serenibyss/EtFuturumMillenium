@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.recipes;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.api.StrippingRegistry;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
+import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
@@ -53,6 +54,8 @@ public class EFMRecipes {
             addShapelessRecipe("minecraft:acacia_planks", new ItemStack(Blocks.PLANKS, 4, 4), EFMOreDict.LOG_WOOD_ACACIA);
             addShapelessRecipe("minecraft:dark_oak_planks", new ItemStack(Blocks.PLANKS, 4, 5), EFMOreDict.LOG_WOOD_DARK_OAK);
         }
+
+        addShapedRecipe("turtle_helmet", EFMItems.TURTLE_HELMET.getItemStack(), "XXX", "X X", 'X', EFMItems.SCUTE.getItemStack());
     }
 
     @SuppressWarnings("deprecation")

@@ -10,6 +10,8 @@ public class Features13 extends FeatureManager {
     public final Feature conduit;
     public final Feature trident;
 
+    public final Feature turtle;
+
     public Features13() {
         phantom = Feature.builder("phantom", this, () -> ConfigEntities.enablePhantoms)
                 .addTextures("entity/phantom.png", "entity/phantom_eyes.png", "item/phantom_membrane.png")
@@ -50,6 +52,26 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("item/trident/riptide", 1, 3)
                 .addNumberedSounds("item/trident/throw", 1, 2)
                 .addNumberedSounds("item/trident/thunder", 1, 2)
+                .build();
+
+        turtle = Feature.builder("turtle", this, () -> ConfigEntities.enableTurtles)
+                .addTextures("entity/turtle/big_sea_turtle.png", "item/turtle_egg.png",
+                        "block/turtle_egg.png", "block/turtle_egg_very_cracked.png",
+                        "block/turtle_egg_slightly_cracked.png", "item/scute.png",
+                        "item/turtle_helmet.png", "models/armor/turtle_layer_1.png")
+                .addSounds("mob/turtle/armor")
+                .addNumberedSounds("mob/turtle/idle", 1, 3)
+                .addNumberedSounds("mob/turtle/death", 1, 3)
+                .addNumberedSounds("mob/turtle/baby/death", 1, 2)
+                .addNumberedSounds("mob/turtle/egg/egg_break", 1, 2)
+                .addNumberedSounds("mob/turtle/egg/egg_crack", 1, 5)
+                .addNumberedSounds("mob/turtle/baby/egg_hatched", 1, 3)
+                .addNumberedSounds("mob/turtle/hurt", 1, 5)
+                .addNumberedSounds("mob/turtle/baby/hurt", 1, 2)
+                .addNumberedSounds("mob/turtle/egg/drop_egg", 1, 2)
+                .addNumberedSounds("mob/turtle/walk", 1, 5)
+                .addNumberedSounds("mob/turtle/baby/shamble", 1, 4)
+                .addNumberedSounds("mob/turtle/swim/swim", 1, 5)
                 .build();
     }
 

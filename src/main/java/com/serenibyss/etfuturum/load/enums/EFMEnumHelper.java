@@ -1,18 +1,9 @@
 package com.serenibyss.etfuturum.load.enums;
 
-import net.minecraftforge.fml.relauncher.Side;
-import net.minecraftforge.fml.relauncher.SideOnly;
-
 public class EFMEnumHelper {
 
-    public static void init() {
-        EFMEnumAction.init();
-        EFMEnumEnchantmentType.init();
-        EFMEnumCreatureAttribute.init();
-    }
-
-    @SideOnly(Side.CLIENT)
-    public static void initClient() {
-        EFMBipedArmPose.init();
+    public static void initEarlyEnums() {
+        // Most be initialized before EntityLiving class is loaded as it holds an EnumMap of PathNodeType
+        EFMPathNodeType.init();
     }
 }

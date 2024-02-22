@@ -16,6 +16,8 @@ public class ConfigEntities {
     @RangeDouble(min = 2.0D, max = 2048.0D) // range from SharedMonsterAttributes.ATTACK_DAMAGE
     public static double phantomDamage = 2.0f;
 
+    public static boolean enableTurtles = true;
+
     // 1.14: Village & Pillage
 
     // 1.15: Buzzy Bees

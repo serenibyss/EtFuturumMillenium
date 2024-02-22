@@ -1,0 +1,76 @@
+{
+  "variants": {
+    "eggs=1,hatch=0": [
+      { "model": "etfuturum:turtle/turtle_egg" },
+      { "model": "etfuturum:turtle/turtle_egg", "y": 90 },
+      { "model": "etfuturum:turtle/turtle_egg", "y": 180 },
+      { "model": "etfuturum:turtle/turtle_egg", "y": 270 }
+    ],
+    "eggs=1,hatch=1": [
+      { "model": "etfuturum:turtle/slightly_cracked_turtle_egg" },
+      { "model": "etfuturum:turtle/slightly_cracked_turtle_egg", "y": 90 },
+      { "model": "etfuturum:turtle/slightly_cracked_turtle_egg", "y": 180 },
+      { "model": "etfuturum:turtle/slightly_cracked_turtle_egg", "y": 270 }
+    ],
+    "eggs=1,hatch=2": [
+      { "model": "etfuturum:turtle/very_cracked_turtle_egg" },
+      { "model": "etfuturum:turtle/very_cracked_turtle_egg", "y": 90 },
+      { "model": "etfuturum:turtle/very_cracked_turtle_egg", "y": 180 },
+      { "model": "etfuturum:turtle/very_cracked_turtle_egg", "y": 270 }
+    ],
+    "eggs=2,hatch=0": [
+      { "model": "etfuturum:turtle/two_turtle_eggs" },
+      { "model": "etfuturum:turtle/two_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/two_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/two_turtle_eggs", "y": 270 }
+    ],
+    "eggs=2,hatch=1": [
+      { "model": "etfuturum:turtle/two_slightly_cracked_turtle_eggs" },
+      { "model": "etfuturum:turtle/two_slightly_cracked_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/two_slightly_cracked_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/two_slightly_cracked_turtle_eggs", "y": 270 }
+    ],
+    "eggs=2,hatch=2": [
+      { "model": "etfuturum:turtle/two_very_cracked_turtle_eggs" },
+      { "model": "etfuturum:turtle/two_very_cracked_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/two_very_cracked_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/two_very_cracked_turtle_eggs", "y": 270 }
+    ],
+    "eggs=3,hatch=0": [
+      { "model": "etfuturum:turtle/three_turtle_eggs" },
+      { "model": "etfuturum:turtle/three_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/three_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/three_turtle_eggs", "y": 270 }
+    ],
+    "eggs=3,hatch=1": [
+      { "model": "etfuturum:turtle/three_slightly_cracked_turtle_eggs" },
+      { "model": "etfuturum:turtle/three_slightly_cracked_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/three_slightly_cracked_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/three_slightly_cracked_turtle_eggs", "y": 270 }
+    ],
+    "eggs=3,hatch=2": [
+      { "model": "etfuturum:turtle/three_very_cracked_turtle_eggs" },
+      { "model": "etfuturum:turtle/three_very_cracked_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/three_very_cracked_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/three_very_cracked_turtle_eggs", "y": 270 }
+    ],
+    "eggs=4,hatch=0": [
+      { "model": "etfuturum:turtle/four_turtle_eggs" },
+      { "model": "etfuturum:turtle/four_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/four_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/four_turtle_eggs", "y": 270 }
+    ],
+    "eggs=4,hatch=1": [
+      { "model": "etfuturum:turtle/four_slightly_cracked_turtle_eggs" },
+      { "model": "etfuturum:turtle/four_slightly_cracked_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/four_slightly_cracked_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/four_slightly_cracked_turtle_eggs", "y": 270 }
+    ],
+    "eggs=4,hatch=2": [
+      { "model": "etfuturum:turtle/four_very_cracked_turtle_eggs" },
+      { "model": "etfuturum:turtle/four_very_cracked_turtle_eggs", "y": 90 },
+      { "model": "etfuturum:turtle/four_very_cracked_turtle_eggs", "y": 180 },
+      { "model": "etfuturum:turtle/four_very_cracked_turtle_eggs", "y": 270 }
+    ]
+  }
+}

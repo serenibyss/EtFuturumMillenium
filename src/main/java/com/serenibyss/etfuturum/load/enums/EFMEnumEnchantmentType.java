@@ -13,11 +13,7 @@ import static com.serenibyss.etfuturum.load.feature.Features.MC13;
 
 public class EFMEnumEnchantmentType {
 
-    public static EnumEnchantmentType TRIDENT;
-
-    protected static void init() {
-        TRIDENT = addEnchantmentType(MC13.trident, "trident", x -> x instanceof ItemTrident);
-    }
+    public static final EnumEnchantmentType TRIDENT = addEnchantmentType(MC13.trident, "trident", x -> x instanceof ItemTrident);
 
     private static EnumEnchantmentType addEnchantmentType(Feature feature, String name, Predicate<Item> predicate) {
         if (!feature.isEnabled()) {
