@@ -11,11 +11,7 @@ import static com.serenibyss.etfuturum.load.feature.Features.*;
 @SideOnly(Side.CLIENT)
 public class EFMBipedArmPose {
 
-    public static ModelBiped.ArmPose THROW_SPEAR;
-
-    public static void init() {
-        THROW_SPEAR = addArmPose(MC13.trident, "throw_spear");
-    }
+    public static final ModelBiped.ArmPose THROW_SPEAR = addArmPose(MC13.trident, "throw_spear");
 
     private static ModelBiped.ArmPose addArmPose(Feature feature, String name) {
         if (!feature.isEnabled()) {

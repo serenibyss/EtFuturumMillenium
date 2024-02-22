@@ -8,11 +8,7 @@ import static com.serenibyss.etfuturum.load.feature.Features.MC13;
 
 public class EFMEnumCreatureAttribute {
 
-    public static EnumCreatureAttribute WATER;
-
-    protected static void init() {
-        WATER = addCreatureAttribute(MC13.trident, "water");
-    }
+    public static final EnumCreatureAttribute WATER = addCreatureAttribute(MC13.trident, "water");
 
     private static EnumCreatureAttribute addCreatureAttribute(Feature feature, String name) {
         if(!feature.isEnabled()) {
