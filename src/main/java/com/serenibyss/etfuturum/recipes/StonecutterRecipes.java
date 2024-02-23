@@ -12,13 +12,13 @@ final class StonecutterRecipes {
 
         // Stone
         r.addRecipe(new ItemStack(Blocks.STONE),
-                new ItemStack(Blocks.STONEBRICK, 1, 3),   // Chiseled Stone Bricks, 1
-                new ItemStack(Blocks.STONE_SLAB, 2, 5),   // Stone Bricks Slab, 2
-                new ItemStack(Blocks.STONE_BRICK_STAIRS), // Stone Brick Stairs, 1
-                // EFMBlocks.WALL.getItemStack(1, meta),  // Stone Wall, 1
-                new ItemStack(Blocks.STONEBRICK),         // Stone Bricks, 1
-                EFMBlocks.STONE_SLAB.getItemStack(2),     // Stone Slab, 2
-                EFMBlocks.STONE_STAIRS.getItemStack()     // Stone Stairs, 1
+                new ItemStack(Blocks.STONEBRICK, 1, 3),    // Chiseled Stone Bricks, 1
+                new ItemStack(Blocks.STONE_SLAB, 2, 5),    // Stone Bricks Slab, 2
+                new ItemStack(Blocks.STONE_BRICK_STAIRS),  // Stone Brick Stairs, 1
+                EFMBlocks.STONE_BRICK_WALL.getItemStack(), // Stone Brick Wall, 1
+                new ItemStack(Blocks.STONEBRICK),          // Stone Bricks, 1
+                EFMBlocks.STONE_SLAB.getItemStack(2),      // Stone Slab, 2
+                EFMBlocks.STONE_STAIRS.getItemStack()      // Stone Stairs, 1
         );
 
         // Cobblestone
@@ -42,10 +42,10 @@ final class StonecutterRecipes {
 
         // Stone Bricks
         r.addRecipe(new ItemStack(Blocks.STONEBRICK),
-                new ItemStack(Blocks.STONEBRICK, 1, 3),  // Chiseled Stone Bricks, 1
-                new ItemStack(Blocks.STONE_SLAB, 2, 5),  // Stone Bricks Slab, 2
-                new ItemStack(Blocks.STONE_BRICK_STAIRS) // Stone Brick Stairs, 1
-                // EFMBlocks.WALL.getItemStack(1, meta)  // Stone Brick Wall, 1
+                new ItemStack(Blocks.STONEBRICK, 1, 3),   // Chiseled Stone Bricks, 1
+                new ItemStack(Blocks.STONE_SLAB, 2, 5),   // Stone Bricks Slab, 2
+                new ItemStack(Blocks.STONE_BRICK_STAIRS), // Stone Brick Stairs, 1
+                EFMBlocks.STONE_BRICK_WALL.getItemStack() // Stone Brick Wall, 1
         );
 
         // Mossy Stone Bricks

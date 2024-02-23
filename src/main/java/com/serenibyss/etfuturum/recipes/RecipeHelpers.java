@@ -125,13 +125,21 @@ public class RecipeHelpers {
         addShapedRecipe(name, stairs, true, new Object[]{"X  ", "XX ", "XXX", 'X', block});
     }
 
-    @SuppressWarnings("all")
     public static void addSlabRecipe(String name, ItemStack slab, ItemStack block) {
         if (slab == null || slab.isEmpty() || block == null || block.isEmpty()) return;
         slab = slab.copy();
         slab.setCount(6);
         block = block.copy();
         block.setCount(1);
-        addShapedRecipe(name, slab, true, new Object[]{"XXX", 'X', block});
+        addShapedRecipe(name, slab, "XXX", 'X', block);
+    }
+
+    public static void addWallRecipe(String name, ItemStack wall, ItemStack block) {
+        if (wall == null || wall.isEmpty() || block == null || block.isEmpty()) return;
+        wall = wall.copy();
+        wall.setCount(6);
+        block = block.copy();
+        block.setCount(1);
+        addShapedRecipe(name, wall, "XXX", "XXX", 'X', block);
     }
 }

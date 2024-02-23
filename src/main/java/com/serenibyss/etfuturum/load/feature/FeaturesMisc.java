@@ -7,10 +7,12 @@ public class FeaturesMisc extends FeatureManager {
 
     public final Feature newStairs;
     public final Feature newSlabs;
+    public final Feature newWalls;
 
     protected FeaturesMisc() {
         newStairs = Feature.builder("new_stairs", this, () -> ConfigBlocksItems.enableNewStairs).build();
         newSlabs = Feature.builder("new_slabs", this, () -> ConfigBlocksItems.enableNewSlabs).build();
+        newWalls = Feature.builder("new_walls", this, () -> ConfigBlocksItems.enableNewWalls).build();
     }
 
     @Override

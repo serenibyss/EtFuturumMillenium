@@ -20,6 +20,7 @@ entity.turtle.name=Turtle
 # Blocks
 tile.stone_stairs.name=Stone Stairs
 tile.stone_slab.name=Stone Slab
+tile.stone_brick_wall.name=Stone Brick Wall
 tile.turtle_egg.name=Turtle Egg
 
 # Items

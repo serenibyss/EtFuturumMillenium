@@ -39,6 +39,8 @@ public enum EFMBlocks {
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE_SLAB.getHalfSlab()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE_SLAB.getDoubleSlab()),
 
+    STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
+
     ;
 
     private final Feature feature;
