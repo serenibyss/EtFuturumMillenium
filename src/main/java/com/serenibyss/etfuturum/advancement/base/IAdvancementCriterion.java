@@ -7,8 +7,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ResourceLocation;
 
-import java.util.Collection;
-
 public interface IAdvancementCriterion extends ICriterionInstance {
 
     void setId(ResourceLocation id);

@@ -18,6 +18,8 @@ public class ConfigEntities {
 
     public static boolean enableTurtles = true;
 
+    public static boolean enableFish = true;
+
     // 1.14: Village & Pillage
 
     // 1.15: Buzzy Bees

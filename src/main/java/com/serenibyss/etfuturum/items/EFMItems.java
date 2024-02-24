@@ -1,6 +1,9 @@
 package com.serenibyss.etfuturum.items;
 
 import com.serenibyss.etfuturum.EFMTags;
+import com.serenibyss.etfuturum.entities.passive.fish.EntityCod;
+import com.serenibyss.etfuturum.entities.passive.fish.EntityPufferfish;
+import com.serenibyss.etfuturum.entities.passive.fish.EntitySalmon;
 import com.serenibyss.etfuturum.items.base.EFMItem;
 import com.serenibyss.etfuturum.items.base.EFMItem.Settings;
 import com.serenibyss.etfuturum.items.base.EFMItemArmor;
@@ -8,6 +11,7 @@ import com.serenibyss.etfuturum.load.enums.EFMArmorMaterial;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
@@ -27,6 +31,10 @@ public enum EFMItems {
     TRIDENT(MC13.trident, "trident", new ItemTrident()),
     SCUTE(MC13.turtle, "scute", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("scute"))),
     TURTLE_HELMET(MC13.turtle, "turtle_helmet", new ItemTurtleHelmet()),
+
+    COD_BUCKET(MC13.fish, "cod_bucket", new ItemFishBucket<>(EntityCod.class, Blocks.WATER)),
+    SALMON_BUCKET(MC13.fish, "salmon_bucket", new ItemFishBucket<>(EntitySalmon.class, Blocks.WATER)),
+    PUFFERFISH_BUCKET(MC13.fish, "pufferfish_bucket", new ItemFishBucket<>(EntityPufferfish.class, Blocks.WATER)),
 
     ;
 

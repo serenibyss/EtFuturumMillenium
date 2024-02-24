@@ -11,6 +11,7 @@ public class Features13 extends FeatureManager {
     public final Feature trident;
 
     public final Feature turtle;
+    public final Feature fish;
 
     public Features13() {
         phantom = Feature.builder("phantom", this, () -> ConfigEntities.enablePhantoms)
@@ -72,6 +73,21 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("mob/turtle/walk", 1, 5)
                 .addNumberedSounds("mob/turtle/baby/shamble", 1, 4)
                 .addNumberedSounds("mob/turtle/swim/swim", 1, 5)
+                .build();
+
+        fish = Feature.builder("fish", this, () -> ConfigEntities.enableFish)
+                .addTextures("entity/fish/cod.png", "item/cod_bucket.png",
+                        "entity/fish/salmon.png", "item/salmon_bucket.png",
+                        "entity/fish/pufferfish.png", "item/pufferfish_bucket.png"
+                        )
+                .addNumberedSounds("entity/fish/hurt", 1, 4)
+                .addNumberedSounds("entity/fish/flop", 1, 4)
+                .addNumberedSounds("entity/pufferfish/blow_out", 1, 2)
+                .addNumberedSounds("entity/pufferfish/blow_up", 1, 2)
+                .addNumberedSounds("entity/pufferfish/death", 1, 2)
+                .addNumberedSounds("entity/pufferfish/flop", 1, 4)
+                .addNumberedSounds("entity/pufferfish/hurt", 1, 2)
+                .addNumberedSounds("entity/pufferfish/sting", 1, 2)
                 .build();
     }
 

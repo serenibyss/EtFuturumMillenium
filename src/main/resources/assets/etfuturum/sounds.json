@@ -506,5 +506,199 @@
       }
     ],
     "subtitle": "subtitles.item.armor.equip_turtle"
+  },
+  "entity.fish.swim": {
+    "sounds": [
+      "etfuturum:entity/fish/swim1",
+      "etfuturum:entity/fish/swim2",
+      "etfuturum:entity/fish/swim3",
+      "etfuturum:entity/fish/swim4",
+      "etfuturum:entity/fish/swim5",
+      "etfuturum:entity/fish/swim6",
+      "etfuturum:entity/fish/swim7"
+    ]
+  },
+  "entity.cod.ambient": {
+    "sounds": []
+  },
+  "entity.cod.death": {
+    "sounds": [
+      "etfuturum:entity/fish/hurt1",
+      "etfuturum:entity/fish/hurt2",
+      "etfuturum:entity/fish/hurt3",
+      "etfuturum:entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.entity.cod.death"
+  },
+  "entity.cod.flop": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/fish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.cod.flop"
+  },
+  "entity.cod.hurt": {
+    "sounds": [
+      "etfuturum:entity/fish/hurt1",
+      "etfuturum:entity/fish/hurt2",
+      "etfuturum:entity/fish/hurt3",
+      "etfuturum:entity/fish/hurt4"
+    ],
+    "subtitle": "subtitles.entity.cod.hurt"
+  },
+  "entity.salmon.ambient": {
+    "sounds": []
+  },
+  "entity.salmon.death": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.salmon.death"
+  },
+  "entity.salmon.flop": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/fish/flop1",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop2",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop3",
+        "pitch": 0.8,
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop4",
+        "pitch": 0.8,
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.salmon.flop"
+  },
+  "entity.salmon.hurt": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ],
+    "subtitle": "subtitles.entity.salmon.hurt"
+  },
+  "entity.puffer_fish.ambient": {
+    "sounds": []
+  },
+  "entity.puffer_fish.blow_out": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/pufferfish/blow_out1",
+        "volume": 0.7
+      },
+      {
+        "name": "etfuturum:entity/pufferfish/blow_out2",
+        "volume": 0.7
+      }
+    ],
+    "subtitle": "subtitles.entity.puffer_fish.blow_out"
+  },
+  "entity.puffer_fish.blow_up": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/pufferfish/blow_up1",
+        "volume": 0.45
+      },
+      {
+        "name": "etfuturum:entity/pufferfish/blow_up2",
+        "volume": 0.45
+      }
+    ],
+    "subtitle": "subtitles.entity.puffer_fish.blow_up"
+  },
+  "entity.puffer_fish.death": {
+    "sounds": [
+      "etfuturum:entity/pufferfish/death1",
+      "etfuturum:entity/pufferfish/death2"
+    ],
+    "subtitle": "subtitles.entity.puffer_fish.death"
+  },
+  "entity.puffer_fish.flop": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/pufferfish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/pufferfish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/pufferfish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/pufferfish/flop4",
+        "volume": 0.3
+      }
+    ],
+    "subtitle": "subtitles.entity.puffer_fish.flop"
+  },
+  "entity.puffer_fish.hurt": {
+    "sounds": [
+      "etfuturum:entity/pufferfish/hurt1",
+      "etfuturum:entity/pufferfish/hurt2"
+    ],
+    "subtitle": "subtitles.entity.puffer_fish.hurt"
+  },
+  "entity.puffer_fish.sting": {
+    "sounds": [
+      "etfuturum:entity/pufferfish/sting1",
+      "etfuturum:entity/pufferfish/sting2"
+    ],
+    "subtitle": "subtitles.entity.puffer_fish.sting"
   }
 }

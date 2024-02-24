@@ -10,9 +10,11 @@ import static com.serenibyss.etfuturum.load.feature.Features.*;
 public class EFMLootTables {
 
     public static ResourceLocation ENTITIES_PHANTOM;
+    public static ResourceLocation ENTITIES_COD;
 
     public static void init() {
         ENTITIES_PHANTOM = register(MC13.phantom, "entities/phantom");
+        ENTITIES_COD = register(MC13.fish, "entities/cod");
     }
 
     private static ResourceLocation register(Feature feature, String name) {

@@ -1,11 +1,12 @@
 package com.serenibyss.etfuturum.entities;
 
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.client.render.entity.RenderPhantom;
-import com.serenibyss.etfuturum.client.render.entity.RenderTrident;
-import com.serenibyss.etfuturum.client.render.entity.RenderTurtle;
+import com.serenibyss.etfuturum.client.render.entity.*;
 import com.serenibyss.etfuturum.entities.monster.EntityPhantom;
 import com.serenibyss.etfuturum.entities.passive.EntityTurtle;
+import com.serenibyss.etfuturum.entities.passive.fish.EntityCod;
+import com.serenibyss.etfuturum.entities.passive.fish.EntityPufferfish;
+import com.serenibyss.etfuturum.entities.passive.fish.EntitySalmon;
 import com.serenibyss.etfuturum.entities.projectile.EntityTrident;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.entity.Entity;
@@ -46,6 +47,23 @@ public class EFMEntities {
                     .name("turtle")
                     .egg(0xE7E7E7, 0x00AFAF).build());
         }
+        if(Features.MC13.fish.isEnabled()) {
+            event.getRegistry().register(EntityEntryBuilder.create().entity(EntityCod.class)
+                    .id(new ResourceLocation(EFMTags.MODID, "cod"), id++)
+                    .tracker(80, 3, true)
+                    .name("cod")
+                    .egg(0xE7E7E7, 0x00AFAF).build());
+            event.getRegistry().register(EntityEntryBuilder.create().entity(EntitySalmon.class)
+                    .id(new ResourceLocation(EFMTags.MODID, "salmon"), id++)
+                    .tracker(80, 3, true)
+                    .name("salmon")
+                    .egg(0xE7E7E7, 0x00AFAF).build());
+            event.getRegistry().register(EntityEntryBuilder.create().entity(EntityPufferfish.class)
+                    .id(new ResourceLocation(EFMTags.MODID, "pufferfish"), id++)
+                    .tracker(80, 3, true)
+                    .name("pufferfish")
+                    .egg(0xE7E7E7, 0x00AFAF).build());
+        }
     }
 
     @SideOnly(Side.CLIENT)
@@ -58,6 +76,11 @@ public class EFMEntities {
         }
         if(Features.MC13.turtle.isEnabled()) {
             RenderingRegistry.registerEntityRenderingHandler(EntityTurtle.class, RenderTurtle::new);
+        }
+        if(Features.MC13.fish.isEnabled()) {
+            RenderingRegistry.registerEntityRenderingHandler(EntityCod.class, RenderCod::new);
+            RenderingRegistry.registerEntityRenderingHandler(EntitySalmon.class, RenderSalmon::new);
+            RenderingRegistry.registerEntityRenderingHandler(EntityPufferfish.class, RenderPufferfish::new);
         }
 
     }
