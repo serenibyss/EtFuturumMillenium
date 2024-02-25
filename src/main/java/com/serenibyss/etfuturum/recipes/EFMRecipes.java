@@ -45,6 +45,7 @@ public class EFMRecipes {
         addStairsRecipe("andesite_stairs", EFMBlocks.ANDESITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
         addStairsRecipe("polished_andesite_stairs", EFMBlocks.POLISHED_ANDESITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 6));
         addStairsRecipe("mossy_cobblestone_stairs", EFMBlocks.MOSSY_COBBLESTONE_STAIRS.getItemStack(), new ItemStack(Blocks.MOSSY_COBBLESTONE));
+        addStairsRecipe("mossy_stone_brick_stairs", EFMBlocks.MOSSY_STONE_BRICK_STAIRS.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
 
         addSlabRecipe("stone_slab", EFMBlocks.STONE_SLAB.getItemStack(), new ItemStack(Blocks.STONE));
         if (Features.MC14.smoothStone.isEnabled()) {
@@ -52,8 +53,10 @@ public class EFMRecipes {
         }
         addSlabRecipe("granite_slab", EFMBlocks.GRANITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
         addSlabRecipe("mossy_cobblestone_slab", EFMBlocks.MOSSY_COBBLESTONE_SLAB.getItemStack(), new ItemStack(Blocks.MOSSY_COBBLESTONE));
+        addSlabRecipe("mossy_stone_brick_slab", EFMBlocks.MOSSY_STONE_BRICK_SLAB.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
 
         addWallRecipe("stone_brick_wall", EFMBlocks.STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK));
+        addWallRecipe("mossy_stone_brick_wall", EFMBlocks.MOSSY_STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
         addWallRecipe("granite_wall", EFMBlocks.GRANITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
         addWallRecipe("diorite_wall", EFMBlocks.DIORITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
         addWallRecipe("andesite_wall", EFMBlocks.ANDESITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));

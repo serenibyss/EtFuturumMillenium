@@ -49,11 +49,11 @@ final class StonecutterRecipes {
         );
 
         // Mossy Stone Bricks
-        // r.addRecipe(new ItemStack(Blocks.STONEBRICK, 1, 1),
-        //         EFMBlocks.SLAB.getItemStack(2, meta),   // Mossy Stone Brick Slab, 2
-        //         EFMBlocks.STAIRS.getItemStack(1, meta), // Mossy Stone Brick Stairs, 1
-        //         EFMBlocks.WALL.getItemStack(1, meta)    // Mossy Stone Brick Wall, 1
-        // );
+        r.addRecipe(new ItemStack(Blocks.STONEBRICK, 1, 1),
+                EFMBlocks.MOSSY_STONE_BRICK_SLAB.getItemStack(2),  // Mossy Stone Brick Slab, 2
+                EFMBlocks.MOSSY_STONE_BRICK_STAIRS.getItemStack(), // Mossy Stone Brick Stairs, 1
+                EFMBlocks.MOSSY_STONE_BRICK_WALL.getItemStack()    // Mossy Stone Brick Wall, 1
+        );
 
         // Granite
         r.addRecipe(new ItemStack(Blocks.STONE, 1, 1),
