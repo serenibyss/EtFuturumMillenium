@@ -25,8 +25,10 @@ tile.diorite_stairs.name=Diorite Stairs
 tile.polished_diorite_stairs.name=Polished Diorite Stairs
 tile.andesite_stairs.name=Andesite Stairs
 tile.polished_andesite_stairs.name=Polished Andesite Stairs
+tile.mossy_cobblestone_stairs.name=Mossy Cobblestone Stairs
 
 tile.stone_slab.name=Stone Slab
+tile.mossy_cobblestone_slab.name=Mossy Cobblestone Slab
 tile.granite_slab.name=Granite Slab
 
 tile.stone_brick_wall.name=Stone Brick Wall

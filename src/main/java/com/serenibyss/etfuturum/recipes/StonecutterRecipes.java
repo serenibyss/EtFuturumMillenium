@@ -30,9 +30,9 @@ final class StonecutterRecipes {
 
         // Mossy Cobblestone
         r.addRecipe(new ItemStack(Blocks.MOSSY_COBBLESTONE),
-                // EFMBlocks.SLAB.getItemStack(2, meta),     // Mossy Cobblestone Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta),    // Mossy Cobblestone Stairs, 1
-                new ItemStack(Blocks.COBBLESTONE_WALL, 1, 1) // Mossy Cobblestone Wall, 1
+                EFMBlocks.MOSSY_COBBLESTONE_SLAB.getItemStack(2),  // Mossy Cobblestone Slab, 2
+                EFMBlocks.MOSSY_COBBLESTONE_STAIRS.getItemStack(), // Mossy Cobblestone Stairs, 1
+                new ItemStack(Blocks.COBBLESTONE_WALL, 1, 1)       // Mossy Cobblestone Wall, 1
         );
 
         // Smooth Stone

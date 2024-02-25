@@ -36,10 +36,10 @@ public class ConfigBlocksItems {
 
     // Misc: Too spread out or small to set to one specific version
 
-    @Comment("Adds new Stair blocks. Included are: Stone, Granite, Polished Granite, Diorite, Polished Diorite, Andesite, Polished Andesite")
+    @Comment("Adds new Stair blocks. Included are: Stone, Mossy Cobblestone, Granite, Polished Granite, Diorite, Polished Diorite, Andesite, Polished Andesite")
     public static boolean enableNewStairs = true;
 
-    @Comment("Adds new Slab blocks. Included are: Stone (normal, non-smooth), Granite")
+    @Comment("Adds new Slab blocks. Included are: Stone (normal, non-smooth), Mossy Cobblestone, Granite")
     public static boolean enableNewSlabs = true;
 
     @Comment("Adds new Wall blocks. Included are: Stone Bricks, Granite, Diorite, Andesite")

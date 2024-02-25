@@ -46,11 +46,14 @@ public enum EFMBlocks {
     POLISHED_DIORITE_STAIRS(MISC.newStairs, "polished_diorite_stairs", new EFMBlockStairs(Blocks.STONE, 4, "polished_diorite_stairs")),
     ANDESITE_STAIRS(MISC.newStairs, "andesite_stairs", new EFMBlockStairs(Blocks.STONE, 5, "andesite_stairs")),
     POLISHED_ANDESITE_STAIRS(MISC.newStairs, "polished_andesite_stairs", new EFMBlockStairs(Blocks.STONE, 6, "polished_andesite_stairs")),
+    MOSSY_COBBLESTONE_STAIRS(MISC.newStairs, "mossy_cobblestone_stairs", new EFMBlockStairs(Blocks.MOSSY_COBBLESTONE, "mossy_cobblestone_stairs")),
 
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE.getDouble()),
     GRANITE_SLAB(MISC.newSlabs, "granite_slab", SlabFactory.GRANITE.getHalf()),
     GRANITE_DOUBLE_SLAB(MISC.newSlabs, "granite_double_slab", SlabFactory.GRANITE.getDouble()),
+    MOSSY_COBBLESTONE_SLAB(MISC.newSlabs, "mossy_cobblestone_slab", SlabFactory.MOSSY_COBBLESTONE.getHalf()),
+    MOSSY_COBBLESTONE_DOUBLE_SLAB(MISC.newSlabs, "mossy_cobblestone_double_slab", SlabFactory.MOSSY_COBBLESTONE.getDouble()),
 
     STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
     GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, "granite_wall")),
