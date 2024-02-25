@@ -56,9 +56,9 @@ public enum EFMBlocks {
     MOSSY_COBBLESTONE_DOUBLE_SLAB(MISC.newSlabs, "mossy_cobblestone_double_slab", SlabFactory.MOSSY_COBBLESTONE.getDouble()),
 
     STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
-    GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, "granite_wall")),
-    DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, "diorite_wall")),
-    ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, "andesite_wall")),
+    GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, 1, "granite_wall")),
+    DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, 3, "diorite_wall")),
+    ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
 
     ;
 
