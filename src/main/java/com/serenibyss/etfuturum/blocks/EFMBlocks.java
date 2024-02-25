@@ -40,6 +40,12 @@ public enum EFMBlocks {
     SMOOTH_STONE(MC14.smoothStone, "smooth_stone", new EFMBlock(new Settings(Material.ROCK, MapColor.STONE).hardness(2.0f).resistance(6.0f).creativeTab(CreativeTabs.BUILDING_BLOCKS).translationKey("smooth_stone"))),
 
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
+    GRANITE_STAIRS(MISC.newStairs, "granite_stairs", new EFMBlockStairs(Blocks.STONE, 1, "granite_stairs")),
+    POLISHED_GRANITE_STAIRS(MISC.newStairs, "polished_granite_stairs", new EFMBlockStairs(Blocks.STONE, 2, "polished_granite_stairs")),
+    DIORITE_STAIRS(MISC.newStairs, "diorite_stairs", new EFMBlockStairs(Blocks.STONE, 3, "diorite_stairs")),
+    POLISHED_DIORITE_STAIRS(MISC.newStairs, "polished_diorite_stairs", new EFMBlockStairs(Blocks.STONE, 4, "polished_diorite_stairs")),
+    ANDESITE_STAIRS(MISC.newStairs, "andesite_stairs", new EFMBlockStairs(Blocks.STONE, 5, "andesite_stairs")),
+    POLISHED_ANDESITE_STAIRS(MISC.newStairs, "polished_andesite_stairs", new EFMBlockStairs(Blocks.STONE, 6, "polished_andesite_stairs")),
 
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE.getDouble()),

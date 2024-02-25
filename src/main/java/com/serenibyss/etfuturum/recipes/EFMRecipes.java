@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.recipes;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.api.StrippingRegistry;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
+import com.serenibyss.etfuturum.blocks.base.EFMBlock;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.block.Block;
@@ -37,6 +38,12 @@ public class EFMRecipes {
         addShapedRecipe("stonecutter", EFMBlocks.STONECUTTER.getItemStack(), " X ", "SSS", 'X', "ingotIron", 'S', new ItemStack(Blocks.STONE));
 
         addStairsRecipe("stone_stairs", EFMBlocks.STONE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE));
+        addStairsRecipe("granite_stairs", EFMBlocks.GRANITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
+        addStairsRecipe("polished_granite_stairs", EFMBlocks.POLISHED_GRANITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 2));
+        addStairsRecipe("diorite_stairs", EFMBlocks.DIORITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
+        addStairsRecipe("polished_diorite_stairs", EFMBlocks.POLISHED_DIORITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 4));
+        addStairsRecipe("andesite_stairs", EFMBlocks.ANDESITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
+        addStairsRecipe("polished_andesite_stairs", EFMBlocks.POLISHED_ANDESITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 6));
 
         addSlabRecipe("stone_slab", EFMBlocks.STONE_SLAB.getItemStack(), new ItemStack(Blocks.STONE));
         if (Features.MC14.smoothStone.isEnabled()) {
