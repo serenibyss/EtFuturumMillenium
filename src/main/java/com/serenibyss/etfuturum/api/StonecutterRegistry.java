@@ -21,6 +21,7 @@ public final class StonecutterRegistry {
     }
 
     public void addRecipe(ItemStack input, ItemStack... output) {
+        if (input == null || input.isEmpty()) return;
         ObjectList<ItemStack> list = new ObjectArrayList<>();
         Arrays.stream(output)
                 .filter(Objects::nonNull)

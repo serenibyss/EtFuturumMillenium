@@ -36,9 +36,9 @@ final class StonecutterRecipes {
         );
 
         // Smooth Stone
-        // r.addRecipe(EFMBlocks.SMOOTH_STONE.getItemStack(),
-        //         new ItemStack(Blocks.STONE_SLAB, 2) // Smooth Stone Slab, 2
-        // );
+        r.addRecipe(EFMBlocks.SMOOTH_STONE.getItemStack(),
+                new ItemStack(Blocks.STONE_SLAB, 2) // Smooth Stone Slab, 2
+        );
 
         // Stone Bricks
         r.addRecipe(new ItemStack(Blocks.STONEBRICK),
