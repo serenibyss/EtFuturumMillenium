@@ -52,6 +52,9 @@ public class EFMRecipes {
         addSlabRecipe("granite_slab", EFMBlocks.GRANITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
 
         addWallRecipe("stone_brick_wall", EFMBlocks.STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK));
+        addWallRecipe("granite_wall", EFMBlocks.GRANITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
+        addWallRecipe("diorite_wall", EFMBlocks.DIORITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
+        addWallRecipe("andesite_wall", EFMBlocks.ANDESITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
 
         // todo: Uncomment when Nautilus Shell and Heart of the Sea are added
         //addShapedRecipe("conduit", EFMBlocks.CONDUIT.getItemStack(), "XXX", "XSX", "XXX", 'X', EFMItems.NAUTILUS_SHELL.getItemStack(), 'S', EFMItems.HEART_OF_THE_SEA.getItemStack());
