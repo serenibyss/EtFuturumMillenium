@@ -9,8 +9,8 @@ import static com.serenibyss.etfuturum.load.feature.Features.*;
 public class EFMLangOverrides {
 
     public static void init(Set<String> s) {
-        addOverride(MISC.newSlabs, "tile.stoneSlab.name", s);
-        addOverride(MISC.newSlabs, "tile.stoneSlab.stone.name", s);
+        addOverride(MC14.smoothStone, "tile.stoneSlab.name", s);
+        addOverride(MC14.smoothStone, "tile.stoneSlab.stone.name", s);
     }
 
     private static void addOverride(Feature feature, String langKey, Set<String> s) {

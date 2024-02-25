@@ -38,8 +38,10 @@ public class EFMRecipes {
 
         addStairsRecipe("stone_stairs", EFMBlocks.STONE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE));
 
-        // todo fix 1.12 vanilla stone slab recipe
         addSlabRecipe("stone_slab", EFMBlocks.STONE_SLAB.getItemStack(), new ItemStack(Blocks.STONE));
+        if (Features.MC14.smoothStone.isEnabled()) {
+            addSlabRecipe("minecraft:stone_slab", new ItemStack(Blocks.STONE_SLAB), EFMBlocks.SMOOTH_STONE.getItemStack());
+        }
 
         addWallRecipe("stone_brick_wall", EFMBlocks.STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK));
 

@@ -19,6 +19,9 @@ public class ConfigBlocksItems {
     public static boolean enableBarrels = true;
     public static boolean enableStonecutter = true;
 
+    @Comment("Adds Smooth Stone, and changes the old Stone Slab to Smooth Stone Slab, and changes its recipe. Recommended if 'enableNewSlabs' is enabled.")
+    public static boolean enableSmoothStone = true;
+
     // 1.15: Buzzy Bees
 
     // 1.16: Nether Update

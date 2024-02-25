@@ -2,11 +2,15 @@ package com.serenibyss.etfuturum.blocks;
 
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.blocks.base.*;
+import com.serenibyss.etfuturum.blocks.base.EFMBlock.Settings;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.tiles.TileEntityBarrel;
 import com.serenibyss.etfuturum.tiles.TileEntityConduit;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -33,6 +37,7 @@ public enum EFMBlocks {
 
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
+    SMOOTH_STONE(MC14.smoothStone, "smooth_stone", new EFMBlock(new Settings(Material.ROCK, MapColor.STONE).hardness(2.0f).resistance(6.0f).creativeTab(CreativeTabs.BUILDING_BLOCKS).translationKey("smooth_stone"))),
 
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
 
