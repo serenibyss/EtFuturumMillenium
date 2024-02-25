@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "etfuturum:andesite_slab" },
+    "half=top": { "model": "etfuturum:andesite_slab_top" }
+  }
+}

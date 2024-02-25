@@ -51,9 +51,11 @@ public class EFMRecipes {
         if (Features.MC14.smoothStone.isEnabled()) {
             addSlabRecipe("minecraft:stone_slab", new ItemStack(Blocks.STONE_SLAB), EFMBlocks.SMOOTH_STONE.getItemStack());
         }
-        addSlabRecipe("granite_slab", EFMBlocks.GRANITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
         addSlabRecipe("mossy_cobblestone_slab", EFMBlocks.MOSSY_COBBLESTONE_SLAB.getItemStack(), new ItemStack(Blocks.MOSSY_COBBLESTONE));
         addSlabRecipe("mossy_stone_brick_slab", EFMBlocks.MOSSY_STONE_BRICK_SLAB.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
+        addSlabRecipe("granite_slab", EFMBlocks.GRANITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
+        addSlabRecipe("diorite_slab", EFMBlocks.DIORITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
+        addSlabRecipe("andesite_slab", EFMBlocks.ANDESITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
 
         addWallRecipe("stone_brick_wall", EFMBlocks.STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK));
         addWallRecipe("mossy_stone_brick_wall", EFMBlocks.MOSSY_STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));

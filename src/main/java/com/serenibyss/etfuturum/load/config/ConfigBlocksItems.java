@@ -39,7 +39,7 @@ public class ConfigBlocksItems {
     @Comment("Adds new Stair blocks. Included are: Stone, Mossy Cobblestone, Mossy Stone Bricks, Granite, Polished Granite, Diorite, Polished Diorite, Andesite, Polished Andesite")
     public static boolean enableNewStairs = true;
 
-    @Comment("Adds new Slab blocks. Included are: Stone (normal, non-smooth), Mossy Cobblestone, Mossy Stone Bricks, Granite")
+    @Comment("Adds new Slab blocks. Included are: Stone (normal, non-smooth), Mossy Cobblestone, Mossy Stone Bricks, Granite, Diorite, Andesite")
     public static boolean enableNewSlabs = true;
 
     @Comment("Adds new Wall blocks. Included are: Stone Bricks, Mossy Stone Bricks, Granite, Diorite, Andesite")
