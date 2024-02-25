@@ -1,17 +1,12 @@
 package com.serenibyss.etfuturum.blocks.base;
 
-import net.minecraft.block.material.MapColor;
-import net.minecraft.block.material.Material;
-import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
 
 /** A place to construct Single+Double Slabs together without needing lots of tiny classes. */
 public class SlabFactory {
 
-    public static final SlabFactory STONE_SLAB = new SlabFactory(
-            new EFMBlock.Settings(Material.ROCK, MapColor.STONE)
-                    .hardness(2.0f).resistance(6.0f)
-                    .creativeTab(CreativeTabs.BUILDING_BLOCKS)
-                    .translationKey("stone_slab"));
+    public static final SlabFactory STONE = new SlabFactory(EFMBlock.Settings.from(Blocks.STONE).translationKey("stone_slab"));
+    public static final SlabFactory GRANITE = new SlabFactory(EFMBlock.Settings.from(Blocks.STONE, 1).translationKey("granite_slab"));
 
     private final EFMBlockHalfSlab halfSlab;
     private final EFMBlockDoubleSlab doubleSlab;
@@ -31,11 +26,11 @@ public class SlabFactory {
         };
     }
 
-    public EFMBlockHalfSlab getHalfSlab() {
+    public EFMBlockHalfSlab getHalf() {
         return halfSlab;
     }
 
-    public EFMBlockDoubleSlab getDoubleSlab() {
+    public EFMBlockDoubleSlab getDouble() {
         return doubleSlab;
     }
 }

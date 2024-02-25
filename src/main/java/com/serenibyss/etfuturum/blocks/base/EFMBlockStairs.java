@@ -14,6 +14,7 @@ public class EFMBlockStairs extends BlockStairs implements IModelRegister {
     // the super constructor is protected...
     public EFMBlockStairs(Block baseBlock, int meta, String translationKey) {
         super(baseBlock.getStateFromMeta(meta));
+        this.useNeighborBrightness = true;
         setTranslationKey(translationKey);
     }
 }

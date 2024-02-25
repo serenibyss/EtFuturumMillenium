@@ -41,8 +41,10 @@ public enum EFMBlocks {
 
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
 
-    STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE_SLAB.getHalfSlab()),
-    STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE_SLAB.getDoubleSlab()),
+    STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
+    STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE.getDouble()),
+    GRANITE_SLAB(MISC.newSlabs, "granite_slab", SlabFactory.GRANITE.getHalf()),
+    GRANITE_DOUBLE_SLAB(MISC.newSlabs, "granite_double_slab", SlabFactory.GRANITE.getDouble()),
 
     STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
 

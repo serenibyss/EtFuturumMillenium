@@ -57,7 +57,7 @@ final class StonecutterRecipes {
 
         // Granite
         r.addRecipe(new ItemStack(Blocks.STONE, 1, 1),
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Granite Slab, 2
+                EFMBlocks.GRANITE_SLAB.getItemStack(2),   // Granite Slab, 2
                 // EFMBlocks.STAIR.getItemStack(1, meta), // Granite Stairs, 1
                 // EFMBlocks.WALL.getItemStack(1, meta),  // Granite Wall, 1
                 new ItemStack(Blocks.STONE, 1, 2)         // Polished Granite, 1

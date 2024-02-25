@@ -13,6 +13,7 @@ import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.EnumRarity;
+import net.minecraft.item.Item;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
@@ -92,6 +93,10 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable, I
                 : settings.material.getMaterialMapColor();
     }
 
+    public Item asItem() {
+        return Item.getItemFromBlock(this);
+    }
+
     @Optional.Method(modid = ModIDs.FLUIDLOGGED)
     @Override
     public final boolean isFluidloggable(IBlockState state, World world, BlockPos pos) {
@@ -128,7 +133,7 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable, I
     public static class Settings {
 
         public final Material material;
-        public final ContextFunction<MapColor> mapColor;
+        public ContextFunction<MapColor> mapColor;
         public String translationKey;
         public CreativeTabs tab;
         public boolean collidable = true;
@@ -148,6 +153,26 @@ public class EFMBlock extends Block implements IModelRegister, IFluidloggable, I
 
         public Settings(Material material, MapColor mapColor) {
             this(material, (state, world, pos) -> mapColor);
+        }
+
+        public static Settings from(Block blockIn) {
+            return from(blockIn, 0);
+        }
+
+        public static Settings from(Block blockIn, int meta) {
+            IBlockState state = blockIn.getStateFromMeta(meta);
+            Settings settings = new Settings(blockIn.getMaterial(state));
+            settings.mapColor = ($, world, pos) -> blockIn.getMapColor(state, world, pos);
+            settings.tab = blockIn.getCreativeTab();
+            settings.collidable = blockIn.isCollidable();
+            settings.opaque = blockIn.isOpaqueCube(state);
+            settings.fullCube = blockIn.isFullCube(state);
+            settings.resistance = blockIn.getExplosionResistance(null) * 5.0F / 3.0F;
+            settings.hardness = blockIn.getBlockHardness(null, null, null);
+            settings.soundType = blockIn.getSoundType();
+            settings.lightValue = ($, world, pos) -> blockIn.getLightValue(state, world, pos);
+            settings.slipperiness = ($, world, pos) -> blockIn.getSlipperiness(state, world, pos, null);
+            return settings;
         }
 
         public Settings(Material material, ContextFunction<MapColor> mapColor) {

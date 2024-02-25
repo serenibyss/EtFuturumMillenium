@@ -42,6 +42,7 @@ public class EFMRecipes {
         if (Features.MC14.smoothStone.isEnabled()) {
             addSlabRecipe("minecraft:stone_slab", new ItemStack(Blocks.STONE_SLAB), EFMBlocks.SMOOTH_STONE.getItemStack());
         }
+        addSlabRecipe("granite_slab", EFMBlocks.GRANITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
 
         addWallRecipe("stone_brick_wall", EFMBlocks.STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK));
 
