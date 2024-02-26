@@ -59,6 +59,29 @@ public class EFMSounds {
     public static final SoundEvent ENTITY_TURTLE_LAY_EGG = create(MC13.turtle, "entity.turtle.lay_egg");
     public static final SoundEvent ITEM_ARMOR_EQUIP_TURTLE = create(MC13.turtle, "item.armor.equip_turtle");
 
+    public static final SoundEvent ITEM_BUCKET_FILL_FISH = create(MC13.fish, "item.bucket.fill_fish");
+    public static final SoundEvent ITEM_BUCKET_EMPTY_FISH = create(MC13.fish, "item.bucket.empty_fish");
+    public static final SoundEvent ENTITY_FISH_SWIM = create(MC13.fish, "entity.fish.swim");
+    public static final SoundEvent ENTITY_COD_AMBIENT = create(MC13.fish, "entity.cod.ambient");
+    public static final SoundEvent ENTITY_COD_DEATH = create(MC13.fish, "entity.cod.death");
+    public static final SoundEvent ENTITY_COD_HURT = create(MC13.fish, "entity.cod.hurt");
+    public static final SoundEvent ENTITY_COD_FLOP = create(MC13.fish, "entity.cod.flop");
+    public static final SoundEvent ENTITY_SALMON_AMBIENT = create(MC13.fish, "entity.salmon.ambient");
+    public static final SoundEvent ENTITY_SALMON_DEATH = create(MC13.fish, "entity.salmon.death");
+    public static final SoundEvent ENTITY_SALMON_HURT = create(MC13.fish, "entity.salmon.hurt");
+    public static final SoundEvent ENTITY_SALMON_FLOP = create(MC13.fish, "entity.salmon.flop");
+    public static final SoundEvent ENTITY_PUFFER_FISH_AMBIENT = create(MC13.fish, "entity.puffer_fish.ambient");
+    public static final SoundEvent ENTITY_PUFFER_FISH_BLOW_UP = create(MC13.fish, "entity.puffer_fish.blow_up");
+    public static final SoundEvent ENTITY_PUFFER_FISH_BLOW_OUT = create(MC13.fish, "entity.puffer_fish.blow_out");
+    public static final SoundEvent ENTITY_PUFFER_FISH_DEATH = create(MC13.fish, "entity.puffer_fish.death");
+    public static final SoundEvent ENTITY_PUFFER_FISH_HURT = create(MC13.fish, "entity.puffer_fish.hurt");
+    public static final SoundEvent ENTITY_PUFFER_FISH_FLOP = create(MC13.fish, "entity.puffer_fish.flop");
+    public static final SoundEvent ENTITY_PUFFER_FISH_STING = create(MC13.fish, "entity.puffer_fish.sting");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_AMBIENT = create(MC13.fish, "entity.tropical_fish.ambient");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_DEATH = create(MC13.fish, "entity.tropical_fish.death");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_HURT = create(MC13.fish, "entity.tropical_fish.hurt");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_FLOP = create(MC13.fish, "entity.tropical_fish.flop");
+
     private static SoundEvent create(Feature feature, String name) {
         if (feature == null || !feature.isEnabled()) {
             return null;

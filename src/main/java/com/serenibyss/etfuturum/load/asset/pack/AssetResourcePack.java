@@ -13,11 +13,13 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.Set;
 
 @SideOnly(Side.CLIENT)
 public class AssetResourcePack extends FolderResourcePack implements FMLContainerHolder {
 
+    public static final Set<String> textureOverrides = new HashSet<>();
     private final ModContainer mc;
 
     public AssetResourcePack(ModContainer mc) {
@@ -52,5 +54,10 @@ public class AssetResourcePack extends FolderResourcePack implements FMLContaine
         packObj.addProperty("description", "Includes assets moved by Et Futurum Millenium.");
         packObj.addProperty("pack_format", 2);
         return metadataSerializer.parseMetadataSection(metadataSectionName, metadata);
+    }
+
+    @Override
+    protected boolean hasResourceName(@NotNull String name) {
+        return !textureOverrides.contains(name) && super.hasResourceName(name);
     }
 }

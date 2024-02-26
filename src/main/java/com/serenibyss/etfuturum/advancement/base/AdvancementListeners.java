@@ -4,6 +4,7 @@ import net.minecraft.advancements.ICriterionTrigger.Listener;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 
 import java.util.*;
 
@@ -50,6 +51,16 @@ class AdvancementListeners<T extends IAdvancementCriterion> {
         List<Listener<T>> list = new ArrayList<>();
         for (Listener<T> listener : listeners) {
             if (listener.getCriterionInstance().test(player, entity)) {
+                list.add(listener);
+            }
+        }
+        grantCriterion(list);
+    }
+
+    public void trigger(EntityPlayerMP player, ItemStack stack) {
+        List<Listener<T>> list = new ArrayList<>();
+        for (Listener<T> listener : listeners) {
+            if (listener.getCriterionInstance().test(player, stack)) {
                 list.add(listener);
             }
         }

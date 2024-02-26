@@ -2,7 +2,6 @@ package com.serenibyss.etfuturum.load.asset.pack;
 
 import com.google.common.collect.ImmutableSet;
 import com.serenibyss.etfuturum.EFMTags;
-import com.serenibyss.etfuturum.load.asset.EFMLangOverrides;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.AbstractResourcePack;
 import net.minecraft.client.resources.IReloadableResourceManager;
@@ -23,24 +22,23 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
 @SideOnly(Side.CLIENT)
-public abstract class BuiltInResourcePack extends AbstractResourcePack {
+public abstract class LangOverridePack extends AbstractResourcePack {
 
     private static final String PACK_ID = "vanilla_overrides";
-    private static final Set<String> langOverrides = new HashSet<>();
+    public static final Set<String> langOverrides = new HashSet<>();
 
-    public BuiltInResourcePack(File resourcePackFileIn) {
+    public LangOverridePack(File resourcePackFileIn) {
         super(resourcePackFileIn);
     }
 
     public static void init() {
         File file = Loader.instance().activeModContainer().getSource();
-        BuiltInResourcePack pack;
+        LangOverridePack pack;
         if (file.isDirectory()) {
-            pack = new BuiltInFolderResourcePack(file);
+            pack = new LangFolderResourcePack(file);
         } else {
-            pack = new BuiltInFileResourcePack(file);
+            pack = new LangFileResourcePack(file);
         }
-        EFMLangOverrides.init(langOverrides);
         List<IResourcePack> packs = ObfuscationReflectionHelper.getPrivateValue(
                 Minecraft.class, Minecraft.getMinecraft(), "field_110449_ao");
         packs.add(pack);
@@ -69,11 +67,11 @@ public abstract class BuiltInResourcePack extends AbstractResourcePack {
     }
 
     @SideOnly(Side.CLIENT)
-    private static class BuiltInFileResourcePack extends BuiltInResourcePack {
+    private static class LangFileResourcePack extends LangOverridePack {
 
         private final ZipFile zipFile;
 
-        public BuiltInFileResourcePack(File file) {
+        public LangFileResourcePack(File file) {
             super(file);
             try {
                 this.zipFile = new ZipFile(file);
@@ -128,14 +126,14 @@ public abstract class BuiltInResourcePack extends AbstractResourcePack {
 
         @Override
         protected boolean hasResourceName(@NotNull String name) {
-            return zipFile.getEntry(getRootPath() + name) != null;
+            return name.endsWith("lang") && zipFile.getEntry(getRootPath() + name) != null;
         }
     }
 
     @SideOnly(Side.CLIENT)
-    private static class BuiltInFolderResourcePack extends BuiltInResourcePack {
+    private static class LangFolderResourcePack extends LangOverridePack {
 
-        public BuiltInFolderResourcePack(File resourcePackFileIn) {
+        public LangFolderResourcePack(File resourcePackFileIn) {
             super(resourcePackFileIn);
         }
 
@@ -183,7 +181,7 @@ public abstract class BuiltInResourcePack extends AbstractResourcePack {
 
         @Override
         protected boolean hasResourceName(@NotNull String name) {
-            return new File(this.resourcePackFile, getRootPath() + "/" + name).isFile();
+            return name.endsWith("lang") && new File(this.resourcePackFile, getRootPath() + "/" + name).isFile();
         }
     }
 }

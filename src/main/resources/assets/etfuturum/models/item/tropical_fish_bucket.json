@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "etfuturum:item/tropical_fish_bucket"
+  }
+}

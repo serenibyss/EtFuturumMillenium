@@ -7,14 +7,14 @@ import net.minecraft.advancements.ICriterionTrigger;
 import net.minecraft.advancements.PlayerAdvancements;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AdvancementTrigger<T extends IAdvancementCriterion> implements ICriterionTrigger<T> {
+public class AdvancementTrigger<T extends IAdvancementCriterion<T>> implements ICriterionTrigger<T> {
 
     private final ResourceLocation id;
     private final T criterion;
@@ -67,7 +67,7 @@ public class AdvancementTrigger<T extends IAdvancementCriterion> implements ICri
     /**
      * Trigger an advancement for a player unconditionally.
      *
-     * @param player The player triggering the Advancement
+     * @param player The player triggering the Advancement.
      */
     public void trigger(@NotNull EntityPlayerMP player) {
         AdvancementListeners<T> listener = listeners.get(player.getAdvancements());
@@ -79,13 +79,26 @@ public class AdvancementTrigger<T extends IAdvancementCriterion> implements ICri
     /**
      * Trigger an advancement for a player, and ensure an advancement-specified entity is present in the collection.
      *
-     * @param player   The player triggering the Advancement
-     * @param entities A list of entities to test against. Typically, entities that are being attacked by the player.
+     * @param player The player triggering the Advancement.
+     * @param entity An entity to test against. Typically, entities that are being attacked by the player.
      */
     public void trigger(@NotNull EntityPlayerMP player, @NotNull Entity entity) {
         AdvancementListeners<T> listener = listeners.get(player.getAdvancements());
         if (listener != null) {
             listener.trigger(player, entity);
+        }
+    }
+
+    /**
+     * Trigger an advancement for a player, and test against a specific item.
+     *
+     * @param player The player triggering the Advancement.
+     * @param stack  The item to test against.
+     */
+    public void trigger(@NotNull EntityPlayerMP player, @NotNull ItemStack stack) {
+        AdvancementListeners<T> listener = listeners.get(player.getAdvancements());
+        if (listener != null) {
+            listener.trigger(player, stack);
         }
     }
 }

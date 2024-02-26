@@ -1,3 +1,6 @@
 # Vanilla Overrides
 tile.stoneSlab.name=Smooth Stone Slab
 tile.stoneSlab.stone.name=Smooth Stone Slab
+item.fish.clownfish.raw.name=Tropical Fish
+item.fish.cod.raw.name=Raw Cod
+item.fish.cod.cooked.name=Cooked Cod
