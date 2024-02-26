@@ -53,8 +53,8 @@ public enum EFMBlocks {
     POLISHED_ANDESITE_STAIRS(MISC.newStairs, "polished_andesite_stairs", new EFMBlockStairs(Blocks.STONE, 6, "polished_andesite_stairs")),
     COBBLED_DEEPSLATE_STAIRS(MC18.deepslate, "cobbled_deepslate_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 0, "cobbled_deepslate_stairs")),
     POLISHED_DEEPSLATE_STAIRS(MC18.deepslate, "polished_deepslate_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 2, "polished_deepslate_stairs")),
-    BRICK_DEEPSLATE_STAIRS(MC18.deepslate, "deepslate_brick_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 3, "deepslate_brick_stairs")),
-    TILE_DEEPSLATE_STAIRS(MC18.deepslate, "deepslate_tile_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 5, "deepslate_tile_stairs")),
+    DEEPSLATE_BRICK_STAIRS(MC18.deepslate, "deepslate_brick_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 3, "deepslate_brick_stairs")),
+    DEEPSLATE_TILE_STAIRS(MC18.deepslate, "deepslate_tile_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 5, "deepslate_tile_stairs")),
 
     // Slabs
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
@@ -84,6 +84,10 @@ public enum EFMBlocks {
     GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, 1, "granite_wall")),
     DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, 3, "diorite_wall")),
     ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
+    COBBLED_DEEPSLATE_WALL(MISC.newWalls, "cobbled_deepslate_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 0, "cobbled_deepslate_wall")),
+    POLISHED_DEEPSLATE_WALL(MISC.newWalls, "polished_deepslate_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 2, "polished_deepslate_wall")),
+    DEEPSLATE_BRICK_WALL(MISC.newWalls, "deepslate_brick_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 3, "deepslate_brick_wall")),
+    DEEPSLATE_TILE_WALL(MISC.newWalls, "deepslate_tile_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 5, "deepslate_tile_wall")),
 
     ;
 

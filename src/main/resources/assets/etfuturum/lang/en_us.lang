@@ -58,6 +58,14 @@ tile.cobbled_deepslate_stairs.name=Cobbled Deepslate Stairs
 tile.polished_deepslate_stairs.name=Polished Deepslate Stairs
 tile.deepslate_brick_stairs.name=Deepslate Brick Stairs
 tile.deepslate_tile_stairs.name=Deepslate Tile Stairs
+tile.cobbled_deepslate_slab.name=Cobbled Deepslate Slab
+tile.polished_deepslate_slab.name=Polished Deepslate Slab
+tile.deepslate_brick_slab.name=Deepslate Brick Slab
+tile.deepslate_tile_slab.name=Deepslate Tile Slab
+tile.cobbled_deepslate_wall.name=Cobbled Deepslate Wall
+tile.polished_deepslate_wall.name=Polished Deepslate Wall
+tile.deepslate_brick_wall.name=Deepslate Brick Wall
+tile.deepslate_tile_wall.name=Deepslate Tile Wall
 
 tile.turtle_egg.name=Turtle Egg
 tile.smooth_stone.name=Smooth Stone

@@ -1,0 +1,6 @@
+{
+  "parent": "block/wall_inventory",
+  "textures": {
+    "wall": "etfuturum:block/polished_deepslate"
+  }
+}
