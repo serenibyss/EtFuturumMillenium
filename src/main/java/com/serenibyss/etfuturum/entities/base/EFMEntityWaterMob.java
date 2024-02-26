@@ -7,8 +7,12 @@ import net.minecraft.entity.passive.IAnimals;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public abstract class EFMEntityWaterMob extends EntityCreature implements IAnimals {
+
     protected EFMEntityWaterMob(World worldIn) {
         super(worldIn);
     }
@@ -19,8 +23,8 @@ public abstract class EFMEntityWaterMob extends EntityCreature implements IAnima
     }
 
     @Override
-    public EnumCreatureAttribute getCreatureAttribute() {
-        return EFMEnumCreatureAttribute.WATER;
+    public @NotNull EnumCreatureAttribute getCreatureAttribute() {
+        return Objects.requireNonNull(EFMEnumCreatureAttribute.WATER);
     }
 
     @Override
@@ -34,19 +38,14 @@ public abstract class EFMEntityWaterMob extends EntityCreature implements IAnima
     }
 
     @Override
-    protected boolean canDespawn() {
-        return true;
-    }
-
-    @Override
-    protected int getExperiencePoints(EntityPlayer player) {
+    protected int getExperiencePoints(@NotNull EntityPlayer player) {
         return 1 + this.world.rand.nextInt(3);
     }
 
     protected void updateAir(int air) {
-        if(this.isEntityAlive() && !this.isInWater()) {
+        if (this.isEntityAlive() && !this.isInWater()) {
             this.setAir(air - 1);
-            if(this.getAir() == -20) {
+            if (this.getAir() == -20) {
                 this.setAir(0);
                 this.attackEntityFrom(DamageSource.DROWN, 2.0f);
             }
@@ -68,7 +67,7 @@ public abstract class EFMEntityWaterMob extends EntityCreature implements IAnima
     }
 
     @Override
-    public boolean canBeLeashedTo(EntityPlayer player) {
+    public boolean canBeLeashedTo(@NotNull EntityPlayer player) {
         return false;
     }
 }

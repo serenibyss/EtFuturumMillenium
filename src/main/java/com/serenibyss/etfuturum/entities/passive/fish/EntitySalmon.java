@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class EntitySalmon extends AbstractGroupFish {
+
     public EntitySalmon(World worldIn) {
         super(worldIn);
         setSize(0.7f, 0.4f);
@@ -24,7 +25,7 @@ public class EntitySalmon extends AbstractGroupFish {
     @Nullable
     @Override
     protected ResourceLocation getLootTable() {
-        return EFMLootTables.ENTITIES_COD;
+        return EFMLootTables.ENTITIES_SALMON;
     }
 
     @Override

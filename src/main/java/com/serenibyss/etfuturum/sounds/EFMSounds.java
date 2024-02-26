@@ -60,6 +60,7 @@ public class EFMSounds {
     public static final SoundEvent ITEM_ARMOR_EQUIP_TURTLE = create(MC13.turtle, "item.armor.equip_turtle");
 
     public static final SoundEvent ITEM_BUCKET_FILL_FISH = create(MC13.fish, "item.bucket.fill_fish");
+    public static final SoundEvent ITEM_BUCKET_EMPTY_FISH = create(MC13.fish, "item.bucket.empty_fish");
     public static final SoundEvent ENTITY_FISH_SWIM = create(MC13.fish, "entity.fish.swim");
     public static final SoundEvent ENTITY_COD_AMBIENT = create(MC13.fish, "entity.cod.ambient");
     public static final SoundEvent ENTITY_COD_DEATH = create(MC13.fish, "entity.cod.death");

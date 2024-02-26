@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "name": "cod_cod",
+      "name": "salmon_salmon",
       "rolls": 1,
       "entries": [
         {
@@ -11,7 +11,7 @@
           "functions": [
             {
               "function": "set_data",
-              "data": 0
+              "data": 1
             },
             {
               "function": "minecraft:furnace_smelt",
@@ -31,7 +31,7 @@
     },
     {
       "rolls": 1,
-      "name": "cod_bone_meal",
+      "name": "salmon_bone_meal",
       "entries": [
         {
           "type": "item",

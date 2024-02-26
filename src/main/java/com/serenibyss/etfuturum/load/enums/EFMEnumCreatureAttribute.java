@@ -4,11 +4,11 @@ import com.serenibyss.etfuturum.load.feature.Feature;
 import net.minecraft.entity.EnumCreatureAttribute;
 import net.minecraftforge.common.util.EnumHelper;
 
-import static com.serenibyss.etfuturum.load.feature.Features.MC13;
+import static com.serenibyss.etfuturum.load.feature.Features.*;
 
 public class EFMEnumCreatureAttribute {
 
-    public static final EnumCreatureAttribute WATER = addCreatureAttribute(MC13.trident, "water");
+    public static final EnumCreatureAttribute WATER = addCreatureAttribute(CORE, "water");
 
     private static EnumCreatureAttribute addCreatureAttribute(Feature feature, String name) {
         if(!feature.isEnabled()) {

@@ -86,8 +86,8 @@ public class Features13 extends FeatureManager {
                         "entity/fish/tropical_b.png",
                         "entity/fish/tropical_b_pattern_1.png", "entity/fish/tropical_b_pattern_2.png",
                         "entity/fish/tropical_b_pattern_3.png", "entity/fish/tropical_b_pattern_4.png",
-                        "entity/fish/tropical_b_pattern_5.png", "entity/fish/tropical_b_pattern_6.png"
-                        )
+                        "entity/fish/tropical_b_pattern_5.png", "entity/fish/tropical_b_pattern_6.png")
+                .addNumberedSounds("entity/fish/swim", 1, 7)
                 .addNumberedSounds("entity/fish/hurt", 1, 4)
                 .addNumberedSounds("entity/fish/flop", 1, 4)
                 .addNumberedSounds("entity/pufferfish/blow_out", 1, 2)
@@ -96,6 +96,11 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("entity/pufferfish/flop", 1, 4)
                 .addNumberedSounds("entity/pufferfish/hurt", 1, 2)
                 .addNumberedSounds("entity/pufferfish/sting", 1, 2)
+                .addNumberedSounds("item/bucket/fill_fish", 1, 3)
+                .addNumberedSounds("item/bucket/empty_fish", 1, 3)
+                .addTextureOverride("item/cod.png", "items/fish_cod_raw.png")
+                .addTextureOverride("item/cooked_cod.png", "items/fish_cod_cooked.png")
+                .addLangOverrides("item.fish.cod.raw.name", "item.fish.cod.cooked.name", "item.fish.clownfish.raw.name")
                 .build();
     }
 

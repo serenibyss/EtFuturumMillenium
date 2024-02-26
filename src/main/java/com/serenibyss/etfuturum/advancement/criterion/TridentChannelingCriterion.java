@@ -10,12 +10,13 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.JsonUtils;
 
-public class TridentChannelingCriterion extends AbstractCriterion {
+public class TridentChannelingCriterion extends AbstractCriterion<TridentChannelingCriterion> {
 
     private EntityPredicate[] entityPredicates = { EntityPredicate.ANY };
 
     @Override
-    public void deserialize(JsonObject json, JsonDeserializationContext context) {
+    public TridentChannelingCriterion deserialize(JsonObject json, JsonDeserializationContext context) {
+        TridentChannelingCriterion criterion = new TridentChannelingCriterion();
         JsonElement element = json.get("victims");
         if (element != null && !element.isJsonNull()) {
             JsonArray array = JsonUtils.getJsonArray(element, "entities");
@@ -24,8 +25,9 @@ public class TridentChannelingCriterion extends AbstractCriterion {
             for (int i = 0; i < array.size(); i++) {
                 predicates[i] = EntityPredicate.deserialize(array.get(i));
             }
-            entityPredicates = predicates;
+            criterion.entityPredicates = predicates;
         }
+        return criterion;
     }
 
     @Override

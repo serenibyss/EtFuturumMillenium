@@ -2,6 +2,7 @@ package com.serenibyss.etfuturum.entities.passive.fish;
 
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.items.EFMItems;
+import com.serenibyss.etfuturum.loot.EFMLootTables;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.item.EnumDyeColor;
@@ -20,29 +21,30 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 
 public class EntityTropicalFish extends AbstractGroupFish {
+
     private static final DataParameter<Integer> VARIANT = EntityDataManager.createKey(EntityTropicalFish.class, DataSerializers.VARINT);
-    private static final ResourceLocation[] BODY_TEXTURES = new ResourceLocation[] {
+
+    private static final ResourceLocation[] BODY_TEXTURES = {
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a.png"),
-            new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b.png")
-    };
-    private static final ResourceLocation[] PATTERN_TEXTURES_A = new ResourceLocation[] {
+            new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b.png"), };
+
+    private static final ResourceLocation[] PATTERN_TEXTURES_A = {
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_1.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_2.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_3.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_4.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_5.png"),
-            new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_6.png")
-    };
-    private static final ResourceLocation[] PATTERN_TEXTURES_B = new ResourceLocation[] {
+            new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_a_pattern_6.png"), };
+
+    private static final ResourceLocation[] PATTERN_TEXTURES_B = {
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_1.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_2.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_3.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_4.png"),
             new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_5.png"),
-            new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_6.png")
-    };
+            new ResourceLocation(EFMTags.MODID, "textures/entity/fish/tropical_b_pattern_6.png"), };
 
-    public static final int[] SPECIAL_VARIANTS = new int[] {
+    public static final int[] SPECIAL_VARIANTS = {
             pack(EntityTropicalFish.Type.STRIPEY, EnumDyeColor.ORANGE, EnumDyeColor.GRAY),
             pack(EntityTropicalFish.Type.FLOPPER, EnumDyeColor.GRAY, EnumDyeColor.GRAY),
             pack(EntityTropicalFish.Type.FLOPPER, EnumDyeColor.GRAY, EnumDyeColor.BLUE),
@@ -64,14 +66,18 @@ public class EntityTropicalFish extends AbstractGroupFish {
             pack(EntityTropicalFish.Type.KOB, EnumDyeColor.RED, EnumDyeColor.WHITE),
             pack(EntityTropicalFish.Type.SUNSTREAK, EnumDyeColor.GRAY, EnumDyeColor.WHITE),
             pack(EntityTropicalFish.Type.DASHER, EnumDyeColor.CYAN, EnumDyeColor.YELLOW),
-            pack(EntityTropicalFish.Type.FLOPPER, EnumDyeColor.YELLOW, EnumDyeColor.YELLOW)
-    };
+            pack(EntityTropicalFish.Type.FLOPPER, EnumDyeColor.YELLOW, EnumDyeColor.YELLOW), };
+
     private boolean isSchool = true;
 
     private static int pack(EntityTropicalFish.Type size, EnumDyeColor pattern, EnumDyeColor bodyColor) {
-        return size.getBase() & 255 | (size.getIndex() & 255) << 8 | (pattern.getMetadata() & 255) << 16 | (bodyColor.getMetadata() & 255) << 24;
+        return size.getBase() & 0xFF
+                | (size.getIndex() & 0xFF) << 8
+                | (pattern.getMetadata() & 0xFF) << 16
+                | (bodyColor.getMetadata() & 0xFF) << 24;
     }
 
+    @SuppressWarnings("unused")
     public EntityTropicalFish(World worldIn) {
         super(worldIn);
         this.setSize(0.5f, 0.4f);
@@ -80,9 +86,10 @@ public class EntityTropicalFish extends AbstractGroupFish {
     public EntityTropicalFish(World worldIn, ItemStack fromBucket) {
         super(worldIn);
         this.setSize(0.5f, 0.4f);
-        if(fromBucket.hasTagCompound()) {
-            NBTTagCompound compound = fromBucket.getTagCompound();
-            this.setVariant(compound.getInteger("Variant"));
+
+        NBTTagCompound tag = fromBucket.getTagCompound();
+        if (tag != null) {
+            this.setVariant(tag.getInteger("Variant"));
         }
     }
 
@@ -110,6 +117,12 @@ public class EntityTropicalFish extends AbstractGroupFish {
         dataManager.register(VARIANT, 0);
     }
 
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return EFMLootTables.ENTITIES_TROPICAL_FISH;
+    }
+
     @Override
     public void writeEntityToNBT(NBTTagCompound compound) {
         super.writeEntityToNBT(compound);
@@ -126,6 +139,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
         this.dataManager.set(VARIANT, variant);
     }
 
+    // todo this needs to still be injected via mixin/asm
     public boolean inSchool() {
         return !this.isSchool;
     }
@@ -176,7 +190,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
     }
 
     private static int getBodyColorID(int index) {
-        return (index & 16711680) >> 16;
+        return (index & 0xFF0000) >> 16;
     }
 
     public float[] getBodyColorTexture() {
@@ -184,7 +198,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
     }
 
     private static int getPatternColorID(int index) {
-        return (index & -16777216) >> 24;
+        return (index & 0xFF000000) >> 24;
     }
 
     public float[] getPatternColorTexture() {
@@ -192,7 +206,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
     }
 
     public static int getBaseVariant(int index) {
-        return Math.min(index & 255, 1);
+        return Math.min(index & 0xFF, 1);
     }
 
     public int getBaseVariant() {
@@ -200,7 +214,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
     }
 
     private static int getPatternVariant(int index) {
-        return Math.min((index & '\uff00') >> 8, 5);
+        return Math.min((index & 0xFF00) >> 8, 5);
     }
 
     public ResourceLocation getPatternTexture() {
@@ -225,10 +239,10 @@ public class EntityTropicalFish extends AbstractGroupFish {
             l = tfld.patternColor;
         } else if((double) this.rand.nextFloat() < 0.9) {
             int i1 = SPECIAL_VARIANTS[this.rand.nextInt(SPECIAL_VARIANTS.length)];
-            i = i1 & 255;
-            j = (i1 & '\uff00') >> 8;
-            k = (i1 & 16711680) >> 16;
-            l = (i1 & -16777216) >> 24;
+            i = i1 & 0xFF;
+            j = (i1 & 0xFF00) >> 8;
+            k = (i1 & 0xFF0000) >> 16;
+            l = (i1 & 0xFF000000) >> 24;
             livingdata = new EntityTropicalFish.GroupData(this, i, j, k, l);
         } else {
             this.isSchool = false;
@@ -257,7 +271,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
         }
     }
 
-    static enum Type {
+    enum Type {
         KOB(0, 0),
         SUNSTREAK(0, 1),
         SNOOPER(0, 2),
@@ -275,7 +289,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
         private final int index;
         private static final EntityTropicalFish.Type[] VALUES = values();
 
-        private Type(int base, int index) {
+        Type(int base, int index) {
             this.base = base;
             this.index = index;
         }

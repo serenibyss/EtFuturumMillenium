@@ -3,8 +3,8 @@ package com.serenibyss.etfuturum.entities.passive.fish;
 import com.google.common.base.Predicate;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.load.enums.EFMEnumCreatureAttribute;
+import com.serenibyss.etfuturum.loot.EFMLootTables;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
-import net.minecraft.entity.EntityLiving;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.EntityAIBase;
 import net.minecraft.entity.monster.EntityMob;
@@ -19,25 +19,22 @@ import net.minecraft.network.datasync.EntityDataManager;
 import net.minecraft.network.play.server.SPacketChangeGameState;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-
 public class EntityPufferfish extends AbstractFish {
+
     private static final DataParameter<Integer> PUFF_STATE = EntityDataManager.createKey(EntityPufferfish.class, DataSerializers.VARINT);
     private int puffTimer;
     private int deflateTimer;
-    private static final Predicate<EntityLivingBase> ENEMY_MATCHER = (enemy) -> {
-        if(enemy == null) {
-            return false;
-        } else if(!(enemy instanceof EntityPlayer) || !((EntityPlayer)enemy).isSpectator() && !((EntityPlayer)enemy).isCreative()) {
-            return enemy.getCreatureAttribute() != EFMEnumCreatureAttribute.WATER;
-        } else {
-            return false;
-        }
+    private static final Predicate<EntityLivingBase> ENEMY_MATCHER = enemy -> {
+        if (enemy == null) return false;
+        if (enemy instanceof EntityPlayer player && (player.isSpectator() || player.isCreative())) return false;
+        return enemy.getCreatureAttribute() != EFMEnumCreatureAttribute.WATER;
     };
     private float originalWidth = -1.0f;
     private float originalHeight;
@@ -51,6 +48,12 @@ public class EntityPufferfish extends AbstractFish {
     protected void entityInit() {
         super.entityInit();
         dataManager.register(PUFF_STATE, 0);
+    }
+
+    @Nullable
+    @Override
+    protected ResourceLocation getLootTable() {
+        return EFMLootTables.ENTITIES_PUFFERFISH;
     }
 
     public int getPuffState() {
@@ -78,7 +81,7 @@ public class EntityPufferfish extends AbstractFish {
         boolean flag = this.originalWidth > 0.0f;
         this.originalWidth = width;
         this.originalHeight = height;
-        if(!flag) {
+        if (!flag) {
             this.updateSize(1.0F);
         }
     }
@@ -118,19 +121,19 @@ public class EntityPufferfish extends AbstractFish {
 
     @Override
     public void onUpdate() {
-        if(isAlive() && !world.isRemote && this.isServerWorld()) {
-            if(puffTimer > 0) {
-                if(getPuffState() == 0) {
+        if (isAlive() && !world.isRemote && this.isServerWorld()) {
+            if (puffTimer > 0) {
+                if (getPuffState() == 0) {
                     playSound(EFMSounds.ENTITY_PUFFER_FISH_BLOW_UP, getSoundVolume(), getSoundPitch());
                     setPuffState(1);
-                } else if(puffTimer > 40 && getPuffState() == 1) {
+                } else if (puffTimer > 40 && getPuffState() == 1) {
                     playSound(EFMSounds.ENTITY_PUFFER_FISH_BLOW_UP, getSoundVolume(), getSoundPitch());
                     setPuffState(2);
                 }
 
                 ++puffTimer;
             } else if (getPuffState() != 0) {
-                if(deflateTimer > 60 && getPuffState() == 2) {
+                if (deflateTimer > 60 && getPuffState() == 2) {
                     playSound(EFMSounds.ENTITY_PUFFER_FISH_BLOW_OUT, getSoundVolume(), getSoundPitch());
                     setPuffState(1);
                 } else if (deflateTimer > 100 && getPuffState() == 1) {
@@ -147,9 +150,9 @@ public class EntityPufferfish extends AbstractFish {
     @Override
     public void onLivingUpdate() {
         super.onLivingUpdate();
-        if(isAlive() && getPuffState() > 0) {
-            for(EntityMob mob : world.getEntitiesWithinAABB(EntityMob.class, this.getEntityBoundingBox().grow(0.9), ENEMY_MATCHER)) {
-                if(mob.isEntityAlive()) {
+        if (isAlive() && getPuffState() > 0) {
+            for (EntityMob mob : world.getEntitiesWithinAABB(EntityMob.class, this.getEntityBoundingBox().grow(0.9), ENEMY_MATCHER)) {
+                if (mob.isEntityAlive()) {
                     attack(mob);
                 }
             }
@@ -158,7 +161,7 @@ public class EntityPufferfish extends AbstractFish {
 
     private void attack(EntityMob mob) {
         int i = getPuffState();
-        if(mob.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(1 + i))) {
+        if (mob.attackEntityFrom(DamageSource.causeMobDamage(this), i + 1)) {
             mob.addPotionEffect(new PotionEffect(MobEffects.POISON, 60 * i, 0));
             this.playSound(EFMSounds.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f);
         }
@@ -167,10 +170,10 @@ public class EntityPufferfish extends AbstractFish {
     @Override
     public void onCollideWithPlayer(EntityPlayer entityIn) {
         int i = getPuffState();
-        if(entityIn instanceof EntityPlayerMP && i > 0 && entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), (float)(1 + i))) {
-            ((EntityPlayerMP)entityIn).connection.sendPacket(new SPacketChangeGameState(9, 0.0f));
+        if (entityIn instanceof EntityPlayerMP player && i > 0 && entityIn.attackEntityFrom(DamageSource.causeMobDamage(this), i + 1)) {
+            player.connection.sendPacket(new SPacketChangeGameState(9, 0.0f));
             entityIn.addPotionEffect(new PotionEffect(MobEffects.POISON, 60 * i, 0));
-            //this.playSound(EFMSounds.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f);
+            this.playSound(EFMSounds.ENTITY_PUFFER_FISH_STING, 1.0f, 1.0f);
         }
     }
     @Nullable
@@ -197,6 +200,7 @@ public class EntityPufferfish extends AbstractFish {
     }
 
     static class AIPuff extends EntityAIBase {
+
         private final EntityPufferfish puffer;
 
         public AIPuff(EntityPufferfish fish) {
@@ -205,7 +209,7 @@ public class EntityPufferfish extends AbstractFish {
 
         @Override
         public boolean shouldExecute() {
-            List<EntityLivingBase> list = puffer.world.getEntitiesWithinAABB(EntityLivingBase.class, puffer.getEntityBoundingBox().grow(2.0), EntityPufferfish.ENEMY_MATCHER);
+            List<EntityLivingBase> list = puffer.world.getEntitiesWithinAABB(EntityLivingBase.class, puffer.getEntityBoundingBox().grow(2.0), ENEMY_MATCHER);
             return !list.isEmpty();
         }
 
@@ -222,7 +226,7 @@ public class EntityPufferfish extends AbstractFish {
 
         @Override
         public boolean shouldContinueExecuting() {
-            List<EntityLivingBase> list = puffer.world.getEntitiesWithinAABB(EntityLivingBase.class, puffer.getEntityBoundingBox().grow(2.0), EntityPufferfish.ENEMY_MATCHER);
+            List<EntityLivingBase> list = puffer.world.getEntitiesWithinAABB(EntityLivingBase.class, puffer.getEntityBoundingBox().grow(2.0), ENEMY_MATCHER);
             return !list.isEmpty();
         }
     }

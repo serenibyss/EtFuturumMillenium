@@ -1,8 +1,10 @@
 package com.serenibyss.etfuturum.entities.passive.fish;
 
+import com.serenibyss.etfuturum.advancement.EFMAdvancements;
 import com.serenibyss.etfuturum.entities.ai.EFMEntityAIWanderSwim;
 import com.serenibyss.etfuturum.entities.base.EFMEntityWaterMob;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
+import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.MoverType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -10,6 +12,7 @@ import net.minecraft.entity.ai.EntityAIAvoidEntity;
 import net.minecraft.entity.ai.EntityAIPanic;
 import net.minecraft.entity.ai.EntityMoveHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -26,9 +29,12 @@ import net.minecraft.util.math.MathHelper;
 import net.minecraft.world.World;
 
 public abstract class AbstractFish extends EFMEntityWaterMob {
+
     private static final DataParameter<Boolean> FROM_BUCKET = EntityDataManager.createKey(AbstractFish.class, DataSerializers.BOOLEAN);
+
     public AbstractFish(World worldIn) {
         super(worldIn);
+        this.moveHelper = new MoveHelper(this);
     }
 
     @Override
@@ -50,7 +56,7 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
     @Override
     public boolean getCanSpawnHere() {
         BlockPos pos = new BlockPos(this);
-        return this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(pos.up()).getBlock() == Blocks.WATER ? super.getCanSpawnHere() : false;
+        return this.world.getBlockState(pos).getBlock() == Blocks.WATER && this.world.getBlockState(pos.up()).getBlock() == Blocks.WATER && super.getCanSpawnHere();
     }
 
     @Override
@@ -93,7 +99,7 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
     protected void initEntityAI() {
         super.initEntityAI();
         this.tasks.addTask(0, new EntityAIPanic(this, 1.25));
-        this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, 8.0f, 1.6, 1.4));
+        this.tasks.addTask(2, new EntityAIAvoidEntity<>(this, EntityPlayer.class, p -> !p.isSpectator(), 8.0f, 1.6, 1.4));
         this.tasks.addTask(4, new AbstractFish.AISwim(this));
     }
 
@@ -107,9 +113,9 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
         if (this.isServerWorld() && this.isInWater()) {
             this.moveRelative(strafe, vertical, forward, 0.01f);
             this.move(MoverType.SELF, this.motionX, this.motionY, this.motionZ);
-            this.motionX *= (double) 0.9F;
-            this.motionY *= (double) 0.9F;
-            this.motionZ *= (double) 0.9F;
+            this.motionX *= 0.9F;
+            this.motionY *= 0.9F;
+            this.motionZ *= 0.9F;
             if (this.getAttackTarget() == null) {
                 this.motionY -= 0.005D;
             }
@@ -120,10 +126,10 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
 
     @Override
     public void onEntityUpdate() {
-        if(!isInWater() && this.onGround && collidedVertically) {
+        if (!isInWater() && this.onGround && collidedVertically) {
             this.motionY += 0.4;
-            this.motionX += (double)((this.rand.nextFloat() * 2.0f - 1.0f) * 0.05);
-            this.motionZ += (double)((this.rand.nextFloat() * 2.0f - 1.0f) * 0.05);
+            this.motionX += (this.rand.nextFloat() * 2.0f - 1.0f) * 0.05;
+            this.motionZ += (this.rand.nextFloat() * 2.0f - 1.0f) * 0.05;
             this.onGround = false;
             this.isAirBorne = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getSoundPitch());
@@ -137,16 +143,16 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
         if(stack.getItem() == Items.WATER_BUCKET && isEntityAlive()) {
             this.playSound(EFMSounds.ITEM_BUCKET_FILL_FISH, 1.0f, 1.0f);
             stack.shrink(1);
-            ItemStack stack1 = getFishBucket();
-            this.setBucketData(stack1);
-            if(!this.world.isRemote) {
-                // criteria
+            ItemStack fishBucket = getFishBucket();
+            this.setBucketData(fishBucket);
+            if (!this.world.isRemote) {
+                EFMAdvancements.FILLED_BUCKET.trigger((EntityPlayerMP) player, fishBucket);
             }
 
-            if(stack.isEmpty()) {
-                player.setHeldItem(hand, stack1);
-            } else if(!player.inventory.addItemStackToInventory(stack1)) {
-                player.dropItem(stack1, false);
+            if (stack.isEmpty()) {
+                player.setHeldItem(hand, fishBucket);
+            } else if (!player.inventory.addItemStackToInventory(fishBucket)) {
+                player.dropItem(fishBucket, false);
             }
 
             this.setDead();
@@ -157,15 +163,17 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
     }
 
     protected void setBucketData(ItemStack stack) {
-        if(hasCustomName()) {
+        if (hasCustomName()) {
             stack.setStackDisplayName(getCustomNameTag());
         }
     }
 
     protected abstract ItemStack getFishBucket();
+
     protected boolean isAlive() {
         return true;
     }
+
     protected abstract SoundEvent getFlopSound();
 
     @Override
@@ -174,6 +182,7 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
     }
 
     static class AISwim extends EFMEntityAIWanderSwim {
+
         private final AbstractFish fish;
 
         public AISwim(AbstractFish creatureIn) {
@@ -188,30 +197,32 @@ public abstract class AbstractFish extends EFMEntityWaterMob {
     }
 
     static class MoveHelper extends EntityMoveHelper {
+
         private final AbstractFish fish;
-        public MoveHelper(AbstractFish entitylivingIn) {
-            super(entitylivingIn);
-            this.fish = entitylivingIn;
+
+        public MoveHelper(AbstractFish fish) {
+            super(fish);
+            this.fish = fish;
         }
 
         @Override
         public void onUpdateMoveHelper() {
-            if(fish.isInsideOfMaterial(Material.WATER)) {
+            if (fish.isInsideOfMaterial(Material.WATER)) {
                 this.fish.motionY += 0.005;
             }
 
-            if(this.action == Action.MOVE_TO && !fish.getNavigator().noPath()) {
+            if (this.action == Action.MOVE_TO && !fish.getNavigator().noPath()) {
                 double dx = posX - fish.posX;
                 double dy = posY - fish.posY;
                 double dz = posZ - fish.posZ;
                 double del = MathHelper.sqrt(dx * dx + dy * dy + dz * dz);
                 dy /= del;
-                float f = (float)(MathHelper.atan2(dz, dx) * (180f / (float)Math.PI)) - 90.0f;
+                float f = (float) (MathHelper.atan2(dz, dx) * (180f / (float) Math.PI)) - 90.0f;
                 fish.rotationYaw = limitAngle(fish.rotationYaw, f, 90.0f);
                 fish.renderYawOffset = fish.rotationYaw;
-                float f1 = (float)(speed * fish.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
+                float f1 = (float) (speed * fish.getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).getAttributeValue());
                 fish.setAIMoveSpeed(fish.getAIMoveSpeed() + (f1 - fish.getAIMoveSpeed()) * 0.125f);
-                fish.motionY += (double) fish.getAIMoveSpeed() * dy * 0.1;
+                fish.motionY += fish.getAIMoveSpeed() * dy * 0.1;
             } else {
                 fish.setAIMoveSpeed(0.0f);
             }

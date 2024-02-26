@@ -11,6 +11,7 @@ public class AssetRequest {
 
     protected final MCVersion mcVersion;
     protected final EnumMap<AssetType, Set<String>> assetFiles = new EnumMap<>(AssetType.class);
+    protected final Map<String, String> assetOverrides = new HashMap<>();
 
     public AssetRequest(MCVersion mcVersion) {
         this.mcVersion = mcVersion;
@@ -18,6 +19,10 @@ public class AssetRequest {
 
     public void add(AssetType type, String entry) {
         assetFiles.computeIfAbsent(type, $ -> new HashSet<>()).add(entry);
+    }
+
+    public void addOverride(String fromName, String toName) {
+        assetOverrides.put(fromName, toName);
     }
 
     public boolean isEmpty() {
@@ -40,6 +45,9 @@ public class AssetRequest {
             for (String asset : assets) {
                 assetRequest.put("assets/minecraft/" + typeName + "/" + asset, "assets/etfuturum/" + typeName + "/" + asset);
             }
+        }
+        for (var override : assetOverrides.entrySet()) {
+            assetRequest.put("assets/minecraft/textures/" + override.getKey(), "assets/minecraft/textures/" + override.getValue());
         }
         return assetRequest;
     }

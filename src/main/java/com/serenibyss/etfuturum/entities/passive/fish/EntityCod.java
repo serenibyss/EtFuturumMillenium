@@ -11,6 +11,7 @@ import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 public class EntityCod extends AbstractGroupFish{
+
     public EntityCod(World worldIn) {
         super(worldIn);
         setSize(0.5f, 0.3f);

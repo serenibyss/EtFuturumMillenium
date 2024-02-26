@@ -22,7 +22,10 @@ public class Features14 extends FeatureManager {
                 .addSounds("ui/stonecutter/cut1.ogg", "ui/stonecutter/cut2.ogg")
                 .build();
 
-        smoothStone = Feature.builder("smooth_stone", this, () -> ConfigBlocksItems.enableSmoothStone).addTextures("block/smooth_stone.png").build();
+        smoothStone = Feature.builder("smooth_stone", this, () -> ConfigBlocksItems.enableSmoothStone)
+                .addTextures("block/smooth_stone.png")
+                .addLangOverrides("tile.stoneSlab.name", "tile.stoneSlab.stone.name")
+                .build();
     }
 
     @Override

@@ -751,5 +751,19 @@
       "etfuturum:entity/fish/hurt3",
       "etfuturum:entity/fish/hurt4"
     ]
+  },
+  "item.bucket.empty_fish": {
+    "sounds": [
+      "etfuturum:item/bucket/empty_fish1",
+      "etfuturum:item/bucket/empty_fish2",
+      "etfuturum:item/bucket/empty_fish3"
+    ]
+  },
+  "item.bucket.fill_fish": {
+    "sounds": [
+      "etfuturum:item/bucket/fill_fish1",
+      "etfuturum:item/bucket/fill_fish2",
+      "etfuturum:item/bucket/fill_fish3"
+    ]
   }
 }

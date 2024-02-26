@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.stream.Stream;
 
 public abstract class AbstractGroupFish extends AbstractFish {
+
     private AbstractGroupFish groupLeader;
     private int size = 1;
 
@@ -78,18 +79,16 @@ public abstract class AbstractGroupFish extends AbstractFish {
     }
 
     public void splitGroup(Stream<AbstractGroupFish> initGroup) {
-        initGroup.limit((long)(this.getMaxGroupSize() - this.size)).filter((group) -> {
-            return group != this;
-        }).forEach((newGroup) -> {
-            newGroup.addFish(this);
-        });
+        initGroup.limit(this.getMaxGroupSize() - this.size)
+                .filter(group -> group != this)
+                .forEach(newGroup -> newGroup.addFish(this));
     }
 
     @Nullable
     @Override
     public IEntityLivingData onInitialSpawn(DifficultyInstance difficulty, @Nullable IEntityLivingData livingdata) {
         super.onInitialSpawn(difficulty, livingdata);
-        if(livingdata == null) {
+        if (livingdata == null) {
             livingdata = new AbstractGroupFish.GroupData(this);
         } else {
             this.addFish(((GroupData)livingdata).group);
@@ -101,15 +100,16 @@ public abstract class AbstractGroupFish extends AbstractFish {
     @Override
     public void onUpdate() {
         super.onUpdate();
-        if(this.isGroupLeader() && this.world.rand.nextInt(200) == 1) {
+        if (this.isGroupLeader() && this.world.rand.nextInt(200) == 1) {
             List<AbstractFish> list = world.getEntitiesWithinAABB(this.getClass(), this.getEntityBoundingBox().grow(8.0, 8.0, 8.0));
-            if(list.size() <= 1) {
+            if (list.size() <= 1) {
                 size = 1;
             }
         }
     }
 
     public static class GroupData implements IEntityLivingData {
+
         public final AbstractGroupFish group;
 
         public GroupData(AbstractGroupFish group) {

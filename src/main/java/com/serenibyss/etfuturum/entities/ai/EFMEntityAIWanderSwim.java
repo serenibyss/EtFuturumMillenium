@@ -7,9 +7,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
-
 public class EFMEntityAIWanderSwim extends EntityAIWander {
+
     public EFMEntityAIWanderSwim(EntityCreature creatureIn, double speedIn, int chance) {
         super(creatureIn, speedIn, chance);
     }
@@ -17,12 +16,17 @@ public class EFMEntityAIWanderSwim extends EntityAIWander {
     @Nullable
     @Override
     protected Vec3d getPosition() {
-        Vec3d vec = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
-
-        for(int i = 0; vec != null && !this.entity.world.getBlockState(new BlockPos(vec)).getBlock().isPassable(entity.world, new BlockPos(vec)) && i++ < 10; vec = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7)) {
-            ;
-        }
-
+        Vec3d vec;
+        int i = 0;
+        do {
+            vec = RandomPositionGenerator.findRandomTarget(this.entity, 10, 7);
+            if (vec != null) {
+                BlockPos pos = new BlockPos(vec);
+                if (entity.world.getBlockState(pos).getBlock().isPassable(entity.world, pos)) {
+                    return vec;
+                }
+            }
+        } while (i++ < 10);
         return vec;
     }
 }

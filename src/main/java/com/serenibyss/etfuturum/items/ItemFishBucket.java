@@ -1,16 +1,14 @@
 package com.serenibyss.etfuturum.items;
 
 import com.serenibyss.etfuturum.entities.passive.fish.*;
-import com.serenibyss.etfuturum.mixin.fish.ItemBucketMixin;
+import com.serenibyss.etfuturum.sounds.EFMSounds;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.advancements.CriteriaTriggers;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -21,24 +19,22 @@ import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.ActionResult;
-import net.minecraft.util.EnumActionResult;
-import net.minecraft.util.EnumFacing;
-import net.minecraft.util.EnumHand;
+import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TextComponentTranslation;
+import net.minecraft.util.math.RayTraceResult.Type;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
-import java.util.Locale;
-import java.util.function.Supplier;
 
 public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implements IModelRegister {
+
+    private static final String BUCKET_VARIANT_TAG = "BucketVariantTag";
+
     private final Class<T> fishType;
+
     public ItemFishBucket(Class<T> type, Block containedBlockIn) {
         super(containedBlockIn);
         this.fishType = type;
@@ -46,168 +42,124 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
 
     @Override
     public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        boolean flag = false;
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
-        RayTraceResult raytraceresult = this.rayTrace(worldIn, playerIn, flag);
-        ActionResult<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onBucketUse(playerIn, worldIn, itemstack, raytraceresult);
-        if (ret != null) return ret;
+        ItemStack stack = playerIn.getHeldItem(handIn);
+        RayTraceResult result = this.rayTrace(worldIn, playerIn, false);
 
-        if (raytraceresult == null)
-        {
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+        //noinspection ConstantConditions, yes it can be null
+        if (result == null || result.typeOfHit != Type.BLOCK) {
+            return new ActionResult<>(EnumActionResult.PASS, stack);
         }
-        else if (raytraceresult.typeOfHit != RayTraceResult.Type.BLOCK)
-        {
-            return new ActionResult<ItemStack>(EnumActionResult.PASS, itemstack);
+
+        BlockPos pos = result.getBlockPos();
+        EnumFacing side = result.sideHit;
+        if (!worldIn.isBlockModifiable(playerIn, pos)) {
+            return new ActionResult<>(EnumActionResult.FAIL, stack);
         }
-        else
-        {
-            BlockPos blockpos = raytraceresult.getBlockPos();
 
-            if (!worldIn.isBlockModifiable(playerIn, blockpos))
-            {
-                return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-            }
-            else if (flag)
-            {
-                if (!playerIn.canPlayerEdit(blockpos.offset(raytraceresult.sideHit), raytraceresult.sideHit, itemstack))
-                {
-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-                }
-                else
-                {
-                    IBlockState iblockstate = worldIn.getBlockState(blockpos);
-                    Material material = iblockstate.getMaterial();
-
-                    if (material == Material.WATER && ((Integer)iblockstate.getValue(BlockLiquid.LEVEL)).intValue() == 0)
-                    {
-                        worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
-                        playerIn.addStat(StatList.getObjectUseStats(this));
-                        playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL, 1.0F, 1.0F);
-                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(itemstack, playerIn, Items.WATER_BUCKET));
-                    }
-                    else if (material == Material.LAVA && ((Integer)iblockstate.getValue(BlockLiquid.LEVEL)).intValue() == 0)
-                    {
-                        playerIn.playSound(SoundEvents.ITEM_BUCKET_FILL_LAVA, 1.0F, 1.0F);
-                        worldIn.setBlockState(blockpos, Blocks.AIR.getDefaultState(), 11);
-                        playerIn.addStat(StatList.getObjectUseStats(this));
-                        return new ActionResult<ItemStack>(EnumActionResult.SUCCESS, this.fillBucket(itemstack, playerIn, Items.LAVA_BUCKET));
-                    }
-                    else
-                    {
-                        return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-                    }
-                }
-            }
-            else
-            {
-                boolean flag1 = worldIn.getBlockState(blockpos).getBlock().isReplaceable(worldIn, blockpos);
-                BlockPos blockpos1 = flag1 && raytraceresult.sideHit == EnumFacing.UP ? blockpos : blockpos.offset(raytraceresult.sideHit);
-
-                if (!playerIn.canPlayerEdit(blockpos1, raytraceresult.sideHit, itemstack))
-                {
-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-                }
-                else if (this.tryPlaceContainedLiquid(playerIn, worldIn, blockpos1))
-                {
-                    try {
-                        this.placeFish(worldIn, itemstack, blockpos1);
-                    } catch(InstantiationException | IllegalAccessException ie) {
-
-                    }
-                    if (playerIn instanceof EntityPlayerMP)
-                    {
-                        CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)playerIn, blockpos1, itemstack);
-                    }
-
-                    playerIn.addStat(StatList.getObjectUseStats(this));
-                    return !playerIn.capabilities.isCreativeMode ? new ActionResult(EnumActionResult.SUCCESS, new ItemStack(Items.BUCKET)) : new ActionResult(EnumActionResult.SUCCESS, itemstack);
-                }
-                else
-                {
-                    return new ActionResult<ItemStack>(EnumActionResult.FAIL, itemstack);
-                }
-            }
+        if (!worldIn.getBlockState(pos).getBlock().isReplaceable(worldIn, pos) || side != EnumFacing.UP) {
+            pos = pos.offset(side);
         }
+
+        if (!playerIn.canPlayerEdit(pos, side, stack) || !tryPlaceContainedLiquid(playerIn, worldIn, pos)) {
+            return new ActionResult<>(EnumActionResult.FAIL, stack);
+        }
+
+        try {
+            this.placeFish(worldIn, stack, pos);
+        } catch(InstantiationException | IllegalAccessException ignored) {}
+
+        playerIn.addStat(StatList.getObjectUseStats(this));
+        if (playerIn instanceof EntityPlayerMP) {
+            CriteriaTriggers.PLACED_BLOCK.trigger((EntityPlayerMP)playerIn, pos, stack);
+        }
+
+        return !playerIn.capabilities.isCreativeMode
+                ? new ActionResult<>(EnumActionResult.SUCCESS, new ItemStack(Items.BUCKET))
+                : new ActionResult<>(EnumActionResult.SUCCESS, stack);
     }
 
-    public void placeFish(World world, ItemStack stack, BlockPos pos) throws InstantiationException, IllegalAccessException {
-        if(!world.isRemote) {
-            if(fishType == EntityCod.class) {
-                var fish = new EntityCod(world);
-                fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
-                fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                if(stack.hasDisplayName())
-                    fish.setCustomNameTag(stack.getDisplayName());
-                fish.rotationYawHead = fish.rotationYaw;
-                fish.renderYawOffset = fish.rotationYaw;
-                fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), null);
-                fish.setFromBucket(true);
-                world.spawnEntity(fish);
-            }
-            if(fishType == EntitySalmon.class) {
-                var fish = new EntitySalmon(world);
-                fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
-                fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                if(stack.hasDisplayName())
-                    fish.setCustomNameTag(stack.getDisplayName());
-                fish.rotationYawHead = fish.rotationYaw;
-                fish.renderYawOffset = fish.rotationYaw;
-                fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), null);
-                fish.setFromBucket(true);
-                world.spawnEntity(fish);
-            }
-            if(fishType == EntityPufferfish.class) {
-                var fish = new EntityPufferfish(world);
-                fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
-                fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                if(stack.hasDisplayName())
-                    fish.setCustomNameTag(stack.getDisplayName());
-                fish.rotationYawHead = fish.rotationYaw;
-                fish.renderYawOffset = fish.rotationYaw;
-                fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), null);
-                fish.setFromBucket(true);
-                world.spawnEntity(fish);
-            }
-            if(fishType == EntityTropicalFish.class) {
-                var fish = new EntityTropicalFish(world, stack);
-                fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
-                fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                if(stack.hasDisplayName())
-                    fish.setCustomNameTag(stack.getDisplayName());
-                fish.rotationYawHead = fish.rotationYaw;
-                fish.renderYawOffset = fish.rotationYaw;
-                fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), convertNBTToGroupData(fish, stack));
-                fish.setFromBucket(true);
-                world.spawnEntity(fish);
-            }
+    @Override
+    public boolean tryPlaceContainedLiquid(@Nullable EntityPlayer player, World worldIn, BlockPos posIn) {
+        if (this.containedBlock == Blocks.AIR) return false;
+        IBlockState state = worldIn.getBlockState(posIn);
+        Material material = state.getMaterial();
+        boolean isSolid = !material.isSolid();
+        boolean isReplaceable = state.getBlock().isReplaceable(worldIn, posIn);
+
+        if (!worldIn.isAirBlock(posIn) && !isSolid && !isReplaceable) {
+            return false;
         }
+
+        if (worldIn.provider.doesWaterVaporize() && this.containedBlock == Blocks.FLOWING_WATER) {
+            int x = posIn.getX();
+            int y = posIn.getY();
+            int z = posIn.getZ();
+            worldIn.playSound(player, posIn, SoundEvents.BLOCK_FIRE_EXTINGUISH, SoundCategory.BLOCKS, 0.5F, 2.6F + (worldIn.rand.nextFloat() - worldIn.rand.nextFloat()) * 0.8F);
+
+            for (int i = 0; i < 8; i++) {
+                worldIn.spawnParticle(EnumParticleTypes.SMOKE_LARGE, x + Math.random(), y + Math.random(), z + Math.random(), 0.0D, 0.0D, 0.0D);
+            }
+        } else {
+            if (!worldIn.isRemote && (isSolid || isReplaceable) && !material.isLiquid()) {
+                worldIn.destroyBlock(posIn, true);
+            }
+
+            worldIn.playSound(player, posIn, EFMSounds.ITEM_BUCKET_EMPTY_FISH, SoundCategory.NEUTRAL, 1.0F, 1.0F);
+            worldIn.setBlockState(posIn, this.containedBlock.getDefaultState(), 11);
+        }
+
+        return true;
     }
 
+    private void placeFish(World world, ItemStack stack, BlockPos pos) throws InstantiationException, IllegalAccessException {
+        if (world.isRemote) return;
+
+        AbstractFish fish;
+        if (fishType == EntityCod.class) fish = new EntityCod(world);
+        else if (fishType == EntitySalmon.class) fish = new EntitySalmon(world);
+        else if (fishType == EntityPufferfish.class) fish = new EntityPufferfish(world);
+        else if (fishType == EntityTropicalFish.class) fish = new EntityTropicalFish(world, stack);
+        else return;
+
+        fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
+        fish.setLocationAndAngles(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0f), 0.0f);
+        if (stack.hasDisplayName()) fish.setCustomNameTag(stack.getDisplayName());
+        fish.rotationYawHead = fish.rotationYaw;
+        fish.renderYawOffset = fish.rotationYaw;
+
+        IEntityLivingData data = null;
+        if (fish instanceof EntityTropicalFish tropicalFish) {
+            data = convertNBTToGroupData(tropicalFish, stack);
+        }
+        fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), data);
+        fish.setFromBucket(true);
+        world.spawnEntity(fish);
+    }
+
+    @Nullable
     private EntityTropicalFish.GroupData convertNBTToGroupData(EntityTropicalFish fish, ItemStack stack) {
-        if(stack.hasTagCompound()) {
-            NBTTagCompound compound = stack.getTagCompound();
-            int i1 = compound.getInteger("BucketVariantTag");
-            int i = i1 & 255;
-            int j = (i1 & '\uff00') >> 8;
-            int k = (i1 & 16711680) >> 16;
-            int l = (i1 & -16777216) >> 24;
-            return new EntityTropicalFish.GroupData(fish, i, j, k, l);
-        }
-        return null;
+        NBTTagCompound tag = stack.getTagCompound();
+        if (tag == null) return null;
+
+        int raw = tag.getInteger(BUCKET_VARIANT_TAG);
+        int base = raw & 0xFF;
+        int pattern = (raw & 0xFF00) >> 8;
+        int bodyColor = (raw & 0xFF0000) >> 16;
+        int patternColor = (raw & 0xFF000000) >> 24;
+        return new EntityTropicalFish.GroupData(fish, base, pattern, bodyColor, patternColor);
     }
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
-        if(fishType == EntityTropicalFish.class) {
+        if (fishType == EntityTropicalFish.class) {
             NBTTagCompound bucketCompound = stack.getTagCompound();
-            if(bucketCompound != null && bucketCompound.hasKey("BucketVariantTag")) {
-                int i = bucketCompound.getInteger("BucketVariantTag");
+            if (bucketCompound != null && bucketCompound.hasKey(BUCKET_VARIANT_TAG)) {
+                int i = bucketCompound.getInteger(BUCKET_VARIANT_TAG);
                 String bodyColor = "color.minecraft." + EntityTropicalFish.getBaseColor(i);
                 String patternColor = "color.minecraft." + EntityTropicalFish.getPatternColor(i);
 
-                for(int j = 0; j < EntityTropicalFish.SPECIAL_VARIANTS.length; ++j) {
-                    if(i == EntityTropicalFish.SPECIAL_VARIANTS[j]) {
+                for (int j = 0; j < EntityTropicalFish.SPECIAL_VARIANTS.length; ++j) {
+                    if (i == EntityTropicalFish.SPECIAL_VARIANTS[j]) {
                         tooltip.add(I18n.format(EntityTropicalFish.getPredefinedName(j)));
                         return;
                     }
@@ -215,7 +167,7 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
 
                 tooltip.add(I18n.format(EntityTropicalFish.getFishTypeName(i)));
                 String coloring = I18n.format(bodyColor);
-                if(!bodyColor.equals(patternColor)) {
+                if (!bodyColor.equals(patternColor)) {
                     coloring += ", " + I18n.format(patternColor);
                 }
 
