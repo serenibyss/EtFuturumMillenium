@@ -3,6 +3,7 @@ package com.serenibyss.etfuturum.recipes;
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.api.StrippingRegistry;
 import com.serenibyss.etfuturum.blocks.EFMBlocks;
+import com.serenibyss.etfuturum.blocks.base.EFMBlock;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.load.feature.Features;
 import net.minecraft.block.Block;
@@ -37,11 +38,30 @@ public class EFMRecipes {
         addShapedRecipe("stonecutter", EFMBlocks.STONECUTTER.getItemStack(), " X ", "SSS", 'X', "ingotIron", 'S', new ItemStack(Blocks.STONE));
 
         addStairsRecipe("stone_stairs", EFMBlocks.STONE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE));
+        addStairsRecipe("granite_stairs", EFMBlocks.GRANITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
+        addStairsRecipe("polished_granite_stairs", EFMBlocks.POLISHED_GRANITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 2));
+        addStairsRecipe("diorite_stairs", EFMBlocks.DIORITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
+        addStairsRecipe("polished_diorite_stairs", EFMBlocks.POLISHED_DIORITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 4));
+        addStairsRecipe("andesite_stairs", EFMBlocks.ANDESITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
+        addStairsRecipe("polished_andesite_stairs", EFMBlocks.POLISHED_ANDESITE_STAIRS.getItemStack(), new ItemStack(Blocks.STONE, 1, 6));
+        addStairsRecipe("mossy_cobblestone_stairs", EFMBlocks.MOSSY_COBBLESTONE_STAIRS.getItemStack(), new ItemStack(Blocks.MOSSY_COBBLESTONE));
+        addStairsRecipe("mossy_stone_brick_stairs", EFMBlocks.MOSSY_STONE_BRICK_STAIRS.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
 
-        // todo fix 1.12 vanilla stone slab recipe
         addSlabRecipe("stone_slab", EFMBlocks.STONE_SLAB.getItemStack(), new ItemStack(Blocks.STONE));
+        if (Features.MC14.smoothStone.isEnabled()) {
+            addSlabRecipe("minecraft:stone_slab", new ItemStack(Blocks.STONE_SLAB), EFMBlocks.SMOOTH_STONE.getItemStack());
+        }
+        addSlabRecipe("mossy_cobblestone_slab", EFMBlocks.MOSSY_COBBLESTONE_SLAB.getItemStack(), new ItemStack(Blocks.MOSSY_COBBLESTONE));
+        addSlabRecipe("mossy_stone_brick_slab", EFMBlocks.MOSSY_STONE_BRICK_SLAB.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
+        addSlabRecipe("granite_slab", EFMBlocks.GRANITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
+        addSlabRecipe("diorite_slab", EFMBlocks.DIORITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
+        addSlabRecipe("andesite_slab", EFMBlocks.ANDESITE_SLAB.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
 
         addWallRecipe("stone_brick_wall", EFMBlocks.STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK));
+        addWallRecipe("mossy_stone_brick_wall", EFMBlocks.MOSSY_STONE_BRICK_WALL.getItemStack(), new ItemStack(Blocks.STONEBRICK, 1, 1));
+        addWallRecipe("granite_wall", EFMBlocks.GRANITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 1));
+        addWallRecipe("diorite_wall", EFMBlocks.DIORITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 3));
+        addWallRecipe("andesite_wall", EFMBlocks.ANDESITE_WALL.getItemStack(), new ItemStack(Blocks.STONE, 1, 5));
 
         // todo: Uncomment when Nautilus Shell and Heart of the Sea are added
         //addShapedRecipe("conduit", EFMBlocks.CONDUIT.getItemStack(), "XXX", "XSX", "XXX", 'X', EFMItems.NAUTILUS_SHELL.getItemStack(), 'S', EFMItems.HEART_OF_THE_SEA.getItemStack());

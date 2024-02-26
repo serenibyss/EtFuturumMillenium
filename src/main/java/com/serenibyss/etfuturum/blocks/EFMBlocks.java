@@ -2,11 +2,15 @@ package com.serenibyss.etfuturum.blocks;
 
 import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.blocks.base.*;
+import com.serenibyss.etfuturum.blocks.base.EFMBlock.Settings;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import com.serenibyss.etfuturum.tiles.TileEntityBarrel;
 import com.serenibyss.etfuturum.tiles.TileEntityConduit;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.block.Block;
+import net.minecraft.block.material.MapColor;
+import net.minecraft.block.material.Material;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -33,13 +37,36 @@ public enum EFMBlocks {
 
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
+    SMOOTH_STONE(MC14.smoothStone, "smooth_stone", new EFMBlock(new Settings(Material.ROCK, MapColor.STONE).hardness(2.0f).resistance(6.0f).creativeTab(CreativeTabs.BUILDING_BLOCKS).translationKey("smooth_stone"))),
 
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
+    MOSSY_COBBLESTONE_STAIRS(MISC.newStairs, "mossy_cobblestone_stairs", new EFMBlockStairs(Blocks.MOSSY_COBBLESTONE, "mossy_cobblestone_stairs")),
+    MOSSY_STONE_BRICK_STAIRS(MISC.newStairs, "mossy_stone_brick_stairs", new EFMBlockStairs(Blocks.STONEBRICK, 1, "mossy_stone_brick_stairs")),
+    GRANITE_STAIRS(MISC.newStairs, "granite_stairs", new EFMBlockStairs(Blocks.STONE, 1, "granite_stairs")),
+    POLISHED_GRANITE_STAIRS(MISC.newStairs, "polished_granite_stairs", new EFMBlockStairs(Blocks.STONE, 2, "polished_granite_stairs")),
+    DIORITE_STAIRS(MISC.newStairs, "diorite_stairs", new EFMBlockStairs(Blocks.STONE, 3, "diorite_stairs")),
+    POLISHED_DIORITE_STAIRS(MISC.newStairs, "polished_diorite_stairs", new EFMBlockStairs(Blocks.STONE, 4, "polished_diorite_stairs")),
+    ANDESITE_STAIRS(MISC.newStairs, "andesite_stairs", new EFMBlockStairs(Blocks.STONE, 5, "andesite_stairs")),
+    POLISHED_ANDESITE_STAIRS(MISC.newStairs, "polished_andesite_stairs", new EFMBlockStairs(Blocks.STONE, 6, "polished_andesite_stairs")),
 
-    STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE_SLAB.getHalfSlab()),
-    STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE_SLAB.getDoubleSlab()),
+    STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
+    STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE.getDouble()),
+    MOSSY_STONE_BRICK_SLAB(MISC.newSlabs, "mossy_stone_brick_slab", SlabFactory.MOSSY_STONE_BRICK.getHalf()),
+    MOSSY_STONE_BRICK_DOUBLE_SLAB(MISC.newSlabs, "mossy_stone_brick_double_slab", SlabFactory.MOSSY_STONE_BRICK.getDouble()),
+    MOSSY_COBBLESTONE_SLAB(MISC.newSlabs, "mossy_cobblestone_slab", SlabFactory.MOSSY_COBBLESTONE.getHalf()),
+    MOSSY_COBBLESTONE_DOUBLE_SLAB(MISC.newSlabs, "mossy_cobblestone_double_slab", SlabFactory.MOSSY_COBBLESTONE.getDouble()),
+    GRANITE_SLAB(MISC.newSlabs, "granite_slab", SlabFactory.GRANITE.getHalf()),
+    GRANITE_DOUBLE_SLAB(MISC.newSlabs, "granite_double_slab", SlabFactory.GRANITE.getDouble()),
+    DIORITE_SLAB(MISC.newSlabs, "diorite_slab", SlabFactory.DIORITE.getHalf()),
+    DIORITE_DOUBLE_SLAB(MISC.newSlabs, "diorite_double_slab", SlabFactory.DIORITE.getDouble()),
+    ANDESITE_SLAB(MISC.newSlabs, "andesite_slab", SlabFactory.ANDESITE.getHalf()),
+    ANDESITE_DOUBLE_SLAB(MISC.newSlabs, "andesite_double_slab", SlabFactory.ANDESITE.getDouble()),
 
     STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
+    MOSSY_STONE_BRICK_WALL(MISC.newWalls, "mossy_stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, 1, "mossy_stone_brick_wall")),
+    GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, 1, "granite_wall")),
+    DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, 3, "diorite_wall")),
+    ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
 
     ;
 

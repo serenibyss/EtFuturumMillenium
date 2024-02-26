@@ -6,6 +6,7 @@ public class Features14 extends FeatureManager {
 
     public final Feature barrel;
     public final Feature stonecutter;
+    public final Feature smoothStone;
 
     public Features14() {
         // initialize your features here
@@ -20,6 +21,8 @@ public class Features14 extends FeatureManager {
                         "block/stonecutter_saw.png", "block/stonecutter_saw.png.mcmeta", "gui/container/stonecutter.png")
                 .addSounds("ui/stonecutter/cut1.ogg", "ui/stonecutter/cut2.ogg")
                 .build();
+
+        smoothStone = Feature.builder("smooth_stone", this, () -> ConfigBlocksItems.enableSmoothStone).addTextures("block/smooth_stone.png").build();
     }
 
     @Override

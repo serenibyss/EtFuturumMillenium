@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "etfuturum:diorite_slab" },
+    "half=top": { "model": "etfuturum:diorite_slab_top" }
+  }
+}

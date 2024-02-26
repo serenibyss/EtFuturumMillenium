@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "etfuturum:mossy_stone_brick_slab" },
+    "half=top": { "model": "etfuturum:mossy_stone_brick_slab_top" }
+  }
+}
