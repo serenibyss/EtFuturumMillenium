@@ -1,0 +1,8 @@
+{
+  "parent": "block/outer_stairs",
+  "textures": {
+    "bottom": "etfuturum:block/polished_deepslate",
+    "top": "etfuturum:block/polished_deepslate",
+    "side": "etfuturum:block/polished_deepslate"
+  }
+}

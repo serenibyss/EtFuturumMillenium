@@ -1,5 +1,7 @@
 package com.serenibyss.etfuturum.blocks.base;
 
+import com.serenibyss.etfuturum.blocks.BlockDeepslate;
+import com.serenibyss.etfuturum.blocks.EFMBlocks;
 import net.minecraft.init.Blocks;
 
 /** A place to construct Single+Double Slabs together without needing lots of tiny classes. */
@@ -11,6 +13,10 @@ public class SlabFactory {
     public static final SlabFactory GRANITE = new SlabFactory(EFMBlock.Settings.from(Blocks.STONE, 1).translationKey("granite_slab"));
     public static final SlabFactory DIORITE = new SlabFactory(EFMBlock.Settings.from(Blocks.STONE, 3).translationKey("diorite_slab"));
     public static final SlabFactory ANDESITE = new SlabFactory(EFMBlock.Settings.from(Blocks.STONE, 5).translationKey("andesite_slab"));
+    public static final SlabFactory COBBLED_DEEPSLATE = new SlabFactory(EFMBlock.Settings.from(EFMBlocks.DEEPSLATE.getBlock(), 0).translationKey("cobbled_deepslate_slab"));
+    public static final SlabFactory POLISHED_DEEPSLATE = new SlabFactory(EFMBlock.Settings.from(EFMBlocks.DEEPSLATE.getBlock(), 2).translationKey("polished_deepslate_slab"));
+    public static final SlabFactory DEEPSLATE_BRICK = new SlabFactory(EFMBlock.Settings.from(EFMBlocks.DEEPSLATE.getBlock(), 3).translationKey("deepslate_brick_slab"));
+    public static final SlabFactory DEEPSLATE_TILE = new SlabFactory(EFMBlock.Settings.from(EFMBlocks.DEEPSLATE.getBlock(), 5).translationKey("deepslate_tile_slab"));
 
     private final EFMBlockHalfSlab halfSlab;
     private final EFMBlockDoubleSlab doubleSlab;

@@ -1,7 +1,7 @@
 {
   "parent": "block/cube_column",
   "textures": {
-    "end": "etfuturum:blocks/deepslate_top",
-    "side": "etfuturum:blocks/deepslate"
+    "end": "etfuturum:block/deepslate_top",
+    "side": "etfuturum:block/deepslate"
   }
 }
