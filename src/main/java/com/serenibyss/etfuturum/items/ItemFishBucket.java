@@ -8,6 +8,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.IEntityLivingData;
@@ -27,10 +28,13 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TextComponentTranslation;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.function.Supplier;
 
 public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implements IModelRegister {
@@ -133,7 +137,8 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
                 var fish = new EntityCod(world);
                 fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
                 fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                fish.setCustomNameTag(stack.getDisplayName());
+                if(stack.hasDisplayName())
+                    fish.setCustomNameTag(stack.getDisplayName());
                 fish.rotationYawHead = fish.rotationYaw;
                 fish.renderYawOffset = fish.rotationYaw;
                 fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), null);
@@ -144,7 +149,8 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
                 var fish = new EntitySalmon(world);
                 fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
                 fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                fish.setCustomNameTag(stack.getDisplayName());
+                if(stack.hasDisplayName())
+                    fish.setCustomNameTag(stack.getDisplayName());
                 fish.rotationYawHead = fish.rotationYaw;
                 fish.renderYawOffset = fish.rotationYaw;
                 fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), null);
@@ -155,7 +161,8 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
                 var fish = new EntityPufferfish(world);
                 fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
                 fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                fish.setCustomNameTag(stack.getDisplayName());
+                if(stack.hasDisplayName())
+                    fish.setCustomNameTag(stack.getDisplayName());
                 fish.rotationYawHead = fish.rotationYaw;
                 fish.renderYawOffset = fish.rotationYaw;
                 fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), null);
@@ -166,7 +173,8 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
                 var fish = new EntityTropicalFish(world, stack);
                 fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
                 fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
-                fish.setCustomNameTag(stack.getDisplayName());
+                if(stack.hasDisplayName())
+                    fish.setCustomNameTag(stack.getDisplayName());
                 fish.rotationYawHead = fish.rotationYaw;
                 fish.renderYawOffset = fish.rotationYaw;
                 fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), convertNBTToGroupData(fish, stack));
@@ -191,6 +199,29 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
 
     @Override
     public void addInformation(ItemStack stack, @Nullable World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
+        if(fishType == EntityTropicalFish.class) {
+            NBTTagCompound bucketCompound = stack.getTagCompound();
+            if(bucketCompound != null && bucketCompound.hasKey("BucketVariantTag")) {
+                int i = bucketCompound.getInteger("BucketVariantTag");
+                String bodyColor = "color.minecraft." + EntityTropicalFish.getBaseColor(i);
+                String patternColor = "color.minecraft." + EntityTropicalFish.getPatternColor(i);
+
+                for(int j = 0; j < EntityTropicalFish.SPECIAL_VARIANTS.length; ++j) {
+                    if(i == EntityTropicalFish.SPECIAL_VARIANTS[j]) {
+                        tooltip.add(I18n.format(EntityTropicalFish.getPredefinedName(j)));
+                        return;
+                    }
+                }
+
+                tooltip.add(I18n.format(EntityTropicalFish.getFishTypeName(i)));
+                String coloring = I18n.format(bodyColor);
+                if(!bodyColor.equals(patternColor)) {
+                    coloring += ", " + I18n.format(patternColor);
+                }
+
+                tooltip.add(coloring);
+            }
+        }
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 }

@@ -87,7 +87,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
     }
 
     public static String getPredefinedName(int index) {
-        return "entity.minecraft.trofical_fish.predefined." + index;
+        return "entity.tropical_fish.predefined." + index;
     }
 
     public static EnumDyeColor getBaseColor(int index) {
@@ -101,7 +101,7 @@ public class EntityTropicalFish extends AbstractGroupFish {
     public static String getFishTypeName(int index) {
         int i = getBaseVariant(index);
         int j = getPatternVariant(index);
-        return "entity.minecraft.tropical_fish.type" + EntityTropicalFish.Type.getTypeName(i, j);
+        return "entity.tropical_fish.type" + EntityTropicalFish.Type.getTypeName(i, j);
     }
 
     @Override

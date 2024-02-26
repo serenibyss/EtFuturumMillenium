@@ -33,10 +33,10 @@ public enum EFMItems {
     SCUTE(MC13.turtle, "scute", new EFMItem(new Settings().creativeTab(CreativeTabs.BREWING).translationKey("scute"))),
     TURTLE_HELMET(MC13.turtle, "turtle_helmet", new ItemTurtleHelmet()),
 
-    COD_BUCKET(MC13.fish, "cod_bucket", new ItemFishBucket<>(EntityCod.class, Blocks.WATER)),
-    SALMON_BUCKET(MC13.fish, "salmon_bucket", new ItemFishBucket<>(EntitySalmon.class, Blocks.WATER)),
-    PUFFERFISH_BUCKET(MC13.fish, "pufferfish_bucket", new ItemFishBucket<>(EntityPufferfish.class, Blocks.WATER)),
-    TROPICAL_FISH_BUCKET(MC13.fish, "tropical_fish_bucket", new ItemFishBucket<>(EntityTropicalFish.class, Blocks.WATER)),
+    COD_BUCKET(MC13.fish, "cod_bucket", new ItemFishBucket<>(EntityCod.class, Blocks.WATER).setTranslationKey("cod_bucket")),
+    SALMON_BUCKET(MC13.fish, "salmon_bucket", new ItemFishBucket<>(EntitySalmon.class, Blocks.WATER).setTranslationKey("salmon_bucket")),
+    PUFFERFISH_BUCKET(MC13.fish, "pufferfish_bucket", new ItemFishBucket<>(EntityPufferfish.class, Blocks.WATER).setTranslationKey("pufferfish_bucket")),
+    TROPICAL_FISH_BUCKET(MC13.fish, "tropical_fish_bucket", new ItemFishBucket<>(EntityTropicalFish.class, Blocks.WATER).setTranslationKey("tropical_fish_bucket")),
 
     ;
 
