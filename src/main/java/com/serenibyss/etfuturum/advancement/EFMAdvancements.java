@@ -3,6 +3,8 @@ package com.serenibyss.etfuturum.advancement;
 import com.serenibyss.etfuturum.EtFuturum;
 import com.serenibyss.etfuturum.advancement.base.AdvancementTrigger;
 import com.serenibyss.etfuturum.advancement.base.IAdvancementCriterion;
+import com.serenibyss.etfuturum.advancement.criterion.FilledBucketCriterion;
+import com.serenibyss.etfuturum.advancement.criterion.FishHookedCriterion;
 import com.serenibyss.etfuturum.advancement.criterion.TridentChannelingCriterion;
 import com.serenibyss.etfuturum.load.feature.Feature;
 import net.minecraft.advancements.Advancement;
@@ -20,16 +22,22 @@ import static com.serenibyss.etfuturum.load.feature.Features.*;
 public class EFMAdvancements {
 
     public static AdvancementTrigger<?> TRIDENT_CHANNELING;
+    public static AdvancementTrigger<?> FILLED_BUCKET;
+    public static AdvancementTrigger<?> FISH_HOOKED;
 
     /** Register new Advancement Triggers, things to call in code to trigger an Advancement being granted. */
     public static void initTriggers() {
         TRIDENT_CHANNELING = registerTrigger(MC13.trident, "channeled_lightning", new TridentChannelingCriterion());
+        FILLED_BUCKET = registerTrigger(MC13.fish, "filled_bucket", new FilledBucketCriterion());
+        FISH_HOOKED = registerTrigger(MC13.fish, "fishing_rod_hooked", new FishHookedCriterion());
     }
 
     /** Registering entirely new Advancements into the Vanilla Advancement categories. */
     private static void initAdditions(Map<ResourceLocation, Advancement.Builder> map) {
         addAdvancement(MC13.trident, "adventure/throw_trident", map);
         addAdvancement(MC13.trident, "adventure/very_very_frightening", map);
+        addAdvancement(MC13.fish, "husbandry/fishy_business", map);
+        addAdvancement(MC13.fish, "husbandry/tactical_fishing", map);
     }
 
     /** Modifications to existing Vanilla Advancements. */
@@ -46,7 +54,7 @@ public class EFMAdvancements {
         initHacks(map);
     }
 
-    private static <T extends IAdvancementCriterion> AdvancementTrigger<T> registerTrigger(Feature feature, String id, T criterion) {
+    private static <T extends IAdvancementCriterion<T>> AdvancementTrigger<T> registerTrigger(Feature feature, String id, T criterion) {
         if (!feature.isEnabled()) {
             return null;
         }

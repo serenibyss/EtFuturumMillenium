@@ -3,7 +3,7 @@ package com.serenibyss.etfuturum.advancement.base;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class AbstractCriterion implements IAdvancementCriterion {
+public abstract class AbstractCriterion<T extends IAdvancementCriterion<T>> implements IAdvancementCriterion<T> {
 
     private ResourceLocation id = new ResourceLocation("MISSING");
 

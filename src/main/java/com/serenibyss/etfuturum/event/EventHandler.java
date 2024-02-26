@@ -18,6 +18,7 @@ import net.minecraft.world.World;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraftforge.event.entity.EntityStruckByLightningEvent;
 import net.minecraftforge.event.entity.living.LivingDeathEvent;
+import net.minecraftforge.event.entity.player.ItemFishedEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.event.entity.player.PlayerSleepInBedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -89,6 +90,19 @@ public class EventHandler {
                 EntityPlayerMP player = efmLightning.getCaster();
                 if (player != null && hitEntity != null) {
                     EFMAdvancements.TRIDENT_CHANNELING.trigger(player, hitEntity);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void onItemFished(ItemFishedEvent event) {
+        final EntityPlayer player = event.getEntityPlayer();
+
+        if (MC13.fish.isEnabled()) {
+            if (!player.world.isRemote) {
+                for (ItemStack stack : event.getDrops()) {
+                    EFMAdvancements.FISH_HOOKED.trigger((EntityPlayerMP) player, stack);
                 }
             }
         }

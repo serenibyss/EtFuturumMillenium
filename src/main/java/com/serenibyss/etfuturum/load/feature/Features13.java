@@ -11,6 +11,7 @@ public class Features13 extends FeatureManager {
     public final Feature trident;
 
     public final Feature turtle;
+    public final Feature fish;
 
     public Features13() {
         phantom = Feature.builder("phantom", this, () -> ConfigEntities.enablePhantoms)
@@ -72,6 +73,34 @@ public class Features13 extends FeatureManager {
                 .addNumberedSounds("mob/turtle/walk", 1, 5)
                 .addNumberedSounds("mob/turtle/baby/shamble", 1, 4)
                 .addNumberedSounds("mob/turtle/swim/swim", 1, 5)
+                .build();
+
+        fish = Feature.builder("fish", this, () -> ConfigEntities.enableFish)
+                .addTextures("entity/fish/cod.png", "item/cod_bucket.png",
+                        "entity/fish/salmon.png", "item/salmon_bucket.png",
+                        "entity/fish/pufferfish.png", "item/pufferfish_bucket.png",
+                        "entity/fish/tropical_a.png", "item/tropical_fish_bucket.png",
+                        "entity/fish/tropical_a_pattern_1.png", "entity/fish/tropical_a_pattern_2.png",
+                        "entity/fish/tropical_a_pattern_3.png", "entity/fish/tropical_a_pattern_4.png",
+                        "entity/fish/tropical_a_pattern_5.png", "entity/fish/tropical_a_pattern_6.png",
+                        "entity/fish/tropical_b.png",
+                        "entity/fish/tropical_b_pattern_1.png", "entity/fish/tropical_b_pattern_2.png",
+                        "entity/fish/tropical_b_pattern_3.png", "entity/fish/tropical_b_pattern_4.png",
+                        "entity/fish/tropical_b_pattern_5.png", "entity/fish/tropical_b_pattern_6.png")
+                .addNumberedSounds("entity/fish/swim", 1, 7)
+                .addNumberedSounds("entity/fish/hurt", 1, 4)
+                .addNumberedSounds("entity/fish/flop", 1, 4)
+                .addNumberedSounds("entity/pufferfish/blow_out", 1, 2)
+                .addNumberedSounds("entity/pufferfish/blow_up", 1, 2)
+                .addNumberedSounds("entity/pufferfish/death", 1, 2)
+                .addNumberedSounds("entity/pufferfish/flop", 1, 4)
+                .addNumberedSounds("entity/pufferfish/hurt", 1, 2)
+                .addNumberedSounds("entity/pufferfish/sting", 1, 2)
+                .addNumberedSounds("item/bucket/fill_fish", 1, 3)
+                .addNumberedSounds("item/bucket/empty_fish", 1, 3)
+                .addTextureOverride("item/cod.png", "items/fish_cod_raw.png")
+                .addTextureOverride("item/cooked_cod.png", "items/fish_cod_cooked.png")
+                .addLangOverrides("item.fish.cod.raw.name", "item.fish.cod.cooked.name", "item.fish.clownfish.raw.name")
                 .build();
     }
 

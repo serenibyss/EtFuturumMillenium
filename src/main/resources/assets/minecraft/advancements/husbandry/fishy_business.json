@@ -1,0 +1,64 @@
+{
+  "parent": "minecraft:husbandry/root",
+  "display": {
+    "icon": {
+      "item": "minecraft:fishing_rod"
+    },
+    "title": {
+      "translate": "advancements.husbandry.fishy_business.title"
+    },
+    "description": {
+      "translate": "advancements.husbandry.fishy_business.description"
+    },
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "hidden": false
+  },
+  "criteria": {
+    "cod": {
+      "trigger": "etfuturum:fishing_rod_hooked",
+      "conditions": {
+        "item": {
+          "item": "minecraft:fish",
+          "data": 0
+        }
+      }
+    },
+    "tropical_fish": {
+      "trigger": "etfuturum:fishing_rod_hooked",
+      "conditions": {
+        "item": {
+          "item": "minecraft:fish",
+          "data": 2
+        }
+      }
+    },
+    "pufferfish": {
+      "trigger": "etfuturum:fishing_rod_hooked",
+      "conditions": {
+        "item": {
+          "item": "minecraft:fish",
+          "data": 3
+        }
+      }
+    },
+    "salmon": {
+      "trigger": "etfuturum:fishing_rod_hooked",
+      "conditions": {
+        "item": {
+          "item": "minecraft:fish",
+          "data": 1
+        }
+      }
+    }
+  },
+  "requirements": [
+    [
+      "cod",
+      "tropical_fish",
+      "pufferfish",
+      "salmon"
+    ]
+  ]
+}

@@ -14,6 +14,46 @@ subtitles.item.axe.strip=Debarking Log
 # Entities
 entity.phantom.name=Phantom
 entity.turtle.name=Turtle
+entity.cod.name=Cod
+entity.salmon.name=Salmon
+entity.pufferfish.name=Pufferfish
+entity.tropical_fish.name=Tropical Fish
+
+entity.tropical_fish.predefined.0=Anemone
+entity.tropical_fish.predefined.1=Black Tang
+entity.tropical_fish.predefined.2=Blue Tang
+entity.tropical_fish.predefined.3=Butterflyfish
+entity.tropical_fish.predefined.4=Cichlid
+entity.tropical_fish.predefined.5=Clownfish
+entity.tropical_fish.predefined.6=Cotton Candy Betta
+entity.tropical_fish.predefined.7=Dottyback
+entity.tropical_fish.predefined.8=Emperor Red Snapper
+entity.tropical_fish.predefined.9=Goatfish
+entity.tropical_fish.predefined.10=Moorish Idol
+entity.tropical_fish.predefined.11=Ornate Bufferflyfish
+entity.tropical_fish.predefined.12=Parrotfish
+entity.tropical_fish.predefined.13=Queen Angelfish
+entity.tropical_fish.predefined.14=Red Cichlid
+entity.tropical_fish.predefined.15=Red Lipped Blenny
+entity.tropical_fish.predefined.16=Red Snapper
+entity.tropical_fish.predefined.17=Threadfin
+entity.tropical_fish.predefined.18=Tomato Clownfish
+entity.tropical_fish.predefined.19=Triggerfish
+entity.tropical_fish.predefined.20=Yellowtail Parrotfish
+entity.tropical_fish.predefined.21=Yellow Tang
+
+entity.tropical_fish.type.flopper=Flopper
+entity.tropical_fish.type.stripey=Stripey
+entity.tropical_fish.type.glitter=Glitter
+entity.tropical_fish.type.blockfish=Blockfish
+entity.tropical_fish.type.betty=Betty
+entity.tropical_fish.type.clayfish=Clayfish
+entity.tropical_fish.type.kob=Kob
+entity.tropical_fish.type.sunstreak=Sunstreak
+entity.tropical_fish.type.snooper=Snooper
+entity.tropical_fish.type.dasher=Dasher
+entity.tropical_fish.type.brinely=Brinely
+entity.tropical_fish.type.spotty=Spotty
 
 # Blocks
 tile.stone_stairs.name=Stone Stairs
@@ -76,6 +116,10 @@ item.phantom_membrane.name=Phantom Membrane
 item.trident.name=Trident
 item.scute.name=Scute
 item.turtle_helmet.name=Turtle Shell
+item.cod_bucket.name=Bucket of Cod
+item.salmon_bucket.name=Bucket of Salmon
+item.pufferfish_bucket.name=Bucket of Pufferfish
+item.tropical_fish_bucket.name=Bucket of Tropical Fish
 
 # Enchants
 enchantment.channeling=Channeling
@@ -92,3 +136,7 @@ advancements.adventure.throw_trident.title=A Throwaway Joke
 advancements.adventure.throw_trident.description=Throw a Trident at something. Note: Throwing away your only weapon is not a good idea.
 advancements.adventure.very_very_frightening.title=Very Very Frightening
 advancements.adventure.very_very_frightening.description=Strike a Villager with lightning
+advancements.husbandry.fishy_business.title=Fishy Business
+advancements.husbandry.fishy_business.description=Catch a fish
+advancements.husbandry.tactical_fishing.title=Tactical Fishing
+advancements.husbandry.tactical_fishing.description=Catch a Fish... without a Fishing Rod!
