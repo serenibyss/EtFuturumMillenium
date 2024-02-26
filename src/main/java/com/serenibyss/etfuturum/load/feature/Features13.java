@@ -78,7 +78,15 @@ public class Features13 extends FeatureManager {
         fish = Feature.builder("fish", this, () -> ConfigEntities.enableFish)
                 .addTextures("entity/fish/cod.png", "item/cod_bucket.png",
                         "entity/fish/salmon.png", "item/salmon_bucket.png",
-                        "entity/fish/pufferfish.png", "item/pufferfish_bucket.png"
+                        "entity/fish/pufferfish.png", "item/pufferfish_bucket.png",
+                        "entity/fish/tropical_a.png", "item/tropical_fish_bucket.png",
+                        "entity/fish/tropical_a_pattern_1.png", "entity/fish/tropical_a_pattern_2.png",
+                        "entity/fish/tropical_a_pattern_3.png", "entity/fish/tropical_a_pattern_4.png",
+                        "entity/fish/tropical_a_pattern_5.png", "entity/fish/tropical_a_pattern_6.png",
+                        "entity/fish/tropical_b.png",
+                        "entity/fish/tropical_b_pattern_1.png", "entity/fish/tropical_b_pattern_2.png",
+                        "entity/fish/tropical_b_pattern_3.png", "entity/fish/tropical_b_pattern_4.png",
+                        "entity/fish/tropical_b_pattern_5.png", "entity/fish/tropical_b_pattern_6.png"
                         )
                 .addNumberedSounds("entity/fish/hurt", 1, 4)
                 .addNumberedSounds("entity/fish/flop", 1, 4)

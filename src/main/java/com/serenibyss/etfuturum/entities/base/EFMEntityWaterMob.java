@@ -25,7 +25,7 @@ public abstract class EFMEntityWaterMob extends EntityCreature implements IAnima
 
     @Override
     public boolean isNotColliding() {
-        return this.world.checkNoEntityCollision(this.getCollisionBoundingBox(), this) && world.getCollisionBoxes(this, this.getCollisionBoundingBox()).isEmpty();
+        return this.world.checkNoEntityCollision(this.getEntityBoundingBox(), this) && world.getCollisionBoxes(this, this.getEntityBoundingBox()).isEmpty();
     }
 
     @Override

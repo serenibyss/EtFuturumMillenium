@@ -1,9 +1,6 @@
 package com.serenibyss.etfuturum.items;
 
-import com.serenibyss.etfuturum.entities.passive.fish.AbstractFish;
-import com.serenibyss.etfuturum.entities.passive.fish.EntityCod;
-import com.serenibyss.etfuturum.entities.passive.fish.EntityPufferfish;
-import com.serenibyss.etfuturum.entities.passive.fish.EntitySalmon;
+import com.serenibyss.etfuturum.entities.passive.fish.*;
 import com.serenibyss.etfuturum.mixin.fish.ItemBucketMixin;
 import com.serenibyss.etfuturum.util.IModelRegister;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -13,6 +10,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.IEntityLivingData;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
@@ -20,6 +18,7 @@ import net.minecraft.init.Items;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.ItemBucket;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
@@ -163,7 +162,31 @@ public class ItemFishBucket<T extends AbstractFish> extends ItemBucket implement
                 fish.setFromBucket(true);
                 world.spawnEntity(fish);
             }
+            if(fishType == EntityTropicalFish.class) {
+                var fish = new EntityTropicalFish(world, stack);
+                fish.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
+                fish.setLocationAndAngles((double) pos.getX() + 0.5D, (double) pos.getY(), (double) pos.getZ() + 0.5D, MathHelper.wrapDegrees(world.rand.nextFloat() * 360.0F), 0.0F);
+                fish.setCustomNameTag(stack.getDisplayName());
+                fish.rotationYawHead = fish.rotationYaw;
+                fish.renderYawOffset = fish.rotationYaw;
+                fish.onInitialSpawn(world.getDifficultyForLocation(new BlockPos(fish)), convertNBTToGroupData(fish, stack));
+                fish.setFromBucket(true);
+                world.spawnEntity(fish);
+            }
         }
+    }
+
+    private EntityTropicalFish.GroupData convertNBTToGroupData(EntityTropicalFish fish, ItemStack stack) {
+        if(stack.hasTagCompound()) {
+            NBTTagCompound compound = stack.getTagCompound();
+            int i1 = compound.getInteger("BucketVariantTag");
+            int i = i1 & 255;
+            int j = (i1 & '\uff00') >> 8;
+            int k = (i1 & 16711680) >> 16;
+            int l = (i1 & -16777216) >> 24;
+            return new EntityTropicalFish.GroupData(fish, i, j, k, l);
+        }
+        return null;
     }
 
     @Override

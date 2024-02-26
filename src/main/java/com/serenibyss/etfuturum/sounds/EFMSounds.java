@@ -76,6 +76,10 @@ public class EFMSounds {
     public static final SoundEvent ENTITY_PUFFER_FISH_HURT = create(MC13.fish, "entity.puffer_fish.hurt");
     public static final SoundEvent ENTITY_PUFFER_FISH_FLOP = create(MC13.fish, "entity.puffer_fish.flop");
     public static final SoundEvent ENTITY_PUFFER_FISH_STING = create(MC13.fish, "entity.puffer_fish.sting");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_AMBIENT = create(MC13.fish, "entity.tropical_fish.ambient");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_DEATH = create(MC13.fish, "entity.tropical_fish.death");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_HURT = create(MC13.fish, "entity.tropical_fish.hurt");
+    public static final SoundEvent ENTITY_TROPICAL_FISH_FLOP = create(MC13.fish, "entity.tropical_fish.flop");
 
     private static SoundEvent create(Feature feature, String name) {
         if (feature == null || !feature.isEnabled()) {

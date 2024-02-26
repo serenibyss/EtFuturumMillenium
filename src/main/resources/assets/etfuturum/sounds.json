@@ -700,5 +700,56 @@
       "etfuturum:entity/pufferfish/sting2"
     ],
     "subtitle": "subtitles.entity.puffer_fish.sting"
+  },
+  "entity.tropical_fish.ambient": {
+    "sounds": []
+  },
+  "entity.tropical_fish.death": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/fish/hurt1",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt2",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt3",
+        "pitch": 0.8
+      },
+      {
+        "name": "etfuturum:entity/fish/hurt4",
+        "pitch": 0.8
+      }
+    ]
+  },
+  "entity.tropical_fish.flop": {
+    "sounds": [
+      {
+        "name": "etfuturum:entity/fish/flop1",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop2",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop3",
+        "volume": 0.3
+      },
+      {
+        "name": "etfuturum:entity/fish/flop4",
+        "volume": 0.3
+      }
+    ]
+  },
+  "entity.tropical_fish.hurt": {
+    "sounds": [
+      "etfuturum:entity/fish/hurt1",
+      "etfuturum:entity/fish/hurt2",
+      "etfuturum:entity/fish/hurt3",
+      "etfuturum:entity/fish/hurt4"
+    ]
   }
 }

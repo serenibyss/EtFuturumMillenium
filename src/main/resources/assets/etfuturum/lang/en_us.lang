@@ -16,6 +16,10 @@ subtitles.item.axe.strip=Debarking Log
 # Entities
 entity.phantom.name=Phantom
 entity.turtle.name=Turtle
+entity.cod.name=Cod
+entity.salmon.name=Salmon
+entity.pufferfish.name=Pufferfish
+entity.tropical_fish.name=Tropical Fish
 
 # Blocks
 tile.stone_stairs.name=Stone Stairs
@@ -28,6 +32,10 @@ item.phantom_membrane.name=Phantom Membrane
 item.trident.name=Trident
 item.scute.name=Scute
 item.turtle_helmet.name=Turtle Shell
+item.cod_bucket.name=Bucket of Cod
+item.salmon_bucket.name=Bucket of Salmon
+item.pufferfish_bucket.name=Bucket of Pufferfish
+item.tropical_fish_bucket.name=Bucket of Tropical Fish
 
 # Enchants
 enchantment.channeling=Channeling

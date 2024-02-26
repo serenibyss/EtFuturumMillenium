@@ -148,7 +148,7 @@ public class EntityPufferfish extends AbstractFish {
     public void onLivingUpdate() {
         super.onLivingUpdate();
         if(isAlive() && getPuffState() > 0) {
-            for(EntityMob mob : world.getEntitiesWithinAABB(EntityMob.class, this.getEntityBoundingBox().grow(0.3), ENEMY_MATCHER)) {
+            for(EntityMob mob : world.getEntitiesWithinAABB(EntityMob.class, this.getEntityBoundingBox().grow(0.9), ENEMY_MATCHER)) {
                 if(mob.isEntityAlive()) {
                     attack(mob);
                 }

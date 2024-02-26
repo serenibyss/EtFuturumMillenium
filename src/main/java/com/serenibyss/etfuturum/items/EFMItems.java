@@ -4,6 +4,7 @@ import com.serenibyss.etfuturum.EFMTags;
 import com.serenibyss.etfuturum.entities.passive.fish.EntityCod;
 import com.serenibyss.etfuturum.entities.passive.fish.EntityPufferfish;
 import com.serenibyss.etfuturum.entities.passive.fish.EntitySalmon;
+import com.serenibyss.etfuturum.entities.passive.fish.EntityTropicalFish;
 import com.serenibyss.etfuturum.items.base.EFMItem;
 import com.serenibyss.etfuturum.items.base.EFMItem.Settings;
 import com.serenibyss.etfuturum.items.base.EFMItemArmor;
@@ -35,6 +36,7 @@ public enum EFMItems {
     COD_BUCKET(MC13.fish, "cod_bucket", new ItemFishBucket<>(EntityCod.class, Blocks.WATER)),
     SALMON_BUCKET(MC13.fish, "salmon_bucket", new ItemFishBucket<>(EntitySalmon.class, Blocks.WATER)),
     PUFFERFISH_BUCKET(MC13.fish, "pufferfish_bucket", new ItemFishBucket<>(EntityPufferfish.class, Blocks.WATER)),
+    TROPICAL_FISH_BUCKET(MC13.fish, "tropical_fish_bucket", new ItemFishBucket<>(EntityTropicalFish.class, Blocks.WATER)),
 
     ;
 
