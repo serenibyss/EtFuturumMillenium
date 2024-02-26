@@ -1,6 +1,6 @@
 {
   "variants": {
-    "half=bottom": { "model": "etfuturum:half_slab_stone" },
-    "half=top": { "model": "etfuturum:upper_slab_stone" }
+    "half=bottom": { "model": "etfuturum:stone_slab" },
+    "half=top": { "model": "etfuturum:stone_slab_top" }
   }
 }

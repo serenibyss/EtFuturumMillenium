@@ -15,6 +15,8 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeModContainer;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.util.Random;
 
@@ -33,6 +35,7 @@ public abstract class EFMBlockSlab extends EFMBlock {
     public EFMBlockSlab(Settings settings) {
         super(settings);
         this.fullBlock = this.isDouble();
+        this.useNeighborBrightness = true;
         this.setLightOpacity(255);
     }
 
@@ -70,6 +73,18 @@ public abstract class EFMBlockSlab extends EFMBlock {
     public boolean isTopSolid(IBlockState state) {
         EFMBlockSlab slab = ((EFMBlockSlab) state.getBlock());
         return slab.isDouble() || state.getValue(HALF) == EnumBlockHalf.TOP;
+    }
+
+    @Override
+    public boolean isSideSolid(IBlockState base_state, IBlockAccess world, BlockPos pos, EnumFacing side) {
+        if (base_state.isTopSolid() && side == EnumFacing.UP) {
+            return true;
+        }
+
+        IBlockState state = this.getActualState(base_state, world, pos);
+        return base_state.isFullBlock()
+                || (state.getValue(HALF) == EnumBlockHalf.TOP && side == EnumFacing.UP)
+                || (state.getValue(HALF) == EnumBlockHalf.BOTTOM && side == EnumFacing.DOWN);
     }
 
     @Override
@@ -127,5 +142,17 @@ public abstract class EFMBlockSlab extends EFMBlock {
             return false;
         }
         return super.shouldSideBeRendered(blockState, blockAccess, pos, side);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public int getPackedLightmapCoords(IBlockState state, IBlockAccess source, BlockPos pos) {
+        int i = source.getCombinedLight(pos, state.getLightValue(source, pos));
+        if (i == 0) {
+            pos = pos.down();
+            state = source.getBlockState(pos);
+            return source.getCombinedLight(pos, state.getLightValue(source, pos));
+        }
+        return i;
     }
 }

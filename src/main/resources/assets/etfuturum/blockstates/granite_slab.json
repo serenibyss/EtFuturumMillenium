@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "etfuturum:granite_slab" },
+    "half=top": { "model": "etfuturum:granite_slab_top" }
+  }
+}

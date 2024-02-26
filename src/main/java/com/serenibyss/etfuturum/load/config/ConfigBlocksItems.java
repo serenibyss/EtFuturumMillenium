@@ -19,6 +19,9 @@ public class ConfigBlocksItems {
     public static boolean enableBarrels = true;
     public static boolean enableStonecutter = true;
 
+    @Comment("Adds Smooth Stone, and changes the old Stone Slab to Smooth Stone Slab, and changes its recipe. Recommended if 'enableNewSlabs' is enabled.")
+    public static boolean enableSmoothStone = true;
+
     // 1.15: Buzzy Bees
 
     // 1.16: Nether Update
@@ -33,13 +36,13 @@ public class ConfigBlocksItems {
 
     // Misc: Too spread out or small to set to one specific version
 
-    @Comment("Adds new Stair blocks. Included are: Stone Stairs")
+    @Comment("Adds new Stair blocks. Included are: Stone, Mossy Cobblestone, Mossy Stone Bricks, Granite, Polished Granite, Diorite, Polished Diorite, Andesite, Polished Andesite")
     public static boolean enableNewStairs = true;
 
-    @Comment("Adds new Slab blocks. Included are: Stone Slab")
+    @Comment("Adds new Slab blocks. Included are: Stone (normal, non-smooth), Mossy Cobblestone, Mossy Stone Bricks, Granite, Diorite, Andesite")
     public static boolean enableNewSlabs = true;
 
-    @Comment("Adds new Wall blocks. Included are: Stone Brick Wall")
+    @Comment("Adds new Wall blocks. Included are: Stone Bricks, Mossy Stone Bricks, Granite, Diorite, Andesite")
     public static boolean enableNewWalls = true;
 
 

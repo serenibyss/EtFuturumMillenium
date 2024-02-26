@@ -30,15 +30,15 @@ final class StonecutterRecipes {
 
         // Mossy Cobblestone
         r.addRecipe(new ItemStack(Blocks.MOSSY_COBBLESTONE),
-                // EFMBlocks.SLAB.getItemStack(2, meta),     // Mossy Cobblestone Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta),    // Mossy Cobblestone Stairs, 1
-                new ItemStack(Blocks.COBBLESTONE_WALL, 1, 1) // Mossy Cobblestone Wall, 1
+                EFMBlocks.MOSSY_COBBLESTONE_SLAB.getItemStack(2),  // Mossy Cobblestone Slab, 2
+                EFMBlocks.MOSSY_COBBLESTONE_STAIRS.getItemStack(), // Mossy Cobblestone Stairs, 1
+                new ItemStack(Blocks.COBBLESTONE_WALL, 1, 1)       // Mossy Cobblestone Wall, 1
         );
 
         // Smooth Stone
-        // r.addRecipe(EFMBlocks.SMOOTH_STONE.getItemStack(),
-        //         new ItemStack(Blocks.STONE_SLAB, 2) // Smooth Stone Slab, 2
-        // );
+        r.addRecipe(EFMBlocks.SMOOTH_STONE.getItemStack(),
+                new ItemStack(Blocks.STONE_SLAB, 2) // Smooth Stone Slab, 2
+        );
 
         // Stone Bricks
         r.addRecipe(new ItemStack(Blocks.STONEBRICK),
@@ -49,59 +49,59 @@ final class StonecutterRecipes {
         );
 
         // Mossy Stone Bricks
-        // r.addRecipe(new ItemStack(Blocks.STONEBRICK, 1, 1),
-        //         EFMBlocks.SLAB.getItemStack(2, meta),   // Mossy Stone Brick Slab, 2
-        //         EFMBlocks.STAIRS.getItemStack(1, meta), // Mossy Stone Brick Stairs, 1
-        //         EFMBlocks.WALL.getItemStack(1, meta)    // Mossy Stone Brick Wall, 1
-        // );
+        r.addRecipe(new ItemStack(Blocks.STONEBRICK, 1, 1),
+                EFMBlocks.MOSSY_STONE_BRICK_SLAB.getItemStack(2),  // Mossy Stone Brick Slab, 2
+                EFMBlocks.MOSSY_STONE_BRICK_STAIRS.getItemStack(), // Mossy Stone Brick Stairs, 1
+                EFMBlocks.MOSSY_STONE_BRICK_WALL.getItemStack()    // Mossy Stone Brick Wall, 1
+        );
 
         // Granite
         r.addRecipe(new ItemStack(Blocks.STONE, 1, 1),
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Granite Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta), // Granite Stairs, 1
-                // EFMBlocks.WALL.getItemStack(1, meta),  // Granite Wall, 1
-                new ItemStack(Blocks.STONE, 1, 2)         // Polished Granite, 1
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Polished Granite Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta)  // Polished Granite Stairs, 1
+                EFMBlocks.GRANITE_SLAB.getItemStack(2),          // Granite Slab, 2
+                EFMBlocks.GRANITE_STAIRS.getItemStack(),         // Granite Stairs, 1
+                EFMBlocks.GRANITE_WALL.getItemStack(),           // Granite Wall, 1
+                new ItemStack(Blocks.STONE, 1, 2),               // Polished Granite, 1
+                // EFMBlocks.SLAB.getItemStack(2, meta),         // Polished Granite Slab, 2
+                EFMBlocks.POLISHED_GRANITE_STAIRS.getItemStack() // Polished Granite Stairs, 1
         );
 
         // Polished Granite
-        // r.addRecipe(new ItemStack(Blocks.STONE, 1, 2),
-        //         EFMBlocks.SLAB.getItemStack(2, meta),  // Polished Granite Slab, 2
-        //         EFMBlocks.STAIRS.getItemStack(1, meta) // Polished Granite Stairs, 1
-        // );
+        r.addRecipe(new ItemStack(Blocks.STONE, 1, 2),
+                // EFMBlocks.SLAB.getItemStack(2, meta),         // Polished Granite Slab, 2
+                EFMBlocks.POLISHED_GRANITE_STAIRS.getItemStack() // Polished Granite Stairs, 1
+        );
 
         // Diorite
         r.addRecipe(new ItemStack(Blocks.STONE, 1, 3),
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Diorite Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta), // Diorite Stairs, 1
-                // EFMBlocks.WALL.getItemStack(1, meta),  // Diorite Wall, 1
-                new ItemStack(Blocks.STONE, 1, 4)         // Polished Diorite, 1
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Polished Diorite Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta)  // Polished Diorite Stairs, 1
+                EFMBlocks.DIORITE_SLAB.getItemStack(2),          // Diorite Slab, 2
+                EFMBlocks.DIORITE_STAIRS.getItemStack(),         // Diorite Stairs, 1
+                EFMBlocks.DIORITE_WALL.getItemStack(),           // Diorite Wall, 1
+                new ItemStack(Blocks.STONE, 1, 4),               // Polished Diorite, 1
+                // EFMBlocks.SLAB.getItemStack(2, meta),         // Polished Diorite Slab, 2
+                EFMBlocks.POLISHED_DIORITE_STAIRS.getItemStack() // Polished Diorite Stairs, 1
         );
 
         // Polished Diorite
-        // r.addRecipe(new ItemStack(Blocks.STONE, 1, 4),
-        //         EFMBlocks.SLAB.getItemStack(2, meta),  // Polished Diorite Slab, 2
-        //         EFMBlocks.STAIRS.getItemStack(1, meta) // Polished Diorite Stairs, 1
-        // );
+        r.addRecipe(new ItemStack(Blocks.STONE, 1, 4),
+                // EFMBlocks.SLAB.getItemStack(2, meta),         // Polished Diorite Slab, 2
+                EFMBlocks.POLISHED_DIORITE_STAIRS.getItemStack() // Polished Diorite Stairs, 1
+        );
 
         // Andesite
         r.addRecipe(new ItemStack(Blocks.STONE, 1, 5),
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Andesite Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta), // Andesite Stairs, 1
-                // EFMBlocks.WALL.getItemStack(1, meta),  // Andesite Wall, 1
-                new ItemStack(Blocks.STONE, 1, 6)         // Polished Andesite, 1
-                // EFMBlocks.SLAB.getItemStack(2, meta),  // Polished Andesite Slab, 2
-                // EFMBlocks.STAIR.getItemStack(1, meta)  // Polished Andesite Stairs, 1
+                EFMBlocks.ANDESITE_SLAB.getItemStack(2),          // Andesite Slab, 2
+                EFMBlocks.ANDESITE_STAIRS.getItemStack(),         // Andesite Stairs, 1
+                EFMBlocks.ANDESITE_WALL.getItemStack(),           // Andesite Wall, 1
+                new ItemStack(Blocks.STONE, 1, 6),                // Polished Andesite, 1
+                // EFMBlocks.SLAB.getItemStack(2, meta),          // Polished Andesite Slab, 2
+                EFMBlocks.POLISHED_ANDESITE_STAIRS.getItemStack() // Polished Andesite Stairs, 1
         );
 
         // Polished Andesite
-        // r.addRecipe(new ItemStack(Blocks.STONE, 1, 6),
-        //         EFMBlocks.SLAB.getItemStack(2, meta),  // Polished Andesite Slab, 2
-        //         EFMBlocks.STAIRS.getItemStack(1, meta) // Polished Andesite Stairs, 1
-        // );
+        r.addRecipe(new ItemStack(Blocks.STONE, 1, 6),
+                // EFMBlocks.SLAB.getItemStack(2, meta),          // Polished Andesite Slab, 2
+                EFMBlocks.POLISHED_ANDESITE_STAIRS.getItemStack() // Polished Andesite Stairs, 1
+        );
 
         // Cobbled Deepslate
         // r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, meta),
