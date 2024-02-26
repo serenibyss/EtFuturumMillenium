@@ -1,4 +1,4 @@
-package com.serenibyss.etfuturum.util;
+package com.serenibyss.etfuturum.load.enums;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.util.DamageSource;

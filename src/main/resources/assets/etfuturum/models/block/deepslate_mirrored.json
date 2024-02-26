@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column_mirrored",
+  "textures": {
+    "end": "etfuturum:blocks/deepslate_top",
+    "side": "etfuturum:blocks/deepslate"
+  }
+}

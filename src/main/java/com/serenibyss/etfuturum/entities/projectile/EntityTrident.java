@@ -5,7 +5,7 @@ import com.serenibyss.etfuturum.entities.weather.EFMEntityLightningBolt;
 import com.serenibyss.etfuturum.items.EFMItems;
 import com.serenibyss.etfuturum.mixin.trident.EntityArrowAccessor;
 import com.serenibyss.etfuturum.sounds.EFMSounds;
-import com.serenibyss.etfuturum.util.EFMDamageSource;
+import com.serenibyss.etfuturum.load.enums.EFMDamageSource;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;

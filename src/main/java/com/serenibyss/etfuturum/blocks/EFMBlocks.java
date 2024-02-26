@@ -38,7 +38,9 @@ public enum EFMBlocks {
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
     SMOOTH_STONE(MC14.smoothStone, "smooth_stone", new EFMBlock(new Settings(Material.ROCK, MapColor.STONE).hardness(2.0f).resistance(6.0f).creativeTab(CreativeTabs.BUILDING_BLOCKS).translationKey("smooth_stone"))),
+    DEEPSLATE(MC18.deepslate, "deepslate", new EFMBlockRotatedPillar(new Settings(Material.ROCK, MapColor.OBSIDIAN))),
 
+    // Stairs
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
     MOSSY_COBBLESTONE_STAIRS(MISC.newStairs, "mossy_cobblestone_stairs", new EFMBlockStairs(Blocks.MOSSY_COBBLESTONE, "mossy_cobblestone_stairs")),
     MOSSY_STONE_BRICK_STAIRS(MISC.newStairs, "mossy_stone_brick_stairs", new EFMBlockStairs(Blocks.STONEBRICK, 1, "mossy_stone_brick_stairs")),
@@ -48,7 +50,9 @@ public enum EFMBlocks {
     POLISHED_DIORITE_STAIRS(MISC.newStairs, "polished_diorite_stairs", new EFMBlockStairs(Blocks.STONE, 4, "polished_diorite_stairs")),
     ANDESITE_STAIRS(MISC.newStairs, "andesite_stairs", new EFMBlockStairs(Blocks.STONE, 5, "andesite_stairs")),
     POLISHED_ANDESITE_STAIRS(MISC.newStairs, "polished_andesite_stairs", new EFMBlockStairs(Blocks.STONE, 6, "polished_andesite_stairs")),
+    DEEPSLATE_STAIRS(MC18.deepslate, "deepslate_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 0, "deepslate_stairs")),
 
+    // Slabs
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE.getDouble()),
     MOSSY_STONE_BRICK_SLAB(MISC.newSlabs, "mossy_stone_brick_slab", SlabFactory.MOSSY_STONE_BRICK.getHalf()),
@@ -62,6 +66,7 @@ public enum EFMBlocks {
     ANDESITE_SLAB(MISC.newSlabs, "andesite_slab", SlabFactory.ANDESITE.getHalf()),
     ANDESITE_DOUBLE_SLAB(MISC.newSlabs, "andesite_double_slab", SlabFactory.ANDESITE.getDouble()),
 
+    // Walls
     STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
     MOSSY_STONE_BRICK_WALL(MISC.newWalls, "mossy_stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, 1, "mossy_stone_brick_wall")),
     GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, 1, "granite_wall")),

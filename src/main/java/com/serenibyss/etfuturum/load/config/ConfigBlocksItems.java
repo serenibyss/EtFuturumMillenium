@@ -27,6 +27,7 @@ public class ConfigBlocksItems {
     // 1.16: Nether Update
 
     // 1.17: Caves & Cliffs Part I
+    public static boolean enableDeepslate = true;
 
     // 1.18: Caves & Cliffs Part II
 
