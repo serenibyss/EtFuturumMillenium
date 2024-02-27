@@ -1,0 +1,7 @@
+{
+  "parent": "etfuturum:block/cube_column_mirrored",
+  "textures": {
+    "end": "etfuturum:block/deepslate_top",
+    "side": "etfuturum:block/deepslate"
+  }
+}

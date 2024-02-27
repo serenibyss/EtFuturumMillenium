@@ -1,0 +1,25 @@
+{
+  "variants": {
+    "variant=cobbled_deepslate": {
+      "model": "etfuturum:cobbled_deepslate"
+    },
+    "variant=chiseled_deepslate" : {
+      "model": "etfuturum:chiseled_deepslate"
+    },
+    "variant=polished_deepslate" : {
+      "model": "etfuturum:polished_deepslate"
+    },
+    "variant=deepslate_bricks" : {
+      "model": "etfuturum:deepslate_bricks"
+    },
+    "variant=cracked_deepslate_bricks" : {
+      "model": "etfuturum:cracked_deepslate_bricks"
+    },
+    "variant=deepslate_tiles" : {
+      "model": "etfuturum:deepslate_tiles"
+    },
+    "variant=cracked_deepslate_tiles" : {
+      "model": "etfuturum:cracked_deepslate_tiles"
+    }
+  }
+}

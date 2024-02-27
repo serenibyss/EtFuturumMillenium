@@ -104,50 +104,58 @@ final class StonecutterRecipes {
         );
 
         // Cobbled Deepslate
-        // r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, meta),
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Chiseled Deepslate, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Cobbled Deepslate Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Cobbled Deepslate Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Cobbled Deepslate Wall, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Deepslate Brick Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Deepslate Brick Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Deepslate Brick Wall, 1
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Deepslate Bricks, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Deepslate Tile Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Deepslate Tile Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Deepslate Tile Wall, 1
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Deepslate Tiles, 1
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Polished Deepslate, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Polished Deepslate Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Polished Deepslate Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta)    // Polished Deepslate Wall, 1
-        // );
+        r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, 0),
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 1),        // Chiseled Deepslate, 1
+                 EFMBlocks.COBBLED_DEEPSLATE_SLAB.getItemStack(2),   // Cobbled Deepslate Slab, 2
+                 EFMBlocks.COBBLED_DEEPSLATE_STAIRS.getItemStack(), // Cobbled Deepslate Stairs, 1
+                 EFMBlocks.COBBLED_DEEPSLATE_WALL.getItemStack(1),   // Cobbled Deepslate Wall, 1
+                 EFMBlocks.DEEPSLATE_BRICK_SLAB.getItemStack(2),   // Deepslate Brick Slab, 2
+                 EFMBlocks.DEEPSLATE_BRICK_STAIRS.getItemStack(1), // Deepslate Brick Stairs, 1
+                 EFMBlocks.DEEPSLATE_BRICK_WALL.getItemStack(1),   // Deepslate Brick Wall, 1
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 3),        // Deepslate Bricks, 1
+                 EFMBlocks.DEEPSLATE_TILE_SLAB.getItemStack(2),   // Deepslate Tile Slab, 2
+                 EFMBlocks.DEEPSLATE_TILE_STAIRS.getItemStack(1), // Deepslate Tile Stairs, 1
+                 EFMBlocks.DEEPSLATE_TILE_WALL.getItemStack(1),   // Deepslate Tile Wall, 1
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 5),        // Deepslate Tiles, 1
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 2),        // Polished Deepslate, 1
+                 EFMBlocks.POLISHED_DEEPSLATE_SLAB.getItemStack(2),   // Polished Deepslate Slab, 2
+                 EFMBlocks.POLISHED_DEEPSLATE_STAIRS.getItemStack(1), // Polished Deepslate Stairs, 1
+                 EFMBlocks.POLISHED_DEEPSLATE_WALL.getItemStack(1)    // Polished Deepslate Wall, 1
+        );
 
         // Polished Deepslate
-        // r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, meta),
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Deepslate Brick Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Deepslate Brick Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Deepslate Brick Wall, 1
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Deepslate Bricks, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Deepslate Tile Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Deepslate Tile Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Deepslate Tile Wall, 1
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Deepslate Tiles, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Polished Deepslate Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Polished Deepslate Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta)    // Polished Deepslate Wall, 1
-        // );
+        r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, 2),
+                 EFMBlocks.DEEPSLATE_BRICK_SLAB.getItemStack(2),   // Deepslate Brick Slab, 2
+                 EFMBlocks.DEEPSLATE_BRICK_STAIRS.getItemStack(1), // Deepslate Brick Stairs, 1
+                 EFMBlocks.DEEPSLATE_BRICK_WALL.getItemStack(1),   // Deepslate Brick Wall, 1
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 3),        // Deepslate Bricks, 1
+                 EFMBlocks.DEEPSLATE_TILE_SLAB.getItemStack(2),   // Deepslate Tile Slab, 2
+                 EFMBlocks.DEEPSLATE_TILE_STAIRS.getItemStack(1), // Deepslate Tile Stairs, 1
+                 EFMBlocks.DEEPSLATE_TILE_WALL.getItemStack(1),   // Deepslate Tile Wall, 1
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 5),        // Deepslate Tiles, 1
+                 EFMBlocks.POLISHED_DEEPSLATE_SLAB.getItemStack(2),   // Polished Deepslate Slab, 2
+                 EFMBlocks.POLISHED_DEEPSLATE_STAIRS.getItemStack(1), // Polished Deepslate Stairs, 1
+                 EFMBlocks.POLISHED_DEEPSLATE_WALL.getItemStack(1)    // Polished Deepslate Wall, 1
+        );
 
         // Deepslate Bricks
-        // r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, meta),
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Deepslate Brick Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Deepslate Brick Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Deepslate Brick Wall, 1
-        //         EFMBlocks.DEEPSLATE_SLAB.getItemStack(2, meta),   // Deepslate Tile Slab, 2
-        //         EFMBlocks.DEEPSLATE_STAIRS.getItemStack(1, meta), // Deepslate Tile Stairs, 1
-        //         EFMBlocks.DEEPSLATE_WALL.getItemStack(1, meta),   // Deepslate Tile Wall, 1
-        //         EFMBlocks.DEEPSLATE.getItemStack(1, meta),        // Deepslate Tiles, 1
-        // );
+        r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, 3),
+                 EFMBlocks.DEEPSLATE_BRICK_SLAB.getItemStack(2),   // Deepslate Brick Slab, 2
+                 EFMBlocks.DEEPSLATE_BRICK_STAIRS.getItemStack(1), // Deepslate Brick Stairs, 1
+                 EFMBlocks.DEEPSLATE_BRICK_WALL.getItemStack(1),   // Deepslate Brick Wall, 1
+                 EFMBlocks.DEEPSLATE_TILE_SLAB.getItemStack(2),   // Deepslate Tile Slab, 2
+                 EFMBlocks.DEEPSLATE_TILE_STAIRS.getItemStack(1), // Deepslate Tile Stairs, 1
+                 EFMBlocks.DEEPSLATE_TILE_WALL.getItemStack(1),   // Deepslate Tile Wall, 1
+                 EFMBlocks.DEEPSLATE.getItemStack(1, 5)        // Deepslate Tiles, 1
+        );
+
+        // Deepslate Tiles
+        r.addRecipe(EFMBlocks.DEEPSLATE.getItemStack(1, 5),
+                EFMBlocks.DEEPSLATE_TILE_SLAB.getItemStack(2),   // Deepslate Tile Slab, 2
+                EFMBlocks.DEEPSLATE_TILE_STAIRS.getItemStack(1), // Deepslate Tile Stairs, 1
+                EFMBlocks.DEEPSLATE_TILE_WALL.getItemStack(1)   // Deepslate Tile Wall, 1
+
+        );
 
         // Bricks
         r.addRecipe(new ItemStack(Blocks.BRICK_BLOCK),

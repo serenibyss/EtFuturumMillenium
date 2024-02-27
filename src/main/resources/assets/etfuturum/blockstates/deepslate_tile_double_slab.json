@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "normal": { "model": "etfuturum:deepslate_tiles" },
+    "all":    { "model": "etfuturum:deepslate_tiles" }
+  }
+}

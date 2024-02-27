@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "normal": { "model": "etfuturum:deepslate_bricks" },
+    "all":    { "model": "etfuturum:deepslate_bricks" }
+  }
+}

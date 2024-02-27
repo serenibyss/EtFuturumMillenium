@@ -1,0 +1,62 @@
+{
+  "variants": {
+    "axis=x": [
+      {
+        "model": "etfuturum:deepslate",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "etfuturum:deepslate_mirrored",
+        "x": 90,
+        "y": 90
+      },
+      {
+        "model": "etfuturum:deepslate",
+        "y": 90,
+        "x": 90
+      },
+      {
+        "model": "etfuturum:deepslate_mirrored",
+        "y": 90,
+        "x": 90
+      }
+    ],
+    "axis=y": [
+      {
+        "model": "etfuturum:deepslate"
+      },
+      {
+        "model": "etfuturum:deepslate_mirrored"
+      },
+      {
+        "model": "etfuturum:deepslate",
+        "y": 180
+      },
+      {
+        "model": "etfuturum:deepslate_mirrored",
+        "y": 180
+      }
+    ],
+    "axis=z": [
+      {
+        "model": "etfuturum:deepslate",
+        "x": 90
+      },
+      {
+        "model": "etfuturum:deepslate_mirrored",
+        "x": 90
+      },
+      {
+        "model": "etfuturum:deepslate",
+        "y": 180,
+        "x": 90
+      },
+      {
+        "model": "etfuturum:deepslate_mirrored",
+        "y": 180,
+        "x": 90
+      }
+    ]
+  }
+}

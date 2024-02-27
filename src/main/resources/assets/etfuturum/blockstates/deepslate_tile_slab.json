@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "half=bottom": { "model": "etfuturum:deepslate_tile_slab" },
+    "half=top": { "model": "etfuturum:deepslate_tile_slab_top" }
+  }
+}

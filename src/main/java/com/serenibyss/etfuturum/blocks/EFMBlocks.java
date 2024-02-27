@@ -38,7 +38,10 @@ public enum EFMBlocks {
     BARREL(MC14.barrel, "barrel", new BlockBarrel(), TileEntityBarrel.class),
     STONECUTTER(MC14.stonecutter, "stonecutter", new BlockStonecutter()),
     SMOOTH_STONE(MC14.smoothStone, "smooth_stone", new EFMBlock(new Settings(Material.ROCK, MapColor.STONE).hardness(2.0f).resistance(6.0f).creativeTab(CreativeTabs.BUILDING_BLOCKS).translationKey("smooth_stone"))),
+    DEEPSLATE_STONE(MC18.deepslate, "deepslate", new EFMBlockRotatedPillar(new Settings(Material.ROCK, MapColor.OBSIDIAN)).setTranslationKey("deepslate_stone")),
+    DEEPSLATE(MC18.deepslate, "cobbled_deepslate", new BlockDeepslate().setResistance(6).setHardness(3.5f).setTranslationKey("deepslate")),
 
+    // Stairs
     STONE_STAIRS(MISC.newStairs, "stone_stairs", new EFMBlockStairs(Blocks.STONE, "stone_stairs")),
     MOSSY_COBBLESTONE_STAIRS(MISC.newStairs, "mossy_cobblestone_stairs", new EFMBlockStairs(Blocks.MOSSY_COBBLESTONE, "mossy_cobblestone_stairs")),
     MOSSY_STONE_BRICK_STAIRS(MISC.newStairs, "mossy_stone_brick_stairs", new EFMBlockStairs(Blocks.STONEBRICK, 1, "mossy_stone_brick_stairs")),
@@ -48,7 +51,12 @@ public enum EFMBlocks {
     POLISHED_DIORITE_STAIRS(MISC.newStairs, "polished_diorite_stairs", new EFMBlockStairs(Blocks.STONE, 4, "polished_diorite_stairs")),
     ANDESITE_STAIRS(MISC.newStairs, "andesite_stairs", new EFMBlockStairs(Blocks.STONE, 5, "andesite_stairs")),
     POLISHED_ANDESITE_STAIRS(MISC.newStairs, "polished_andesite_stairs", new EFMBlockStairs(Blocks.STONE, 6, "polished_andesite_stairs")),
+    COBBLED_DEEPSLATE_STAIRS(MC18.deepslate, "cobbled_deepslate_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 0, "cobbled_deepslate_stairs")),
+    POLISHED_DEEPSLATE_STAIRS(MC18.deepslate, "polished_deepslate_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 2, "polished_deepslate_stairs")),
+    DEEPSLATE_BRICK_STAIRS(MC18.deepslate, "deepslate_brick_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 3, "deepslate_brick_stairs")),
+    DEEPSLATE_TILE_STAIRS(MC18.deepslate, "deepslate_tile_stairs", new EFMBlockStairs(EFMBlocks.DEEPSLATE.myBlock, 5, "deepslate_tile_stairs")),
 
+    // Slabs
     STONE_SLAB(MISC.newSlabs, "stone_slab", SlabFactory.STONE.getHalf()),
     STONE_DOUBLE_SLAB(MISC.newSlabs, "stone_double_slab", SlabFactory.STONE.getDouble()),
     MOSSY_STONE_BRICK_SLAB(MISC.newSlabs, "mossy_stone_brick_slab", SlabFactory.MOSSY_STONE_BRICK.getHalf()),
@@ -61,12 +69,25 @@ public enum EFMBlocks {
     DIORITE_DOUBLE_SLAB(MISC.newSlabs, "diorite_double_slab", SlabFactory.DIORITE.getDouble()),
     ANDESITE_SLAB(MISC.newSlabs, "andesite_slab", SlabFactory.ANDESITE.getHalf()),
     ANDESITE_DOUBLE_SLAB(MISC.newSlabs, "andesite_double_slab", SlabFactory.ANDESITE.getDouble()),
+    COBBLED_DEEPSLATE_SLAB(MISC.newSlabs, "cobbled_deepslate_slab", SlabFactory.COBBLED_DEEPSLATE.getHalf()),
+    COBBLED_DEEPSLATE_DOUBLE_SLAB(MISC.newSlabs, "cobbled_deepslate_double_slab", SlabFactory.COBBLED_DEEPSLATE.getDouble()),
+    POLISHED_DEEPSLATE_SLAB(MISC.newSlabs, "polished_deepslate_slab", SlabFactory.POLISHED_DEEPSLATE.getHalf()),
+    POLISHED_DEEPSLATE_DOUBLE_SLAB(MISC.newSlabs, "polished_deepslate_double_slab", SlabFactory.POLISHED_DEEPSLATE.getDouble()),
+    DEEPSLATE_BRICK_SLAB(MISC.newSlabs, "deepslate_brick_slab", SlabFactory.DEEPSLATE_BRICK.getHalf()),
+    DEEPSLATE_BRICK_DOUBLE_SLAB(MISC.newSlabs, "deepslate_brick_double_slab", SlabFactory.DEEPSLATE_BRICK.getDouble()),
+    DEEPSLATE_TILE_SLAB(MISC.newSlabs, "deepslate_tile_slab", SlabFactory.DEEPSLATE_TILE.getHalf()),
+    DEEPSLATE_TILE_DOUBLE_SLAB(MISC.newSlabs, "deepslate_tile_double_slab", SlabFactory.DEEPSLATE_TILE.getDouble()),
 
+    // Walls
     STONE_BRICK_WALL(MISC.newWalls, "stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, "stone_brick_wall")),
     MOSSY_STONE_BRICK_WALL(MISC.newWalls, "mossy_stone_brick_wall", new EFMBlockWall(Blocks.STONEBRICK, 1, "mossy_stone_brick_wall")),
     GRANITE_WALL(MISC.newWalls, "granite_wall", new EFMBlockWall(Blocks.STONE, 1, "granite_wall")),
     DIORITE_WALL(MISC.newWalls, "diorite_wall", new EFMBlockWall(Blocks.STONE, 3, "diorite_wall")),
     ANDESITE_WALL(MISC.newWalls, "andesite_wall", new EFMBlockWall(Blocks.STONE, 5, "andesite_wall")),
+    COBBLED_DEEPSLATE_WALL(MISC.newWalls, "cobbled_deepslate_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 0, "cobbled_deepslate_wall")),
+    POLISHED_DEEPSLATE_WALL(MISC.newWalls, "polished_deepslate_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 2, "polished_deepslate_wall")),
+    DEEPSLATE_BRICK_WALL(MISC.newWalls, "deepslate_brick_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 3, "deepslate_brick_wall")),
+    DEEPSLATE_TILE_WALL(MISC.newWalls, "deepslate_tile_wall", new EFMBlockWall(EFMBlocks.DEEPSLATE.myBlock, 5, "deepslate_tile_wall")),
 
     ;
 

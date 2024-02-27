@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "normal": { "model": "etfuturum:cobbled_deepslate" },
+    "all":    { "model": "etfuturum:cobbled_deepslate" }
+  }
+}
